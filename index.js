@@ -746,7 +746,7 @@ if (reversed == null) { reversed = false; }
 			window.open("https://www.youtube.com/channel/UC6j6u6M-FPvFFJISoydRQ1A", "_blank");
 		}
 		
-		this.youtube_b.addEventListener("click", gotolink_mail);
+		this.mail_b.addEventListener("click", gotolink_mail);
 		function gotolink_mail() {
 			window.open("mailto:notartist@gmail.com", "_blank");
 		}
