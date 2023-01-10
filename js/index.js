@@ -223,7 +223,7 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_3 = function() {
+(lib.CachedBmp_32 = function() {
 	this.initialize(ss["index_atlas_1"]);
 	this.gotoAndStop(28);
 }).prototype = p = new cjs.Sprite();
@@ -1189,8 +1189,7 @@ if (reversed == null) { reversed = false; }
 		this.btn_aboutMe.addEventListener("click", ()=> {
 			self.gotoAndStop("aboutMe"); 
 				dataLayer.push({
-						'event': 'click_aboutMe',
-						'gtm-action': 'click-關於我',
+						'event': 'click_aboutMe'
 					
 					});
 		})
@@ -1199,7 +1198,7 @@ if (reversed == null) { reversed = false; }
 			self.gotoAndStop("games"); 
 				dataLayer.push({
 						'event': 'click_game',
-						'gtm-action': 'click-遊戲',
+				
 		
 					});
 		})
@@ -1212,16 +1211,16 @@ if (reversed == null) { reversed = false; }
 		function gotolink_mail() {
 			window.open("mailto:notartist@gmail.com", "_blank");
 				dataLayer.push({
-						'event': 'click_Mail',
-						'gtm-action': 'click-Mail',
+						'event': 'click_Mail'
+				
 					});
 		}
 		this.facebook_b.addEventListener("click", gotolink_fb);
 		function gotolink_fb() {
 			window.open("https://www.facebook.com/shigaihome/", "_blank");
 				dataLayer.push({
-						'event': 'click_facebook',
-						'gtm-action': 'click-FB',
+						'event': 'click_facebook'
+						
 					});
 		}
 		
@@ -1229,8 +1228,8 @@ if (reversed == null) { reversed = false; }
 		function gotolink_ig() {
 			window.open("https://www.instagram.com/shigaishigai/", "_blank");
 				dataLayer.push({
-						'event': 'click_ig',
-						'gtm-action': 'click-ig',
+						'event': 'click_ig'
+						
 					});
 		}
 		
@@ -1238,8 +1237,8 @@ if (reversed == null) { reversed = false; }
 		function gotolink_twitter() {
 			window.open("https://twitter.com/shigai", "_blank");
 				dataLayer.push({
-						'event': 'click_twitter',
-						'gtm-action': 'click-twitter',
+						'event': 'click_twitter'
+					
 					});
 		}
 		
@@ -1247,8 +1246,8 @@ if (reversed == null) { reversed = false; }
 		function gotolink_youtube() {
 			window.open("https://www.youtube.com/channel/UC6j6u6M-FPvFFJISoydRQ1A", "_blank");
 				dataLayer.push({
-						'event': 'click_youtube',
-						'gtm-action': 'click-youtube',
+						'event': 'click_youtube'
+						
 					});
 		}
 		
@@ -1256,8 +1255,8 @@ if (reversed == null) { reversed = false; }
 		function gotolink_giphy() {
 			window.open("https://giphy.com/shigai", "_blank");
 				dataLayer.push({
-						'event': 'click_giphy',
-						'gtm-action': 'click-giphy',
+						'event': 'click_giphy'
+						
 					});
 		}
 		
@@ -1265,8 +1264,8 @@ if (reversed == null) { reversed = false; }
 		function gotolink_lineStore() {
 			window.open("https://store.line.me/stickershop/author/4968/zh-Hant", "_blank");
 				dataLayer.push({
-						'event': 'click_lineStore',
-						'gtm-action': 'click-lineStore',
+						'event': 'click_lineStore'
+					
 					});
 		}
 	}
@@ -1310,7 +1309,7 @@ if (reversed == null) { reversed = false; }
 	this.m_randomTalk.name = "m_randomTalk";
 	this.m_randomTalk.setTransform(512,607.3);
 
-	this.instance = new lib.CachedBmp_3();
+	this.instance = new lib.CachedBmp_32();
 	this.instance.setTransform(211.05,219.6,0.5,0.5);
 
 	this.instance_1 = new lib.CachedBmp_2();
