@@ -1,0 +1,85 @@
+:root {
+  --game-bg-blur: 3px;
+  --game-bg-brightness: .75;
+  --game-bg-overlay: .28;
+}
+.game-scene-background { position: fixed; inset: -24px; z-index: 0; overflow: hidden; pointer-events: none; filter: blur(var(--game-bg-blur)) brightness(var(--game-bg-brightness)); transform: scale(1.035); }
+.game-scene-background .scene-render-root { width: 100%; height: 100%; }
+.game-background-filter { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: rgba(244,240,231,var(--game-bg-overlay)); }
+body::before { z-index: 1; }
+.desk-decoration { z-index: 2; }
+.game-shell { z-index: 2; }
+.companion { overflow: visible; }
+.companion > img { width: 100%; height: 100%; object-fit: contain; border-radius: inherit; }
+.companion > img[hidden], .config-icon[hidden] { display: none; }
+.config-icon { width: 22px; height: 22px; object-fit: contain; vertical-align: middle; }
+.back, .game-controls button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; }
+.game-navigation { display: flex; align-items: center; gap: 7px; }
+.levels-button { display: grid; grid-template-columns: auto auto; align-items: center; gap: 0 7px; padding: 8px 13px; border: 2px solid var(--ink); border-radius: 15px; background: var(--yellow); box-shadow: 3px 4px 0 #252321; color: var(--ink); font: inherit; font-size: 13px; font-weight: 800; }
+.levels-button > span { grid-row: 1 / 3; font-size: 20px; }.levels-button b { white-space: nowrap; }.levels-button small { color: #685b35; font-size: 10px; text-align: left; }
+.progress-dots img { width: 14px; height: 14px; object-fit: contain; }
+.complete { z-index: 1000; }
+.completion-actions { display: flex; justify-content: center; gap: 10px; }
+.completion-actions #nextLevel { background: #9ec9d2; }
+.completion-actions button[hidden] { display: none; }
+.level-chooser { position: fixed; z-index: 1100; inset: 0; display: grid; overflow: auto; place-items: center; padding: 18px; background: #263332c9; backdrop-filter: blur(6px); }
+.level-chooser[hidden] { display: none; }
+.level-chooser-card { width: min(720px,100%); max-height: min(760px,92vh); overflow: auto; padding: 24px; border: 3px solid var(--ink); border-radius: 24px; background: var(--paper); box-shadow: 12px 14px 0 #1116; }
+.level-chooser-card > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.level-chooser-card h2 { margin: 2px 0; font-size: 28px; }
+.level-chooser-card header p:last-child { margin: 4px 0 0; color: #69777b; }
+#closeLevels { position: relative; width: 40px; height: 40px; flex: 0 0 auto; border: 2px solid var(--ink); border-radius: 50%; background: #fff; }
+#closeLevels::before, #closeLevels::after { content: ""; position: absolute; top: 50%; left: 50%; width: 18px; height: 2px; border-radius: 2px; background: var(--ink); transform-origin: center; }
+#closeLevels::before { transform: translate(-50%,-50%) rotate(45deg); }#closeLevels::after { transform: translate(-50%,-50%) rotate(-45deg); }
+.continue-level { display: grid; width: 100%; gap: 2px; margin: 18px 0 14px; padding: 13px 16px; border: 2px solid var(--ink); border-radius: 16px; background: var(--yellow); box-shadow: 4px 5px 0 #252321; text-align: left; }
+.continue-level b { font-size: 17px; }.continue-level small { opacity: .72; }
+.continue-level[hidden] { display: none; }
+.level-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(185px,1fr)); gap: 10px; }
+.level-choice { display: grid; grid-template-columns: 38px 1fr; gap: 2px 9px; align-items: center; padding: 11px; border: 2px solid #b8c8cd; border-radius: 14px; background: #fff; color: var(--ink); text-align: left; }
+.level-choice > span { display: grid; grid-row: 1 / 3; width: 34px; height: 34px; place-items: center; border-radius: 50%; background: #e6eef0; font-weight: 900; }
+.level-choice b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.level-choice small { color: #758489; }
+.level-choice.is-completed { border-color: #8dbda0; background: #f0faf3; }.level-choice.is-completed > span { background: #bde0c8; }
+.level-choice.is-current { outline: 3px solid #f3ce68; outline-offset: 1px; }
+.board { position: relative; }
+.start-bridge { position: absolute; z-index: 8; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.start-bridge button { display: grid; min-width: 190px; grid-template-columns: auto 1fr; align-items: center; gap: 0 9px; padding: 11px 17px; border: 3px solid var(--ink); border-radius: 18px; background: var(--yellow); box-shadow: 5px 6px 0 #252321; color: var(--ink); }
+.start-bridge button > span { grid-row: 1 / 3; font-size: 22px; }
+.start-bridge button b { text-align: left; font-size: 16px; }
+.start-bridge button small { text-align: left; font-size: 10px; font-weight: 700; opacity: .72; }
+.board:not(.is-preparing) .start-bridge { display: none; }
+.picture-cover { position: absolute; z-index: 5; inset: 0; display: grid; place-items: center; padding: 20px; background: linear-gradient(145deg,#f5df9df2,#a9d7d5f2); color: #2f494e; text-align: center; font-weight: 900; letter-spacing: .04em; transition: opacity .36s ease, visibility .36s; }
+.modified-card .picture-cover { background: linear-gradient(145deg,#a9d7d5f2,#f5df9df2); }
+.board:not(.is-preparing) .picture-cover { visibility: hidden; opacity: 0; }
+@media (max-width: 800px) {
+  html, body { width: 100%; min-height: 100%; margin: 0; background: var(--paper); }
+  body { min-height: 100dvh; overflow-x: hidden; }
+  body::before, .desk-decoration, .game-scene-background, .game-background-filter { display: none; }
+  .game-shell { width: 100%; max-width: none; min-height: 100dvh; margin: 0; padding: max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left)); background: var(--paper); }
+  .game-bar { position: relative; z-index: 20; grid-template-columns: auto 1fr auto; gap: 7px; margin: 0 0 8px; padding: 4px; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+  .game-navigation { align-items: stretch; flex-direction: column; }
+  .game-navigation .back { width: 42px; min-width: 42px; height: 42px; overflow: hidden; padding: 0; border-radius: 50%; color: #fff; background: rgba(28,22,18,.78); font-size: 0; }
+  .game-navigation .back .fallback-icon { font-size: 22px; }
+  .game-title { text-align: center; }
+  .game-title h1 { font-size: 17px; }
+  .game-stats { grid-column: auto; gap: 4px; }
+  .stat-pill { min-width: 58px; padding: 4px 7px; border-width: 1px; border-radius: 10px; }
+  .stat-pill small { font-size: 8px; }
+  .stat-pill strong { font-size: 12px; }
+  .levels-button { padding: 6px 9px; border-radius: 12px; }
+  .game-navigation .levels-button { position: fixed; right: max(8px,env(safe-area-inset-right)); bottom: max(10px,env(safe-area-inset-bottom)); z-index: 30; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border-radius: 50%; }
+  .game-navigation .levels-button b, .game-navigation .levels-button small { display: none; }
+  .game-navigation .levels-button > span { grid-row: auto; font-size: 20px; }
+  .game-intro { display: none; }
+  .board { gap: 7px; }
+  .picture-card { padding: 3px; border-width: 1px; border-radius: 3px; background: transparent; box-shadow: none; transform: none; }
+  .picture-card:nth-child(2) { transform: none; }
+  .picture-card .pane { border-width: 1px; border-radius: 2px; }
+  .picture-card .tape, .picture-card footer { display: none; }
+  .start-bridge { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); margin: 0; }
+  .start-bridge button { min-width: min(78vw,250px); padding: 8px 13px; }
+  .start-bridge button small { display: none; }
+  .game-controls { margin: 8px 0 0; padding: 5px 54px 5px 7px; border: 0; border-radius: 0; background: transparent; }
+  .game-controls .hint { font-size: 11px; }
+  .game-controls #reset { align-self: flex-start; padding: 6px 10px; }
+}
+@media (max-width: 430px) { .level-chooser { padding: 8px; }.level-chooser-card { padding: 17px 13px; border-radius: 18px; }.level-grid { grid-template-columns: 1fr 1fr; }.level-choice { grid-template-columns: 30px 1fr; padding: 8px; }.level-choice > span { width: 28px; height: 28px; font-size: 11px; }.level-choice b { font-size: 12px; }.level-choice small { font-size: 9px; } }

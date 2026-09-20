@@ -1,0 +1,114 @@
+{
+  "websiteBrand": {
+    "siteName": "Shi-Gai.Com",
+    "icon": "",
+    "nav": {
+      "home": "Home",
+      "journal": "Journal",
+      "works": "Works",
+      "characters": "Characters",
+      "games": "Games",
+      "about": "About me"
+    },
+    "pages": {
+      "journal": true,
+      "works": true,
+      "characters": true,
+      "games": true,
+      "about": true
+    },
+    "analytics": {
+      "enabled": false,
+      "provider": "gtm",
+      "containerId": "GTM-TVSK97C"
+    },
+    "journal": {
+      "eyebrow": "SHI-GAI JOURNAL",
+      "title": "最近發生的事",
+      "intro": "創作、角色與日常留下來的片段。"
+    },
+    "about": {
+      "title": "R451's Studio",
+      "intro": "Shi-Gai 是我的個人創作世界。我從事動畫、動態設計與影像製作，也持續創作角色、短動畫與互動作品。",
+      "servicesTitle": "Services",
+      "services": [
+        "2D Animation",
+        "Motion Design",
+        "Illustration Animation",
+        "Video Editing",
+        "Character / IP Content"
+      ],
+      "email": "notartist@gmail.com",
+      "instagram": "https://www.instagram.com/shigaishigai/",
+      "youtube": "https://www.youtube.com/@shigaishigai"
+    },
+    "controls": {
+      "globalMenu": true,
+      "globalBrand": false,
+      "homeNavigation": true,
+      "journalNavigation": true,
+      "worksNavigation": true,
+      "charactersNavigation": true,
+      "gamesNavigation": true,
+      "aboutNavigation": false,
+      "worksMenu": true,
+      "worksFirstPage": true,
+      "worksPreviousPage": true,
+      "worksPagePicker": true,
+      "worksNextPage": true,
+      "worksLastPage": true,
+      "workDetailBack": true,
+      "workDetailPrevious": true,
+      "workDetailNext": true,
+      "workDetailPlayPause": true,
+      "workDetailSound": true,
+      "charactersMenu": true,
+      "characterDetailBack": true,
+      "characterDetailPrevious": true,
+      "characterDetailNext": true
+    },
+    "buttonAssets": {
+      "menu": {
+        "asset": "",
+        "fallbackAsset": ""
+      },
+      "back": {
+        "asset": "",
+        "fallbackAsset": ""
+      },
+      "previous": {
+        "asset": "",
+        "fallbackAsset": ""
+      },
+      "next": {
+        "asset": "",
+        "fallbackAsset": ""
+      }
+    },
+    "footerName": "Shi-Gai",
+    "copyright": "Shi-Gai",
+    "welcome": {
+      "enabled": false,
+      "asset": "assets/site/brand/welcome-logo-1787668785393.webm",
+      "fallbackAsset": "assets/site/brand/welcome-logo-1787668785393.gif",
+      "duration": 4,
+      "interaction": {
+        "enabled": true,
+        "cursor": "pointer",
+        "action": "scene",
+        "target": "scene-1786548379879",
+        "openMode": "same-tab"
+      },
+      "animation": {
+        "enabled": true,
+        "x": 0,
+        "y": 0,
+        "scale": 3,
+        "flipX": false,
+        "duration": 3,
+        "mode": "yoyo",
+        "easing": "ease-in-out"
+      }
+    }
+  }
+}

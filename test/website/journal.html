@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shi-Gai 的最新創作日誌與故事。">
+  <title>Journal · Shi-Gai</title>
+  <link rel="icon" type="image/png" href="assets/images/brand-icon.png">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/journal.css?v=journal-paper-v1">
+  <script src="assets/js/settings.js?v=shared-settings-1"></script>
+  <script src="assets/js/site.js?v=journal-phase-1" defer></script>
+  <meta name="robots" content="noindex,nofollow">
+</head>
+<body data-page="journal">
+  <header class="site-header" data-site-header></header>
+  <main class="journal-main">
+    <header class="journal-heading">
+      <span id="journalEyebrow">SHI-GAI JOURNAL</span>
+      <h1 id="journalTitle">最近發生的事</h1>
+      <p id="journalIntro">創作、角色與日常留下來的片段。</p>
+    </header>
+    <section id="journalEntries" class="journal-entries" aria-live="polite"></section>
+    <nav id="journalPagination" class="journal-pagination" aria-label="Journal 分頁" hidden>
+      <button id="journalPrevious" type="button">← 上一頁</button>
+      <span id="journalPageStatus"></span>
+      <button id="journalNext" type="button">下一頁 →</button>
+    </nav>
+    <section id="journalEmpty" class="journal-empty" hidden><h2>日誌正在整理中。</h2><p>下一篇故事很快就會來到這裡。</p></section>
+    <section id="journalError" class="journal-empty" hidden><h2>暫時無法載入日誌。</h2><p>請稍後再試一次。</p></section>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+  <script src="assets/js/work-order.js"></script>
+  <script src="assets/js/journal.js?v=journal-editor-refresh-1"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+
+html:has(body[data-page="games"]), body[data-page="games"] { width: 100%; height: 100%; overflow: hidden; }
+body[data-page="games"] { min-width: 0; margin: 0; background: #24150e; }
+.games-main { position: relative; width: 100%; height: 100dvh; margin: 0; overflow: hidden; background: linear-gradient(rgba(31,19,12,.12), rgba(31,19,12,.34)), var(--works-wallpaper, #4b3026) center / cover fixed; }
+.games-home-return { position: fixed; z-index: 20; top: max(16px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left)); display: inline-flex; min-height: 38px; align-items: center; padding: 7px 11px; color: #f8f0e4; background: rgba(44,28,17,.72); border: 1px solid rgba(245,222,171,.42); border-radius: 999px; box-shadow: 0 6px 16px rgba(18,9,4,.25); font-size: 13px; font-weight: 800; text-decoration: none; backdrop-filter: blur(8px); }
+.games-home-return:hover { background: rgba(75,47,28,.86); }
+
+.games-room { position: relative; height: 100dvh; padding: clamp(68px, 7vh, 90px) clamp(16px, 5vw, 72px) clamp(46px, 6vw, 94px); overflow: hidden; }
+.games-room-heading { position: relative; z-index: 2; margin: 0 auto 8px; color: #f8f0e4; text-align: center; }
+.games-room-heading .eyebrow { margin: 0; color: rgba(248,240,228,.7); }
+.games-room-heading h1 { margin: 3px 0 0; font-size: clamp(25px, 3vw, 40px); }
+.games-state { margin: 24px auto; color: #f8f0e4; text-align: center; }
+
+/* TV tuner: one clear selection control shared by desktop and mobile. */
+.games-tv-gallery { position: relative; display: grid; width: min(100%, calc((100dvh - 245px) * 1.5), 1180px); margin: 0 auto; grid-template-columns: 54px minmax(0, 960px) 54px; grid-template-rows: auto auto; gap: 0 clamp(8px, 1.5vw, 24px); align-items: center; justify-content: center; }
+.games-tv { position: relative; z-index: 3; grid-column: 2; grid-row: 1; width: 100%; aspect-ratio: 3 / 2; overflow: visible; color: #f8f0e4; }
+.games-tv-frame { position: absolute; z-index: 3; inset: 0; width: 100%; height: 100%; object-fit: fill; pointer-events: none; }
+.games-tv-screen { position: absolute; z-index: 2; top: 13.2%; left: 12.6%; display: grid; width: 74.8%; height: 62.4%; padding: clamp(8px, 1.4vw, 22px); overflow: hidden; place-items: center; align-content: center; color: #f8f0e4; border-radius: 7% / 12%; background-color: #090807; background-image: radial-gradient(ellipse at 50% 40%, rgba(78,73,57,.8), rgba(9,8,7,.96) 78%), repeating-radial-gradient(circle at 20% 30%, rgba(255,255,255,.12) 0 1px, transparent 1px 3px); box-shadow: inset 0 0 35px rgba(0,0,0,.86), inset 0 0 0 2px rgba(246,207,131,.23); text-align: center; touch-action: pan-y; }
+.games-tv-screen > * { position: relative; z-index: 1; }
+.games-tv-mark { display: grid; width: clamp(58px, 8vw, 96px); aspect-ratio: 1; margin-bottom: 12px; place-items: center; color: #f9e6a8; border: 2px solid rgba(249,230,168,.7); border-radius: 50%; font-size: clamp(26px, 4vw, 50px); }
+.games-tv-mark img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: inherit; }
+.games-tv-screen p { max-width: 40ch; margin: 0; color: rgba(248,240,228,.84); font-size: clamp(14px, 1.5vw, 18px); line-height: 1.55; }
+
+.games-tv-arrow { position: static; z-index: 6; display: grid; grid-row: 1; width: 46px; height: 62px; place-items: center; color: #f8f0e4; background: rgba(45,25,13,.75); border: 1px solid rgba(248,230,184,.42); border-radius: 14px; box-shadow: 0 7px 18px rgba(12,6,2,.36); font-size: 36px; cursor: pointer; }
+.games-tv-previous { grid-column: 1; justify-self: start; }
+.games-tv-next { grid-column: 3; justify-self: end; }
+
+.games-tuner { position: relative; z-index: 6; display: grid; grid-column: 1 / -1; grid-row: 2; width: min(100%, 720px); margin: 18px auto 0; padding: 16px 18px; grid-template-columns: minmax(0, 1fr) auto auto; gap: 18px; align-items: center; color: #f8f0e4; background: rgba(31,18,10,.82); border: 1px solid rgba(247,219,154,.42); border-radius: 18px; box-shadow: 0 12px 28px rgba(16,8,3,.3); backdrop-filter: blur(10px); }
+.games-tuner-copy { min-width: 0; }
+.games-tuner-copy h2 { overflow: hidden; margin: 0; font-size: clamp(21px, 2.5vw, 30px); text-overflow: ellipsis; white-space: nowrap; }
+.games-tuner-position { display: block; margin-top: 3px; color: rgba(248,240,228,.7); font-size: 13px; font-weight: 800; letter-spacing: .12em; }
+.games-tuner-choices { display: flex; gap: 9px; align-items: center; justify-content: center; }
+.games-tuner-choice { width: 12px; height: 12px; padding: 0; background: rgba(248,240,228,.32); border: 1px solid rgba(248,240,228,.62); border-radius: 50%; cursor: pointer; }
+.games-tuner-choice[aria-selected="true"] { background: #f8e4af; border-color: #f8e4af; box-shadow: 0 0 0 4px rgba(248,228,175,.16); }
+.games-tuner-start { min-width: 142px; min-height: 48px; padding: 10px 20px; color: #432716; background: #f8e4af; border: 0; border-radius: 12px; box-shadow: 0 5px 0 #9d642e; font: inherit; font-weight: 900; cursor: pointer; }
+.games-tuner-start:hover { background: #fff0c9; transform: translateY(-1px); }
+.games-tuner-start:active { box-shadow: 0 2px 0 #9d642e; transform: translateY(3px); }
+.games-tuner-start:disabled { opacity: .55; cursor: default; }
+
+.games-tv.is-switching .games-tv-screen > * { animation: games-tv-slide-in .34s cubic-bezier(.2,.75,.25,1); }
+.games-tv[data-slide-direction="previous"].is-switching .games-tv-screen > * { animation-name: games-tv-slide-in-previous; }
+@keyframes games-tv-slide-in { from { opacity: 0; transform: translateX(11%); filter: brightness(.65) contrast(1.4); } 38% { opacity: .72; } to { opacity: 1; transform: translateX(0); filter: none; } }
+@keyframes games-tv-slide-in-previous { from { opacity: 0; transform: translateX(-11%); filter: brightness(.65) contrast(1.4); } 38% { opacity: .72; } to { opacity: 1; transform: translateX(0); filter: none; } }
+
+.games-scene { position: fixed; inset: 0; width: 100%; height: 100dvh; overflow: hidden; background-position: center; background-size: cover; pointer-events: none; }
+.games-scene, .games-scene * { pointer-events: none !important; }
+.games-scene-back { z-index: 1; }
+.games-scene-front { z-index: 4; }
+.games-scene-render { position: absolute; inset: 0; overflow: hidden; }
+
+@media (max-width: 767px) {
+  .games-home-return { top: max(10px, calc(env(safe-area-inset-top) + 4px)); left: max(10px, calc(env(safe-area-inset-left) + 4px)); min-height: 34px; padding: 5px 9px; font-size: 12px; }
+  .games-room { padding: max(48px, calc(env(safe-area-inset-top) + 42px)) 12px 44px; }
+  .games-room-heading { display: none; }
+  .games-tv-gallery { width: min(100%, calc((100dvh - 250px) * .563), 360px); grid-template-columns: 40px minmax(0, 1fr) 40px; grid-template-rows: auto auto; gap: 10px 4px; }
+  .games-tv { grid-column: 1 / -1; grid-row: 1; aspect-ratio: 941 / 1672; }
+  .games-tv-frame { content: url("../images/games/vintage-crt-tv-portrait-bottom-controls-v2.webp"); }
+  .games-tv-screen { top: 8.4%; left: 15%; width: 70%; height: 66.8%; padding: 5px 8px; border-radius: 8% / 4.5%; }
+  .games-tv-mark { width: 42px; margin-bottom: 5px; font-size: 25px; }
+  .games-tv-screen p { display: block; max-width: 30ch; font-size: 11px; line-height: 1.35; }
+  .games-tv-arrow { position: relative; top: auto; width: 38px; height: 42px; align-self: center; border-radius: 12px; font-size: 29px; }
+  .games-tv-previous { grid-column: 1; grid-row: 2; justify-self: start; }
+  .games-tv-next { grid-column: 3; grid-row: 2; justify-self: end; }
+  .games-tuner { grid-column: 2; grid-row: 2; width: 100%; margin: 0; padding: 12px; grid-template-columns: 1fr auto; gap: 10px; border-radius: 15px; }
+  .games-tuner-copy { text-align: left; }
+  .games-tuner-copy h2 { font-size: 19px; }
+  .games-tuner-position { font-size: 11px; }
+  .games-tuner-choices { justify-self: end; }
+  .games-tuner-start { grid-column: 1 / -1; width: 100%; min-height: 46px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .games-tv.is-switching .games-tv-screen > * { animation: none; }
+}

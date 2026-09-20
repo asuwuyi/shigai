@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shi-Gai 作品詳細資訊。">
+  <title>Work · Shi-Gai</title>
+  <link rel="icon" type="image/png" href="assets/images/brand-icon.png">
+  <link rel="stylesheet" href="assets/css/style.css?v=works-exhibition-6">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/work.css?v=long-description-2">
+  <link rel="stylesheet" href="../shared/scene-renderer.css">
+  <script src="assets/js/settings.js?v=shared-settings-1"></script>
+  <script src="assets/js/site.js?v=shared-settings-1" defer></script>
+  <meta name="robots" content="noindex,nofollow">
+</head>
+<body class="work-detail-page" data-page="works">
+  <div id="workDetailUiLayer" class="work-detail-ui-layer" aria-label="作品內頁操作物件" hidden></div>
+  <header class="site-header" data-site-header></header>
+
+  <main class="site-main work-detail-main">
+    <a id="backToGallery" class="back-to-gallery" href="works.html">← 返回 Gallery</a>
+    <div id="detailLoading" class="detail-loading" aria-live="polite">正在載入作品…</div>
+    <div id="workCorridorViewport" class="work-corridor-viewport" hidden aria-label="作品長廊">
+      <div id="workCorridorTrack" class="work-corridor-track">
+    <section id="workDetail" class="work-detail work-corridor-panel is-current" data-corridor-current="true" hidden aria-labelledby="workTitle">
+      <div class="work-detail-stage">
+      <div class="work-detail-exhibit">
+      <div id="workMediaWrap" class="work-detail-media-wrap">
+        <a id="previousWork" class="work-side-navigation work-side-previous" href="works.html" aria-label="上一件作品">‹</a>
+        <div id="detailMedia" class="work-detail-media">
+          <div id="videoControls" class="detail-video-controls" hidden aria-label="影片控制">
+            <button id="playPause" class="detail-media-control" type="button" aria-label="暫停影片">❚❚</button>
+            <button id="soundToggle" class="detail-media-control" type="button" aria-label="開啟影片聲音">🔇</button>
+          </div>
+        </div>
+        <a id="nextWork" class="work-side-navigation work-side-next" href="works.html" aria-label="下一件作品">›</a>
+      </div>
+      <article class="work-detail-content">
+        <h1 id="workTitle"></h1>
+        <p id="workDescription" class="work-description"></p>
+        <div class="work-fine-print">
+          <p id="workId" class="work-id"></p>
+          <dl id="workMeta" class="work-meta"></dl>
+          <section class="detail-group" aria-labelledby="charactersTitle">
+            <h2 id="charactersTitle">角色</h2>
+            <div id="workCharacters" class="character-list"></div>
+          </section>
+          <section class="detail-group" aria-labelledby="tagsTitle">
+            <h2 id="tagsTitle">標籤</h2>
+            <div id="workTags" class="tag-list"></div>
+          </section>
+        </div>
+      </article>
+      </div>
+      </div>
+    </section>
+      </div>
+    </div>
+    <section id="detailError" class="empty-state site-empty-state error-state" hidden>
+      <span aria-hidden="true">…</span>
+      <h1>找不到這件作品。</h1>
+      <p>它可能尚未匯出，或網址已失效。</p>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-site-footer></footer>
+  <script src="assets/js/work-order.js"></script>
+  <script src="../shared/scene-render-rules.js"></script>
+  <script src="../shared/scene-animation-rules.js"></script>
+  <script src="../shared/scene-renderer.js"></script>
+  <script src="../shared/scene-interaction.js"></script>
+  <script src="assets/js/work.js?v=long-description-2"></script>
+</body>
+</html>

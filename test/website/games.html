@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'none'"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shi-Gai 世界的沙龍遊戲室。"><title>Games · Shi-Gai</title>
+  <link rel="icon" type="image/png" href="assets/images/brand-icon.png">
+  <link rel="stylesheet" href="assets/css/style.css"><link rel="stylesheet" href="assets/css/site.css"><link rel="stylesheet" href="../shared/scene-renderer.css"><link rel="stylesheet" href="assets/css/games.css?v=games-viewport-scene-1">
+  <script src="assets/js/settings.js?v=shared-settings-1"></script><script src="assets/js/site.js?v=shared-settings-1" defer></script>
+  <script src="../shared/scene-render-rules.js" defer></script><script src="../shared/scene-animation-rules.js" defer></script><script src="../shared/scene-renderer.js?v=game-viewport-1" defer></script><script src="assets/js/games.js?v=games-viewport-scene-1" defer></script>
+  <meta name="robots" content="noindex,nofollow">
+</head>
+<body data-page="games">
+  <main class="games-main">
+    <a class="games-home-return" href="index.html" aria-label="返回首頁">← Home</a>
+    <section id="gamesBackdrop" class="games-scene games-scene-back" aria-hidden="true" hidden><div id="gamesBackScene" class="games-scene-render"></div></section>
+    <section class="games-room" aria-labelledby="gamesTitle">
+      <div class="games-room-heading"><p class="eyebrow">SHI-GAI PLAYROOM</p><h1 id="gamesTitle">遊戲室</h1></div>
+    <div class="games-tv-gallery">
+      <button id="previousGame" class="games-tv-arrow games-tv-previous" type="button" aria-label="上一款遊戲">‹</button>
+      <div id="gamesTv" class="games-tv" aria-live="polite"><div id="gamesTvScreen" class="games-tv-screen"></div><img class="games-tv-frame" src="assets/images/games/vintage-crt-tv-bottom-controls-v1.webp" alt="" aria-hidden="true" decoding="async"></div>
+      <button id="nextGame" class="games-tv-arrow games-tv-next" type="button" aria-label="下一款遊戲">›</button>
+      <div class="games-tuner" aria-label="遊戲選擇">
+        <div class="games-tuner-copy"><h2 id="selectedGameName">遊戲</h2><span id="selectedGamePosition" class="games-tuner-position"></span></div>
+        <div id="gamesChoices" class="games-tuner-choices" role="tablist" aria-label="選擇遊戲"></div>
+        <button id="startGame" class="games-tuner-start" type="button">開始遊戲</button>
+      </div>
+    </div>
+      <p id="gamesState" class="games-state">正在載入遊戲資料。</p>
+    </section>
+    <section id="gamesFront" class="games-scene games-scene-front" aria-label="遊戲室前方佈置" hidden><div id="gamesFrontScene" class="games-scene-render"></div></section>
+  </main>
+</body>
+</html>

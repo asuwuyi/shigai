@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="探索 Shi-Gai 世界的所有作品。">
+  <title>Works · Shi-Gai</title>
+  <link rel="icon" type="image/png" href="assets/images/brand-icon.png">
+  <link rel="stylesheet" href="assets/css/style.css?v=works-menu-2">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="../shared/scene-renderer.css">
+  <script src="assets/js/settings.js?v=shared-settings-1"></script>
+  <script src="assets/js/site.js?v=nav-labels-1" defer></script>
+  <meta name="robots" content="noindex,nofollow">
+</head>
+<body data-page="works">
+  <main id="works" class="works-exhibition-main">
+    <h1 id="pageTitle" class="visually-hidden">作品 Works</h1>
+    <button id="mobileSearchButton" class="works-exhibition-menu-button" type="button" aria-label="開啟作品導覽與篩選" aria-expanded="false">☰</button>
+    <section class="browse-panel works-exhibition-menu" aria-label="作品導覽與篩選">
+      <div class="works-menu-header"><div><span>SHI-GAI ARCHIVE</span><strong>作品瀏覽</strong></div><button id="closeWorksMenu" type="button" aria-label="關閉作品選單">×</button></div>
+      <p class="works-menu-section-label">前往</p>
+      <nav class="works-exhibition-nav" aria-label="主要導覽"><a href="index.html" data-site-nav="home">Home</a><a href="journal.html" data-site-nav="journal">Journal</a><a href="works.html" data-site-nav="works" aria-current="page">Works</a><a href="characters.html" data-site-nav="characters">Characters</a><a href="games.html" data-site-nav="games">Games</a><a href="about.html" data-site-nav="about">作者工作室</a></nav>
+      <p class="works-menu-section-label">尋找作品</p>
+      <label class="search-field site-search-field" for="searchInput">
+        <span aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="搜尋作品、角色或標籤" autocomplete="off">
+      </label>
+      <div class="filter-row site-filter-group">
+        <select id="characterFilter" aria-label="依角色篩選"><option value="">全部角色</option></select>
+        <select id="categoryFilter" aria-label="依分類篩選"><option value="">全部分類</option></select>
+        <select id="yearFilter" aria-label="依年份篩選"><option value="">全部年份</option></select>
+        <button id="clearFilters" class="clear-filters" type="button">清除篩選</button>
+      </div>
+      <p id="resultSummary" class="result-summary" aria-live="polite"></p>
+      <p class="works-menu-section-label">快速換頁</p>
+      <nav id="worksMenuPagination" class="works-menu-pagination" aria-label="快速切換作品頁碼" hidden>
+        <button id="menuPreviousPage" type="button" aria-label="上一頁">←</button>
+        <label><span class="visually-hidden">快速選擇頁碼</span><select id="menuPageSelect" aria-label="快速選擇作品頁碼"></select></label>
+        <button id="menuNextPage" type="button" aria-label="下一頁">→</button>
+      </nav>
+    </section>
+
+    <section class="works-exhibition-wall" aria-label="沙龍作品展牆">
+      <div id="worksGrid" class="works-grid" aria-live="polite"></div>
+      <nav id="worksPagination" class="works-pagination" aria-label="作品分頁" hidden>
+        <button id="firstPage" type="button">第一頁</button>
+        <button id="previousPage" type="button">← 上一頁</button>
+        <label class="works-page-picker"><span class="visually-hidden">選擇頁碼</span><select id="pageSelect" aria-label="選擇作品頁碼"></select></label>
+        <span id="pageStatus" class="visually-hidden" aria-live="polite"></span>
+        <button id="nextPage" type="button">下一頁 →</button>
+        <button id="lastPage" type="button">最後一頁</button>
+      </nav>
+      <div id="emptyState" class="empty-state site-empty-state" hidden>
+        <span aria-hidden="true">☁</span>
+        <h2>作品正在創作中。</h2>
+        <p>很快就會有新的故事來這裡報到。</p>
+      </div>
+      <div id="loadError" class="empty-state site-empty-state error-state" hidden>
+        <span aria-hidden="true">…</span>
+        <h2>作品資料暫時無法載入。</h2>
+        <p>請確認網站是透過本機或網站伺服器開啟。</p>
+      </div>
+    </section>
+    <section id="worksCorridor" class="works-exhibition-corridor" aria-label="作品展廊">
+      <div id="worksCorridorScene" class="works-corridor-scene"></div>
+    </section>
+  </main>
+
+  <template id="workCardTemplate">
+    <article class="work-card">
+      <button class="work-card-button" type="button">
+        <span class="work-media"></span>
+        <span class="work-content">
+          <span class="work-title"></span>
+          <span class="character-list"></span>
+        </span>
+      </button>
+    </article>
+  </template>
+
+  <script src="assets/js/work-order.js"></script>
+  <script src="../shared/scene-render-rules.js"></script>
+  <script src="../shared/scene-animation-rules.js"></script>
+  <script src="../shared/scene-renderer.js"></script>
+  <script src="../shared/scene-interaction.js?v=works-pagination-objects-1"></script>
+  <script src="assets/js/app.js?v=works-menu-2"></script>
+</body>
+</html>

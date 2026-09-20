@@ -1,0 +1,35 @@
+[
+  {
+    "id": "lottery",
+    "name": "企鵝樂透號碼產生器",
+    "description": "想買樂透，卻不知道要選哪幾個號碼嗎?\n就由企鵝來幫你選吧",
+    "mark": "✦",
+    "icon": "",
+    "status": "published",
+    "url": "games/lottery/",
+    "order": 1,
+    "visible": true
+  },
+  {
+    "id": "goddess",
+    "name": "企鵝女神的告誡",
+    "description": "注意你的選項，不用在意他的告誡XDDD",
+    "mark": "♓",
+    "icon": "",
+    "status": "published",
+    "url": "games/goddess/",
+    "order": 2,
+    "visible": true
+  },
+  {
+    "id": "spot-difference",
+    "name": "找找不同",
+    "description": "在兩張圖之間，找出藏起來的小小變化。",
+    "mark": "◎",
+    "icon": "",
+    "status": "published",
+    "url": "games/spot-difference/",
+    "order": 3,
+    "visible": true
+  }
+]

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="認識 Shi-Gai 世界的角色。">
+  <title>Characters · Shi-Gai</title>
+  <link rel="icon" type="image/png" href="assets/images/brand-icon.png">
+  <link rel="stylesheet" href="assets/css/style.css?v=characters-exhibition-1">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/characters.css?v=characters-exhibition-1">
+  <script src="assets/js/settings.js?v=shared-settings-1"></script>
+  <script src="assets/js/site.js?v=nav-labels-1" defer></script>
+  <meta name="robots" content="noindex,nofollow">
+</head>
+<body data-page="characters">
+  <main class="characters-main">
+    <h1 id="pageTitle" class="visually-hidden">角色 Characters</h1>
+    <button id="characterMenuButton" class="characters-menu-button" type="button" aria-label="開啟角色導覽與搜尋" aria-expanded="false">☰</button>
+    <section id="characterMenu" class="characters-menu" aria-label="角色導覽與搜尋">
+      <nav class="works-exhibition-nav" aria-label="主要導覽"><a href="index.html" data-site-nav="home">Home</a><a href="journal.html" data-site-nav="journal">Journal</a><a href="works.html" data-site-nav="works">Works</a><a href="characters.html" data-site-nav="characters" aria-current="page">Characters</a><a href="games.html" data-site-nav="games">Games</a><a href="about.html" data-site-nav="about">作者工作室</a></nav>
+      <label class="search-field site-search-field character-search" for="characterSearch"><span aria-hidden="true">⌕</span><input id="characterSearch" type="search" placeholder="搜尋角色名稱" autocomplete="off"></label>
+      <p id="characterSummary" class="result-summary" aria-live="polite"></p>
+    </section>
+    <section class="characters-wall" aria-label="角色展牆">
+      <div id="charactersGrid" class="characters-grid" aria-live="polite"></div>
+      <div id="emptyCharacters" class="empty-state site-empty-state" hidden>
+        <span aria-hidden="true">☁</span>
+        <h2>No Characters</h2>
+        <p>角色很快就會來這裡報到。</p>
+      </div>
+      <div id="characterLoadError" class="empty-state site-empty-state error-state" hidden>
+        <span aria-hidden="true">…</span>
+        <h2>角色資料暫時無法載入。</h2>
+        <p>請確認網站是透過本機或網站伺服器開啟。</p>
+      </div>
+    </section>
+  </main>
+
+  <template id="characterCardTemplate">
+    <a class="character-card" href="character.html">
+      <span class="character-card-media"><span class="character-frame-opening"></span></span>
+      <span class="character-card-content">
+        <span class="character-card-name"></span>
+        <span class="character-card-description" hidden></span>
+        <span class="character-work-count"></span>
+      </span>
+    </a>
+  </template>
+
+  <script src="assets/js/work-order.js"></script>
+  <script src="assets/js/characters.js?v=page-load-1"></script>
+</body>
+</html>

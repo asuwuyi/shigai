@@ -1,0 +1,80 @@
+/* Canonical Scene geometry shared by Studio and Website. */
+.scene-render-plane {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow: visible;
+  transform: translate(-50%, -50%);
+}
+
+.scene-render-object {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.scene-render-object-orientation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  transform-origin: center;
+}
+
+.scene-render-object-orientation.is-seamless-clone,
+.scene-render-object-orientation.is-seamless-clone * {
+  pointer-events: none !important;
+}
+
+.scene-render-object-visual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  width: max-content;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  pointer-events: auto;
+  transform-origin: center;
+}
+
+.scene-render-object-media {
+  display: block;
+  width: auto;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 24px rgba(43, 70, 90, .16));
+}
+
+.scene-render-object-text {
+  display: block;
+  max-width: 100%;
+  color: #38566d;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: center;
+  white-space: pre-wrap;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+}
+
+.scene-render-object.is-button .scene-render-object-text,
+.scene-render-object.is-link .scene-render-object-text {
+  padding: 12px 18px;
+  border-radius: 999px;
+  color: #754026;
+  background: rgba(255, 229, 209, .92);
+  box-shadow: 0 6px 15px rgba(93, 65, 45, .15);
+  font-size: 18px;
+}
+
+.scene-render-object.has-media-error {
+  display: none;
+}

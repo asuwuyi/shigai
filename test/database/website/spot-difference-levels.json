@@ -1,0 +1,228 @@
+[
+  {
+    "id": "level-001",
+    "name": "Level 001",
+    "order": 1,
+    "original": "assets/games/spot-difference/level-001/original.jpg",
+    "modified": "assets/games/spot-difference/level-001/modified.jpg",
+    "differences": [
+      {
+        "id": "difference-001",
+        "x": 0.01,
+        "y": 0.055,
+        "radius": 0.055,
+        "radiusX": 0.055,
+        "radiusY": 0.055
+      },
+      {
+        "id": "difference-002",
+        "x": 0.24,
+        "y": 0.068,
+        "radius": 0.052,
+        "radiusX": 0.052,
+        "radiusY": 0.052
+      },
+      {
+        "id": "difference-003",
+        "x": 0.463,
+        "y": 0.075,
+        "radius": 0.04,
+        "radiusX": 0.04,
+        "radiusY": 0.04
+      },
+      {
+        "id": "difference-004",
+        "x": 0.63,
+        "y": 0.07,
+        "radius": 0.05,
+        "radiusX": 0.05,
+        "radiusY": 0.05
+      },
+      {
+        "id": "difference-005",
+        "x": 0.9,
+        "y": 0.175,
+        "radius": 0.055,
+        "radiusX": 0.055,
+        "radiusY": 0.055
+      },
+      {
+        "id": "difference-006",
+        "x": 0.262,
+        "y": 0.33,
+        "radius": 0.05,
+        "radiusX": 0.05,
+        "radiusY": 0.05
+      },
+      {
+        "id": "difference-007",
+        "x": 0.671,
+        "y": 0.29,
+        "radius": 0.05,
+        "radiusX": 0.05,
+        "radiusY": 0.05
+      },
+      {
+        "id": "difference-008",
+        "x": 0.488,
+        "y": 0.392,
+        "radius": 0.047,
+        "radiusX": 0.047,
+        "radiusY": 0.047
+      },
+      {
+        "id": "difference-009",
+        "x": 0.902,
+        "y": 0.322,
+        "radius": 0.055,
+        "radiusX": 0.055,
+        "radiusY": 0.055
+      },
+      {
+        "id": "difference-010",
+        "x": 0.245,
+        "y": 0.492,
+        "radius": 0.055,
+        "radiusX": 0.055,
+        "radiusY": 0.055
+      },
+      {
+        "id": "difference-011",
+        "x": 0.287,
+        "y": 0.652,
+        "radius": 0.055,
+        "radiusX": 0.055,
+        "radiusY": 0.055
+      },
+      {
+        "id": "difference-012",
+        "x": 0.531,
+        "y": 0.742,
+        "radius": 0.04,
+        "radiusX": 0.04,
+        "radiusY": 0.04
+      },
+      {
+        "id": "difference-013",
+        "x": 0.06,
+        "y": 0.802,
+        "radius": 0.055,
+        "radiusX": 0.055,
+        "radiusY": 0.055
+      },
+      {
+        "id": "difference-014",
+        "x": 0.075,
+        "y": 0.947,
+        "radius": 0.06,
+        "radiusX": 0.06,
+        "radiusY": 0.06
+      },
+      {
+        "id": "difference-015",
+        "x": 0.301,
+        "y": 0.95,
+        "radius": 0.05,
+        "radiusX": 0.05,
+        "radiusY": 0.05
+      },
+      {
+        "id": "difference-016",
+        "x": 0.93,
+        "y": 0.952,
+        "radius": 0.06,
+        "radiusX": 0.06,
+        "radiusY": 0.06
+      }
+    ]
+  },
+  {
+    "id": "level-002",
+    "name": "Level 002",
+    "order": 2,
+    "original": "assets/games/spot-difference/level-002/original-1788461712389-8324886c.jpg",
+    "modified": "assets/games/spot-difference/level-002/modified-1788461712393-a615ec2e.jpg",
+    "differences": [
+      {
+        "id": "difference-001",
+        "x": 0.453,
+        "y": 0.102,
+        "radius": 0.102,
+        "radiusX": 0.102,
+        "radiusY": 0.09
+      },
+      {
+        "id": "difference-002",
+        "x": 0.711,
+        "y": 0.172,
+        "radius": 0.102,
+        "radiusX": 0.102,
+        "radiusY": 0.09
+      },
+      {
+        "id": "difference-003",
+        "x": 0.266,
+        "y": 0.195,
+        "radius": 0.09,
+        "radiusX": 0.09,
+        "radiusY": 0.09
+      },
+      {
+        "id": "difference-004",
+        "x": 0.629,
+        "y": 0.5,
+        "radius": 0.172,
+        "radiusX": 0.172,
+        "radiusY": 0.09
+      },
+      {
+        "id": "difference-005",
+        "x": 0.746,
+        "y": 0.594,
+        "radius": 0.102,
+        "radiusX": 0.102,
+        "radiusY": 0.09
+      },
+      {
+        "id": "difference-006",
+        "x": 0.84,
+        "y": 0.688,
+        "radius": 0.09,
+        "radiusX": 0.09,
+        "radiusY": 0.102
+      },
+      {
+        "id": "difference-007",
+        "x": 0.16,
+        "y": 0.758,
+        "radius": 0.09,
+        "radiusX": 0.09,
+        "radiusY": 0.102
+      },
+      {
+        "id": "difference-008",
+        "x": 0.781,
+        "y": 0.793,
+        "radius": 0.172,
+        "radiusX": 0.172,
+        "radiusY": 0.09
+      },
+      {
+        "id": "difference-009",
+        "x": 0.195,
+        "y": 0.91,
+        "radius": 0.102,
+        "radiusX": 0.102,
+        "radiusY": 0.09
+      },
+      {
+        "id": "difference-010",
+        "x": 0.336,
+        "y": 0.91,
+        "radius": 0.102,
+        "radiusX": 0.102,
+        "radiusY": 0.09
+      }
+    ]
+  }
+]

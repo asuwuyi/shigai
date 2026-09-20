@@ -1,0 +1,13 @@
+body[data-page="not-found"] { min-height: 100vh; color: #fff7e9; background: #392b22 url("../images/wallpapers/salon-wallpaper-navy-03.webp") repeat; background-size: min(52vw,620px) auto; }
+body[data-page="not-found"] .site-header { color: #fff7e9; background: rgba(22,16,25,.28); }
+body[data-page="not-found"] .site-brand, body[data-page="not-found"] .site-nav { color: inherit; }
+.not-found-main { display: grid; min-height: calc(100vh - 72px); padding: 48px var(--page-gutter) 80px; place-items: center; }
+.not-found-frame { width: min(620px,100%); padding: clamp(45px,8vw,82px); color: #48382d; text-align: center; background: #fff5dc; background-clip: padding-box; border: clamp(34px,6vw,64px) solid transparent; border-image: url("../images/frames/salon-06.webp") 28% / 1 / 0 stretch; filter: drop-shadow(0 20px 22px rgba(15,8,5,.48)); }
+.not-found-code { margin: 0 0 8px; color: #a6693f; font-size: clamp(44px,10vw,92px); font-weight: 900; line-height: .9; letter-spacing: -.06em; }
+.not-found-frame h1 { margin: 0 0 14px; font-family: Georgia,"Times New Roman",serif; font-size: clamp(25px,5vw,42px); }
+.not-found-frame > p:not(.not-found-code) { margin: 0 auto 28px; color: #746356; line-height: 1.7; }
+.not-found-home { display: inline-flex; min-height: 46px; padding: 10px 18px; align-items: center; justify-content: center; color: #fff7e8; background: #526b5d; border-radius: 999px; box-shadow: 0 4px 0 #32443a; font-weight: 850; text-decoration: none; }
+.not-found-home:hover { background: #394f43; transform: translateY(-1px); }
+body[data-page="not-found"] .site-footer { color: rgba(255,247,232,.78); background: rgba(22,16,25,.28); }
+body[data-page="not-found"] .site-footer-name, body[data-page="not-found"] .site-footer-nav a { color: #fff3da; }
+@media (max-width: 767px) { .not-found-main { min-height: calc(100vh - 64px); padding: 35px 14px 60px; } .not-found-frame { padding: 38px 25px; border-width: 34px; } }

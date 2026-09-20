@@ -1,0 +1,29 @@
+{
+  "background": {
+    "mode": "follow-home",
+    "sceneId": "",
+    "blur": 3,
+    "brightness": 0.75,
+    "overlay": 0.3
+  },
+  "text": {
+    "kicker": "SHI-GAI 的觀察時間",
+    "heading": "兩張圖裡，藏著哪些小變化？",
+    "instructions": "點一下你發現的地方。兩張圖會一起留下紅色記號。",
+    "mobileHint": "手機可用雙指縮放與拖曳，兩張圖會同步移動。",
+    "originalLabel": "原來的樣子",
+    "modifiedLabel": "找找哪裡不同",
+    "backLabel": "遊戲室",
+    "resetLabel": "重新開始",
+    "completeTitle": "全部找到了！",
+    "completeMessage": "你的觀察力真厲害。",
+    "againLabel": "再玩一次"
+  },
+  "assets": {
+    "mascot": "assets/games/spot-difference/ui/mascot-1788507876341-6e6b001f.png",
+    "backIcon": "",
+    "resetIcon": "",
+    "progressIcon": "",
+    "completeIcon": ""
+  }
+}

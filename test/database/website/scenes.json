@@ -1,0 +1,932 @@
+[
+  {
+    "id": "scene-1786444494332",
+    "name": "街頭",
+    "type": "world-entrance",
+    "status": "published",
+    "order": 1,
+    "background": {
+      "color": "#F0C8A3",
+      "asset": ""
+    },
+    "condition": {
+      "mode": "fixed",
+      "time": "",
+      "dates": [],
+      "holidays": [],
+      "weight": 1,
+      "random": false,
+      "event": ""
+    },
+    "language": {
+      "defaultLocale": "zh-Hant",
+      "translations": {}
+    },
+    "objects": [
+      {
+        "id": "object-local-1786464356654",
+        "order": 1,
+        "type": "background",
+        "name": "雲層",
+        "media": {
+          "src": "assets/published/scenes/asset-22218a5d8b8d4c772f0e3c48/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "22218a5d8b8d4c772f0e3c488a8ddb82630a1092572a7ecc5eb7538a323db4bc",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-22218a5d8b8d4c772f0e3c48/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.002,
+          "y": 0.46
+        },
+        "scale": 1.17,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.002,
+              "y": 0.46
+            },
+            "scale": 1.17,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": -0.192,
+              "y": 0.269
+            },
+            "scale": 1,
+            "rotation": 0
+          }
+        },
+        "layer": "background",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "loop",
+          "enabled": true,
+          "position": {
+            "x": 1,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 15,
+          "mode": "seamless",
+          "easing": "linear"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1786638722980",
+        "order": 4,
+        "type": "character",
+        "name": "我騎車",
+        "media": {
+          "src": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "16bd73612327b1b09b965f85c063e456f1e88b1d764aabe5752618d5e1091147",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.855,
+          "y": 0.798
+        },
+        "scale": 0.259,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.855,
+              "y": 0.798
+            },
+            "scale": 0.259,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.91,
+              "y": 0.965
+            },
+            "scale": 0.213,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "interaction": {
+          "enabled": true,
+          "cursor": "default",
+          "action": "about",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": true,
+          "duration": 20,
+          "loop": true,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": [
+              {
+                "offset": 0,
+                "position": {
+                  "x": 0,
+                  "y": 0
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              },
+              {
+                "offset": 0.5,
+                "position": {
+                  "x": -0.328,
+                  "y": 0.008
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": true
+              },
+              {
+                "offset": 1,
+                "position": {
+                  "x": 0,
+                  "y": 0
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              }
+            ],
+            "portrait": [
+              {
+                "offset": 0,
+                "position": {
+                  "x": 0.057,
+                  "y": -0.038
+                },
+                "rotation": 0,
+                "scale": 1.709,
+                "flipX": false
+              },
+              {
+                "offset": 0.5,
+                "position": {
+                  "x": -0.731,
+                  "y": -0.029
+                },
+                "rotation": 0,
+                "scale": 1.615,
+                "flipX": true
+              },
+              {
+                "offset": 1,
+                "position": {
+                  "x": 0.032,
+                  "y": -0.029
+                },
+                "rotation": 0,
+                "scale": 1.793,
+                "flipX": false
+              }
+            ]
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1787640977508",
+        "order": 2,
+        "type": "background",
+        "name": "街景",
+        "media": {
+          "src": "assets/published/scenes/asset-f1e94515463f3cacf69202f9/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "f1e94515463f3cacf69202f9507b6e6af8a93c195312b80e3b66b7a52d8dada9",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-f1e94515463f3cacf69202f9/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.49,
+          "y": 0.44
+        },
+        "scale": 1.372,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.49,
+              "y": 0.44
+            },
+            "scale": 1.372,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.134,
+              "y": 0.549
+            },
+            "scale": 2.309,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1788711281803",
+        "order": 3,
+        "type": "prop",
+        "name": "企鵝",
+        "media": {
+          "src": "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1788711340811.png",
+          "format": "png",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.616,
+          "y": 0.814
+        },
+        "scale": 0.073,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.616,
+              "y": 0.814
+            },
+            "scale": 0.073,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.617,
+              "y": 0.899
+            },
+            "scale": 0.112,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      }
+    ],
+    "metadata": {
+      "mobileViewport": {
+        "enabled": true,
+        "width": 1.8,
+        "initialX": 0.5,
+        "autoPan": true,
+        "speed": 9
+      }
+    },
+    "createdAt": "2026-08-11T10:34:54.332Z",
+    "updatedAt": "2026-09-14T07:24:32.152Z"
+  },
+  {
+    "id": "scene-1787847732039",
+    "name": "作品廊道",
+    "type": "work",
+    "status": "published",
+    "order": 5,
+    "background": {
+      "color": "#392B22",
+      "asset": ""
+    },
+    "condition": {
+      "mode": "fixed",
+      "time": "",
+      "dates": [],
+      "holidays": [],
+      "weight": 1,
+      "random": false,
+      "event": ""
+    },
+    "language": {
+      "defaultLocale": "zh-Hant",
+      "translations": {}
+    },
+    "objects": [
+      {
+        "id": "object-local-1787870141396",
+        "order": 2,
+        "type": "prop",
+        "name": "地毯",
+        "media": {
+          "src": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "0ac2d27d800b76c5bf1695c70850341c176c932b466fc15f11effda58960c34e",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.495,
+          "y": 0.387
+        },
+        "scale": 0.909,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.495,
+              "y": 0.387
+            },
+            "scale": 0.909,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.493,
+              "y": 0.441
+            },
+            "scale": 1.091,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": false,
+          "duration": 4,
+          "loop": false,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": [],
+            "portrait": []
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1787871545771",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "16bd73612327b1b09b965f85c063e456f1e88b1d764aabe5752618d5e1091147",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.894,
+          "y": 0.448
+        },
+        "scale": 0.333,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.894,
+              "y": 0.448
+            },
+            "scale": 0.333,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 1.138,
+              "y": 0.437
+            },
+            "scale": 0.402,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": true,
+          "duration": 20,
+          "loop": true,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": [
+              {
+                "offset": 0,
+                "position": {
+                  "x": 0.173,
+                  "y": 0.017
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              },
+              {
+                "offset": 0.5,
+                "position": {
+                  "x": -0.982,
+                  "y": 0.028
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": true
+              },
+              {
+                "offset": 1,
+                "position": {
+                  "x": 0.163,
+                  "y": 0.003
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              }
+            ],
+            "portrait": [
+              {
+                "offset": 0,
+                "position": {
+                  "x": 0.013,
+                  "y": 0.012
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              },
+              {
+                "offset": 0.5,
+                "position": {
+                  "x": -1.286,
+                  "y": 0.009
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": true
+              },
+              {
+                "offset": 1,
+                "position": {
+                  "x": 0.017,
+                  "y": 0.013
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              }
+            ]
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      }
+    ],
+    "metadata": {},
+    "createdAt": "2026-08-27T16:22:12.039Z",
+    "updatedAt": "2026-09-03T07:21:27.420Z"
+  },
+  {
+    "id": "scene-1788159835341",
+    "name": "遊戲室前方",
+    "type": "game",
+    "status": "published",
+    "order": 7,
+    "background": {
+      "color": "#F7F9FC",
+      "asset": ""
+    },
+    "condition": {
+      "mode": "fixed",
+      "time": "",
+      "dates": [],
+      "holidays": [],
+      "weight": 1,
+      "random": false,
+      "event": ""
+    },
+    "language": {
+      "defaultLocale": "zh-Hant",
+      "translations": {}
+    },
+    "objects": [
+      {
+        "id": "object-local-1788193069792",
+        "order": 1,
+        "type": "background",
+        "name": "地毯",
+        "media": {
+          "src": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "0ac2d27d800b76c5bf1695c70850341c176c932b466fc15f11effda58960c34e",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.489,
+          "y": 0.513
+        },
+        "scale": 1.484,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.489,
+              "y": 0.513
+            },
+            "scale": 1.484,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.488,
+              "y": 0.895
+            },
+            "scale": 0.74,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1788193133638",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "16bd73612327b1b09b965f85c063e456f1e88b1d764aabe5752618d5e1091147",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.996,
+          "y": 0.704
+        },
+        "scale": 0.436,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.996,
+              "y": 0.704
+            },
+            "scale": 0.436,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 1.167,
+              "y": 0.852
+            },
+            "scale": 0.253,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": true,
+          "duration": 4,
+          "loop": true,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": [
+              {
+                "offset": 0,
+                "position": {
+                  "x": 0,
+                  "y": 0
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              },
+              {
+                "offset": 0.5,
+                "position": {
+                  "x": -0.981,
+                  "y": -0.009
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": true
+              },
+              {
+                "offset": 1,
+                "position": {
+                  "x": 0,
+                  "y": 0
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              }
+            ],
+            "portrait": [
+              {
+                "offset": 0,
+                "position": {
+                  "x": -0.004,
+                  "y": 0.021
+                },
+                "rotation": 0,
+                "scale": 2.032,
+                "flipX": false
+              },
+              {
+                "offset": 0.5,
+                "position": {
+                  "x": -1.358,
+                  "y": 0.015
+                },
+                "rotation": 0,
+                "scale": 2.178,
+                "flipX": true
+              },
+              {
+                "offset": 1,
+                "position": {
+                  "x": -0.04,
+                  "y": 0.034
+                },
+                "rotation": 0,
+                "scale": 2.348,
+                "flipX": false
+              }
+            ]
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      }
+    ],
+    "metadata": {},
+    "createdAt": "2026-08-31T07:03:55.341Z",
+    "updatedAt": "2026-09-04T15:58:26.663Z"
+  }
+]

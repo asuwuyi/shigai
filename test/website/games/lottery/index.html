@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Shi-Gai Lottery 小遊戲。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Lottery · Shi-Gai</title>
+  <link rel="stylesheet" href="../game-shell.css?v=mobile-game-mode-1">
+  <meta name="robots" content="noindex,nofollow">
+</head>
+<body style="--mobile-game-stage:#B0CD6C" data-desktop-script="js/lotteryD.js" data-mobile-script="js/lotteryM.js" data-desktop-export="lotteryD" data-mobile-export="lotteryM" data-stage-background="#FFCD3E" data-mobile-stage-background="#B0CD6C">
+  <main class="game-stage">
+    <a class="game-back" href="../../games.html" aria-label="返回 Shi-Gai Games">← Games</a>
+    <p id="gameStatus" class="game-status" role="status">正在載入 Lottery…</p>
+    <div id="animation_container" class="game-animation-container">
+      <canvas id="canvas" class="game-canvas" aria-label="Lottery 遊戲畫面"></canvas>
+      <div id="_preload_div_" class="game-preloader"><img src="../shared/preloader.gif" alt=""></div>
+      <div id="dom_overlay_container" class="game-overlay"></div>
+    </div>
+  </main>
+  <script src="../game-runtime.js?v=mobile-game-mode-1"></script>
+</body>
+</html>
