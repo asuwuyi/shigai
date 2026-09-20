@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-09-20T11:49:09.963Z",
+  "createdAt": "2026-09-20T16:44:49.147Z",
   "entry": "website/index.html",
   "counts": {
     "works": 991,
@@ -13,7 +13,7 @@
     "assets": 1067,
     "files": 1171
   },
-  "bytes": 134800656,
+  "bytes": 134012606,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -34,6 +34,7 @@
     "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp",
     "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
     "assets/published/scenes/asset-22218a5d8b8d4c772f0e3c48/primary-v1.webp",
+    "assets/published/scenes/asset-3fefe177b957dcb0767163fee22cabbd/primary-v1.webp",
     "assets/published/scenes/asset-f1e94515463f3cacf69202f9/primary-v1.webp",
     "assets/published/works/SG-000001/primary-v1.webp",
     "assets/published/works/SG-000007/primary-v1.webp",
@@ -1064,7 +1065,6 @@
     "assets/published/works/SG-001002/primary-v1.webp",
     "assets/published/works/SG-001003/primary-v1.webp",
     "assets/published/works/SG-001004/primary-v1.webp",
-    "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1788711340811.png",
     "assets/site/brand/welcome-logo-1787668785393.gif",
     "assets/site/brand/welcome-logo-1787668785393.webm",
     "assets/site/frames/frame-mtspj2a0-a17dbba3.png",

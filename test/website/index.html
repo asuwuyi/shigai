@@ -9,13 +9,27 @@
   <link rel="icon" type="image/png" href="assets/images/brand-icon.png">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/site.css">
-  <link rel="stylesheet" href="assets/css/home.css?v=mobile-scene-viewport-1">
+  <link rel="stylesheet" href="assets/css/home.css?v=home-first-load-1">
   <link rel="stylesheet" href="../shared/scene-renderer.css?v=mobile-scene-viewport-1">
+  <link rel="preload" href="../database/website/settings.json" as="fetch" crossorigin="anonymous">
+  <link rel="preload" href="../database/website/scenes.json" as="fetch" crossorigin="anonymous">
   <script src="assets/js/settings.js?v=shared-settings-1"></script>
   <script src="assets/js/site.js?v=shared-settings-1" defer></script>
   <meta name="robots" content="noindex,nofollow">
 </head>
-<body data-page="home">
+<body data-page="home" class="is-home-loading">
+  <div class="home-loading-screen" data-home-loading role="status" aria-live="polite" aria-label="Shi-Gai 場景載入中">
+    <div class="home-loading-tv" aria-hidden="true">
+      <span class="home-loading-signal"></span>
+      <span class="home-loading-scanlines"></span>
+      <span class="home-loading-mark">SG</span>
+    </div>
+    <p class="home-loading-title">SHI-GAI SIGNAL</p>
+    <p class="home-loading-status" data-home-loading-status>正在連接 Shi-Gai 世界…</p>
+    <div class="home-loading-track" aria-hidden="true"><span data-home-loading-bar></span></div>
+    <p class="home-loading-percent" data-home-loading-percent>0%</p>
+    <button class="home-loading-retry" data-home-loading-retry type="button" hidden>重新載入</button>
+  </div>
   <header class="site-header" data-site-header></header>
 
   <main class="site-main home-main">
@@ -30,9 +44,9 @@
   </main>
   <script src="../shared/scene-render-rules.js"></script>
   <script src="../shared/scene-animation-rules.js"></script>
-  <script src="../shared/scene-renderer.js?v=mobile-scene-viewport-1"></script>
+  <script src="../shared/scene-renderer.js?v=home-first-load-1"></script>
   <script src="../shared/scene-interaction.js"></script>
   <script src="assets/js/homeDynamic.js"></script>
-  <script src="assets/js/home.js?v=mobile-scene-viewport-1"></script>
+  <script src="assets/js/home.js?v=home-first-load-1"></script>
 </body>
 </html>

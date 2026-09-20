@@ -8,7 +8,12 @@ const homeElements = {
   worksGrid: document.getElementById("featuredWorksGrid"), workTemplate: document.getElementById("homeWorkTemplate"),
   worksEmpty: document.getElementById("featuredWorksEmpty"),
   charactersGrid: document.getElementById("charactersPreviewGrid"), characterTemplate: document.getElementById("homeCharacterTemplate"),
-  charactersEmpty: document.getElementById("charactersPreviewEmpty")
+  charactersEmpty: document.getElementById("charactersPreviewEmpty"),
+  loading: document.querySelector("[data-home-loading]"),
+  loadingStatus: document.querySelector("[data-home-loading-status]"),
+  loadingBar: document.querySelector("[data-home-loading-bar]"),
+  loadingPercent: document.querySelector("[data-home-loading-percent]"),
+  loadingRetry: document.querySelector("[data-home-loading-retry]")
 };
 
 const isReviewMode = new URLSearchParams(window.location.search).get("review") === "1";
@@ -18,6 +23,43 @@ let activeWorldEntranceSceneId = "";
 let suppressSceneInteractionUntil = 0;
 let activeMobileViewport = null;
 const welcomeSessionKey = "shi-gai:welcome-seen:v1";
+const homeLoadingStartedAt = performance.now();
+function setHomeLoadingProgress(value, message = "") {
+  const progress = Math.max(0, Math.min(100, Math.round(Number(value) || 0)));
+  homeElements.loading?.style.setProperty("--home-loading-progress", `${progress}%`);
+  if (homeElements.loadingBar) homeElements.loadingBar.style.width = `${progress}%`;
+  if (homeElements.loadingPercent) homeElements.loadingPercent.textContent = `${progress}%`;
+  if (message && homeElements.loadingStatus) homeElements.loadingStatus.textContent = message;
+}
+function finishHomeLoading() {
+  setHomeLoadingProgress(100, "訊號接收完成");
+  const remaining = Math.max(0, 360 - (performance.now() - homeLoadingStartedAt));
+  window.setTimeout(() => {
+    homeElements.loading?.classList.add("is-leaving");
+    document.body.classList.remove("is-home-loading");
+    window.setTimeout(() => homeElements.loading?.remove(), 380);
+  }, remaining);
+}
+function failHomeLoading() {
+  setHomeLoadingProgress(100, "暫時無法接收訊號，請重新載入");
+  homeElements.loading?.classList.add("has-error");
+  if (homeElements.loadingRetry) homeElements.loadingRetry.hidden = false;
+}
+function waitForCriticalSceneMedia() {
+  const critical = [...(homeElements.worldSceneRender?.querySelectorAll(".scene-render-object.is-background img, .scene-render-object.is-background video") || [])];
+  if (!critical.length) return Promise.resolve();
+  let completed = 0;
+  const update = () => {
+    completed += 1;
+    setHomeLoadingProgress(55 + (completed / critical.length) * 40, `正在接收場景 ${completed} / ${critical.length}`);
+  };
+  return Promise.all(critical.map((media) => new Promise((resolve) => {
+    const done = () => { update(); resolve(); };
+    if ((media.tagName === "IMG" && media.complete) || (media.tagName === "VIDEO" && media.readyState >= 2)) return done();
+    media.addEventListener(media.tagName === "VIDEO" ? "canplay" : "load", done, { once: true });
+    media.addEventListener("error", done, { once: true });
+  })));
+}
 function currentSceneLayout() { return window.matchMedia("(orientation: portrait)").matches ? "portrait" : "landscape"; }
 function mobileViewportSettings(scene) {
   const source = scene?.metadata?.mobileViewport || {};
@@ -517,10 +559,18 @@ function renderReviewPanel(content, { works, characters, categories, tags, scene
 async function loadHome() {
   const reviewContent = createReviewPanel();
   try {
+    setHomeLoadingProgress(12, "正在讀取世界設定…");
     const [scenesResponse, settings] = await Promise.all([fetch("../database/website/scenes.json"), window.ShiGaiWebsiteSettings]);
     if (!scenesResponse.ok) throw new Error("Website Scene export could not be loaded.");
+    setHomeLoadingProgress(38, "正在建立場景…");
     const scenesData = await scenesResponse.json();
     renderWorldEntranceScene(scenesData);
+    setHomeLoadingProgress(55, "正在接收場景素材…");
+    await Promise.race([
+      waitForCriticalSceneMedia(),
+      new Promise((resolve) => window.setTimeout(resolve, 8000))
+    ]);
+    finishHomeLoading();
     renderWelcomeLogo(settings?.websiteBrand?.welcome);
     if (reviewContent) {
       const [worksResponse, charactersResponse, categoriesResponse, tagsResponse] = await Promise.all([
@@ -533,7 +583,7 @@ async function loadHome() {
       const tags = tagsResponse.ok ? await tagsResponse.json() : [];
       renderReviewPanel(reviewContent, { works: Array.isArray(works) ? works : [], characters: Array.isArray(characters) ? characters : [], categories: Array.isArray(categories) ? categories : [], tags: Array.isArray(tags) ? tags : [], scenes: Array.isArray(scenesData) ? scenesData : [] });
     }
-  } catch (error) {}
+  } catch (error) { failHomeLoading(); }
 }
 
 function renderWelcomeLogo(value) {
@@ -593,4 +643,5 @@ if (homeElements.worldSceneRender) {
 
 enableTouchCameraPeek();
 enableMobileSceneViewport();
+homeElements.loadingRetry?.addEventListener("click", () => window.location.reload());
 loadHome();

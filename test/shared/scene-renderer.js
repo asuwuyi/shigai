@@ -134,6 +134,8 @@
     media.src = source;
     media.alt = object?.media?.alt || object?.name || "";
     media.draggable = false;
+    media.decoding = "async";
+    media.fetchPriority = object?.type === "background" ? "high" : "auto";
     if (media.tagName === "VIDEO") {
       media.autoplay = true;
       media.muted = true;

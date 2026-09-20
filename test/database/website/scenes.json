@@ -339,9 +339,20 @@
         "type": "prop",
         "name": "企鵝",
         "media": {
-          "src": "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1788711340811.png",
-          "format": "png",
-          "alt": ""
+          "src": "assets/published/scenes/asset-3fefe177b957dcb0767163fee22cabbd/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "3fefe177b957dcb0767163fee22cabbd596fc09a03ad931ca274dca2939f464b",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-3fefe177b957dcb0767163fee22cabbd/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
         },
         "position": {
           "x": 0.616,
