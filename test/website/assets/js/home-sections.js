@@ -1,0 +1,189 @@
+// V2-M4 Homepage composition host. Sections read existing Website exports only.
+(function initializeHomeSections() {
+  "use strict";
+
+  const root = document.querySelector("[data-home-sections]");
+  if (!root) return;
+
+  const analyticsEvents = Object.freeze({
+    sectionView: "home_section_view",
+    sectionInteraction: "home_section_interaction",
+    scrollDepth: "scroll_depth"
+  });
+  const dailyEngine = window.ShiGaiDailyComposition;
+  if (!dailyEngine) return;
+  const dailyContext = dailyEngine.createContext();
+  const registry = new Map();
+  const sectionDefinitions = Object.freeze([
+    Object.freeze({ id: "latest-journal", type: "latest-journal", enabled: true, fixedOrder: 10 }),
+    Object.freeze({ id: "daily-game", type: "habit-recommendation", enabled: true, dailySlot: true }),
+    Object.freeze({ id: "archive-discovery", type: "archive-discovery", enabled: true, dailySlot: true })
+  ]);
+  const composition = dailyEngine.resolveSections(sectionDefinitions, dailyContext);
+
+  function track(eventName, parameters) {
+    window.ShiGaiAnalytics?.track(eventName, {
+      contract_version: "v2_m4",
+      daily_key: dailyContext.dateKey,
+      weekday: dailyContext.weekday,
+      ...parameters
+    });
+  }
+  function safeMediaSource(work) {
+    const source = work?.media?.optimized?.outputs?.primary || work?.file || "";
+    return source.startsWith("assets/") && !source.split("/").includes("..") ? `../${source}` : "";
+  }
+  function safePosterSource(work) {
+    const source = work?.media?.optimized?.outputs?.poster || work?.thumbnail || "";
+    return source.startsWith("assets/") && !source.split("/").includes("..") ? `../${source}` : "";
+  }
+  function workDate(work) {
+    return String(work?.publishDate || work?.createDate || "").replaceAll("-", " · ") || "今天";
+  }
+  function newestFirst(first, second) {
+    const firstDate = Date.parse(first?.publishDate || first?.createDate || first?.createdAt || 0) || 0;
+    const secondDate = Date.parse(second?.publishDate || second?.createDate || second?.createdAt || 0) || 0;
+    return secondDate - firstDate || String(second?.id || "").localeCompare(String(first?.id || ""), undefined, { numeric: true });
+  }
+  function mediaNode(work, className = "home-journal-media") {
+    const wrap = document.createElement("figure");
+    wrap.className = className;
+    const source = safeMediaSource(work);
+    if (!source) return wrap;
+    const media = work.type === "video" ? document.createElement("video") : document.createElement("img");
+    media.src = source;
+    if (media.tagName === "VIDEO") { media.controls = true; media.playsInline = true; media.preload = "metadata"; media.poster = safePosterSource(work); }
+    else { media.loading = "lazy"; media.alt = ""; }
+    wrap.append(media);
+    return wrap;
+  }
+  function archiveEntry(work) {
+    const article = document.createElement("article");
+    article.className = "home-archive-entry";
+    article.dataset.contentId = work.id;
+    const copy = document.createElement("div"); copy.className = "home-archive-copy";
+    const meta = document.createElement("p"); meta.className = "home-living-card-date";
+    meta.textContent = [workDate(work), work.category].filter(Boolean).join(" · ");
+    const title = document.createElement("h3");
+    title.textContent = work.title || `${work.characters?.[0] ? `${work.characters[0]} 的` : ""}${work.category || "作品"}片段`;
+    const body = document.createElement("p"); body.className = "home-archive-body"; body.textContent = work.description || "今天從 Shi-Gai 的作品世界裡，重新遇見這一件。";
+    const link = document.createElement("a"); link.className = "home-archive-link"; link.href = `work.html?id=${encodeURIComponent(work.id)}`; link.textContent = "走進這件作品 →";
+    link.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: "archive-discovery", content_id: work.id, action: "open_archive_work" }));
+    copy.append(meta, title, body, link); article.append(mediaNode(work, "home-archive-media"), copy);
+    return article;
+  }
+  function latestJournalEntry(work) {
+    const article = document.createElement("article");
+    article.className = "home-journal-entry";
+    article.dataset.contentId = work.id;
+    const copy = document.createElement("div"); copy.className = "home-journal-copy";
+    const date = document.createElement("p"); date.className = "home-living-card-date"; date.textContent = workDate(work);
+    const title = document.createElement("h3"); title.textContent = work.title || work.id;
+    const body = document.createElement("p"); body.className = "home-journal-body"; body.textContent = work.journal?.text || work.description || "今天留下了一個新的片段。";
+    const link = document.createElement("a"); link.className = "home-journal-link"; link.href = `journal.html?id=${encodeURIComponent(work.id)}`; link.textContent = "前往完整 Journal →";
+    link.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: "latest-journal", content_id: work.id, action: "open_journal" }));
+    copy.append(date, title, body, link); article.append(mediaNode(work), copy);
+    return article;
+  }
+  function sectionShell(config, title, eyebrow, href, linkLabel) {
+    const section = document.createElement("section"); section.className = "home-living-section"; section.dataset.homeSection = config.id;
+    const heading = document.createElement("header"); heading.className = "home-living-heading";
+    const copy = document.createElement("div");
+    const label = document.createElement("p"); label.textContent = eyebrow;
+    const headingTitle = document.createElement("h2"); headingTitle.textContent = title;
+    const more = document.createElement("a"); more.className = "home-living-more"; more.href = href; more.textContent = linkLabel;
+    more.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: "", action: "open_all" }));
+    copy.append(label, headingTitle); heading.append(copy, more); section.append(heading);
+    return section;
+  }
+  function observeSection(section, sectionId) {
+    if (!("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      track(analyticsEvents.sectionView, { section_id: sectionId });
+      observer.disconnect();
+    }, { threshold: .35 });
+    observer.observe(section);
+  }
+  function observeScrollDepth() {
+    const sent = new Set();
+    const report = () => {
+      const available = document.documentElement.scrollHeight - innerHeight;
+      if (available <= 0) return;
+      const depth = Math.round((scrollY / available) * 100);
+      [25, 50, 75, 100].forEach((threshold) => {
+        if (depth < threshold || sent.has(threshold)) return;
+        sent.add(threshold); track(analyticsEvents.scrollDepth, { page: "home", percent: threshold });
+      });
+    };
+    addEventListener("scroll", report, { passive: true });
+    report();
+  }
+
+  registry.set("latest-journal", async (config) => {
+    const section = sectionShell(config, "今天留下的片段", "TODAY IN SHI-GAI", "journal.html", "走進 Journal →");
+    const content = document.createElement("div"); content.className = "home-journal-content"; section.append(content);
+    try {
+      const response = await fetch("../database/website/works.json", { cache: "no-store" });
+      if (!response.ok) throw new Error("Works export unavailable");
+      const work = (await response.json()).filter((item) => item?.status === "published" && item?.journal?.enabled === true).sort(newestFirst)[0];
+      if (work) content.append(latestJournalEntry(work));
+      else { const empty = document.createElement("p"); empty.className = "home-living-empty"; empty.textContent = "今天的故事還在路上。先在 Scene 裡四處看看吧。"; content.append(empty); }
+    } catch {
+      const empty = document.createElement("p"); empty.className = "home-living-empty"; empty.textContent = "今天的訊號暫時沒有接上，稍後再回來看看。"; content.append(empty);
+    }
+    observeSection(section, config.id);
+    return section;
+  });
+
+  registry.set("habit-recommendation", async (config) => {
+    const section = sectionShell(config, "今天一起玩什麼？", "TODAY'S GAME", "games.html", "所有遊戲 →");
+    const grid = document.createElement("div"); grid.className = "home-habit-grid"; section.append(grid);
+    try {
+      const response = await fetch("../database/website/games.json", { cache: "no-store" });
+      if (!response.ok) throw new Error("Games export unavailable");
+      const games = (await response.json())
+        .filter((item) => item?.status === "published" && item?.visible !== false && item?.url)
+        .sort((first, second) => Number(first.order || 0) - Number(second.order || 0) || String(first.id).localeCompare(String(second.id)));
+      const game = games[dailyEngine.selectIndex(games.length, dailyContext, "daily-game")];
+      if (!game) throw new Error("Habit interaction unavailable");
+      const panel = document.createElement("div"); panel.className = "home-game-embed"; panel.dataset.gameId = game.id;
+      const intro = document.createElement("p"); intro.className = "home-game-embed-intro"; intro.textContent = game.description || "直接在這裡玩今天推薦的遊戲。";
+      const frame = document.createElement("iframe"); frame.className = "home-game-frame"; frame.src = `${game.url}${game.url.includes("?") ? "&" : "?"}embed=home`; frame.title = `${game.name || game.id} 完整遊戲`; frame.loading = "lazy"; frame.allow = "fullscreen";
+      const controls = document.createElement("div"); controls.className = "home-game-embed-controls";
+      const full = document.createElement("a"); full.className = "home-game-full"; full.href = game.url; full.textContent = "放大遊玩 →";
+      frame.addEventListener("load", () => track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: game.id, action: "load_original_game_inline" }));
+      full.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: game.id, action: "open_full_game" }));
+      controls.append(full); panel.append(intro, frame, controls); grid.append(panel);
+    } catch {
+      const empty = document.createElement("p"); empty.className = "home-living-empty"; empty.textContent = "今天的互動正在準備，仍可前往遊戲室看看。"; grid.append(empty);
+    }
+    observeSection(section, config.id);
+    return section;
+  });
+
+  registry.set("archive-discovery", async (config) => {
+    const section = sectionShell(config, "今天重新遇見的作品", "ARCHIVE DISCOVERY", "works.html", "探索所有 Works →");
+    const content = document.createElement("div"); content.className = "home-archive-content"; section.append(content);
+    try {
+      const response = await fetch("../database/website/works.json", { cache: "no-store" });
+      if (!response.ok) throw new Error("Works export unavailable");
+      const works = (await response.json()).filter((item) => item?.status === "published" && item?.journal?.enabled !== true && safeMediaSource(item));
+      const index = dailyEngine.selectIndex(works.length, dailyContext, "archive-discovery");
+      if (index < 0) throw new Error("Archive discovery unavailable");
+      content.append(archiveEntry(works[index]));
+    } catch {
+      const empty = document.createElement("p"); empty.className = "home-living-empty"; empty.textContent = "今天的作品發現暫時沒有接上，仍可前往 Works 探索。"; content.append(empty);
+    }
+    observeSection(section, config.id);
+    return section;
+  });
+
+  Promise.all(composition.filter((section) => section.enabled).sort((a, b) => a.order - b.order).map(async (config) => {
+    const renderer = registry.get(config.type);
+    return renderer ? renderer(config) : null;
+  })).then((sections) => root.replaceChildren(...sections.filter(Boolean)));
+  observeScrollDepth();
+
+  window.ShiGaiHomeSections = Object.freeze({ registry, composition, dailyContext, analyticsEvents });
+})();

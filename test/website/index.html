@@ -2,14 +2,14 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://i.ytimg.com https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; frame-src 'self' https://www.youtube-nocookie.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'none'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="探索 Shi-Gai 的作品與角色世界。">
   <title>Shi-Gai</title>
   <link rel="icon" type="image/png" href="assets/images/brand-icon.png">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/site.css">
-  <link rel="stylesheet" href="assets/css/home.css?v=home-first-load-1">
+  <link rel="stylesheet" href="assets/css/home.css?v=v2-m4-daily">
   <link rel="stylesheet" href="../shared/scene-renderer.css?v=mobile-scene-viewport-1">
   <link rel="preload" href="../database/website/settings.json" as="fetch" crossorigin="anonymous">
   <link rel="preload" href="../database/website/scenes.json" as="fetch" crossorigin="anonymous">
@@ -41,6 +41,7 @@
       </div>
       <div class="home-world-scene-render" data-world-scene-render aria-label="Shi-Gai 世界入口"></div>
     </section>
+    <div class="home-living-sections" data-home-sections aria-label="今日 Shi-Gai"></div>
   </main>
   <script src="../shared/scene-render-rules.js"></script>
   <script src="../shared/scene-animation-rules.js"></script>
@@ -48,5 +49,7 @@
   <script src="../shared/scene-interaction.js"></script>
   <script src="assets/js/homeDynamic.js"></script>
   <script src="assets/js/home.js?v=home-first-load-1"></script>
+  <script src="assets/js/home-daily-composition.js?v=v2-m4"></script>
+  <script src="assets/js/home-sections.js?v=v2-m4-daily"></script>
 </body>
 </html>

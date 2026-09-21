@@ -2,6 +2,8 @@
 (function runShiGaiGame() {
   const body = document.body, status = document.getElementById("gameStatus"), canvas = document.getElementById("canvas"), container = document.getElementById("animation_container"), overlay = document.getElementById("dom_overlay_container"), preloader = document.getElementById("_preload_div_");
   const requestedLayout = new URLSearchParams(location.search).get("layout");
+  const embeddedMode = new URLSearchParams(location.search).get("embed");
+  if (embeddedMode) document.documentElement.dataset.gameEmbed = embeddedMode;
   const mobile = requestedLayout === "mobile" || (requestedLayout !== "desktop" && (matchMedia("(orientation: portrait)").matches || (navigator.maxTouchPoints > 0 && innerWidth <= 1024)));
   const width = mobile ? 1080 : 1920, height = mobile ? 1920 : 1080;
   const scriptPath = mobile ? body.dataset.mobileScript : body.dataset.desktopScript;

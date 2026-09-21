@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-09-20T16:44:49.147Z",
+  "createdAt": "2026-09-21T17:47:41.851Z",
   "entry": "website/index.html",
   "counts": {
     "works": 991,
@@ -11,9 +11,9 @@
     "games": 3,
     "spotDifferenceLevels": 2,
     "assets": 1067,
-    "files": 1171
+    "files": 1173
   },
-  "bytes": 134012606,
+  "bytes": 134035608,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",

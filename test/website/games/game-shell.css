@@ -24,4 +24,5 @@ html[data-game-layout="mobile"] .game-animation-container { border-radius: 0; ba
 html[data-game-layout="mobile"] .game-animation-container::after { display: none; }
 html[data-game-layout="mobile"] .game-back { top: max(8px, env(safe-area-inset-top)); left: max(8px, env(safe-area-inset-left)); min-width: 42px; min-height: 42px; overflow: hidden; width: 42px; padding: 0; border-radius: 50%; color: #fff; background: rgba(28,22,18,.72); border-color: rgba(255,255,255,.45); font-size: 0; }
 html[data-game-layout="mobile"] .game-back::before { content: "×"; font-size: 28px; font-weight: 500; line-height: 1; }
+html[data-game-embed="home"] .game-back { display: none; }
 @media (prefers-reduced-motion: reduce) { .game-preloader img { display: none; } }
