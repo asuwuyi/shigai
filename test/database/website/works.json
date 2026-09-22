@@ -47180,5 +47180,4653 @@
         "error": ""
       }
     }
+  },
+  {
+    "id": "SG-001005",
+    "title": "",
+    "publishDate": "2018-09-24",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1537791017_1875441386309026782_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "中秋節\n以前都要放鞭炮\n射嫦娥跟月兔！？\n喔不是⋯\n是放鞭炮慶祝！\n後來只能賞月，\n但有時候天氣又不好⋯\n不過\n還好我們還有月餅、柚子\n跟⋯烤肉醬！\n\n中秋快樂⋯",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001005/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001005/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=wiwCJrqMXk8",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:00:57.167Z",
+    "updatedAt": "2026-09-21T19:00:57.167Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "6601660c6b30d0ca8623242c0acd20fcd23c2db46edf427f48bab446a39cbb2e",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001005/primary-v1.webm",
+          "poster": "assets/published/works/SG-001005/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001006",
+    "title": "",
+    "publishDate": "2018-09-26",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1537968412_1876935994654516157_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "Bye Bye!\n潭美！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001006/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001006/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=Un0tssKN-WE",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:02:04.710Z",
+    "updatedAt": "2026-09-21T19:02:04.710Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "e7e53242eb962d287b34e26b9cd9074e8909918da59ae1c3dd52288647782cd6",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001006/primary-v1.webm",
+          "poster": "assets/published/works/SG-001006/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001007",
+    "title": "",
+    "publishDate": "2018-09-27",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1537979338_1877028353597682812_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "作者本人"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "欸⋯",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001007/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001007/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=0UEyJe7xRJs",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:03:12.976Z",
+    "updatedAt": "2026-09-21T19:03:12.976Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "0d29b35f77b9e52f930adcb3cde620d58477b63493c6dc31fd8f4d15fa07df4c",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001007/primary-v1.webm",
+          "poster": "assets/published/works/SG-001007/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001008",
+    "title": "",
+    "publishDate": "2018-09-27",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1538039036_1877529981031396601_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "好的！\n我覺得今天起床的方式\n非常的特別，\n基本上呢，是一個夢，\n有一個朋友，\n指著前方有一隻小強，\n我反射動作拿起東西\n就往小強身上打，\n這時候我朋友說，\n你不覺得一直有怪聲音，\n他指著已經掛掉的小強方向，\n我往小強的方向看過去，\n我看到小強正在表演樂器..= =:\n聲音居然是他發出來的，\n我驚訝之餘..\n他忽然展開彩色的翅膀..\n沒錯...翅膀居然是彩色的\n往我跟我朋友的方向飛過來\n驚嚇中..\n我就起床了...\n根據掉入海裡就是尿床的原則下\n我檢查了一下周圍..\n是不是真的有小強..\n結果....\n甚麼都有沒呢!!!\n不然我就可以拍下有\n彩虹翅膀的小強給妳們看了..\n一一v",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001008/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:03:34.442Z",
+    "updatedAt": "2026-09-21T19:03:34.442Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "e1966caec6c69c35c889c7f9c88a22c4c7ef651caad418de2cba5f177dd44e1f",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001008/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001009",
+    "title": "",
+    "publishDate": "2018-09-28",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1538144300_1878412997115172403_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "作者本人"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "我覺得今天有點⋯\n有點開心？\n有點崩潰？\n有點悲傷？\n有點後悔？\n有點⋯\n那你呢？",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001009/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:03:51.123Z",
+    "updatedAt": "2026-09-21T19:03:51.123Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "180e649bfc80186c8b5743372946de662ef22c63d66a56b721d107dcaf30c242",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001009/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001010",
+    "title": "",
+    "publishDate": "2018-09-30",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1538248515_1879287212894670089_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "作者本人"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "喂~",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001010/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:05:35.639Z",
+    "updatedAt": "2026-09-21T19:05:35.639Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "7885d519c743571b2c14fd18884ee037e994a373d9cd1cc32af5ee23d14d24d0",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001010/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001011",
+    "title": "",
+    "publishDate": "2018-09-30",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1538294108_1879669677207369130_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "今天的感覺差不多就是這樣！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001011/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:06:02.772Z",
+    "updatedAt": "2026-09-21T19:06:02.772Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "a20ea361ba1456fc6b6070230d0e7f967a7e08caa3c65a48edc01cf06bb90759",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001011/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001012",
+    "title": "",
+    "publishDate": "2018-10-01",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1538383654_1880420844011043399_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "秋·涼\n我襪子鬆掉了，\n我覺得也頗有秋意的。",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001012/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:06:25.065Z",
+    "updatedAt": "2026-09-21T19:06:25.065Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "fb52fb619fa23e75462997c06ef9e81e2c2295fa0bb86d87ce5e4937b0816724",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001012/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001013",
+    "title": "",
+    "publishDate": "2018-10-01",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1538389375_1880468835153712512_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "Coffee Day\n我對咖啡沒研究，\n也分不出哪個好哪個不好，\n但我喜歡喝咖啡。",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001013/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:06:44.486Z",
+    "updatedAt": "2026-09-21T19:06:44.486Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "c73c93827711b51b9435401b2013a80e639e97c5618176cc8611fd99649ec980",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001013/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001014",
+    "title": "",
+    "publishDate": "2018-10-02",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1538459042_1881053247058675117_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "這個動作差不多\n就是這個意思了",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001014/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:07:01.386Z",
+    "updatedAt": "2026-09-21T19:07:01.386Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "25bec0dc3bfb35cf4816ab05ae86e0dd58397cf0470649eb4dfde644ff46d1cb",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001014/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001015",
+    "title": "",
+    "publishDate": "2018-10-06",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1538773462_1883690788840550558_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "冰的！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001015/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:07:17.265Z",
+    "updatedAt": "2026-09-21T19:07:17.265Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "42996870120dd61cd39828452e7c559d0aae3d3e9a26b847acd88f6f2fe65dfc",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001015/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001016",
+    "title": "",
+    "publishDate": "2018-10-06",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1538813121_1884023470900466587_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "BoomBoBu",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001016/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:07:35.768Z",
+    "updatedAt": "2026-09-21T19:07:35.768Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "ff9221a48af794689c9e1d5082bf09f0c4313539acec3c174b10bcc99f009d3e",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001016/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001017",
+    "title": "",
+    "publishDate": "2018-10-22",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1540155559_1895284656451119192_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001017/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:07:51.808Z",
+    "updatedAt": "2026-09-21T19:07:51.808Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "7bdeebffac50d46d442e3e36f7bf9bf6ab52ca73d1663f7e28b0fbd1dc36ebec",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001017/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001018",
+    "title": "",
+    "publishDate": "2018-10-22",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1540204149_1895692257974491988_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "你也有奇怪的鄰居嗎",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001018/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:08:29.069Z",
+    "updatedAt": "2026-09-21T19:08:29.069Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "b4d3f61898b1ab7b674c14da7528608d1a69133692d0dc8a054ca9f1372049e6",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001018/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001019",
+    "title": "",
+    "publishDate": "2018-10-23",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1540283430_1896357316933270659_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "好的！\n我又收到掛號郵件催領單了！\n這代表郵差已經在樓下\n大喊我三天了！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001019/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:08:52.807Z",
+    "updatedAt": "2026-09-21T19:08:52.807Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "332ece5df0fa69f887ba69ac896f6ff568c27964825fd422ed5209a71be4be3e",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001019/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001020",
+    "title": "",
+    "publishDate": "2018-10-24",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1540367328_1897061108838520078_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "作者本人"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "一醒來就想洗頭！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001020/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:09:26.869Z",
+    "updatedAt": "2026-09-21T19:09:26.869Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "a48fa710884ce82741362edff1220852778960505adc768d5060eb38fc5104e2",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001020/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001021",
+    "title": "",
+    "publishDate": "2018-10-24",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1540326784_1896721000889100021_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "水腫！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001021/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:10:15.236Z",
+    "updatedAt": "2026-09-21T19:10:15.236Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "2f47b3affe05b946e9dd20cdcde09e41b878e8151b0c72d1da5503ffb1bfc87a",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001021/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001022",
+    "title": "",
+    "publishDate": "2018-10-24",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1540375860_1897132680207076601_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "吃飯(魚？）囉！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001022/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:10:33.077Z",
+    "updatedAt": "2026-09-21T19:10:33.078Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "a79aefad8d28919b1d8cb1b9be4f2b141f8e4b4f256841ef9c9832bb35812069",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001022/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001023",
+    "title": "",
+    "publishDate": "2018-10-25",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1540463742_1897869885959384757_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "所謂人在江湖 身不由己！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001023/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:10:53.590Z",
+    "updatedAt": "2026-09-21T19:10:53.590Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "04ac7ffe32d0c0c93524b341ec07525df289598327bd6d45d9c57a0558818181",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001023/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001024",
+    "title": "",
+    "publishDate": "2018-10-27",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1540642437_1899368888601405647_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "Happy Halloween 🎃\n為什麼我們過別人的節日\n都過的特別用力！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001024/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:11:11.707Z",
+    "updatedAt": "2026-09-21T19:11:11.707Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "9e9f4b5ac22c1c224f0d5096a7d4804ac80521be446d1036aa08c30bbd851ae7",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001024/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001025",
+    "title": "",
+    "publishDate": "2018-10-30",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1540899112_1901522035012597001_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001025/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:11:35.743Z",
+    "updatedAt": "2026-09-21T19:11:35.743Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "e54c08eb377e046e375b982f0b9469d1ef81a140c766d6d8b35066885723eab2",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001025/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001026",
+    "title": "",
+    "publishDate": "2018-10-31",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1540980013_1902200678659630250_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "不知道有沒有人扮成\n無法出門上班的人！\nXDDD",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001026/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:11:51.708Z",
+    "updatedAt": "2026-09-21T19:11:51.708Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "feb692583c964370b922e3f32bfc20b8d3389496ce78fe2ec4157946fe99496c",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001026/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001027",
+    "title": "",
+    "publishDate": "2018-11-09",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1541754233_1908695309228237868_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "晚餐好！\n念十遍\n就會變是一種問候！\n以及一種點餐的意思",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001027/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:12:16.062Z",
+    "updatedAt": "2026-09-21T19:12:16.063Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "013b71137938946e86fd261554bd94c568c2ec67b88a834d82766c2c04ca421c",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001027/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001028",
+    "title": "",
+    "publishDate": "2018-11-13",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1542110077_1911680347502923379_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "不知道什麼時候\n舌頭破了一個洞！\n是不是也該來一杯\n蜂蜜檸檬！！XD",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001028/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:12:34.194Z",
+    "updatedAt": "2026-09-21T19:12:34.194Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "955cefe9756d35eb306f0a1268d34c73e9bbb749a6f5d14c5121d6791b5f4fbf",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001028/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001029",
+    "title": "",
+    "publishDate": "2018-11-14",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1542196523_1912405505075118393_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "我是沒喝啦！\n到底有誰因為這梗去喝了？\n自首喔！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001029/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:12:51.829Z",
+    "updatedAt": "2026-09-21T19:12:51.829Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "b041960a1b777c40868cf47b46086030d9feb6c31b2808c499c9e59dfe64d5cd",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001029/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001030",
+    "title": "",
+    "publishDate": "2018-11-17",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1542446488_1914502361662050949_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "來來來⋯\n看圖說故事！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001030/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:13:08.913Z",
+    "updatedAt": "2026-09-21T19:13:08.913Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "8aff2d15cc2b0a303ab1c080555720162e3e71c8801690cd91cd5d2def9d36d4",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001030/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001031",
+    "title": "",
+    "publishDate": "2018-11-18",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1542550353_1915373518426473208_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "他說什麼？",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001031/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001031/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=CdaKK46hIKE",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:15:09.153Z",
+    "updatedAt": "2026-09-21T19:15:09.154Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "63363f8515ab7cc2648b0c5bc8fe34b6a02b009c9d53f2469c4075d4f99a09d4",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001031/primary-v1.webm",
+          "poster": "assets/published/works/SG-001031/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001032",
+    "title": "",
+    "publishDate": "2018-11-20",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1542715398_1916758145770734723_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "每次選舉時，\n後面的人都好有戲\n有極度放空的\n有狂看鏡頭的\n有剩一半臉的\n有一直摸人的\n有看旁邊的\n也有超不專心的！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001032/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:18:43.624Z",
+    "updatedAt": "2026-09-21T19:18:43.624Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "40ed62cfc4654a4a8d430bd80171116f39ffd2e2adeeb8b7029c322d47132ee4",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001032/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001033",
+    "title": "",
+    "publishDate": "2018-11-21",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1542780890_1917307532234430102_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "什⋯什麼！？\n黑色星期五又是購物節！\n有完沒完！\n是不是最後全世界的所有\n節日都會變成購物節。",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001033/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:19:10.234Z",
+    "updatedAt": "2026-09-21T19:19:10.234Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "ef89c8d5ecc925dae9bbc3ca740052fecf98538db3fbd6e0d5f6e035fe8943e5",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001033/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001034",
+    "title": "",
+    "publishDate": "2018-11-29",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1543494193_1923291151998155320_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "目前看來！\n是該使壞了！\n一一+",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001034/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:19:33.950Z",
+    "updatedAt": "2026-09-21T19:19:33.950Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "1b8309f60498f3b80aab525449d670b3fef6bfbb12ad7bb66b2a6506ef6d54fd",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001034/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001035",
+    "title": "",
+    "publishDate": "2018-12-02",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1543738041_1925336693372851236_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001035/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:20:02.233Z",
+    "updatedAt": "2026-09-21T19:20:02.233Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "ef549456f845ea91c033375488321f3c74ef56e5ae0eae79cdfad850481547ec",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001035/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001036",
+    "title": "",
+    "publishDate": "2018-12-06",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1544097798_1928354556866021432_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "現在只想躺著發呆！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001036/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:20:19.957Z",
+    "updatedAt": "2026-09-21T19:20:19.957Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "46b0927faa71e42b4a61373b18698f5e3eb5419e8184077efc43e4a0df740c2c",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001036/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001037",
+    "title": "",
+    "publishDate": "2018-12-07",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1544179148_1929036966385462743_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "又被退了！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001037/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:20:35.678Z",
+    "updatedAt": "2026-09-21T19:20:35.679Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "4f5c765bd347a213053bb9eb35dca5d90135b26a1e27bf1c05bd673a91c78629",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001037/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001038",
+    "title": "",
+    "publishDate": "2018-12-08",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1544284388_1929919791494127870_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "「倒過來的開心」\n\n在這個下雨的夜晚..\n就來寫個或研究個甚麼的好了...\n\\\\\n我看不慣 雨後會天晴\n也看不慣 雨中澆熄的熱情\n我聽不慣 天晴後的聲音\n也聽不慣 雨中踱步的擔心\n討厭雨後 聞起來皺皺的氣息\n也更厭惡 那些假裝開心的開心\n說來就來的心情 就像大雨過後\n彩虹般莫名其妙 倒過來的開心\n// 究竟倒過來得開心是開心嗎?\n我只是覺得...\n脖子很痠..",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001038/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:20:55.522Z",
+    "updatedAt": "2026-09-21T19:20:55.522Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "b35942862dc2c25ba39a76a79d9fe4504bb9e9b6232ee8fdece04d6a3138860e",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001038/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001039",
+    "title": "",
+    "publishDate": "2018-12-10",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1544445850_1931274230402407985_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "星期一呆！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001039/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:21:10.747Z",
+    "updatedAt": "2026-09-21T19:21:10.747Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "340ba595f520976def5b65273f3b25b0232c85aa90e9d1e2a0cd66da7e38ee80",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001039/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001040",
+    "title": "",
+    "publishDate": "2018-12-11",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1544531867_1931995793238177350_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "‪星期二無言！‬\n‪少油少言多健康啊！‬",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001040/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:21:37.575Z",
+    "updatedAt": "2026-09-21T19:21:37.576Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "64863cb5e7e09f7f1b01dac8b23fa89d33931eca958d135a45c061b0a2fd5b67",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001040/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001041",
+    "title": "",
+    "publishDate": "2018-12-12",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1544599099_1932559777632626028_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "一一v\n看著你我就知道今天有\n「明顯」變冷了！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001041/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:23:04.634Z",
+    "updatedAt": "2026-09-21T19:23:04.634Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "d5fe098d8d465704cecae7bad6b86046d1965300204cd1d5c73b99d09dd26396",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001041/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001042",
+    "title": "",
+    "publishDate": "2018-12-12",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1544616329_1932704307099041905_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "星期三\n關於麵包...\n我想說的是....\n...\n..\n.\n.\n\n我喜歡魔杖!!!\n>////<",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001042/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:23:21.564Z",
+    "updatedAt": "2026-09-21T19:23:21.564Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "49aeadb86a63fd9d273da3a21fb2bc25f9a2cf79b4b265eadfeb5ae6bdafd4bf",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001042/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001043",
+    "title": "",
+    "publishDate": "2018-12-13",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1544703755_1933437697091851109_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "每個人都有成為\n人中之龍的機會\n例如下班的時候",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001043/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:24:10.464Z",
+    "updatedAt": "2026-09-21T19:24:10.464Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "623369ecf462280efc5089ea53b9bfacdfc9c0be8d238c3ade675fbdb9ebc209",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001043/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001044",
+    "title": "",
+    "publishDate": "2018-12-14",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1544780614_1934082432794078864_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "年末了!!\n我們來聊聊.. 你們希望看到什麼圖文?\n有甚麼是你們願意分享的..\n知識性?文學性?時事類?\n越來越多人物?動畫劇情?\n.....",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001044/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:24:27.329Z",
+    "updatedAt": "2026-09-21T19:24:27.329Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "3dfc515f68bc6fcc61d2674e1ebb63ee6a9afb8a0b40d79d808cda60651ac10f",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001044/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001045",
+    "title": "",
+    "publishDate": "2018-12-15",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1544858530_1934736038123651577_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "被禁止旅遊的豬！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001045/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:24:46.661Z",
+    "updatedAt": "2026-09-21T19:31:18.839Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "0a7d01a224826aaa900c623adcee2d42284a745a78559fe8b8b238b44bb36ed5",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001045/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001046",
+    "title": "",
+    "publishDate": "2018-12-17",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1545015512_1936052901705209618_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001046/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:27:27.576Z",
+    "updatedAt": "2026-09-21T19:27:27.576Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "4d294b19dbd7a02715e97c7c46d5ff11ececa08b5ef8071bbbf654d332cfd1ee",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001046/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001047",
+    "title": "",
+    "publishDate": "2018-12-22",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1545471833_1939880794201903368_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001047/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:29:59.105Z",
+    "updatedAt": "2026-09-21T19:29:59.105Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "8b785005cb19f8f5f825c8092877d57fe4343d102372fa81b0482769b29155e9",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001047/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001048",
+    "title": "",
+    "publishDate": "2018-12-18",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1545118439_1936916316288019853_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001048/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:31:06.732Z",
+    "updatedAt": "2026-09-21T19:31:06.732Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "48f7f04a638c5ed47a9dd82739e9a62507603cb4047083b9ef3526488781795f",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001048/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001049",
+    "title": "",
+    "publishDate": "2018-12-21",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1545385871_1939159695717794746_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001049/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:32:40.254Z",
+    "updatedAt": "2026-09-21T19:32:40.254Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "0df8a2136b0c8b64a41183fe1edbba378ed8909e93234f8c6959dc2c6e2f7367",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001049/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001050",
+    "title": "",
+    "publishDate": "2018-12-24",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1545646428_1941345409834326010_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "聖誕老人任務結束！\n還好不用爬煙囪XD",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001050/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:33:12.725Z",
+    "updatedAt": "2026-09-21T19:33:12.725Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "59fc53bf96d8c5099e5edce7764fd69cbf4c5447c9b97f155c800dbcac656b7d",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001050/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001051",
+    "title": "",
+    "publishDate": "2018-12-25",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1545728516_1942034012361177817_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001051/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:33:32.900Z",
+    "updatedAt": "2026-09-21T19:33:32.900Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "36c51dfcd9f6aac05df06d86a8c00874d40bb9c7bc4693eef837a70413b5b228",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001051/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001052",
+    "title": "",
+    "publishDate": "2018-12-26",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1545829196_1942878574889501720_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "自從聖誕節過後..\n大家的靈魂似乎都被聖誕老人帶走一半了!!\n(這故事可以這樣發展嗎?XDDD)\n\n重來重來..\n當聖誕襪不再是聖誕襪\n只剩下襪子的功能的時候..\n不管在哪個場合..\n當某個人頭微微的向上傾15度以上時\n這個時候我們可以很明確的猜出..\n這個人的內心是這樣想的...\n星期三..星期四...星期五...Ya!!!\n(差不多是這樣的概念)\n\n聖誕節? 聖誕節是甚麼..我已經忘記了.",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001052/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:34:26.211Z",
+    "updatedAt": "2026-09-21T19:34:26.211Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "2b4bcdc403851d72c0c45cdd3b1ea5f6119e51e6418216c4b501929e0fffc25d",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001052/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001053",
+    "title": "",
+    "publishDate": "2018-12-27",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1545915480_1943602381207987886_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "鳥",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "最近流行的拍照姿勢...= =:\n(我決定換一批比較輕一點的朋友)\n(然後我就被換掉了...\n= =bye bye 我的好朋友們 ）",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001053/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:34:53.245Z",
+    "updatedAt": "2026-09-21T19:34:53.245Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "8d70156d4a41b0a629f925107f56bf694d7bada1d5070282e9ff25d14b5c9fc1",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001053/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001054",
+    "title": "",
+    "publishDate": "2018-12-28",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1546002742_1944334327974394585_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001054/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001054/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=BQNk3qB4-mo",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:37:17.382Z",
+    "updatedAt": "2026-09-21T19:37:17.382Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "fe213f4e72324e173b1863013f0e738901565db41d75dda8edf77900ba07ea49",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001054/primary-v1.webm",
+          "poster": "assets/published/works/SG-001054/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001055",
+    "title": "",
+    "publishDate": "2018-12-30",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1546158967_1945644892256613702_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001055/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:37:38.625Z",
+    "updatedAt": "2026-09-21T19:37:38.625Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "b5f1b7b966deb7f6c5fde4efc9c12b93e58bbd233b4484f1c10a08dc8a6d4ba8",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001055/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001056",
+    "title": "",
+    "publishDate": "2018-12-31",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1546263605_1946522666978744108_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "Happy New Year!!\n大家明年見囉!!",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001056/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:38:13.210Z",
+    "updatedAt": "2026-09-21T19:38:13.211Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "9dec54d4458583fc965966a847c65e97056ced6229588e622bafed71ba71d910",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001056/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001057",
+    "title": "",
+    "publishDate": "2018-12-31",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1546263653_1946522895476051980_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "Happy New Year!!\n大家明年見囉!!",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001057/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001057/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=NxOvU7dBaaY",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:39:47.648Z",
+    "updatedAt": "2026-09-21T19:39:47.648Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "91e8a4b050fcba9d86d11f7227a2730872d846eeed9b053652af935eddd83aac",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001057/primary-v1.webm",
+          "poster": "assets/published/works/SG-001057/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001058",
+    "title": "",
+    "publishDate": "2019-01-01",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1546348897_1947238145154265891_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "看到「元旦」\n就莫名的想睡覺",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001058/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:42:15.670Z",
+    "updatedAt": "2026-09-21T19:42:15.670Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "dca5427b12b65e870e82b1432081e13df91aa29145338fba686ceedaca4c6299",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001058/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001059",
+    "title": "",
+    "publishDate": "2019-01-02",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1546436240_1947970829908264916_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "我的手機桌布...\n一一v\n我想喝抹茶拿鐵...",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001059/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:42:54.188Z",
+    "updatedAt": "2026-09-21T19:42:54.188Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "9a3b7cf9f952f96baf69b9d34d3bd187783a002aa4e4208142647cd27fcf2987",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001059/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001060",
+    "title": "",
+    "publishDate": "2019-01-03",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1546508017_1948572937514797998_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "No!!!",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001060/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:43:17.238Z",
+    "updatedAt": "2026-09-21T19:43:17.239Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "c0754addbaa87f88478cacfccbe0503e54c84d3a75d324ef10aeb4dc51a6e0f0",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001060/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001061",
+    "title": "",
+    "publishDate": "2019-01-04",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1546610012_1949428531792578783_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "我好想被按摩...\n我好想被按摩...\n我好想被按摩...\n我好想被按摩...",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001061/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:44:16.154Z",
+    "updatedAt": "2026-09-21T19:44:16.154Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "6896eb8c304a512f7297894d3081b556bd4d35302e6d8144dbb2602d04da088e",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001061/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001062",
+    "title": "",
+    "publishDate": "2019-01-07",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1546869351_1951604029876429509_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "= =v\n沒錯我又再探索臉書有甚麼新東西..\n但這個輕影片好像很久就有了..",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001062/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:45:29.816Z",
+    "updatedAt": "2026-09-21T19:45:29.816Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "e1261aa153dd8dcd8403d8833c89f5f7dfb60d2e2a3ea7033c8ca43e9e94b90b",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001062/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001063",
+    "title": "",
+    "publishDate": "2019-01-07",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1546869351_1951604029893195917_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001063/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:45:45.013Z",
+    "updatedAt": "2026-09-21T19:45:45.013Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "6c15f9beb407946eae1ff03bffd756f023dcd8e6b4ccefb6b2d9dc7637abb7d1",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001063/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001064",
+    "title": "",
+    "publishDate": "2019-01-08",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1546883839_1951725563861500265_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001064/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:46:01.534Z",
+    "updatedAt": "2026-09-21T19:46:01.534Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "31dcf569c6bd6d4893a4a4bfe7e039899d955c9aadd5cc9251a84166017f9a23",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001064/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001065",
+    "title": "",
+    "publishDate": "2019-01-08",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1546951679_1952294645526639319_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "冬天就來張有溫度的桌布！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001065/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:46:21.510Z",
+    "updatedAt": "2026-09-21T19:46:21.510Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "d6d30871cba1db12b7803b8b91c2ca24eb46a0e9394c27154b99323321343ce2",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001065/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001066",
+    "title": "",
+    "publishDate": "2019-01-11",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1547205135_1954420785737182137_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "你們今天到底吃了什麼好料\n從實招來喔！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001066/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:47:44.031Z",
+    "updatedAt": "2026-09-21T19:47:44.031Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "d9530aed2b56dfbccdb2d01dca34940bcaf9915d50da715941a41d7dbde44f97",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001066/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001067",
+    "title": "",
+    "publishDate": "2019-01-11",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1547207454_1954440239875510406_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001067/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:48:09.009Z",
+    "updatedAt": "2026-09-21T19:48:09.009Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "69ed6135ed6761a4ffd5613bb2fc7dc7c62b18aa0cde53adc909edfb22a53dd0",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001067/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001068",
+    "title": "",
+    "publishDate": "2019-01-13",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1547382685_1955910187508334632_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "豬",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "2019新品上市！！\n這皮ㄏㄨ⋯⋯\n這觸感⋯",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001068/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:48:27.262Z",
+    "updatedAt": "2026-09-21T19:48:27.262Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "f18a24b9efbbc1416ad191700a63b182278555bd8b89d6e0b602f57f99b4b8ce",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001068/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001069",
+    "title": "",
+    "publishDate": "2019-01-16",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1547591005_1957657704793244693_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001069/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:49:06.431Z",
+    "updatedAt": "2026-09-21T19:49:06.431Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "9a16ce9ec0b92df18dc4e9986d6d12168052317df585c9a30947d9048d2613ec",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001069/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001070",
+    "title": "",
+    "publishDate": "2019-01-16",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1547647730_1958133547499986671_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "你每天都吞下多少想說的話.",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001070/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:49:41.596Z",
+    "updatedAt": "2026-09-21T19:49:41.596Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "535fec400993c837ff8dc506340a1b5dfc0732d2a7768563160838d4be109931",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001070/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001071",
+    "title": "",
+    "publishDate": "2019-01-17",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1547734036_1958857535658337015_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "鳥",
+      "豬",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "其實shigai已經超過10年了！\n我找了一下2009年⋯\n剛好是這張..\n10年後其實還是在瓶子裡⋯\n只是多了一些「東西」XD",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001071/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:50:26.163Z",
+    "updatedAt": "2026-09-21T19:50:26.163Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "6d93c1830d38dc08209aa33f85fecf4780c3c9bef09f9f2809172f0e2c4c29fc",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001071/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001072",
+    "title": "",
+    "publishDate": "2019-01-18",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1547817658_1959559004699084358_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "我們除了欺騙自己也要欺騙別人",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001072/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:51:40.963Z",
+    "updatedAt": "2026-09-21T19:51:40.963Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "a3d342c91e788dad9011f3c942cde912f6d3d264211ad8eb67714b4a06735f90",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001072/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001073",
+    "title": "",
+    "publishDate": "2019-01-19",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1547901953_1960266121168879271_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001073/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:51:58.824Z",
+    "updatedAt": "2026-09-21T19:51:58.824Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "2557195acb8e1c34419a56cf4a7b0364f55257e1f1e2070486e61a7354f4708e",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001073/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001074",
+    "title": "",
+    "publishDate": "2019-01-21",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548072201_1961694263183955947_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "冬天暖暖身！\n有股濃濃的雞湯味\n散佈在整條巷子裡",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001074/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:54:14.600Z",
+    "updatedAt": "2026-09-21T19:54:14.600Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "a133d04822ad5814a8abd21b3a8667b2e4db97323cd339792666e0788a4f8c75",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001074/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001075",
+    "title": "",
+    "publishDate": "2019-01-22",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548130540_1962183653165397968_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "是不是該⋯",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001075/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:54:34.052Z",
+    "updatedAt": "2026-09-21T19:54:34.052Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "6ad7b12edd4c3f5104b88560299579643d6942f25476d3cdbad9feb06bee9be9",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001075/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001076",
+    "title": "",
+    "publishDate": "2019-01-22",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548154348_1962383366527607906_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "下午滿滿的同一則新聞..\n不經意看了一下圖片跟標題..\n我一度思考這個藝人是誰?\n等到我有空點進去看了之後..\n我才知道.....我錯了!!",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001076/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:55:09.180Z",
+    "updatedAt": "2026-09-21T19:55:09.180Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "621d733ea6064006f2fc4f32baace8134b7e0371a27cae5bf12a0f76f9e7980a",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001076/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001077",
+    "title": "",
+    "publishDate": "2019-01-23",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548245251_1963145911521688653_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "孤單寂寞覺得冷嗎？\n薑薑回歸！\n然你看了之後就不再冷！\n沒錯⋯只能看！XDD",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001077/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:56:16.637Z",
+    "updatedAt": "2026-09-21T19:56:16.637Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "a846519dfab865759f28a7086465012620b8c819b9f286fcecf1de9c599d62bb",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001077/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001078",
+    "title": "",
+    "publishDate": "2019-01-24",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548315392_1963732300302874558_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "看到此篇圖文的你\n請放下手機做ㄧ下眼球運動吧！\nShiGai關心你的眼睛健康。",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001078/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001078/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=gEgH0FdNEUg",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T19:59:57.599Z",
+    "updatedAt": "2026-09-21T19:59:57.600Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "3715195b5c89019acdfec464db476b3e54921488de73fd10d57aa99e9f518679",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001078/primary-v1.webm",
+          "poster": "assets/published/works/SG-001078/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001079",
+    "title": "",
+    "publishDate": "2019-01-25",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548418961_1964603102430648060_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "如果我也可以這麼大就好了！XDD",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001079/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T20:00:27.465Z",
+    "updatedAt": "2026-09-21T20:00:27.465Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "f1fd1b969529481dc0fa57046732d26b2e1617316ca3374035d42a089e317990",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001079/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001080",
+    "title": "",
+    "publishDate": "2019-01-26",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548508797_1965356696285153538_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001080/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T20:00:59.873Z",
+    "updatedAt": "2026-09-21T20:00:59.873Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "d78d5f05b683f85300c960fd6519b379a14861af3d8564b805251d1a6295bb8b",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001080/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001081",
+    "title": "",
+    "publishDate": "2019-01-26",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548508797_1965356696293593992_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001081/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T20:01:21.896Z",
+    "updatedAt": "2026-09-21T20:01:21.896Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "2039bc231789b3e3a44d409d24f5ed530bcc61da7bb17db0130393696f539891",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001081/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001082",
+    "title": "",
+    "publishDate": "2019-01-26",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548508797_1965356696301906269_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001082/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T20:01:37.830Z",
+    "updatedAt": "2026-09-21T20:01:37.830Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "453d68c87ca5d52b954c6a3874999913589e72b80b11f7e74ddca4715b36940e",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001082/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001083",
+    "title": "",
+    "publishDate": "2019-01-26",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548508797_1965356696301968536_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001083/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T20:01:45.761Z",
+    "updatedAt": "2026-09-21T20:01:45.761Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "8851cb6e79cd967b7737a8b5264561a0394bb02d4e3b85c5a2f9da1bcf6968a0",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001083/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001084",
+    "title": "",
+    "publishDate": "2019-01-26",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548508797_1965356696310153897_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "鳥"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001084/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T20:01:53.230Z",
+    "updatedAt": "2026-09-21T20:01:53.230Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "edc3de540493660a51fb43276c02c8c91c06e405b8d311f92a128b262a945e08",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001084/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001085",
+    "title": "",
+    "publishDate": "2019-01-26",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548508797_1965356696318585337_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001085/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T20:02:04.066Z",
+    "updatedAt": "2026-09-21T20:02:04.066Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "dd7300bd4b06305e8991ee4fc284f8848945863fb635d4055a7620ddd35faac9",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001085/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001086",
+    "title": "",
+    "publishDate": "2019-01-26",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548678167_1966775718423691568_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "要不要出去玩？",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001086/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001086/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=U9SkS4pcT7c",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T20:03:33.810Z",
+    "updatedAt": "2026-09-21T20:03:33.810Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "96cdeb9816c4391adcc549168bb5f9d0fc2e0058a4e16aad44ee100c6de1fe2e",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001086/primary-v1.webm",
+          "poster": "assets/published/works/SG-001086/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001087",
+    "title": "",
+    "publishDate": "2019-01-29",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548744788_1967335246596831407_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "這時候如果睡著\n會被殺掉喔！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001087/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001087/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=Db2iklJXi7c",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T20:04:56.086Z",
+    "updatedAt": "2026-09-21T20:04:56.086Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "db4f5e08c56172e80a9d442481b86f8f393f6161fa3e397a6d6ee77d3cb8af10",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001087/primary-v1.webm",
+          "poster": "assets/published/works/SG-001087/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001088",
+    "title": "",
+    "publishDate": "2019-01-30",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548851406_1968225173358430040_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "吸吸吐～吸吸吐～",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001088/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001088/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=ZNURoBQj0Nc",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-21T20:06:19.209Z",
+    "updatedAt": "2026-09-21T20:06:19.210Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "653672fba0997752673367d06da109d85279f568f564704739c8e7d198e2e97c",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001088/primary-v1.webm",
+          "poster": "assets/published/works/SG-001088/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001089",
+    "title": "",
+    "publishDate": "2019-01-31",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1548941211_1968982343142174429_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "豬",
+      "雞"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "聽說金豬比較夯！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001089/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001089/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=xWIvGEYu5LA",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-22T14:56:48.196Z",
+    "updatedAt": "2026-09-22T14:56:48.196Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "a12fd6c64259ecd66dd717dcb4cc90fadbf7e98d3affec8db9c2edcc15800ac6",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001089/primary-v1.webm",
+          "poster": "assets/published/works/SG-001089/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001090",
+    "title": "大家新年快樂！！",
+    "publishDate": "2019-02-04",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1549279557_1971821511383856907_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/works/videos/SG-001090-1790089124692.mp4",
+    "thumbnail": "",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=ZZAfgg8WKjQ",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-22T14:58:33.960Z",
+    "updatedAt": "2026-09-22T14:58:44.694Z"
+  },
+  {
+    "id": "SG-001091",
+    "title": "",
+    "publishDate": "2019-02-06",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1549383612_1972693662919941339_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "贏家總是孤獨的！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001091/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001091/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=W1sBFio_nlI",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-22T14:59:59.187Z",
+    "updatedAt": "2026-09-22T14:59:59.187Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "a37e722955998781c65f06fd154760d05c4c7632337b7ce152a1cf3db347440b",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001091/primary-v1.webm",
+          "poster": "assets/published/works/SG-001091/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001092",
+    "title": "",
+    "publishDate": "2019-02-07",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1549544194_1974039075434363854_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "初三限定—還豬哥哥之帶財豬。\n還在努力廝殺掉各位，\n按讚還豬哥哥，\n財位馬上轉到你這來！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001092/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001092/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=59i833xYrpI",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-22T15:01:39.942Z",
+    "updatedAt": "2026-09-22T15:01:39.942Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "8e9e0820452eea8fe022d52df8cddf289fe4300df047c583fb17b8f565d3fb0e",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001092/primary-v1.webm",
+          "poster": "assets/published/works/SG-001092/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001093",
+    "title": "",
+    "publishDate": "2019-02-11",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1549889523_1976934575452404989_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "當開工的鑼鼓聲響起，\n搭配著鑼鼓聲的節奏，\n默默的念出不想上班，\n感覺上⋯還滿搭的！",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001093/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001093/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=8192Jd_0Gbs",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-22T15:10:28.412Z",
+    "updatedAt": "2026-09-22T15:10:28.412Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "70b8bf9ebe15980485f2cc68f64f0b0d90c6c0fd570a54a97b92ed96a31d025b",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001093/primary-v1.webm",
+          "poster": "assets/published/works/SG-001093/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001094",
+    "title": "",
+    "publishDate": "2019-02-12",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1549971019_1977619154576035605_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "魚",
+      "Shi-Gai"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "不知道各公司\n目前的魚獲量\n是否供過於求\n(摸魚摸魚⋯）",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001094/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001094/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=IbGdGmwZxIs",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-09-22T15:11:54.298Z",
+    "updatedAt": "2026-09-22T15:11:54.298Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "0e37c3019f1cfdb11aa9067d56f1db3e7519f3b79e9baa9b51aaf2901cd632e9",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001094/primary-v1.webm",
+          "poster": "assets/published/works/SG-001094/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   }
 ]

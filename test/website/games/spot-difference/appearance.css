@@ -29,9 +29,8 @@ body::before { z-index: 1; }
 .level-chooser-card > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 .level-chooser-card h2 { margin: 2px 0; font-size: 28px; }
 .level-chooser-card header p:last-child { margin: 4px 0 0; color: #69777b; }
-#closeLevels { position: relative; width: 40px; height: 40px; flex: 0 0 auto; border: 2px solid var(--ink); border-radius: 50%; background: #fff; }
-#closeLevels::before, #closeLevels::after { content: ""; position: absolute; top: 50%; left: 50%; width: 18px; height: 2px; border-radius: 2px; background: var(--ink); transform-origin: center; }
-#closeLevels::before { transform: translate(-50%,-50%) rotate(45deg); }#closeLevels::after { transform: translate(-50%,-50%) rotate(-45deg); }
+#closeLevels { display: grid; width: 40px; height: 40px; flex: 0 0 auto; padding: 0; border: 2px solid var(--ink); border-radius: 50%; place-items: center; color: var(--ink); background: #fff; }
+#closeLevels span { display: block; font-size: 32px; font-weight: 400; line-height: 1; transform: translateY(-1px); }
 .continue-level { display: grid; width: 100%; gap: 2px; margin: 18px 0 14px; padding: 13px 16px; border: 2px solid var(--ink); border-radius: 16px; background: var(--yellow); box-shadow: 4px 5px 0 #252321; text-align: left; }
 .continue-level b { font-size: 17px; }.continue-level small { opacity: .72; }
 .continue-level[hidden] { display: none; }
@@ -49,6 +48,8 @@ body::before { z-index: 1; }
 .start-bridge button small { text-align: left; font-size: 10px; font-weight: 700; opacity: .72; }
 .board:not(.is-preparing) .start-bridge { display: none; }
 .picture-cover { position: absolute; z-index: 5; inset: 0; display: grid; place-items: center; padding: 20px; background: linear-gradient(145deg,#f5df9df2,#a9d7d5f2); color: #2f494e; text-align: center; font-weight: 900; letter-spacing: .04em; transition: opacity .36s ease, visibility .36s; }
+.board.is-preparing .pane { touch-action: pan-y; cursor: default; }
+.board.is-playing .pane { touch-action: none; cursor: crosshair; }
 .modified-card .picture-cover { background: linear-gradient(145deg,#a9d7d5f2,#f5df9df2); }
 .board:not(.is-preparing) .picture-cover { visibility: hidden; opacity: 0; }
 @media (max-width: 800px) {
@@ -69,7 +70,8 @@ body::before { z-index: 1; }
   .levels-button { padding: 6px 9px; border-radius: 12px; }
   .game-navigation .levels-button { position: fixed; right: max(8px,env(safe-area-inset-right)); bottom: max(10px,env(safe-area-inset-bottom)); z-index: 30; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border-radius: 50%; }
   .game-navigation .levels-button b, .game-navigation .levels-button small { display: none; }
-  .game-navigation .levels-button > span { grid-row: auto; font-size: 20px; }
+  .game-navigation .levels-button > span { grid-row: auto; font-size: 0; }
+  .game-navigation .levels-button > span::before { content: "×"; display: block; font-size: 32px; font-weight: 400; line-height: 1; transform: translateY(-1px); }
   .game-intro { display: none; }
   .board { gap: 7px; }
   .picture-card { padding: 3px; border-width: 1px; border-radius: 3px; background: transparent; box-shadow: none; transform: none; }

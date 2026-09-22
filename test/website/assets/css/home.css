@@ -87,6 +87,12 @@ body[data-page="home"] { width: 100%; min-height: 100vh; min-height: 100dvh; ove
 .home-game-embed { overflow: hidden; width: 100%; margin: 0 auto; color: #f2e4c4; border: 1px solid rgba(88,58,32,.22); border-radius: 18px; background: #3f3027; box-shadow: inset 0 0 0 3px rgba(239,224,189,.08); }
 .home-game-embed-intro { margin: 0; padding: 18px 20px; color: rgba(242,228,196,.8); line-height: 1.6; }
 .home-game-frame { display: block; width: 100%; aspect-ratio: 9 / 16; border: 0; background: #b0cd6c; }
+.home-game-frame-stage { position: relative; width: 100%; }
+.home-game-frame-stage.is-awaiting-activation .home-game-frame { pointer-events: none; }
+.home-game-activate { position: absolute; z-index: 2; inset: 0; display: grid; width: 100%; height: 100%; padding: 0; border: 0; place-items: center; color: #2f211a; background: transparent; font: inherit; font-weight: 900; touch-action: pan-y; }
+.home-game-activate::before { position: absolute; inset: 0; background: rgba(45,33,26,.16); content: ""; pointer-events: none; }
+.home-game-activate > span { position: relative; padding: 14px 22px; border: 2px solid #2f211a; border-radius: 999px; background: #f0d394; box-shadow: 5px 6px 0 rgba(20,12,8,.72); font-size: 15px; }
+.home-game-activate:focus-visible { outline: 4px solid #fff3bc; outline-offset: -8px; }
 .home-game-embed-controls { display: flex; justify-content: center; padding: 18px 20px 22px; }
 .home-game-full { color: #f2e4c4; font-weight: 850; text-underline-offset: 4px; }
 .home-game-full:focus-visible { outline: 3px solid #fff3bc; outline-offset: 4px; }
@@ -115,8 +121,10 @@ body[data-page="home"] { width: 100%; min-height: 100vh; min-height: 100dvh; ove
 .home-living-section[data-home-section="archive-discovery"] .home-living-heading p { color: #f1c875; }
 .home-living-section[data-home-section="archive-discovery"] .home-living-more { color: #fff0ba; }
 .home-journal-entry { display: grid; border: 0; background: #cfb789; }
-.home-journal-media { display: grid; min-height: 0; place-items: center; background: #bd9e6e; }
-.home-journal-media img, .home-journal-media video { width: 100%; height: auto; max-height: none; object-fit: contain; }
+.home-journal-media { display: grid; min-height: 0; margin: 0; padding: clamp(24px, 6vw, 72px); place-items: center; background: #bd9e6e; }
+.home-journal-artwork { display: inline-grid; max-width: min(82%, 720px); padding: clamp(10px, 1.8vw, 18px); place-items: center; background: #eadbb8; border: clamp(8px, 1.4vw, 15px) solid #65452e; box-shadow: inset 0 0 0 2px rgba(255,255,255,.5), inset 0 0 0 5px rgba(91,59,36,.2), 0 18px 36px rgba(64,39,22,.3); }
+.home-journal-artwork.has-library-frame { padding: var(--home-journal-frame-inset, 12%); border: 0; background-color: transparent; background-image: var(--home-journal-frame); background-position: center; background-repeat: no-repeat; background-size: 100% 100%; box-shadow: 0 18px 36px rgba(64,39,22,.3); }
+.home-journal-artwork img, .home-journal-artwork video { display: block; width: auto; max-width: 100%; height: auto; max-height: min(58dvh, 640px); object-fit: contain; background: transparent; }
 .home-journal-copy { align-self: stretch; padding: clamp(28px, 6vw, 56px) var(--page-gutter); background: rgba(247,235,205,.92); }
 .home-journal-body { max-width: 62ch; }
 .home-game-embed { border: 0; background: #2d211a; box-shadow: none; }
@@ -133,7 +141,8 @@ body[data-page="home"] { width: 100%; min-height: 100vh; min-height: 100dvh; ove
 @media (min-width: 780px) {
   .home-journal-entry { grid-template-columns: minmax(0, 1.35fr) minmax(340px, .65fr); }
   .home-journal-media { min-height: min(68dvh, 680px); }
-  .home-journal-media img, .home-journal-media video { height: 100%; max-height: min(68dvh, 680px); }
+  .home-journal-artwork { max-width: min(78%, 720px); }
+  .home-journal-artwork img, .home-journal-artwork video { max-height: min(56dvh, 600px); }
   .home-journal-copy { display: flex; width: auto; flex-direction: column; justify-content: center; margin: 0; }
   .home-archive-entry { grid-template-columns: minmax(340px, .62fr) minmax(0, 1.38fr); }
   .home-archive-media { order: 2; min-height: min(72dvh, 760px); }
@@ -146,6 +155,9 @@ body[data-page="home"] { width: 100%; min-height: 100vh; min-height: 100dvh; ove
   .home-living-heading h2 { max-width: 12em; margin-top: 4px; font-size: clamp(28px, 6.2vw, 36px); line-height: 1.08; text-wrap: balance; }
   .home-living-more { align-self: end; padding-bottom: 3px; font-size: clamp(13px, 2.5vw, 15px); line-height: 1.25; white-space: nowrap; }
   .home-journal-copy { padding-top: clamp(26px, 6vw, 38px); padding-bottom: clamp(30px, 7vw, 44px); }
+  .home-journal-media { padding: clamp(24px, 7vw, 40px) var(--page-gutter); }
+  .home-journal-artwork { max-width: min(86vw, 560px); }
+  .home-journal-artwork img, .home-journal-artwork video { max-height: 62dvh; }
   .home-living-card-date { margin-bottom: 8px; font-size: 11px; letter-spacing: .04em; }
   .home-journal-entry h3 { margin-bottom: 12px; font-size: clamp(24px, 5vw, 30px); line-height: 1.12; text-wrap: balance; }
   .home-journal-body { max-width: 34em; font-size: clamp(15px, 3vw, 17px); line-height: 1.65; }
