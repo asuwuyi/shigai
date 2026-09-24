@@ -282,9 +282,10 @@ function enableMobileSceneViewport() {
 function enableTouchCameraPeek() {
   const hero = homeElements.hero;
   if (!hero || !window.matchMedia("(pointer: coarse)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const peek = { pointerId: null, startX: 0, startY: 0, moved: false };
+  const peek = { pointerId: null, startX: 0, startY: 0, moved: false, dragging: false };
   const reset = () => {
     peek.pointerId = null;
+    peek.dragging = false;
     hero.classList.remove("is-camera-peeking");
     hero.style.setProperty("--scene-peek-x", "0px");
     hero.style.setProperty("--scene-peek-y", "0px");
@@ -292,16 +293,21 @@ function enableTouchCameraPeek() {
   hero.addEventListener("pointerdown", (event) => {
     if (hero.hasAttribute("data-mobile-scene-viewport")) return;
     if (event.pointerType !== "touch" || event.isPrimary === false) return;
-    peek.pointerId = event.pointerId; peek.startX = event.clientX; peek.startY = event.clientY; peek.moved = false;
-    hero.classList.add("is-camera-peeking");
-    hero.setPointerCapture?.(event.pointerId);
+    peek.pointerId = event.pointerId; peek.startX = event.clientX; peek.startY = event.clientY; peek.moved = false; peek.dragging = false;
   });
   hero.addEventListener("pointermove", (event) => {
     if (hero.hasAttribute("data-mobile-scene-viewport")) return;
     if (event.pointerId !== peek.pointerId) return;
     const deltaX = event.clientX - peek.startX;
     const deltaY = event.clientY - peek.startY;
-    if (Math.hypot(deltaX, deltaY) > 7) peek.moved = true;
+    if (!peek.dragging) {
+      if (Math.abs(deltaY) > 7 && Math.abs(deltaY) > Math.abs(deltaX)) { reset(); return; }
+      if (Math.abs(deltaX) <= 7 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+      peek.dragging = true;
+      hero.classList.add("is-camera-peeking");
+      hero.setPointerCapture?.(event.pointerId);
+    }
+    peek.moved = true;
     const x = Math.max(-26, Math.min(26, deltaX * .23));
     const y = Math.max(-16, Math.min(16, deltaY * .16));
     hero.style.setProperty("--scene-peek-x", `${x.toFixed(2)}px`);
