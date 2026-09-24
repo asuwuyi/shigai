@@ -124,7 +124,6 @@ body[data-page="home"] { width: 100%; min-height: 100vh; min-height: 100dvh; ove
 .home-living-section[data-home-section="archive-discovery"] .home-living-more { color: #fff0ba; }
 .home-journal-entry { position: relative; display: grid; width: min(calc(100% - (var(--page-gutter) * 2)), 1240px); max-width: 1240px; gap: clamp(24px, 4vw, 60px); align-items: center; margin: 0 auto; padding: 0 0 clamp(64px, 8vw, 104px); border: 0; background: transparent; }
 .home-journal-media { position: relative; display: grid; min-height: 0; margin: 0; padding: clamp(12px, 2vw, 28px); place-items: center; background: transparent; }
-.home-journal-media::before { position: absolute; inset: 7% 3% 3% 9%; background: rgba(91,61,36,.16); border-radius: 42% 58% 49% 51% / 55% 44% 56% 45%; content: ""; filter: blur(1px); transform: rotate(-2deg); }
 .home-journal-artwork { display: inline-grid; max-width: min(82%, 720px); padding: clamp(10px, 1.8vw, 18px); place-items: center; background: #eadbb8; border: clamp(8px, 1.4vw, 15px) solid #65452e; box-shadow: inset 0 0 0 2px rgba(255,255,255,.5), inset 0 0 0 5px rgba(91,59,36,.2), 0 18px 36px rgba(64,39,22,.3); }
 .home-journal-artwork.has-salon-frame { box-sizing: content-box; padding: 0; background: transparent; border: clamp(18px, 3vw, 34px) solid transparent; border-image-source: var(--home-journal-frame); border-image-slice: 28%; border-image-width: 1; border-image-repeat: stretch; box-shadow: 0 18px 36px rgba(64,39,22,.3); }
 .home-journal-artwork.has-library-frame { padding: var(--home-journal-frame-inset, 12%); border: 0; background-color: transparent; background-image: var(--home-journal-frame); background-position: center; background-repeat: no-repeat; background-size: 100% 100%; box-shadow: 0 18px 36px rgba(64,39,22,.3); }
@@ -147,7 +146,10 @@ body[data-page="home"] { width: 100%; min-height: 100vh; min-height: 100dvh; ove
 .home-archive-copy.is-minimal::before { height: 48px; box-shadow: 0 56px 0 #e5b85c; }
 .home-archive-entry h3 { margin: 0 0 12px; font-size: clamp(24px, 6vw, 40px); line-height: 1.08; text-wrap: balance; }
 .home-archive-body { max-width: 58ch; margin: 0; color: #42545c; font-size: 16px; line-height: 1.7; text-wrap: pretty; white-space: normal; }
-.home-archive-link { display: inline-block; margin-top: 18px; color: #325e74; font-weight: 900; text-underline-offset: 4px; }
+.home-archive-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 18px; }
+.home-archive-link { display: inline-block; color: #325e74; font-weight: 900; text-underline-offset: 4px; }
+.home-archive-refresh { min-height: 44px; padding: 9px 15px; color: #243d49; background: #f1c969; border: 2px solid #243d49; border-radius: 999px; box-shadow: 3px 4px 0 rgba(36,61,73,.3); font: inherit; font-weight: 900; cursor: pointer; }
+.home-archive-refresh:active { box-shadow: 1px 2px 0 rgba(36,61,73,.3); transform: translate(2px, 2px); }
 @media (min-width: 780px) {
   .home-journal-entry { grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr); }
   .home-journal-media { min-height: min(68dvh, 680px); }
@@ -201,7 +203,7 @@ button.home-welcome-control { cursor: pointer; }
 .home-world-scene-render .scene-render-object[data-scene-interaction-cursor="default"] .scene-render-object-visual { cursor: default; }
 .home-world-scene-render .scene-render-object[data-scene-interaction-enabled="true"]:focus-visible .scene-render-object-visual { outline: 3px solid var(--penguin-blue); outline-offset: 6px; border-radius: 12px; }
 @media (max-width: 767px) and (pointer: coarse) {
-  .home-hero { --scene-peek-x: 0px; --scene-peek-y: 0px; touch-action: pan-y; }
+  .home-hero { --scene-peek-x: 0px; --scene-peek-y: 0px; height: 100svh; min-height: 100svh; touch-action: pan-y; }
   .home-hero:not([data-mobile-scene-viewport]) .home-world-scene-render .scene-render-plane { transform: translate(-50%, -50%) scale(1.04); transition: transform .45s cubic-bezier(.2,.8,.2,1); }
   .home-hero[data-mobile-scene-viewport] .home-world-scene-render .scene-render-plane { left: calc(50% + var(--scene-camera-x, 0px)); transition: left .35s cubic-bezier(.2,.8,.2,1); }
   .home-hero[data-mobile-scene-viewport].is-scene-camera-dragging .home-world-scene-render .scene-render-plane { transition: none; }

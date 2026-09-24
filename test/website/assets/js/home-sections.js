@@ -23,7 +23,7 @@
   const homeCopyDefaults = Object.freeze({
     "latest-journal": Object.freeze({ eyebrow: "TODAY IN SHI-GAI", title: "今天留下的片段", moreLabel: "走進 Journal →", actionLabel: "前往完整 Journal →", titleAsset: "" }),
     "daily-game": Object.freeze({ eyebrow: "TODAY'S GAME", title: "今天一起玩什麼？", moreLabel: "所有遊戲 →", intro: "直接在這裡玩今天推薦的遊戲。", actionLabel: "放大遊玩 →", titleAsset: "" }),
-    "archive-discovery": Object.freeze({ eyebrow: "ARCHIVE DISCOVERY", title: "今天重新遇見的作品", moreLabel: "探索所有 Works →", actionLabel: "走進這件作品 →", titleAsset: "" })
+    "archive-discovery": Object.freeze({ eyebrow: "ARCHIVE DISCOVERY", title: "今天重新遇見的作品", moreLabel: "探索所有 Works →", actionLabel: "走進這件作品 →", refreshLabel: "再遇見一件", titleAsset: "" })
   });
   async function homeCopy(sectionId) {
     const key = { "latest-journal": "latestJournal", "daily-game": "dailyGame", "archive-discovery": "archiveDiscovery" }[sectionId];
@@ -107,7 +107,7 @@
     wrap.append(artwork);
     return wrap;
   }
-  function archiveEntry(work, labels, frames) {
+  function archiveEntry(work, labels, frames, onRefresh) {
     const article = document.createElement("article");
     article.className = "home-archive-entry";
     article.dataset.contentId = work.id;
@@ -119,9 +119,15 @@
     title.textContent = work.title || ""; title.hidden = !title.textContent;
     const body = document.createElement("p"); body.className = "home-archive-body"; body.textContent = work.description || ""; body.hidden = !body.textContent;
     copy.classList.toggle("is-minimal", title.hidden && body.hidden);
+    const actions = document.createElement("div"); actions.className = "home-archive-actions";
     const link = document.createElement("a"); link.className = "home-archive-link"; link.href = `work.html?id=${encodeURIComponent(work.id)}`; link.textContent = labels.actionLabel;
     link.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: "archive-discovery", content_id: work.id, action: "open_archive_work" }));
-    copy.append(meta, title, body, link); article.append(framedMediaNode(work, frames, "home-archive-media"), copy);
+    actions.append(link);
+    if (onRefresh) {
+      const refresh = document.createElement("button"); refresh.className = "home-archive-refresh"; refresh.type = "button"; refresh.textContent = labels.refreshLabel;
+      refresh.addEventListener("click", onRefresh); actions.append(refresh);
+    }
+    copy.append(meta, title, body, actions); article.append(framedMediaNode(work, frames, "home-archive-media"), copy);
     return article;
   }
   function latestJournalEntry(work, frames, labels) {
@@ -138,7 +144,7 @@
     return article;
   }
   function sectionShell(config, labels, href) {
-    const section = document.createElement("section"); section.className = "home-living-section"; section.dataset.homeSection = config.id;
+    const section = document.createElement("section"); section.className = "home-living-section"; section.dataset.homeSection = config.id; section.id = config.id;
     const heading = document.createElement("header"); heading.className = "home-living-heading";
     const copy = document.createElement("div");
     const label = document.createElement("p"); label.textContent = labels.eyebrow;
@@ -246,10 +252,21 @@
       const [worksResponse, framesResponse] = await Promise.all([fetch("../database/website/works.json", { cache: "no-store" }), fetch("../database/website/frames.json", { cache: "no-store" })]);
       if (!worksResponse.ok) throw new Error("Works export unavailable");
       const frames = framesResponse.ok ? await framesResponse.json() : [];
-      const works = (await worksResponse.json()).filter((item) => item?.status === "published" && item?.journal?.enabled !== true && safeMediaSource(item));
-      const index = dailyEngine.selectIndex(works.length, dailyContext, "archive-discovery");
+      const works = (await worksResponse.json()).filter((item) => item?.status === "published" && safeMediaSource(item));
+      let index = dailyEngine.selectIndex(works.length, dailyContext, "archive-discovery");
+      let revealCount = 0;
       if (index < 0) throw new Error("Archive discovery unavailable");
-      content.append(archiveEntry(works[index], copy, frames));
+      const renderWork = () => {
+        const refresh = works.length > 1 ? () => {
+          revealCount += 1;
+          const offset = 1 + dailyEngine.selectIndex(works.length - 1, dailyContext, `archive-discovery-refresh-${revealCount}`);
+          index = (index + offset) % works.length;
+          track(analyticsEvents.sectionInteraction, { section_id: "archive-discovery", content_id: works[index].id, action: "refresh_archive_work" });
+          renderWork();
+        } : null;
+        content.replaceChildren(archiveEntry(works[index], copy, frames, refresh));
+      };
+      renderWork();
     } catch {
       const empty = document.createElement("p"); empty.className = "home-living-empty"; empty.textContent = "今天的作品發現暫時沒有接上，仍可前往 Works 探索。"; content.append(empty);
     }
@@ -260,7 +277,15 @@
   Promise.all(composition.filter((section) => section.enabled).sort((a, b) => a.order - b.order).map(async (config) => {
     const renderer = registry.get(config.type);
     return renderer ? renderer(config) : null;
-  })).then((sections) => root.replaceChildren(...sections.filter(Boolean)));
+  })).then((sections) => {
+    root.replaceChildren(...sections.filter(Boolean));
+    window.dispatchEvent(new CustomEvent("shi-gai:home-sections-ready"));
+    if (location.hash) scrollToHomeSectionFromHash();
+  });
+  function scrollToHomeSectionFromHash() {
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target) target.scrollIntoView({ behavior: "auto", block: "start" });
+  }
   observeScrollDepth();
 
   window.ShiGaiHomeSections = Object.freeze({ registry, composition, dailyContext, analyticsEvents });

@@ -138,6 +138,16 @@ function openInteractionRoute(interaction) {
   }
   window.location.assign(route);
 }
+function scrollToHomeSection(sectionId) {
+  const scroll = () => {
+    const section = document.getElementById(sectionId);
+    if (!section) return false;
+    section.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    return true;
+  };
+  if (scroll()) return;
+  window.addEventListener("shi-gai:home-sections-ready", scroll, { once: true });
+}
 function handleWorldSceneInteraction(event) {
   if (Date.now() < suppressSceneInteractionUntil) { event.preventDefault(); return; }
   const container = homeElements.worldSceneRender;
@@ -152,6 +162,7 @@ function handleWorldSceneInteraction(event) {
     if (target?.id === interaction.target) renderWorldEntranceScene(activeWorldEntranceScenes, target.id);
     return;
   }
+  if (interaction.action === "home-section") { scrollToHomeSection(interaction.target); return; }
   openInteractionRoute(interaction);
 }
 function renderWorldEntranceScene(scenes, preferredSceneId = activeWorldEntranceSceneId) {
@@ -634,7 +645,14 @@ function renderWelcomeLogo(value) {
 
 homeHeroComponent.renderDynamicContent();
 window.addEventListener("DOMContentLoaded", retainReviewLinks, { once: true });
-window.addEventListener("resize", () => { if (activeWorldEntranceScenes.length) renderWorldEntranceScene(activeWorldEntranceScenes); });
+let lastSceneViewportWidth = window.innerWidth;
+window.addEventListener("resize", () => {
+  const nextWidth = window.innerWidth;
+  const mobileTouchViewport = window.matchMedia("(max-width: 767px) and (pointer: coarse)").matches;
+  if (mobileTouchViewport && Math.abs(nextWidth - lastSceneViewportWidth) < 2) return;
+  lastSceneViewportWidth = nextWidth;
+  if (activeWorldEntranceScenes.length) renderWorldEntranceScene(activeWorldEntranceScenes);
+});
 window.setInterval(() => {
   if (!reviewPreviewDate) homeHeroComponent.renderDynamicContent();
 }, 60 * 1000);

@@ -1,12 +1,17 @@
 // Shared Scene Object Interaction schema and route resolver. Studio and Website use this single contract.
 (function exposeSceneInteraction(global) {
-  const actions = Object.freeze(["none", "scene", "work", "character", "game", "about", "url", "previous-page", "next-page", "toggle-menu", "go-back", "previous-item", "next-item", "clear-filters", "media-toggle-play", "media-toggle-sound"]);
+  const actions = Object.freeze(["none", "scene", "work", "character", "game", "home-section", "about", "url", "previous-page", "next-page", "toggle-menu", "go-back", "previous-item", "next-item", "clear-filters", "media-toggle-play", "media-toggle-sound"]);
   const targetlessActions = Object.freeze(["about", "previous-page", "next-page", "toggle-menu", "go-back", "previous-item", "next-item", "clear-filters", "media-toggle-play", "media-toggle-sound"]);
   const openModes = Object.freeze(["same-tab", "new-tab", "scene-transition"]);
   const cursors = Object.freeze(["default", "pointer"]);
   const legacyActions = Object.freeze({ page: "url", external: "url" });
   // Kept as an empty compatibility field; Studio target options come from the Games Registry.
   const gameOptions = Object.freeze([]);
+  const homeSectionOptions = Object.freeze([
+    Object.freeze({ value: "latest-journal", label: "今天留下的片段" }),
+    Object.freeze({ value: "daily-game", label: "今日遊戲" }),
+    Object.freeze({ value: "archive-discovery", label: "今天遇見的作品" })
+  ]);
   const clean = (value, limit = 500) => typeof value === "string" ? value.trim().slice(0, limit) : "";
   const safeUrlTarget = (value) => {
     const target = clean(value);
@@ -42,10 +47,11 @@
     if (interaction.action === "work") return "work.html?id=" + encodeURIComponent(interaction.target);
     if (interaction.action === "character") return "character.html?id=" + encodeURIComponent(interaction.target);
     if (interaction.action === "game") return "games.html#" + encodeURIComponent(interaction.target);
+    if (interaction.action === "home-section") return "index.html#" + encodeURIComponent(interaction.target);
     if (interaction.action === "about") return "about.html";
     return interaction.target;
   };
-  const api = Object.freeze({ actions, targetlessActions, openModes, cursors, gameOptions, safeUrlTarget, normalize, isActionable, route });
+  const api = Object.freeze({ actions, targetlessActions, openModes, cursors, gameOptions, homeSectionOptions, safeUrlTarget, normalize, isActionable, route });
   if (global) global.ShiGaiSceneInteraction = api;
   if (typeof module === "object" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);
