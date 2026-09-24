@@ -2,7 +2,7 @@
 const desktopWorksPerPage = 50;
 const mobileWorksPerPage = 24;
 const mobileWorksQuery = matchMedia("(max-width: 767px)");
-const state = { works: [], characters: [], categories: [], frames: [], filteredWorks: [], page: 1, pageSize: mobileWorksQuery.matches ? mobileWorksPerPage : desktopWorksPerPage, showFirstPage: true, showPreviousPage: true, showPagePicker: true, showNextPage: true, showLastPage: true };
+const state = { works: [], characters: [], categories: [], frames: [], filteredWorks: [], page: 1, pageSize: mobileWorksQuery.matches ? mobileWorksPerPage : desktopWorksPerPage, showFirstPage: true, showPreviousPage: true, showPagePicker: true, showNextPage: true, showLastPage: true, copy: { archiveLabel: "SHI-GAI ARCHIVE", menuTitle: "作品瀏覽", navigationLabel: "前往", searchLabel: "尋找作品", searchPlaceholder: "搜尋作品、角色或標籤", allCharacters: "全部角色", allCategories: "全部分類", allYears: "全部年份", clearFilters: "清除篩選", quickPageLabel: "快速換頁", firstPage: "第一頁", previousPage: "← 上一頁", nextPage: "下一頁 →", lastPage: "最後一頁", emptyTitle: "作品正在創作中。", emptyBody: "很快就會有新的故事來這裡報到。", noResultsTitle: "沒有符合條件的作品。", noResultsBody: "試試看不同的搜尋或篩選條件。", errorTitle: "作品資料暫時無法載入。", errorBody: "請確認網站是透過本機或網站伺服器開啟。" } };
 const exhibitionWallpapers = ["burgundy-01", "sage-02", "navy-03", "ochre-04"];
 let publishedCorridorScenes = [];
 
@@ -157,9 +157,25 @@ function setOptions(select, values, placeholder) {
 
 function renderFilters() {
   const years = [...new Set(state.works.map((work) => (work.publishDate || work.createDate || "").slice(0, 4)).filter(Boolean))].sort((a, b) => b.localeCompare(a));
-  setOptions(elements.characterFilter, state.characters.map((character) => character.name).filter(Boolean), "全部角色");
-  setOptions(elements.categoryFilter, state.categories, "全部分類");
-  setOptions(elements.yearFilter, years, "全部年份");
+  setOptions(elements.characterFilter, state.characters.map((character) => character.name).filter(Boolean), state.copy.allCharacters);
+  setOptions(elements.categoryFilter, state.categories, state.copy.allCategories);
+  setOptions(elements.yearFilter, years, state.copy.allYears);
+}
+
+function applyWorksCopy() {
+  const copy = state.copy;
+  document.querySelector(".works-menu-header span").textContent = copy.archiveLabel;
+  document.querySelector(".works-menu-header strong").textContent = copy.menuTitle;
+  const labels = document.querySelectorAll(".works-menu-section-label");
+  if (labels[0]) labels[0].textContent = copy.navigationLabel;
+  if (labels[1]) labels[1].textContent = copy.searchLabel;
+  if (labels[2]) labels[2].textContent = copy.quickPageLabel;
+  elements.search.placeholder = copy.searchPlaceholder;
+  elements.clearFilters.textContent = copy.clearFilters;
+  elements.firstPage.textContent = copy.firstPage; elements.previousPage.textContent = copy.previousPage;
+  elements.nextPage.textContent = copy.nextPage; elements.lastPage.textContent = copy.lastPage;
+  elements.empty.querySelector("h2").textContent = copy.emptyTitle; elements.empty.querySelector("p").textContent = copy.emptyBody;
+  elements.error.querySelector("h2").textContent = copy.errorTitle; elements.error.querySelector("p").textContent = copy.errorBody;
 }
 
 function restoreFilters() {
@@ -302,8 +318,8 @@ function renderWorks() {
   elements.pageStatus.textContent = `${state.page}／${pageCount}`;
   if (state.works.length && !state.filteredWorks.length) {
     elements.empty.hidden = false;
-    elements.empty.querySelector("h2").textContent = "沒有符合條件的作品。";
-    elements.empty.querySelector("p").textContent = "試試看不同的搜尋或篩選條件。";
+    elements.empty.querySelector("h2").textContent = state.copy.noResultsTitle;
+    elements.empty.querySelector("p").textContent = state.copy.noResultsBody;
   }
   visibleWorks.forEach((work) => {
     const fragment = elements.template.content.cloneNode(true);
@@ -363,6 +379,8 @@ async function loadWebsiteData() {
     state.categories = Array.isArray(categories) ? categories : [];
     state.frames = Array.isArray(frames) ? frames : [];
     const controls = settings?.websiteBrand?.controls || {};
+    state.copy = { ...state.copy, ...(settings?.websiteBrand?.works || {}) };
+    applyWorksCopy();
     const legacyPagination = settings?.websiteBrand?.works?.showSystemPagination !== false;
     const publishedWorkActions = new Set((Array.isArray(scenes) ? scenes : []).filter((scene) => scene?.status === "published" && scene?.type === "work").flatMap((scene) => (scene.objects || []).filter((object) => object.visible !== false && window.ShiGaiSceneInteraction?.isActionable(object.interaction)).map((object) => object.interaction.action)));
     const previousRequested = controls.worksPreviousPage !== false && controls.worksPagination !== false && legacyPagination;

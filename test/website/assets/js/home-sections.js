@@ -77,9 +77,9 @@
     const hash = [...String(work?.id || work?.title || "")].reduce((total, character) => ((total * 33) + character.codePointAt(0)) >>> 0, 5381);
     return (hash % 12) + 1;
   }
-  function journalMediaNode(work, frames) {
+  function framedMediaNode(work, frames, className = "home-journal-media") {
     const wrap = document.createElement("figure");
-    wrap.className = "home-journal-media";
+    wrap.className = className;
     const artwork = document.createElement("div");
     artwork.className = "home-journal-artwork";
     const selectedFrame = frames.find((frame) => frame?.id === work?.frame?.id);
@@ -107,7 +107,7 @@
     wrap.append(artwork);
     return wrap;
   }
-  function archiveEntry(work, labels) {
+  function archiveEntry(work, labels, frames) {
     const article = document.createElement("article");
     article.className = "home-archive-entry";
     article.dataset.contentId = work.id;
@@ -118,9 +118,10 @@
     const character = String(work.characters?.[0] || "").trim();
     title.textContent = work.title || ""; title.hidden = !title.textContent;
     const body = document.createElement("p"); body.className = "home-archive-body"; body.textContent = work.description || ""; body.hidden = !body.textContent;
+    copy.classList.toggle("is-minimal", title.hidden && body.hidden);
     const link = document.createElement("a"); link.className = "home-archive-link"; link.href = `work.html?id=${encodeURIComponent(work.id)}`; link.textContent = labels.actionLabel;
     link.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: "archive-discovery", content_id: work.id, action: "open_archive_work" }));
-    copy.append(meta, title, body, link); article.append(mediaNode(work, "home-archive-media"), copy);
+    copy.append(meta, title, body, link); article.append(framedMediaNode(work, frames, "home-archive-media"), copy);
     return article;
   }
   function latestJournalEntry(work, frames, labels) {
@@ -133,7 +134,7 @@
     const body = document.createElement("p"); body.className = "home-journal-body"; body.textContent = work.journal?.text || work.description || "今天留下了一個新的片段。";
     const link = document.createElement("a"); link.className = "home-journal-link"; link.href = `journal.html?id=${encodeURIComponent(work.id)}`; link.textContent = labels.actionLabel;
     link.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: "latest-journal", content_id: work.id, action: "open_journal" }));
-    copy.append(date, title, body, link); article.append(journalMediaNode(work, frames), copy);
+    copy.append(date, title, body, link); article.append(framedMediaNode(work, frames), copy);
     return article;
   }
   function sectionShell(config, labels, href) {
@@ -242,12 +243,13 @@
     const section = sectionShell(config, copy, "works.html");
     const content = document.createElement("div"); content.className = "home-archive-content"; section.append(content);
     try {
-      const response = await fetch("../database/website/works.json", { cache: "no-store" });
-      if (!response.ok) throw new Error("Works export unavailable");
-      const works = (await response.json()).filter((item) => item?.status === "published" && item?.journal?.enabled !== true && safeMediaSource(item));
+      const [worksResponse, framesResponse] = await Promise.all([fetch("../database/website/works.json", { cache: "no-store" }), fetch("../database/website/frames.json", { cache: "no-store" })]);
+      if (!worksResponse.ok) throw new Error("Works export unavailable");
+      const frames = framesResponse.ok ? await framesResponse.json() : [];
+      const works = (await worksResponse.json()).filter((item) => item?.status === "published" && item?.journal?.enabled !== true && safeMediaSource(item));
       const index = dailyEngine.selectIndex(works.length, dailyContext, "archive-discovery");
       if (index < 0) throw new Error("Archive discovery unavailable");
-      content.append(archiveEntry(works[index], copy));
+      content.append(archiveEntry(works[index], copy, frames));
     } catch {
       const empty = document.createElement("p"); empty.className = "home-living-empty"; empty.textContent = "今天的作品發現暫時沒有接上，仍可前往 Works 探索。"; content.append(empty);
     }

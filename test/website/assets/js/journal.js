@@ -1,10 +1,14 @@
 (function journalPage() {
-  window.ShiGaiWebsiteSettings?.then((settings) => {
+  let copy = { eyebrow: "SHI-GAI JOURNAL", title: "最近發生的事", intro: "創作、角色與日常留下來的片段。", readLabel: "閱讀這篇 →", workLabel: "查看作品 →", previousLabel: "← 上一篇", nextLabel: "下一篇 →", undatedLabel: "日期未定", emptyTitle: "日誌正在整理中。", emptyBody: "下一篇故事很快就會來到這裡。", errorTitle: "暫時無法載入日誌。", errorBody: "請稍後再試一次。" };
+  const settingsReady = window.ShiGaiWebsiteSettings?.then((settings) => {
     const journal = settings?.websiteBrand?.journal || settings?.journal || {};
-    document.getElementById("journalEyebrow").textContent = journal.eyebrow || "SHI-GAI JOURNAL";
-    document.getElementById("journalTitle").textContent = journal.title || "最近發生的事";
-    document.getElementById("journalIntro").textContent = journal.intro || "創作、角色與日常留下來的片段。";
-  });
+    copy = { ...copy, ...journal };
+    document.getElementById("journalEyebrow").textContent = copy.eyebrow;
+    document.getElementById("journalTitle").textContent = copy.title;
+    document.getElementById("journalIntro").textContent = copy.intro;
+    empty.querySelector("h2").textContent = copy.emptyTitle; empty.querySelector("p").textContent = copy.emptyBody;
+    error.querySelector("h2").textContent = copy.errorTitle; error.querySelector("p").textContent = copy.errorBody;
+  }) || Promise.resolve();
   const entriesRoot = document.getElementById("journalEntries");
   const empty = document.getElementById("journalEmpty");
   const error = document.getElementById("journalError");
@@ -22,7 +26,7 @@
   }
   function dateLabel(value) {
     const parts = String(value || "").split("-");
-    return parts.length === 3 ? `${parts[0]} · ${parts[1]} · ${parts[2]}` : "日期未定";
+    return parts.length === 3 ? `${parts[0]} · ${parts[1]} · ${parts[2]}` : copy.undatedLabel;
   }
   function appendText(parent, tag, className, value) {
     const node = document.createElement(tag); node.className = className; node.textContent = value; parent.append(node); return node;
@@ -47,8 +51,8 @@
     [work.category, ...(work.characters || [])].filter(Boolean).forEach((item) => appendText(meta, "span", "", item));
     article.append(meta);
     const links = document.createElement("div"); links.className = "journal-entry-links";
-    const journalLink = document.createElement("a"); journalLink.className = "journal-detail-link"; journalLink.href = `journal.html?id=${encodeURIComponent(work.id)}`; journalLink.textContent = "閱讀這篇 →"; links.append(journalLink);
-    const workLink = document.createElement("a"); workLink.className = "journal-detail-link"; workLink.href = `work.html?id=${encodeURIComponent(work.id)}`; workLink.textContent = "查看作品 →"; links.append(workLink);
+    const journalLink = document.createElement("a"); journalLink.className = "journal-detail-link"; journalLink.href = `journal.html?id=${encodeURIComponent(work.id)}`; journalLink.textContent = copy.readLabel; links.append(journalLink);
+    const workLink = document.createElement("a"); workLink.className = "journal-detail-link"; workLink.href = `work.html?id=${encodeURIComponent(work.id)}`; workLink.textContent = copy.workLabel; links.append(workLink);
     article.append(links);
     return article;
   }
@@ -58,7 +62,7 @@
     previous.disabled = index === journalWorks.length - 1;
     next.disabled = index === 0;
     pageStatus.textContent = `${index + 1} / ${journalWorks.length}`;
-    previous.textContent = "← 上一篇"; next.textContent = "下一篇 →";
+    previous.textContent = copy.previousLabel; next.textContent = copy.nextLabel;
     previous.onclick = () => location.href = `journal.html?id=${encodeURIComponent(journalWorks[index + 1].id)}`;
     next.onclick = () => location.href = `journal.html?id=${encodeURIComponent(journalWorks[index - 1].id)}`;
   }
@@ -71,8 +75,8 @@
     previous.onclick = () => navigatePage(safePage - 1); next.onclick = () => navigatePage(safePage + 1);
   }
   function navigatePage(page) { const url = new URL(location.href); url.searchParams.set("page", page); location.href = url.href; }
-  fetch("../database/website/works.json", { cache: "no-store" })
-    .then((response) => { if (!response.ok) throw new Error("Journal data unavailable"); return response.json(); })
+  Promise.all([settingsReady, fetch("../database/website/works.json", { cache: "no-store" })])
+    .then(([, response]) => { if (!response.ok) throw new Error("Journal data unavailable"); return response.json(); })
     .then((works) => {
       journalWorks = window.ShiGaiWorkOrder.newestFirst(works.filter((work) => work.status === "published" && work.journal?.enabled === true));
       empty.hidden = journalWorks.length !== 0;
