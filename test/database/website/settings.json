@@ -25,7 +25,64 @@
     "journal": {
       "eyebrow": "SHI-GAI JOURNAL",
       "title": "最近發生的事",
-      "intro": "創作、角色與日常留下來的片段。"
+      "intro": "創作、角色與日常留下來的片段。",
+      "readLabel": "閱讀這篇 →",
+      "workLabel": "查看作品 →",
+      "previousLabel": "← 上一篇",
+      "nextLabel": "下一篇 →",
+      "undatedLabel": "日期未定",
+      "emptyTitle": "日誌正在整理中。",
+      "emptyBody": "下一篇故事很快就會來到這裡。",
+      "errorTitle": "暫時無法載入日誌。",
+      "errorBody": "請稍後再試一次。"
+    },
+    "works": {
+      "archiveLabel": "SHI-GAI ARCHIVE",
+      "menuTitle": "作品瀏覽",
+      "navigationLabel": "前往",
+      "searchLabel": "尋找作品",
+      "searchPlaceholder": "搜尋作品、角色或標籤",
+      "allCharacters": "全部角色",
+      "allCategories": "全部分類",
+      "allYears": "全部年份",
+      "clearFilters": "清除篩選",
+      "quickPageLabel": "快速換頁",
+      "firstPage": "第一頁",
+      "previousPage": "← 上一頁",
+      "nextPage": "下一頁 →",
+      "lastPage": "最後一頁",
+      "emptyTitle": "作品正在創作中。",
+      "emptyBody": "很快就會有新的故事來這裡報到。",
+      "noResultsTitle": "沒有符合條件的作品。",
+      "noResultsBody": "試試看不同的搜尋或篩選條件。",
+      "errorTitle": "作品資料暫時無法載入。",
+      "errorBody": "請確認網站是透過本機或網站伺服器開啟。"
+    },
+    "home": {
+      "latestJournal": {
+        "eyebrow": "TODAY IN SHI-GAI",
+        "title": "今天留下的片段",
+        "moreLabel": "走進 Journal →",
+        "intro": "",
+        "actionLabel": "前往完整 Journal →",
+        "titleAsset": ""
+      },
+      "dailyGame": {
+        "eyebrow": "TODAY'S GAME",
+        "title": "今天一起玩什麼？",
+        "moreLabel": "所有遊戲 →",
+        "intro": "直接在這裡玩今天推薦的遊戲。",
+        "actionLabel": "放大遊玩 →",
+        "titleAsset": ""
+      },
+      "archiveDiscovery": {
+        "eyebrow": "ARCHIVE DISCOVERY",
+        "title": "今天重新遇見的作品",
+        "moreLabel": "探索所有 Works →",
+        "intro": "",
+        "actionLabel": "走進這件作品 →",
+        "titleAsset": ""
+      }
     },
     "about": {
       "title": "R451's Studio",

@@ -219,7 +219,7 @@ function renderWorldEntranceScene(scenes, preferredSceneId = activeWorldEntrance
   configureMobileSceneCamera();
 }
 
-const mobileSceneCamera = { pointerId: null, startX: 0, startOffset: 0, offset: 0, maxOffset: 0, moved: false, direction: -1, lastFrame: 0, resumeAt: 0, boundaryUntil: 0, frame: 0 };
+const mobileSceneCamera = { pointerId: null, startX: 0, startY: 0, startOffset: 0, offset: 0, maxOffset: 0, moved: false, dragging: false, direction: -1, lastFrame: 0, resumeAt: 0, boundaryUntil: 0, frame: 0 };
 function setMobileSceneCameraOffset(value) {
   const camera = mobileSceneCamera;
   camera.offset = Math.max(-camera.maxOffset, Math.min(camera.maxOffset, Number(value) || 0));
@@ -255,21 +255,26 @@ function enableMobileSceneViewport() {
   hero.addEventListener("pointerdown", (event) => {
     if (!hero.hasAttribute("data-mobile-scene-viewport") || event.pointerType !== "touch" || event.isPrimary === false) return;
     const camera = mobileSceneCamera;
-    camera.pointerId = event.pointerId; camera.startX = event.clientX; camera.startOffset = camera.offset; camera.moved = false;
-    camera.resumeAt = Infinity; hero.classList.add("is-scene-camera-dragging"); hero.setPointerCapture?.(event.pointerId);
+    camera.pointerId = event.pointerId; camera.startX = event.clientX; camera.startY = event.clientY; camera.startOffset = camera.offset; camera.moved = false; camera.dragging = false;
   });
   hero.addEventListener("pointermove", (event) => {
     const camera = mobileSceneCamera;
     if (event.pointerId !== camera.pointerId) return;
     const deltaX = event.clientX - camera.startX;
-    if (Math.abs(deltaX) > 7) camera.moved = true;
+    const deltaY = event.clientY - camera.startY;
+    if (!camera.dragging) {
+      if (Math.abs(deltaY) > 7 && Math.abs(deltaY) > Math.abs(deltaX)) { camera.pointerId = null; return; }
+      if (Math.abs(deltaX) <= 7 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+      camera.dragging = true; camera.resumeAt = Infinity; hero.classList.add("is-scene-camera-dragging"); hero.setPointerCapture?.(event.pointerId);
+    }
+    camera.moved = true;
     setMobileSceneCameraOffset(camera.startOffset + deltaX);
   });
   const finish = (event) => {
     const camera = mobileSceneCamera;
     if (event.pointerId !== camera.pointerId) return;
     if (camera.moved) suppressSceneInteractionUntil = Date.now() + 450;
-    camera.pointerId = null; camera.resumeAt = performance.now() + 3000; camera.lastFrame = 0; hero.classList.remove("is-scene-camera-dragging");
+    camera.pointerId = null; camera.dragging = false; camera.resumeAt = performance.now() + 3000; camera.lastFrame = 0; hero.classList.remove("is-scene-camera-dragging");
   };
   hero.addEventListener("pointerup", finish); hero.addEventListener("pointercancel", finish);
 }
