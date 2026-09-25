@@ -28,7 +28,7 @@
   async function homeCopy(sectionId) {
     const key = { "latest-journal": "latestJournal", "daily-game": "dailyGame", "archive-discovery": "archiveDiscovery" }[sectionId];
     const settings = await window.ShiGaiWebsiteSettings;
-    return { ...homeCopyDefaults[sectionId], ...(settings?.websiteBrand?.home?.[key] || {}) };
+    return { ...homeCopyDefaults[sectionId], ...(settings?.websiteBrand?.home?.[key] || {}), transition: settings?.websiteBrand?.homeTransitions?.[key] || null };
   }
 
   function track(eventName, parameters) {
@@ -69,7 +69,7 @@
   }
   function safeFrameSource(frame) {
     const source = String(frame?.asset || "");
-    return source.startsWith("assets/") && !source.split("/").includes("..") ? `../${source}` : "";
+    return source.startsWith("assets/") && !source.split("/").includes("..") ? new URL(`../${source}`, document.baseURI).href : "";
   }
   function workFrameNumber(work) {
     const selected = String(work?.frame?.id || "");
@@ -94,7 +94,8 @@
       const extension = frameNumber > 12 ? "png" : "webp";
       artwork.classList.add("has-salon-frame");
       artwork.dataset.frame = String(frameNumber).padStart(2, "0");
-      artwork.style.setProperty("--home-journal-frame", `url("../assets/images/frames/salon-${String(frameNumber).padStart(2, "0")}.${extension}")`);
+      const frameUrl = new URL(`assets/images/frames/salon-${String(frameNumber).padStart(2, "0")}.${extension}`, document.baseURI).href;
+      artwork.style.setProperty("--home-journal-frame", `url("${frameUrl}")`);
     }
     const source = safeMediaSource(work);
     if (source) {
@@ -145,6 +146,21 @@
   }
   function sectionShell(config, labels, href) {
     const section = document.createElement("section"); section.className = "home-living-section"; section.dataset.homeSection = config.id; section.id = config.id;
+    const transition = labels.transition;
+    const transitionAsset = String(transition?.asset || "");
+    if (transition?.enabled === true && transitionAsset.startsWith("assets/") && !transitionAsset.split("/").includes("..")) {
+      const decoration = document.createElement("div"); decoration.className = "home-section-transition"; decoration.setAttribute("aria-hidden", "true");
+      const image = document.createElement("img"); image.src = `../${transitionAsset}`; image.alt = "";
+      ["mobile", "desktop"].forEach((layout) => {
+        const value = transition[layout] || {};
+        decoration.style.setProperty(`--transition-${layout}-x`, `${Number(value.x) || 0}%`);
+        decoration.style.setProperty(`--transition-${layout}-y`, `${Number(value.y) || 0}px`);
+        decoration.style.setProperty(`--transition-${layout}-scale`, Math.max(.2, Number(value.scale) || 1));
+        decoration.style.setProperty(`--transition-${layout}-rotation`, `${Number(value.rotation) || 0}deg`);
+        decoration.style.setProperty(`--transition-${layout}-parallax`, Math.max(0, Number(value.parallax) || 0));
+      });
+      decoration.append(image); section.append(decoration);
+    }
     const heading = document.createElement("header"); heading.className = "home-living-heading";
     const copy = document.createElement("div");
     const label = document.createElement("p"); label.textContent = labels.eyebrow;
@@ -181,6 +197,23 @@
     };
     addEventListener("scroll", report, { passive: true });
     report();
+  }
+  function enableTransitionParallax() {
+    const transitions = [...document.querySelectorAll(".home-section-transition")];
+    if (!transitions.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      transitions.forEach((node) => {
+        const rect = node.parentElement.getBoundingClientRect();
+        const progress = Math.max(-1, Math.min(1, (innerHeight / 2 - rect.top) / innerHeight));
+        const layout = matchMedia("(min-width: 780px)").matches ? "desktop" : "mobile";
+        const strength = Number(getComputedStyle(node).getPropertyValue(`--transition-${layout}-parallax`)) || 0;
+        node.style.setProperty("--transition-parallax-offset", `${(progress * strength).toFixed(2)}px`);
+      });
+    };
+    addEventListener("scroll", () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
+    update();
   }
 
   registry.set("latest-journal", async (config) => {
@@ -279,6 +312,7 @@
     return renderer ? renderer(config) : null;
   })).then((sections) => {
     root.replaceChildren(...sections.filter(Boolean));
+    enableTransitionParallax();
     window.dispatchEvent(new CustomEvent("shi-gai:home-sections-ready"));
     if (location.hash) scrollToHomeSectionFromHash();
   });

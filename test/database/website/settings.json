@@ -85,6 +85,62 @@
         "titleAsset": ""
       }
     },
+    "homeTransitions": {
+      "latestJournal": {
+        "enabled": true,
+        "asset": "assets/website/transitions/home-transition-journal-v1.png",
+        "mobile": {
+          "x": 18,
+          "y": 0,
+          "scale": 0.62,
+          "rotation": -4,
+          "parallax": 10
+        },
+        "desktop": {
+          "x": 16,
+          "y": 0,
+          "scale": 0.72,
+          "rotation": -4,
+          "parallax": 14
+        }
+      },
+      "dailyGame": {
+        "enabled": true,
+        "asset": "assets/website/transitions/home-transition-game-v1.png",
+        "mobile": {
+          "x": 82,
+          "y": 0,
+          "scale": 0.58,
+          "rotation": 3,
+          "parallax": 12
+        },
+        "desktop": {
+          "x": 84,
+          "y": 0,
+          "scale": 0.68,
+          "rotation": 3,
+          "parallax": 16
+        }
+      },
+      "archiveDiscovery": {
+        "enabled": true,
+        "asset": "assets/website/transitions/home-transition-works-v1.png",
+        "mobile": {
+          "x": 84,
+          "y": 0,
+          "scale": 0.58,
+          "rotation": 2,
+          "parallax": 10
+        },
+        "desktop": {
+          "x": 86,
+          "y": 0,
+          "scale": 0.68,
+          "rotation": 2,
+          "parallax": 14
+        }
+      }
+    },
     "about": {
       "title": "R451's Studio",
       "intro": "Shi-Gai 是我的個人創作世界。我從事動畫、動態設計與影像製作，也持續創作角色、短動畫與互動作品。",
