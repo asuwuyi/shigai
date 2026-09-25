@@ -23,7 +23,7 @@
   const homeCopyDefaults = Object.freeze({
     "latest-journal": Object.freeze({ eyebrow: "TODAY IN SHI-GAI", title: "今天留下的片段", moreLabel: "走進 Journal →", actionLabel: "前往完整 Journal →", titleAsset: "" }),
     "daily-game": Object.freeze({ eyebrow: "TODAY'S GAME", title: "今天一起玩什麼？", moreLabel: "所有遊戲 →", intro: "直接在這裡玩今天推薦的遊戲。", actionLabel: "放大遊玩 →", titleAsset: "" }),
-    "archive-discovery": Object.freeze({ eyebrow: "ARCHIVE DISCOVERY", title: "今天重新遇見的作品", moreLabel: "探索所有 Works →", actionLabel: "走進這件作品 →", refreshLabel: "再遇見一件", titleAsset: "" })
+    "archive-discovery": Object.freeze({ eyebrow: "ARCHIVE DISCOVERY", title: "今天重新遇見的作品", moreLabel: "探索所有 Works →", actionLabel: "走進這件作品 →", refreshLabel: "再遇見一件", loadingLabel: "正在尋找…", retryLabel: "再試一次", titleAsset: "" })
   });
   async function homeCopy(sectionId) {
     const key = { "latest-journal": "latestJournal", "daily-game": "dailyGame", "archive-discovery": "archiveDiscovery" }[sectionId];
@@ -46,6 +46,44 @@
   function safePosterSource(work) {
     const source = work?.media?.optimized?.outputs?.poster || work?.thumbnail || "";
     return source.startsWith("assets/") && !source.split("/").includes("..") ? `../${source}` : "";
+  }
+  const archiveMediaPreparation = new Map();
+  function loadArchiveImage(source, timeout = 8000) {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      const timer = setTimeout(() => reject(new Error("Archive image timed out")), timeout);
+      const finish = (callback) => { clearTimeout(timer); image.onload = null; image.onerror = null; callback(); };
+      image.decoding = "async";
+      image.onload = () => {
+        const decoded = typeof image.decode === "function" ? image.decode().catch(() => {}) : Promise.resolve();
+        decoded.then(() => finish(resolve));
+      };
+      image.onerror = () => finish(() => reject(new Error("Archive image unavailable")));
+      image.src = source;
+    });
+  }
+  function loadArchiveVideoFrame(source, timeout = 8000) {
+    return new Promise((resolve, reject) => {
+      const video = document.createElement("video");
+      const timer = setTimeout(() => reject(new Error("Archive video timed out")), timeout);
+      const finish = (callback) => { clearTimeout(timer); video.onloadeddata = null; video.onerror = null; callback(); };
+      video.preload = "auto"; video.muted = true; video.playsInline = true;
+      video.onloadeddata = () => finish(resolve);
+      video.onerror = () => finish(() => reject(new Error("Archive video unavailable")));
+      video.src = source; video.load();
+    });
+  }
+  function prepareArchiveWork(work) {
+    const source = safeMediaSource(work);
+    const poster = safePosterSource(work);
+    const key = `${source}|${poster}`;
+    if (!source) return Promise.reject(new Error("Archive media unavailable"));
+    if (!archiveMediaPreparation.has(key)) {
+      const preparation = (work.type === "video" ? (poster ? loadArchiveImage(poster) : loadArchiveVideoFrame(source)) : loadArchiveImage(source))
+        .catch((error) => { archiveMediaPreparation.delete(key); throw error; });
+      archiveMediaPreparation.set(key, preparation);
+    }
+    return archiveMediaPreparation.get(key);
   }
   function workDate(work) {
     return String(work?.publishDate || work?.createDate || "").replaceAll("-", " · ") || "今天";
@@ -126,7 +164,7 @@
     actions.append(link);
     if (onRefresh) {
       const refresh = document.createElement("button"); refresh.className = "home-archive-refresh"; refresh.type = "button"; refresh.textContent = labels.refreshLabel;
-      refresh.addEventListener("click", onRefresh); actions.append(refresh);
+      refresh.addEventListener("click", () => onRefresh(refresh)); actions.append(refresh);
     }
     copy.append(meta, title, body, actions); article.append(framedMediaNode(work, frames, "home-archive-media"), copy);
     return article;
@@ -289,17 +327,38 @@
       let index = dailyEngine.selectIndex(works.length, dailyContext, "archive-discovery");
       let revealCount = 0;
       if (index < 0) throw new Error("Archive discovery unavailable");
-      const renderWork = () => {
-        const refresh = works.length > 1 ? () => {
-          revealCount += 1;
-          const offset = 1 + dailyEngine.selectIndex(works.length - 1, dailyContext, `archive-discovery-refresh-${revealCount}`);
-          index = (index + offset) % works.length;
-          track(analyticsEvents.sectionInteraction, { section_id: "archive-discovery", content_id: works[index].id, action: "refresh_archive_work" });
-          renderWork();
-        } : null;
-        content.replaceChildren(archiveEntry(works[index], copy, frames, refresh));
+      const nextIndex = (fromIndex, count) => {
+        const offset = 1 + dailyEngine.selectIndex(works.length - 1, dailyContext, `archive-discovery-refresh-${count}`);
+        return (fromIndex + offset) % works.length;
       };
-      renderWork();
+      const preloadUpcoming = () => {
+        if (works.length < 2) return;
+        let projectedIndex = index;
+        for (let step = 1; step <= 2; step += 1) {
+          projectedIndex = nextIndex(projectedIndex, revealCount + step);
+          prepareArchiveWork(works[projectedIndex]).catch(() => {});
+        }
+      };
+      const renderWork = (animate = false) => {
+        const refresh = works.length > 1 ? async (button) => {
+          const targetCount = revealCount + 1;
+          const targetIndex = nextIndex(index, targetCount);
+          button.disabled = true; button.textContent = copy.loadingLabel;
+          content.setAttribute("aria-busy", "true");
+          try {
+            await prepareArchiveWork(works[targetIndex]);
+            revealCount = targetCount; index = targetIndex;
+            track(analyticsEvents.sectionInteraction, { section_id: "archive-discovery", content_id: works[index].id, action: "refresh_archive_work" });
+            renderWork(true); preloadUpcoming();
+          } catch {
+            button.disabled = false; button.textContent = copy.retryLabel;
+          } finally { content.removeAttribute("aria-busy"); }
+        } : null;
+        const entry = archiveEntry(works[index], copy, frames, refresh);
+        if (animate) entry.classList.add("is-revealing");
+        content.replaceChildren(entry);
+      };
+      renderWork(); preloadUpcoming();
     } catch {
       const empty = document.createElement("p"); empty.className = "home-living-empty"; empty.textContent = "今天的作品發現暫時沒有接上，仍可前往 Works 探索。"; content.append(empty);
     }

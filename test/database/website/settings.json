@@ -82,6 +82,8 @@
         "intro": "",
         "actionLabel": "走進這件作品 →",
         "refreshLabel": "再遇見一件",
+        "loadingLabel": "正在尋找…",
+        "retryLabel": "再試一次",
         "titleAsset": ""
       }
     },

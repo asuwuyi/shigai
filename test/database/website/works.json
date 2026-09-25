@@ -10430,8 +10430,8 @@
     "category": "動畫",
     "tags": [],
     "description": "",
-    "file": "assets/works/videos/SG-000248-1787938072957.mp4",
-    "thumbnail": "",
+    "file": "assets/published/works/SG-000248/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-000248/poster-v1.webp",
     "externalMedia": [
       {
         "platform": "youtube",
@@ -10453,7 +10453,19 @@
       "positionY": 50
     },
     "createdAt": "2026-08-28T17:23:25.300Z",
-    "updatedAt": "2026-08-28T17:28:05.193Z"
+    "updatedAt": "2026-09-25T13:19:01.332Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "4496c0efb294e9e22e747637028789f4459c9f91886ca0a30c71e745659fff9f",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-000248/primary-v1.webm",
+          "poster": "assets/published/works/SG-000248/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   },
   {
     "id": "SG-000249",
@@ -13271,8 +13283,8 @@
     "category": "動畫",
     "tags": [],
     "description": "",
-    "file": "assets/works/videos/SG-000310-1787942133889.mp4",
-    "thumbnail": "",
+    "file": "assets/published/works/SG-000310/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-000310/poster-v1.webp",
     "externalMedia": [
       {
         "platform": "youtube",
@@ -13294,7 +13306,19 @@
       "positionY": 50
     },
     "createdAt": "2026-08-28T18:35:28.117Z",
-    "updatedAt": "2026-08-28T18:35:33.890Z"
+    "updatedAt": "2026-09-25T13:19:01.332Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "a4978e96c5e3b67839198d77556a490dc0ec86c8ad9adbf4904b44c93a2a4eb4",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-000310/primary-v1.webm",
+          "poster": "assets/published/works/SG-000310/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   },
   {
     "id": "SG-000311",
@@ -14646,8 +14670,8 @@
     "category": "動畫",
     "tags": [],
     "description": "",
-    "file": "assets/works/videos/SG-000342-1788419531904.mp4",
-    "thumbnail": "",
+    "file": "assets/published/works/SG-000342/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-000342/poster-v1.webp",
     "externalMedia": [
       {
         "platform": "youtube",
@@ -14669,7 +14693,19 @@
       "positionY": 50
     },
     "createdAt": "2026-09-03T07:11:18.086Z",
-    "updatedAt": "2026-09-03T07:12:11.906Z"
+    "updatedAt": "2026-09-25T13:19:01.332Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "82b06ed670e39b8967a0765e0b14cafc4a99f9a7b6d5b595c7f22ee4a741bbab",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-000342/primary-v1.webm",
+          "poster": "assets/published/works/SG-000342/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   },
   {
     "id": "SG-000343",
@@ -17225,8 +17261,8 @@
     "category": "動畫",
     "tags": [],
     "description": "",
-    "file": "assets/works/videos/SG-000398-1788871978537.mp4",
-    "thumbnail": "",
+    "file": "assets/published/works/SG-000398/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-000398/poster-v1.webp",
     "externalMedia": [
       {
         "platform": "youtube",
@@ -17248,7 +17284,19 @@
       "positionY": 50
     },
     "createdAt": "2026-09-08T12:52:30.568Z",
-    "updatedAt": "2026-09-08T12:52:58.539Z"
+    "updatedAt": "2026-09-25T13:19:01.332Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "37e63f560be0d3bcfae77145821cae356168012b9d1312e988920f70a6789127",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-000398/primary-v1.webm",
+          "poster": "assets/published/works/SG-000398/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   },
   {
     "id": "SG-000399",
@@ -17509,8 +17557,8 @@
     "category": "動畫",
     "tags": [],
     "description": "哈囉!! 超想你的快浮出來!!",
-    "file": "assets/works/videos/SG-000404-1788872270491.mp4",
-    "thumbnail": "",
+    "file": "assets/published/works/SG-000404/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-000404/poster-v1.webp",
     "externalMedia": [
       {
         "platform": "youtube",
@@ -17532,7 +17580,19 @@
       "positionY": 50
     },
     "createdAt": "2026-09-08T12:57:43.027Z",
-    "updatedAt": "2026-09-08T12:57:50.493Z"
+    "updatedAt": "2026-09-25T13:19:01.332Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "e2e8b6677f80e411bb441244307ade6c6c3490de5a566291df211e61510dbd9b",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-000404/primary-v1.webm",
+          "poster": "assets/published/works/SG-000404/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   },
   {
     "id": "SG-000405",
@@ -19817,8 +19877,8 @@
     "category": "動畫",
     "tags": [],
     "description": "",
-    "file": "assets/works/videos/SG-000454-1788876463602.mp4",
-    "thumbnail": "",
+    "file": "assets/published/works/SG-000454/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-000454/poster-v1.webp",
     "externalMedia": [
       {
         "platform": "youtube",
@@ -19840,7 +19900,19 @@
       "positionY": 50
     },
     "createdAt": "2026-09-08T14:06:47.412Z",
-    "updatedAt": "2026-09-08T14:07:43.604Z"
+    "updatedAt": "2026-09-25T13:19:01.332Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "b125c096e6146070ad2193879174e19af07d5380970b35ee221014e02a0bb190",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-000454/primary-v1.webm",
+          "poster": "assets/published/works/SG-000454/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   },
   {
     "id": "SG-000455",
@@ -37877,8 +37949,8 @@
       "enabled": false,
       "text": ""
     },
-    "file": "assets/works/videos/SG-000826-1789327072220.mp4",
-    "thumbnail": "",
+    "file": "assets/published/works/SG-000826/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-000826/poster-v1.webp",
     "externalMedia": [
       {
         "platform": "youtube",
@@ -37900,7 +37972,19 @@
       "positionY": 50
     },
     "createdAt": "2026-09-13T19:05:45.760Z",
-    "updatedAt": "2026-09-13T19:17:52.221Z"
+    "updatedAt": "2026-09-25T13:19:01.332Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "028eb1b619ffc5742f0e99018422b44403dddc3cd3f9db7b3a3e42db7f86a711",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-000826/primary-v1.webm",
+          "poster": "assets/published/works/SG-000826/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   },
   {
     "id": "SG-000827",
@@ -39476,8 +39560,8 @@
       "enabled": false,
       "text": ""
     },
-    "file": "assets/works/videos/SG-000856-1789413362799.mp4",
-    "thumbnail": "",
+    "file": "assets/published/works/SG-000856/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-000856/poster-v1.webp",
     "externalMedia": [
       {
         "platform": "youtube",
@@ -39499,7 +39583,19 @@
       "positionY": 50
     },
     "createdAt": "2026-09-14T19:15:44.399Z",
-    "updatedAt": "2026-09-14T19:16:02.808Z"
+    "updatedAt": "2026-09-25T13:19:01.332Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "dad3f8309296b56da59d064e84c38ed7327affd5ce7de344c29b095f2c559652",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-000856/primary-v1.webm",
+          "poster": "assets/published/works/SG-000856/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   },
   {
     "id": "SG-000857",
@@ -43524,8 +43620,8 @@
       "enabled": false,
       "text": ""
     },
-    "file": "assets/works/videos/SG-000934-1789569564124.mp4",
-    "thumbnail": "",
+    "file": "assets/published/works/SG-000934/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-000934/poster-v1.webp",
     "externalMedia": [
       {
         "platform": "youtube",
@@ -43547,7 +43643,19 @@
       "positionY": 50
     },
     "createdAt": "2026-09-16T14:39:13.115Z",
-    "updatedAt": "2026-09-16T14:39:24.127Z"
+    "updatedAt": "2026-09-25T13:19:01.332Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "fbfe3cb54686a3c79b536e394c6bfd2d2c4acf89dd1cb9eb39edd0d952e6f262",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-000934/primary-v1.webm",
+          "poster": "assets/published/works/SG-000934/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   },
   {
     "id": "SG-000935",
@@ -43727,8 +43835,8 @@
       "enabled": false,
       "text": ""
     },
-    "file": "assets/works/videos/SG-000938-1789569786977.mp4",
-    "thumbnail": "",
+    "file": "assets/published/works/SG-000938/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-000938/poster-v1.webp",
     "externalMedia": [
       {
         "platform": "youtube",
@@ -43750,7 +43858,19 @@
       "positionY": 50
     },
     "createdAt": "2026-09-16T14:42:14.251Z",
-    "updatedAt": "2026-09-16T14:43:06.979Z"
+    "updatedAt": "2026-09-25T13:19:01.332Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "57c43530a58370dd247e38b07e132f635f2cb499fad687f0f7bb66ff7f826664",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-000938/primary-v1.webm",
+          "poster": "assets/published/works/SG-000938/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   },
   {
     "id": "SG-000939",
@@ -45380,8 +45500,8 @@
       "enabled": false,
       "text": ""
     },
-    "file": "assets/works/videos/SG-000969-1789661008507.mp4",
-    "thumbnail": "",
+    "file": "assets/published/works/SG-000969/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-000969/poster-v1.webp",
     "externalMedia": [
       {
         "platform": "youtube",
@@ -45403,7 +45523,19 @@
       "positionY": 50
     },
     "createdAt": "2026-09-17T16:03:20.826Z",
-    "updatedAt": "2026-09-17T16:03:28.509Z"
+    "updatedAt": "2026-09-25T13:19:01.332Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "33c03c5c74501d009117258a907502b8ae060e3213146a3ba7a4c7cb03dc9c13",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-000969/primary-v1.webm",
+          "poster": "assets/published/works/SG-000969/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   },
   {
     "id": "SG-000970",
@@ -51575,8 +51707,8 @@
       "enabled": false,
       "text": ""
     },
-    "file": "assets/works/videos/SG-001090-1790089124692.mp4",
-    "thumbnail": "",
+    "file": "assets/published/works/SG-001090/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001090/poster-v1.webp",
     "externalMedia": [
       {
         "platform": "youtube",
@@ -51598,7 +51730,19 @@
       "positionY": 50
     },
     "createdAt": "2026-09-22T14:58:33.960Z",
-    "updatedAt": "2026-09-22T14:58:44.694Z"
+    "updatedAt": "2026-09-25T13:19:01.332Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "e87387d35c68b9933c79edebbfaa482958b12271194e8aab125ecc151d1a7a06",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001090/primary-v1.webm",
+          "poster": "assets/published/works/SG-001090/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   },
   {
     "id": "SG-001091",

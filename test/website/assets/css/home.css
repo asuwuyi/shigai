@@ -153,6 +153,10 @@ body[data-page="home"] { width: 100%; min-height: 100vh; min-height: 100dvh; ove
 .home-archive-link { display: inline-block; color: #325e74; font-weight: 900; text-underline-offset: 4px; }
 .home-archive-refresh { min-height: 44px; padding: 9px 15px; color: #243d49; background: #f1c969; border: 2px solid #243d49; border-radius: 999px; box-shadow: 3px 4px 0 rgba(36,61,73,.3); font: inherit; font-weight: 900; cursor: pointer; }
 .home-archive-refresh:active { box-shadow: 1px 2px 0 rgba(36,61,73,.3); transform: translate(2px, 2px); }
+.home-archive-refresh:disabled { cursor: wait; opacity: .72; box-shadow: 1px 2px 0 rgba(36,61,73,.2); }
+.home-archive-content[aria-busy="true"] .home-archive-entry { opacity: .82; }
+.home-archive-entry.is-revealing { animation: home-archive-reveal .28s ease-out both; }
+@keyframes home-archive-reveal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @media (min-width: 780px) {
   .home-section-transition { top: var(--transition-desktop-y, 0); left: var(--transition-desktop-x, 50%); width: clamp(180px, 24vw, 380px); transform: translate(-50%, -48%) translateY(var(--transition-parallax-offset, 0px)) rotate(var(--transition-desktop-rotation, 0deg)) scale(var(--transition-desktop-scale, 1)); }
   .home-journal-entry { grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr); }
@@ -165,6 +169,7 @@ body[data-page="home"] { width: 100%; min-height: 100vh; min-height: 100dvh; ove
   .home-archive-copy { display: flex; flex-direction: column; justify-content: center; }
 }
 @media (prefers-reduced-motion: reduce) { .home-section-transition { transform: translate(-50%, -48%) rotate(var(--transition-mobile-rotation, 0deg)) scale(var(--transition-mobile-scale, 1)); } }
+@media (prefers-reduced-motion: reduce) { .home-archive-entry.is-revealing { animation: none; } }
 @media (min-width: 780px) and (prefers-reduced-motion: reduce) { .home-section-transition { transform: translate(-50%, -48%) rotate(var(--transition-desktop-rotation, 0deg)) scale(var(--transition-desktop-scale, 1)); } }
 @media (max-width: 779px) {
   .home-living-heading { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 10px 14px; }
