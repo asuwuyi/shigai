@@ -119,30 +119,37 @@
     const wrap = document.createElement("figure");
     wrap.className = className;
     const artwork = document.createElement("div");
-    artwork.className = "home-journal-artwork";
+    artwork.className = "home-journal-artwork work-card";
+    const mediaShell = document.createElement("div");
+    mediaShell.className = "work-media";
+    const opening = document.createElement("div");
+    opening.className = "work-frame-opening";
+    const frame = work?.frame || {};
     const selectedFrame = frames.find((frame) => frame?.id === work?.frame?.id);
     const frameSource = safeFrameSource(selectedFrame);
-    if (work?.frame?.id === "none") artwork.classList.add("has-no-frame");
-    else if (frameSource) {
-      artwork.classList.add("has-library-frame");
-      artwork.style.setProperty("--home-journal-frame", `url("${frameSource}")`);
-      artwork.style.setProperty("--home-journal-frame-inset", `${Math.round(Number(selectedFrame.openingInset || .12) * 100)}%`);
+    artwork.dataset.frame = frame.id === "none" ? "none" : frameSource ? "custom" : String(workFrameNumber(work)).padStart(2, "0");
+    if (frameSource) {
+      artwork.dataset.frameShape = selectedFrame.shape;
+      artwork.style.setProperty("--salon-frame", `url("${frameSource}")`);
+      artwork.style.setProperty("--custom-frame-opening-inset", `${Math.round(Number(selectedFrame.openingInset || .12) * 100)}%`);
+      artwork.style.setProperty("--custom-frame-ratio", String(Number(selectedFrame.ratio) || 1));
     } else {
-      const frameNumber = workFrameNumber(work);
-      const extension = frameNumber > 12 ? "png" : "webp";
-      artwork.classList.add("has-salon-frame");
-      artwork.dataset.frame = String(frameNumber).padStart(2, "0");
-      const frameUrl = new URL(`assets/images/frames/salon-${String(frameNumber).padStart(2, "0")}.${extension}`, document.baseURI).href;
-      artwork.style.setProperty("--home-journal-frame", `url("${frameUrl}")`);
+      artwork.removeAttribute("data-frame-shape");
     }
+    artwork.style.setProperty("--work-frame-fit", frame.fit === "contain" ? "contain" : "cover");
+    artwork.style.setProperty("--work-frame-scale", String(Number.isFinite(Number(frame.scale)) ? Number(frame.scale) : 1));
+    artwork.style.setProperty("--work-frame-x", `${Number.isFinite(Number(frame.positionX)) ? Number(frame.positionX) : 50}%`);
+    artwork.style.setProperty("--work-frame-y", `${Number.isFinite(Number(frame.positionY)) ? Number(frame.positionY) : 50}%`);
     const source = safeMediaSource(work);
     if (source) {
       const media = work.type === "video" ? document.createElement("video") : document.createElement("img");
       media.src = source;
       if (media.tagName === "VIDEO") { media.controls = true; media.playsInline = true; media.preload = "metadata"; media.poster = safePosterSource(work); }
       else { media.loading = "lazy"; media.alt = work.title || "今天留下的片段"; }
-      artwork.append(media);
+      opening.append(media);
     }
+    mediaShell.append(opening);
+    artwork.append(mediaShell);
     wrap.append(artwork);
     return wrap;
   }
@@ -238,7 +245,8 @@
   }
   function enableTransitionParallax() {
     const transitions = [...document.querySelectorAll(".home-section-transition")];
-    if (!transitions.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const sections = [...document.querySelectorAll(".home-living-section")];
+    if ((!transitions.length && !sections.length) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let frame = 0;
     const update = () => {
       frame = 0;
@@ -249,8 +257,52 @@
         const strength = Number(getComputedStyle(node).getPropertyValue(`--transition-${layout}-parallax`)) || 0;
         node.style.setProperty("--transition-parallax-offset", `${(progress * strength).toFixed(2)}px`);
       });
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const progress = Math.max(-1, Math.min(1, (innerHeight / 2 - rect.top) / innerHeight));
+        const strength = matchMedia("(min-width: 780px)").matches ? 20 : 12;
+        section.style.setProperty("--home-background-parallax-offset", `${(progress * strength).toFixed(2)}px`);
+      });
     };
     addEventListener("scroll", () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
+    update();
+  }
+  async function enableHomeCompanion() {
+    const settings = await window.ShiGaiWebsiteSettings;
+    const companion = settings?.websiteBrand?.homeCompanion;
+    if (companion?.enabled !== true) return;
+    const keyForSection = { "latest-journal": "latestJournal", "daily-game": "dailyGame", "archive-discovery": "archiveDiscovery" };
+    const host = document.createElement("div"); host.className = "home-companion"; host.setAttribute("aria-hidden", "true"); host.dataset.motion = companion.motion === "fade" ? "fade" : "straight";
+    const image = document.createElement("img"); image.alt = ""; host.append(image); document.body.append(host);
+    let currentAsset = ""; let frame = 0;
+    const safeAsset = (value) => String(value || "").startsWith("assets/") && !String(value).split("/").includes("..") ? `../${value}` : "";
+    const update = () => {
+      frame = 0;
+      const rootRect = root.getBoundingClientRect();
+      host.hidden = rootRect.top >= innerHeight || rootRect.bottom <= 0;
+      if (host.hidden) return;
+      const layout = matchMedia("(min-width: 780px)").matches ? "desktop" : "mobile";
+      const anchors = [...root.querySelectorAll(".home-living-section")].map((section) => ({ section, state: companion.states?.[keyForSection[section.id]], center: section.getBoundingClientRect().top + (section.getBoundingClientRect().height / 2) })).filter((item) => item.state);
+      if (!anchors.length) return;
+      const viewportCenter = innerHeight / 2;
+      let from = anchors[0]; let to = anchors[anchors.length - 1];
+      for (let index = 0; index < anchors.length - 1; index += 1) if (viewportCenter >= anchors[index].center && viewportCenter <= anchors[index + 1].center) { from = anchors[index]; to = anchors[index + 1]; break; }
+      if (viewportCenter < anchors[0].center) from = to = anchors[0];
+      if (viewportCenter > anchors[anchors.length - 1].center) from = to = anchors[anchors.length - 1];
+      const distance = Math.max(1, to.center - from.center); const progress = from === to ? 0 : Math.max(0, Math.min(1, (viewportCenter - from.center) / distance));
+      const first = from.state[layout] || {}; const second = to.state[layout] || first;
+      const numeric = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
+      const interpolate = (key, fallback) => numeric(first[key], fallback) + ((numeric(second[key], fallback) - numeric(first[key], fallback)) * progress);
+      const selected = progress < .5 ? from.state : to.state; const asset = safeAsset(selected.asset);
+      if (asset && asset !== currentAsset) { currentAsset = asset; image.src = asset; host.classList.remove("is-changing"); void host.offsetWidth; host.classList.add("is-changing"); }
+      const selectedLayout = progress < .5 ? first : second;
+      const x = companion.motion === "fade" ? numeric(selectedLayout.x, 50) : interpolate("x", 50);
+      const y = companion.motion === "fade" ? numeric(selectedLayout.y, 60) : interpolate("y", 60);
+      const scale = companion.motion === "fade" ? numeric(selectedLayout.scale, 1) : interpolate("scale", 1);
+      host.style.setProperty("--companion-x", `${x}%`); host.style.setProperty("--companion-y", `${y}%`); host.style.setProperty("--companion-scale", scale.toFixed(3));
+    };
+    addEventListener("scroll", () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
+    addEventListener("resize", () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
     update();
   }
 
@@ -372,6 +424,7 @@
   })).then((sections) => {
     root.replaceChildren(...sections.filter(Boolean));
     enableTransitionParallax();
+    enableHomeCompanion();
     window.dispatchEvent(new CustomEvent("shi-gai:home-sections-ready"));
     if (location.hash) scrollToHomeSectionFromHash();
   });

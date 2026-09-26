@@ -96,14 +96,14 @@
           "y": 0,
           "scale": 0.62,
           "rotation": -4,
-          "parallax": 10
+          "parallax": 32
         },
         "desktop": {
           "x": 16,
           "y": 0,
           "scale": 0.72,
           "rotation": -4,
-          "parallax": 14
+          "parallax": 48
         }
       },
       "dailyGame": {
@@ -114,14 +114,14 @@
           "y": 0,
           "scale": 0.58,
           "rotation": 3,
-          "parallax": 12
+          "parallax": 32
         },
         "desktop": {
           "x": 84,
           "y": 0,
           "scale": 0.68,
           "rotation": 3,
-          "parallax": 16
+          "parallax": 48
         }
       },
       "archiveDiscovery": {
@@ -132,14 +132,59 @@
           "y": 0,
           "scale": 0.58,
           "rotation": 2,
-          "parallax": 10
+          "parallax": 32
         },
         "desktop": {
           "x": 86,
           "y": 0,
           "scale": 0.68,
           "rotation": 2,
-          "parallax": 14
+          "parallax": 48
+        }
+      }
+    },
+    "homeCompanion": {
+      "enabled": true,
+      "motion": "straight",
+      "states": {
+        "latestJournal": {
+          "asset": "assets/published/characters/penguin/primary-v1.webp",
+          "mobile": {
+            "x": 90,
+            "y": 70,
+            "scale": 0.64
+          },
+          "desktop": {
+            "x": 94,
+            "y": 70,
+            "scale": 0.72
+          }
+        },
+        "dailyGame": {
+          "asset": "assets/published/characters/penguin/primary-v1.webp",
+          "mobile": {
+            "x": 10,
+            "y": 62,
+            "scale": 0.62
+          },
+          "desktop": {
+            "x": 6,
+            "y": 62,
+            "scale": 0.7
+          }
+        },
+        "archiveDiscovery": {
+          "asset": "assets/published/characters/penguin/primary-v1.webp",
+          "mobile": {
+            "x": 90,
+            "y": 64,
+            "scale": 0.64
+          },
+          "desktop": {
+            "x": 94,
+            "y": 64,
+            "scale": 0.72
+          }
         }
       }
     },
