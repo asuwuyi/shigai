@@ -292,13 +292,19 @@
       const distance = Math.max(1, to.center - from.center); const progress = from === to ? 0 : Math.max(0, Math.min(1, (viewportCenter - from.center) / distance));
       const first = from.state[layout] || {}; const second = to.state[layout] || first;
       const numeric = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
-      const interpolate = (key, fallback) => numeric(first[key], fallback) + ((numeric(second[key], fallback) - numeric(first[key], fallback)) * progress);
+      const route = [{ x: numeric(first.x, 50), y: numeric(first.y, 60), scale: numeric(first.scale, 1) }]
+        .concat((Array.isArray(second.path) ? second.path : []).slice(0, 6).map((point) => ({ x: numeric(point?.x, 50), y: numeric(point?.y, 60), scale: numeric(first.scale, 1) })))
+        .concat([{ x: numeric(second.x, 50), y: numeric(second.y, 60), scale: numeric(second.scale, 1) }]);
+      const routeProgress = progress * Math.max(1, route.length - 1);
+      const routeIndex = Math.min(route.length - 2, Math.floor(routeProgress));
+      const routeSegmentProgress = route.length < 2 ? 0 : routeProgress - routeIndex;
+      const interpolateRoute = (key, fallback) => numeric(route[routeIndex]?.[key], fallback) + ((numeric(route[routeIndex + 1]?.[key], fallback) - numeric(route[routeIndex]?.[key], fallback)) * routeSegmentProgress);
       const selected = progress < .5 ? from.state : to.state; const asset = safeAsset(selected.asset);
       if (asset && asset !== currentAsset) { currentAsset = asset; image.src = asset; host.classList.remove("is-changing"); void host.offsetWidth; host.classList.add("is-changing"); }
       const selectedLayout = progress < .5 ? first : second;
-      const x = companion.motion === "fade" ? numeric(selectedLayout.x, 50) : interpolate("x", 50);
-      const y = companion.motion === "fade" ? numeric(selectedLayout.y, 60) : interpolate("y", 60);
-      const scale = companion.motion === "fade" ? numeric(selectedLayout.scale, 1) : interpolate("scale", 1);
+      const x = companion.motion === "fade" ? numeric(selectedLayout.x, 50) : interpolateRoute("x", 50);
+      const y = companion.motion === "fade" ? numeric(selectedLayout.y, 60) : interpolateRoute("y", 60);
+      const scale = companion.motion === "fade" ? numeric(selectedLayout.scale, 1) : interpolateRoute("scale", 1);
       host.style.setProperty("--companion-x", `${x}%`); host.style.setProperty("--companion-y", `${y}%`); host.style.setProperty("--companion-scale", scale.toFixed(3));
     };
     addEventListener("scroll", () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });

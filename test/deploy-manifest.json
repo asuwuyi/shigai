@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-09-26T08:07:01.121Z",
+  "createdAt": "2026-09-28T10:42:46.248Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1081,
@@ -13,7 +13,7 @@
     "assets": 1188,
     "files": 1294
   },
-  "bytes": 155913475,
+  "bytes": 155914721,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
