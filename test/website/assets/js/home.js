@@ -36,10 +36,11 @@ function finishHomeLoading() {
     window.setTimeout(() => homeElements.loading?.remove(), 380);
   }, remaining);
 }
+const failedHomeSceneMedia = new Set();
 function failHomeLoading() {
-  if (homeElements.loadingStatus) homeElements.loadingStatus.textContent = "場景尚未載入完成，請重新載入";
+  if (homeElements.loadingStatus) homeElements.loadingStatus.textContent = "部分場景素材載入失敗，請重試";
   homeElements.loading?.classList.add("has-error");
-  if (homeElements.loadingRetry) homeElements.loadingRetry.hidden = false;
+  if (homeElements.loadingRetry) { homeElements.loadingRetry.hidden = false; homeElements.loadingRetry.textContent = "重試載入"; }
 }
 function waitForCriticalSceneMedia() {
   const critical = [...(homeElements.worldSceneRender?.querySelectorAll(".scene-render-object img, .scene-render-object video") || [])];
@@ -51,7 +52,9 @@ function waitForCriticalSceneMedia() {
   };
   return new Promise((resolve, reject) => {
     const cleanups = [];
-    const timeout = window.setTimeout(() => finish(new Error("Scene media readiness timed out.")), 8000);
+    const timeout = window.setTimeout(() => {
+      if (!settled && homeElements.loadingStatus) homeElements.loadingStatus.textContent = "連線較慢，仍在載入場景…";
+    }, 8000);
     let settled = false;
     function finish(error) {
       if (settled) return;
@@ -63,7 +66,7 @@ function waitForCriticalSceneMedia() {
     Promise.all(critical.map(media => new Promise((ready, failed) => {
       const event = media.tagName === "VIDEO" ? "loadeddata" : "load";
       let checking = false;
-      const fail = () => failed(new Error("Scene media could not be displayed."));
+      const fail = () => { failedHomeSceneMedia.add(media); failed(new Error("Scene media could not be displayed.")); };
       const check = async () => {
         if (checking || settled) return;
         checking = true;
@@ -72,8 +75,8 @@ function waitForCriticalSceneMedia() {
             if (!media.naturalWidth) throw new Error("Scene image is empty.");
             if (typeof media.decode === "function") await media.decode();
           }
-          if (!settled) { update(); ready(); }
-        } catch (error) { failed(error); }
+          if (!settled) { failedHomeSceneMedia.delete(media); update(); ready(); }
+        } catch (error) { failedHomeSceneMedia.add(media); failed(error); }
       };
       media.addEventListener(event, check, { once: true });
       media.addEventListener("error", fail, { once: true });
@@ -698,5 +701,25 @@ if (homeElements.worldSceneRender) {
 
 enableTouchCameraPeek();
 enableMobileSceneViewport();
-homeElements.loadingRetry?.addEventListener("click", () => window.location.reload());
+homeElements.loadingRetry?.addEventListener("click", async () => {
+  homeElements.loadingRetry.hidden = true;
+  homeElements.loading?.classList.remove("has-error");
+  if (homeElements.loadingStatus) homeElements.loadingStatus.textContent = "正在重試場景素材…";
+  if (!homeElements.worldSceneRender?.querySelector(".scene-render-object")) { await loadHome(); return; }
+  // Keep the Scene and successful media intact; only retry actual failures.
+  for (const media of failedHomeSceneMedia) {
+    const source = media.currentSrc || media.getAttribute("src");
+    if (!source) continue;
+    const retryUrl = new URL(source, document.baseURI);
+    retryUrl.searchParams.set("scene_retry", String(Date.now()));
+    media.src = retryUrl.href;
+    if (media.tagName === "VIDEO") media.load();
+  }
+  try {
+    await waitForCriticalSceneMedia();
+    finishHomeLoading();
+    const settings = await window.ShiGaiWebsiteSettings;
+    renderWelcomeLogo(settings?.websiteBrand?.welcome);
+  } catch (error) { failHomeLoading(); }
+});
 loadHome();
