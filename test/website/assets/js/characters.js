@@ -1,5 +1,7 @@
 // Shi-Gai Characters Gallery. This page only reads Website export JSON.
-const state = { characters: [], works: [] };
+const characterCopyDefaults = { pageTitle: "角色 Characters", menuLabel: "開啟角色導覽與搜尋", searchPlaceholder: "搜尋角色名稱", summaryLabel: "顯示 {count} 位角色", unnamedLabel: "未命名角色", workCountLabel: "{count} 件作品", viewLabel: "查看 {name} 的角色詳細頁", emptyTitle: "No Characters", emptyBody: "角色很快就會來這裡報到。", noResultsTitle: "找不到符合的角色。", noResultsBody: "試試看其他角色名稱。", errorTitle: "角色資料暫時無法載入。", errorBody: "請確認網站是透過本機或網站伺服器開啟。" };
+const state = { characters: [], works: [], copy: characterCopyDefaults };
+const copyTemplate = (value, replacements) => Object.entries(replacements).reduce((text, [key, replacement]) => text.replaceAll(`{${key}}`, replacement), value);
 const elements = {
   grid: document.getElementById("charactersGrid"), template: document.getElementById("characterCardTemplate"),
   search: document.getElementById("characterSearch"), summary: document.getElementById("characterSummary"),
@@ -89,12 +91,12 @@ function characterDetailUrl(character) {
 function renderCharacters() {
   const characters = filteredCharacters();
   elements.grid.replaceChildren();
-  elements.summary.textContent = state.characters.length ? `顯示 ${characters.length} 位角色` : "";
+  elements.summary.textContent = state.characters.length ? copyTemplate(state.copy.summaryLabel, { count: characters.length }) : "";
   elements.empty.hidden = Boolean(state.characters.length) && Boolean(characters.length);
   if (state.characters.length && !characters.length) {
     elements.empty.hidden = false;
-    elements.empty.querySelector("h2").textContent = "找不到符合的角色。";
-    elements.empty.querySelector("p").textContent = "試試看其他角色名稱。";
+    elements.empty.querySelector("h2").textContent = state.copy.noResultsTitle;
+    elements.empty.querySelector("p").textContent = state.copy.noResultsBody;
   }
   characters.forEach((character) => {
     const fragment = elements.template.content.cloneNode(true);
@@ -103,22 +105,35 @@ function renderCharacters() {
     card.href = characterDetailUrl(character);
     card.addEventListener("click", () => window.ShiGaiAnalytics?.track("view_character", { character_id: character.id || "unknown" }));
     card.dataset.frame = characterFrameNumber(character);
-    card.setAttribute("aria-label", `查看 ${character.name} 的角色詳細頁`);
+    card.setAttribute("aria-label", copyTemplate(state.copy.viewLabel, { name: character.name || state.copy.unnamedLabel }));
     const media = fragment.querySelector(".character-frame-opening");
     const artwork = representativeArtwork(works);
     appendCharacterImage(media, character, artwork);
-    fragment.querySelector(".character-card-name").textContent = character.name || "未命名角色";
+    fragment.querySelector(".character-card-name").textContent = character.name || state.copy.unnamedLabel;
     const description = shortIntroduction(character);
     const descriptionElement = fragment.querySelector(".character-card-description");
     descriptionElement.hidden = !description;
     descriptionElement.textContent = description;
-    fragment.querySelector(".character-work-count").textContent = `${works.length} 件作品`;
+    fragment.querySelector(".character-work-count").textContent = copyTemplate(state.copy.workCountLabel, { count: works.length });
     elements.grid.append(fragment);
   });
 }
 
 async function loadCharacters() {
   try {
+    const settings = await window.ShiGaiWebsiteSettings.catch(() => ({}));
+    state.copy = { ...characterCopyDefaults, ...(settings?.websiteBrand?.characters || {}) };
+    document.title = `${state.copy.pageTitle} · ${settings?.websiteBrand?.siteName || "Shi-Gai"}`;
+    document.getElementById("pageTitle").textContent = state.copy.pageTitle;
+    let menuTitle = document.getElementById("characterMenuTitle");
+    if (!menuTitle) { menuTitle = document.createElement("h2"); menuTitle.id = "characterMenuTitle"; elements.menu.prepend(menuTitle); }
+    window.ShiGaiVisualText?.apply(menuTitle, state.copy.pageTitle, settings?.websiteBrand?.visualTitles?.characters);
+    elements.menuButton.setAttribute("aria-label", state.copy.menuLabel);
+    elements.search.placeholder = state.copy.searchPlaceholder;
+    elements.empty.querySelector("h2").textContent = state.copy.emptyTitle;
+    elements.empty.querySelector("p").textContent = state.copy.emptyBody;
+    elements.error.querySelector("h2").textContent = state.copy.errorTitle;
+    elements.error.querySelector("p").textContent = state.copy.errorBody;
     const [charactersResponse, worksResponse] = await Promise.all([
       fetch("../database/website/characters.json"), fetch("../database/website/works.json")
     ]);

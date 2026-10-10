@@ -381,6 +381,7 @@ async function loadWebsiteData() {
     const controls = settings?.websiteBrand?.controls || {};
     state.copy = { ...state.copy, ...(settings?.websiteBrand?.works || {}) };
     applyWorksCopy();
+    window.ShiGaiVisualText?.apply(document.querySelector(".works-menu-header strong"), state.copy.menuTitle, settings?.websiteBrand?.visualTitles?.works);
     const legacyPagination = settings?.websiteBrand?.works?.showSystemPagination !== false;
     const publishedWorkActions = new Set((Array.isArray(scenes) ? scenes : []).filter((scene) => scene?.status === "published" && scene?.type === "work").flatMap((scene) => (scene.objects || []).filter((object) => object.visible !== false && window.ShiGaiSceneInteraction?.isActionable(object.interaction)).map((object) => object.interaction.action)));
     const previousRequested = controls.worksPreviousPage !== false && controls.worksPagination !== false && legacyPagination;

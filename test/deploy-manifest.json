@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-09-28T10:42:46.248Z",
+  "createdAt": "2026-10-10T11:52:29.095Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1081,
@@ -11,9 +11,9 @@
     "games": 3,
     "spotDifferenceLevels": 2,
     "assets": 1188,
-    "files": 1294
+    "files": 1296
   },
-  "bytes": 155914721,
+  "bytes": 153434853,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -1200,8 +1200,8 @@
     "assets/site/frames/frame-mu18q41p-2d5703ae.png",
     "assets/site/frames/frame-mu18q42o-401bde07.png",
     "assets/site/frames/frame-mu18q43b-f9fb5e65.png",
-    "assets/website/transitions/home-transition-game-v1.png",
-    "assets/website/transitions/home-transition-journal-v1.png",
-    "assets/website/transitions/home-transition-works-v1.png"
+    "assets/website/transitions/home-transition-game-17984510183c.webp",
+    "assets/website/transitions/home-transition-journal-993e0884741e.webp",
+    "assets/website/transitions/home-transition-works-e8258fd1069b.webp"
   ]
 }

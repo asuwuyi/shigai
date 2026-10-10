@@ -12,6 +12,8 @@
   const backScene = document.getElementById("gamesBackScene");
   const front = document.getElementById("gamesFront");
   const frontScene = document.getElementById("gamesFrontScene");
+  const copyDefaults = { eyebrow: "SHI-GAI PLAYROOM", title: "遊戲室", homeLabel: "← Home", homeAriaLabel: "返回首頁", previousLabel: "上一款遊戲", nextLabel: "下一款遊戲", selectLabel: "選擇遊戲", unnamedLabel: "未命名遊戲", startLabel: "開始遊戲", comingSoonLabel: "Coming Soon", loadingLabel: "正在載入遊戲資料。", emptyLabel: "目前還沒有遊戲。", errorLabel: "遊戲資料暫時無法載入。" };
+  let copy = copyDefaults;
   const wallpapers = ["burgundy-01", "sage-02", "navy-03", "ochre-04"];
   const wallpaperKey = "shi-gai:works-wallpaper:v1";
   let wallpaper = sessionStorage.getItem(wallpaperKey);
@@ -22,7 +24,7 @@
   const prefetched = new Set();
   const routeToGame = (game) => {
     if (!game?.url || game.status !== "published") return;
-    window.ShiGaiAnalytics?.track("game_start", { game_id: game.id || "unknown" });
+    window.ShiGaiAnalytics?.track("game_open", { game_id: game.id || "unknown", source: "games_hub" });
     window.location.assign(game.url);
   };
   function prefetchGame(game) {
@@ -40,10 +42,10 @@
     if (game.icon) { const image=document.createElement("img"); image.src=new URL(`../${game.icon}`,document.baseURI).href; image.alt=""; mark.append(image); } else mark.textContent = game.mark || "✦";
     const description = document.createElement("p"); description.textContent = game.description || "";
     tvScreen.append(mark, description);
-    selectedName.textContent = game.name || "未命名遊戲";
+    selectedName.textContent = game.name || copy.unnamedLabel;
     selectedPosition.textContent = `${activeIndex + 1} / ${games.length}`;
     const available = Boolean(game.url && game.status === "published");
-    startGame.disabled = !available; startGame.textContent = available ? "開始遊戲" : "Coming Soon";
+    startGame.disabled = !available; startGame.textContent = available ? copy.startLabel : copy.comingSoonLabel;
     prefetchGame(game);
   }
   function selectGame(index, { updateHash = true, direction = "" } = {}) {
@@ -61,7 +63,7 @@
       choices.replaceChildren();
       games.forEach((game, index) => {
         const choice = document.createElement("button"); choice.type = "button"; choice.className = "games-tuner-choice"; choice.role = "tab";
-        choice.setAttribute("aria-label", `選擇 ${game.name || "未命名遊戲"}`);
+        choice.setAttribute("aria-label", `${copy.selectLabel} ${game.name || copy.unnamedLabel}`);
         choice.addEventListener("click", () => selectGame(index, { direction: index < activeIndex ? "previous" : "next" })); choices.append(choice);
       });
     }
@@ -99,14 +101,23 @@
     selectGame(activeIndex + (distance < 0 ? 1 : -1), { direction: distance < 0 ? "next" : "previous" });
   }, { passive: true });
   try {
-    const [gamesResponse, scenesResponse] = await Promise.all([fetch("../database/website/games.json"), fetch("../database/website/scenes.json")]);
+    const settings = await window.ShiGaiWebsiteSettings.catch(() => ({}));
+    copy = { ...copyDefaults, ...(settings?.websiteBrand?.games || {}) };
+    document.title = `${copy.title} · ${settings?.websiteBrand?.siteName || "Shi-Gai"}`;
+    document.querySelector(".games-room-heading .eyebrow").textContent = copy.eyebrow;
+    document.getElementById("gamesTitle").textContent = copy.title;
+    window.ShiGaiVisualText?.apply(document.getElementById("gamesTitle"), copy.title, settings?.websiteBrand?.visualTitles?.games);
+    const home = document.querySelector(".games-home-return"); home.textContent = copy.homeLabel; home.setAttribute("aria-label", copy.homeAriaLabel);
+    previous.setAttribute("aria-label", copy.previousLabel); next.setAttribute("aria-label", copy.nextLabel);
+    choices.setAttribute("aria-label", copy.selectLabel); state.textContent = copy.loadingLabel;
+    const [gamesResponse, scenesResponse] = await Promise.all([fetch("../database/website/games.json"), fetch("../database/website/scenes.json").catch(() => ({ ok: false }))]);
     if (!gamesResponse.ok) throw new Error("Games registry unavailable");
     games = (await gamesResponse.json()).filter((game) => game?.visible !== false).sort((a, b) => Number(a.order) - Number(b.order));
-    if (!games.length) { state.textContent = "目前還沒有遊戲。"; return; }
+    if (!games.length) { state.textContent = copy.emptyLabel; return; }
     const requestedId = decodeURIComponent(location.hash.slice(1));
     const requestedIndex = games.findIndex((game) => game.id === requestedId);
     if (requestedIndex >= 0) activeIndex = requestedIndex;
     renderChoices(); renderTv(); state.hidden = true;
     if (scenesResponse.ok) renderGameScene(await scenesResponse.json());
-  } catch { state.hidden = false; state.textContent = "遊戲資料暫時無法載入。"; }
+  } catch { state.hidden = false; state.textContent = copy.errorLabel; }
 })();

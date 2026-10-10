@@ -5,6 +5,7 @@
     copy = { ...copy, ...journal };
     document.getElementById("journalEyebrow").textContent = copy.eyebrow;
     document.getElementById("journalTitle").textContent = copy.title;
+    window.ShiGaiVisualText?.apply(document.getElementById("journalTitle"), copy.title, settings?.websiteBrand?.visualTitles?.journal);
     document.getElementById("journalIntro").textContent = copy.intro;
     empty.querySelector("h2").textContent = copy.emptyTitle; empty.querySelector("p").textContent = copy.emptyBody;
     error.querySelector("h2").textContent = copy.errorTitle; error.querySelector("p").textContent = copy.errorBody;
@@ -57,6 +58,7 @@
     return article;
   }
   function renderDetail(index) {
+    window.ShiGaiAnalytics?.track("view_journal", { content_id: journalWorks[index].id }, `journal:${journalWorks[index].id}`);
     entriesRoot.replaceChildren(entryCard(journalWorks[index]));
     pagination.hidden = journalWorks.length <= 1;
     previous.disabled = index === journalWorks.length - 1;

@@ -150,6 +150,7 @@
           window.stage = stage;
           stage.enableMouseOver(); stage.addChild(window.exportRoot);
           bridgeScaledCanvasButton(window.exportRoot, "playLottery");
+          window.ShiGaiGameAnalytics?.bind(window.exportRoot);
           createjs.Ticker.framerate = library.properties.fps; setTicker(true);
           preloader.hidden = true; canvas.style.display = "block"; status.hidden = true;
           makeExhibitResponsive(library); AdobeAn.compositionLoaded(library.properties.id);

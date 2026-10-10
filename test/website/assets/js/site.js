@@ -3,9 +3,7 @@ const sitePage = document.body.dataset.page || "home";
 const siteHeader = document.querySelector("[data-site-header]");
 const siteFooter = document.querySelector("[data-site-footer]");
 const siteReviewMode = new URLSearchParams(window.location.search).get("review") === "1";
-let analyticsReady = false;
-const pendingAnalyticsEvents = [];
-let siteBrand = { siteName: "Shi-Gai", icon: "", nav: { home: "Home", journal: "Journal", works: "Works", characters: "Characters", games: "Games", about: "作者工作室" }, pages: { journal: true, works: true, characters: true, games: true, about: false }, controls: { globalBrand: true, homeNavigation: true, journalNavigation: true, worksNavigation: true, charactersNavigation: true, gamesNavigation: true, aboutNavigation: true }, analytics: { enabled: false, provider: "gtm", containerId: "" }, footerName: "Shi-Gai", copyright: "Shi-Gai" };
+let siteBrand = { siteName: "Shi-Gai", icon: "", nav: { home: "Home", journal: "Journal", works: "Works", characters: "Characters", games: "Games", about: "作者工作室" }, pages: { journal: true, works: true, characters: true, games: true, about: false }, controls: { globalBrand: true, homeNavigation: true, journalNavigation: true, worksNavigation: true, charactersNavigation: true, gamesNavigation: true, aboutNavigation: true }, analytics: { enabled: false, provider: "gtm", containerId: "" }, system: { homeSuffix: "首頁", openMenuLabel: "開啟網站選單", closeMenuLabel: "關閉網站選單", primaryNavigationLabel: "主要導覽", footerNavigationLabel: "頁尾導覽" }, footerName: "Shi-Gai", copyright: "Shi-Gai" };
 const siteLinks = [
   { id: "home", label: "Home", href: "index.html" },
   { id: "journal", label: "Journal", href: "journal.html" },
@@ -26,30 +24,60 @@ function escapeSiteText(value) {
   return String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
 }
 
-function loadGoogleTagManager(analytics) {
-  const containerId = String(analytics?.containerId || "").trim().toUpperCase();
-  if (analytics?.enabled !== true || !/^GTM-[A-Z0-9]+$/.test(containerId) || document.querySelector("script[data-shigai-gtm]")) return;
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
-  const script = document.createElement("script");
-  script.async = true;
-  script.dataset.shigaiGtm = containerId;
-  script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(containerId)}`;
-  document.head.append(script);
-}
-
-function sanitizeAnalyticsParameters(parameters) {
-  return Object.fromEntries(Object.entries(parameters || {}).filter(([key, value]) => /^[a-z][a-z0-9_]{0,39}$/.test(key) && ["string", "number", "boolean"].includes(typeof value)).map(([key, value]) => [key, typeof value === "string" ? value.slice(0, 100) : value]));
-}
-
 function trackSiteEvent(eventName, parameters = {}) {
-  if (!/^[a-z][a-z0-9_]{0,39}$/.test(eventName)) return;
-  const entry = { event: eventName, ...sanitizeAnalyticsParameters(parameters) };
-  if (!analyticsReady) { pendingAnalyticsEvents.push(entry); return; }
-  if (siteBrand.analytics?.enabled === true) window.dataLayer?.push(entry);
+  window.ShiGaiAnalytics?.track(eventName, parameters);
 }
 
-window.ShiGaiAnalytics = Object.freeze({ track: trackSiteEvent });
+window.ShiGaiVisualText = Object.freeze({
+  deviceListeners: new WeakMap(),
+  apply(element, title, settings = {}) {
+    if (!element) return;
+    window.ShiGaiVisualText.deviceListeners.get(element)?.();
+    const device = matchMedia("(max-width: 700px)");
+    const original = settings;
+    if (settings.mobileAsset) {
+      const change = () => window.ShiGaiVisualText.apply(element, title, original);
+      device.addEventListener("change", change);
+      window.ShiGaiVisualText.deviceListeners.set(element, () => device.removeEventListener("change", change));
+      if (device.matches) settings = { ...settings, asset: settings.mobileAsset, fallbackAsset: settings.mobileFallbackAsset };
+    }
+    element.replaceChildren(document.createTextNode(title));
+    if (settings.mode === "text") return;
+    const source = (asset) => typeof asset === "string" && asset.startsWith("assets/") && !asset.split("/").includes("..") ? new URL(`../${asset}`, document.baseURI).href : "";
+    const asset = source(settings.asset);
+    if (!asset) return;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    const size = (node) => {
+      if (!node.style || !settings.mobileWidth) return;
+      node.classList.add("site-visual-sized");
+      node.style.setProperty("--visual-mobile-width", `${settings.mobileWidth}px`);
+      node.style.setProperty("--visual-desktop-width", `${settings.desktopWidth}px`);
+    };
+    let media;
+    const textFallback = () => element.replaceChildren(document.createTextNode(title));
+    const showFallback = () => {
+      media?.pause?.();
+      const fallback = source(settings.fallbackAsset);
+      if (!fallback) return textFallback();
+      const image = document.createElement("img"); image.className = "site-visual-title"; image.src = fallback; image.alt = title;
+      size(image);
+      image.addEventListener("error", textFallback, { once: true }); element.replaceChildren(image);
+    };
+    if (/\.(webm|mp4)$/i.test(asset)) {
+      if (reduced.matches) return showFallback();
+      media = document.createElement("video"); media.muted = true; media.autoplay = true; media.loop = true; media.playsInline = true;
+      media.setAttribute("aria-label", title); media.setAttribute("role", "img");
+      media.addEventListener("error", showFallback, { once: true });
+      reduced.addEventListener("change", () => { if (reduced.matches) showFallback(); }, { once: true });
+    } else {
+      media = document.createElement("img"); media.alt = title; media.addEventListener("error", textFallback, { once: true });
+    }
+    media.className = "site-visual-title"; media.src = asset;
+    size(media);
+    element.replaceChildren(media);
+    if (media.tagName === "VIDEO") media.play().catch(showFallback);
+  }
+});
 
 function brandIconSource() {
   return siteBrand.icon.startsWith("assets/") && !siteBrand.icon.split("/").includes("..") ? `../${siteBrand.icon}` : "assets/images/brand-icon.png";
@@ -87,11 +115,11 @@ function navigationLinks() {
 function renderSiteChrome() {
 if (siteHeader) {
   siteHeader.innerHTML = `
-    <a class="site-brand" href="${siteHref("index.html")}" aria-label="${escapeSiteText(siteBrand.siteName)} 首頁">
+    <a class="site-brand" href="${siteHref("index.html")}" aria-label="${escapeSiteText(siteBrand.siteName)} ${escapeSiteText(siteBrand.system.homeSuffix)}">
       <span>${escapeSiteText(siteBrand.siteName)}</span>
     </a>
-    <button class="site-menu-toggle" type="button" aria-label="開啟網站選單" aria-expanded="false" aria-controls="sitePrimaryNav">☰</button>
-    <nav id="sitePrimaryNav" class="site-nav" aria-label="主要導覽">${navigationLinks()}</nav>`;
+    <button class="site-menu-toggle" type="button" aria-label="${escapeSiteText(siteBrand.system.openMenuLabel)}" aria-expanded="false" aria-controls="sitePrimaryNav">☰</button>
+    <nav id="sitePrimaryNav" class="site-nav" aria-label="${escapeSiteText(siteBrand.system.primaryNavigationLabel)}">${navigationLinks()}</nav>`;
 
   const menuButton = siteHeader.querySelector(".site-menu-toggle");
   const navigation = siteHeader.querySelector(".site-nav");
@@ -100,13 +128,13 @@ if (siteHeader) {
   const closeMenu = () => {
     navigation.classList.remove("is-open");
     menuButton.setAttribute("aria-expanded", "false");
-    menuButton.setAttribute("aria-label", "開啟網站選單");
+    menuButton.setAttribute("aria-label", siteBrand.system.openMenuLabel);
     if (!menuButton.classList.contains("has-custom-button-media")) menuButton.textContent = "☰";
   };
   const openMenu = () => {
     navigation.classList.add("is-open");
     menuButton.setAttribute("aria-expanded", "true");
-    menuButton.setAttribute("aria-label", "關閉網站選單");
+    menuButton.setAttribute("aria-label", siteBrand.system.closeMenuLabel);
     if (!menuButton.classList.contains("has-custom-button-media")) menuButton.textContent = "×";
   };
   menuButton.addEventListener("click", () => navigation.classList.contains("is-open") ? closeMenu() : openMenu());
@@ -122,7 +150,7 @@ if (siteHeader) {
 if (siteFooter) {
   siteFooter.innerHTML = `
     <p class="site-footer-name">${escapeSiteText(siteBrand.footerName)}</p>
-    <nav class="site-footer-nav" aria-label="頁尾導覽">${navigationLinks()}</nav>
+    <nav class="site-footer-nav" aria-label="${escapeSiteText(siteBrand.system.footerNavigationLabel)}">${navigationLinks()}</nav>
     <p>© ${new Date().getFullYear()} ${escapeSiteText(siteBrand.copyright)}</p>`;
 }
 applyWebsiteButtonAssets();
@@ -140,16 +168,11 @@ window.ShiGaiWebsiteSettings
       about: { ...(siteBrand.about || {}), ...(incoming.about || {}) },
       controls: { ...siteBrand.controls, ...(incoming.controls || {}) },
       analytics: { ...siteBrand.analytics, ...(incoming.analytics || {}) },
+      system: { ...siteBrand.system, ...(incoming.system || {}) },
       buttonAssets: { ...(siteBrand.buttonAssets || {}), ...(incoming.buttonAssets || {}) },
       footerName: incoming.footerName || siteBrand.footerName,
       copyright: incoming.copyright || siteBrand.copyright
     };
-    loadGoogleTagManager(siteBrand.analytics);
-    analyticsReady = true;
-    if (siteBrand.analytics?.enabled === true) {
-      window.dataLayer = window.dataLayer || [];
-      pendingAnalyticsEvents.splice(0).forEach((entry) => window.dataLayer.push(entry));
-    } else pendingAnalyticsEvents.length = 0;
     document.querySelectorAll('link[rel~="icon"]').forEach((link) => { link.href = brandIconSource(); });
     Object.entries(siteBrand.pages).forEach(([page, enabled]) => {
       if (enabled !== false) return;
@@ -163,7 +186,7 @@ window.ShiGaiWebsiteSettings
     }
     renderSiteChrome();
   })
-  .catch(() => { analyticsReady = true; pendingAnalyticsEvents.length = 0; });
+  .catch(() => {});
 
 document.addEventListener("click", (event) => {
   const link = event.target.closest?.("a[href]");

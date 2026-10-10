@@ -14,6 +14,19 @@
   if (!dailyEngine) return;
   const dailyContext = dailyEngine.createContext();
   const registry = new Map();
+  // Share one request and parsed snapshot within this page; failures remain retryable.
+  const publicDataRequests = new Map();
+  function publicData(name, optional = false) {
+    if (!publicDataRequests.has(name)) {
+      const request = fetch(`../database/website/${name}.json`, { cache: "no-store" }).then(response => {
+        if (!response.ok) throw new Error(`${name} export unavailable`);
+        return response.json();
+      }).catch(error => { publicDataRequests.delete(name); throw error; });
+      publicDataRequests.set(name, request);
+    }
+    const request = publicDataRequests.get(name);
+    return optional ? request.catch(() => []) : request;
+  }
   const sectionDefinitions = Object.freeze([
     Object.freeze({ id: "latest-journal", type: "latest-journal", enabled: true, fixedOrder: 10 }),
     Object.freeze({ id: "daily-game", type: "habit-recommendation", enabled: true, dailySlot: true }),
@@ -28,12 +41,12 @@
   async function homeCopy(sectionId) {
     const key = { "latest-journal": "latestJournal", "daily-game": "dailyGame", "archive-discovery": "archiveDiscovery" }[sectionId];
     const settings = await window.ShiGaiWebsiteSettings;
-    return { ...homeCopyDefaults[sectionId], ...(settings?.websiteBrand?.home?.[key] || {}), transition: settings?.websiteBrand?.homeTransitions?.[key] || null };
+    return { ...homeCopyDefaults[sectionId], ...(settings?.websiteBrand?.home?.[key] || {}), visuals: Object.fromEntries(["eyebrow", "title", "moreLabel", "actionLabel"].map(field => [field, settings?.websiteBrand?.visualTitles?.[`home-${key}-${field}`]])), transition: settings?.websiteBrand?.homeTransitions?.[key] || null };
   }
 
   function track(eventName, parameters) {
     window.ShiGaiAnalytics?.track(eventName, {
-      contract_version: "v2_m4",
+      contract_version: "v2_analytics_1",
       daily_key: dailyContext.dateKey,
       weekday: dailyContext.weekday,
       ...parameters
@@ -167,6 +180,7 @@
     copy.classList.toggle("is-minimal", title.hidden && body.hidden);
     const actions = document.createElement("div"); actions.className = "home-archive-actions";
     const link = document.createElement("a"); link.className = "home-archive-link"; link.href = `work.html?id=${encodeURIComponent(work.id)}`; link.textContent = labels.actionLabel;
+    window.ShiGaiVisualText?.apply(link, labels.actionLabel, labels.visuals?.actionLabel);
     link.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: "archive-discovery", content_id: work.id, action: "open_archive_work" }));
     actions.append(link);
     if (onRefresh) {
@@ -185,6 +199,7 @@
     const title = document.createElement("h3"); title.textContent = work.title || work.id;
     const body = document.createElement("p"); body.className = "home-journal-body"; body.textContent = work.journal?.text || work.description || "今天留下了一個新的片段。";
     const link = document.createElement("a"); link.className = "home-journal-link"; link.href = `journal.html?id=${encodeURIComponent(work.id)}`; link.textContent = labels.actionLabel;
+    window.ShiGaiVisualText?.apply(link, labels.actionLabel, labels.visuals?.actionLabel);
     link.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: "latest-journal", content_id: work.id, action: "open_journal" }));
     copy.append(date, title, body, link); article.append(framedMediaNode(work, frames), copy);
     return article;
@@ -195,7 +210,7 @@
     const transitionAsset = String(transition?.asset || "");
     if (transition?.enabled === true && transitionAsset.startsWith("assets/") && !transitionAsset.split("/").includes("..")) {
       const decoration = document.createElement("div"); decoration.className = "home-section-transition"; decoration.setAttribute("aria-hidden", "true");
-      const image = document.createElement("img"); image.src = `../${transitionAsset}`; image.alt = "";
+      const image = document.createElement("img"); image.dataset.transitionSource = `../${transitionAsset}`; image.alt = ""; image.decoding = "async";
       ["mobile", "desktop"].forEach((layout) => {
         const value = transition[layout] || {};
         decoration.style.setProperty(`--transition-${layout}-x`, `${Number(value.x) || 0}%`);
@@ -211,11 +226,14 @@
     const label = document.createElement("p"); label.textContent = labels.eyebrow;
     const headingTitle = document.createElement("h2"); headingTitle.textContent = labels.title;
     const titleAsset = String(labels.titleAsset || "");
-    if (titleAsset.startsWith("assets/") && !titleAsset.split("/").includes("..")) {
+    if (!labels.visuals?.title?.asset && labels.visuals?.title?.mode !== "text" && titleAsset.startsWith("assets/") && !titleAsset.split("/").includes("..")) {
       const image = document.createElement("img"); image.className = "home-living-title-image"; image.src = `../${titleAsset}`; image.alt = labels.title;
       headingTitle.classList.add("has-title-image"); headingTitle.replaceChildren(image);
     }
     const more = document.createElement("a"); more.className = "home-living-more"; more.href = href; more.textContent = labels.moreLabel;
+    for (const [field, node] of [["eyebrow", label], ["title", headingTitle], ["moreLabel", more]]) {
+      if (labels.visuals?.[field]?.asset || labels.visuals?.[field]?.mobileAsset || labels.visuals?.[field]?.mode === "text") window.ShiGaiVisualText?.apply(node, labels[field], labels.visuals[field]);
+    }
     more.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: "", action: "open_all" }));
     copy.append(label, headingTitle); heading.append(copy, more); section.append(heading);
     return section;
@@ -223,15 +241,18 @@
   function observeSection(section, sectionId) {
     if (!("IntersectionObserver" in window)) return;
     const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
-      track(analyticsEvents.sectionView, { section_id: sectionId });
+      if (!entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= .35)) return;
+      track(analyticsEvents.sectionView, { section_id: sectionId, content_id: section.dataset.contentId || "" });
       observer.disconnect();
     }, { threshold: .35 });
-    observer.observe(section);
+    observer.observe(section.querySelector(".home-living-heading") || section);
   }
   function observeScrollDepth() {
     const sent = new Set();
+    let frame = 0;
     const report = () => {
+      frame = 0;
+      if (!root.children.length || scrollY <= 0 || document.body.classList.contains("is-home-loading")) return;
       const available = document.documentElement.scrollHeight - innerHeight;
       if (available <= 0) return;
       const depth = Math.round((scrollY / available) * 100);
@@ -240,8 +261,11 @@
         sent.add(threshold); track(analyticsEvents.scrollDepth, { page: "home", percent: threshold });
       });
     };
-    addEventListener("scroll", report, { passive: true });
-    report();
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(report); };
+    addEventListener("scroll", schedule, { passive: true });
+    addEventListener("resize", schedule, { passive: true });
+    root.addEventListener("load", schedule, true);
+    window.addEventListener("shi-gai:home-sections-ready", schedule);
   }
   function enableTransitionParallax() {
     const transitions = [...document.querySelectorAll(".home-section-transition")];
@@ -272,40 +296,41 @@
     const companion = settings?.websiteBrand?.homeCompanion;
     if (companion?.enabled !== true) return;
     const keyForSection = { "latest-journal": "latestJournal", "daily-game": "dailyGame", "archive-discovery": "archiveDiscovery" };
-    const host = document.createElement("div"); host.className = "home-companion"; host.setAttribute("aria-hidden", "true"); host.dataset.motion = companion.motion === "fade" ? "fade" : "straight";
-    const image = document.createElement("img"); image.alt = ""; host.append(image); document.body.append(host);
-    let currentAsset = ""; let frame = 0;
+    const scene = document.querySelector("[data-home-scene]");
+    const items = Array.isArray(companion.items) && companion.items.length ? companion.items : [{ id: "companion-1", enabled: true, playback: "loop", states: companion.states || {} }];
+    const rendered = items.filter((item) => item.enabled !== false).map((item) => {
+      const host = document.createElement("div"); host.className = "home-companion"; host.setAttribute("aria-hidden", "true"); host.dataset.motion = companion.motion === "fade" ? "fade" : "straight"; host.dataset.companionId = item.id || "companion"; document.body.append(host);
+      return { item, host, media: null, currentAsset: "" };
+    });
+    let frame = 0;
     const safeAsset = (value) => String(value || "").startsWith("assets/") && !String(value).split("/").includes("..") ? `../${value}` : "";
     const update = () => {
       frame = 0;
-      const rootRect = root.getBoundingClientRect();
-      host.hidden = rootRect.top >= innerHeight || rootRect.bottom <= 0;
-      if (host.hidden) return;
+      const rootRect = root.getBoundingClientRect(); const sceneRect = scene?.getBoundingClientRect();
       const layout = matchMedia("(min-width: 780px)").matches ? "desktop" : "mobile";
-      const anchors = [...root.querySelectorAll(".home-living-section")].map((section) => ({ section, state: companion.states?.[keyForSection[section.id]], center: section.getBoundingClientRect().top + (section.getBoundingClientRect().height / 2) })).filter((item) => item.state);
-      if (!anchors.length) return;
-      const viewportCenter = innerHeight / 2;
-      let from = anchors[0]; let to = anchors[anchors.length - 1];
-      for (let index = 0; index < anchors.length - 1; index += 1) if (viewportCenter >= anchors[index].center && viewportCenter <= anchors[index + 1].center) { from = anchors[index]; to = anchors[index + 1]; break; }
-      if (viewportCenter < anchors[0].center) from = to = anchors[0];
-      if (viewportCenter > anchors[anchors.length - 1].center) from = to = anchors[anchors.length - 1];
-      const distance = Math.max(1, to.center - from.center); const progress = from === to ? 0 : Math.max(0, Math.min(1, (viewportCenter - from.center) / distance));
-      const first = from.state[layout] || {}; const second = to.state[layout] || first;
-      const numeric = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
-      const route = [{ x: numeric(first.x, 50), y: numeric(first.y, 60), scale: numeric(first.scale, 1) }]
-        .concat((Array.isArray(second.path) ? second.path : []).slice(0, 6).map((point) => ({ x: numeric(point?.x, 50), y: numeric(point?.y, 60), scale: numeric(first.scale, 1) })))
-        .concat([{ x: numeric(second.x, 50), y: numeric(second.y, 60), scale: numeric(second.scale, 1) }]);
-      const routeProgress = progress * Math.max(1, route.length - 1);
-      const routeIndex = Math.min(route.length - 2, Math.floor(routeProgress));
-      const routeSegmentProgress = route.length < 2 ? 0 : routeProgress - routeIndex;
-      const interpolateRoute = (key, fallback) => numeric(route[routeIndex]?.[key], fallback) + ((numeric(route[routeIndex + 1]?.[key], fallback) - numeric(route[routeIndex]?.[key], fallback)) * routeSegmentProgress);
-      const selected = progress < .5 ? from.state : to.state; const asset = safeAsset(selected.asset);
-      if (asset && asset !== currentAsset) { currentAsset = asset; image.src = asset; host.classList.remove("is-changing"); void host.offsetWidth; host.classList.add("is-changing"); }
-      const selectedLayout = progress < .5 ? first : second;
-      const x = companion.motion === "fade" ? numeric(selectedLayout.x, 50) : interpolateRoute("x", 50);
-      const y = companion.motion === "fade" ? numeric(selectedLayout.y, 60) : interpolateRoute("y", 60);
-      const scale = companion.motion === "fade" ? numeric(selectedLayout.scale, 1) : interpolateRoute("scale", 1);
-      host.style.setProperty("--companion-x", `${x}%`); host.style.setProperty("--companion-y", `${y}%`); host.style.setProperty("--companion-scale", scale.toFixed(3));
+      const pageProgress = Math.max(0, Math.min(1, (innerHeight - rootRect.top) / Math.max(1, rootRect.height + innerHeight)));
+      const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      rendered.forEach((entry) => {
+        const { item, host } = entry; const pageTop = sceneRect?.top ?? rootRect.top; host.hidden = pageTop >= innerHeight || rootRect.bottom <= 0; if (host.hidden) { entry.media?.pause?.(); return; }
+        const sections = [...(scene ? [scene] : []), ...root.querySelectorAll(".home-living-section")];
+        const baseState = item.states?.todayScene || item.states?.latestJournal; const hasKeyframes = Object.values(item.states || {}).some((state) => Array.isArray(state?.[layout]?.path) && state[layout].path.length > 0);
+        const anchors = sections.map((section) => ({ state: hasKeyframes ? (section === scene ? baseState : item.states?.[keyForSection[section.id]]) : baseState, center: section.getBoundingClientRect().top + (section.getBoundingClientRect().height / 2) })).filter((anchor) => anchor.state);
+        if (!anchors.length) return;
+        const viewportCenter = innerHeight / 2; let from = anchors[0]; let to = anchors[anchors.length - 1];
+        for (let index = 0; index < anchors.length - 1; index += 1) if (viewportCenter >= anchors[index].center && viewportCenter <= anchors[index + 1].center) { from = anchors[index]; to = anchors[index + 1]; break; }
+        if (viewportCenter < anchors[0].center) from = to = anchors[0]; if (viewportCenter > anchors[anchors.length - 1].center) from = to = anchors[anchors.length - 1];
+        const progress = from === to ? 0 : Math.max(0, Math.min(1, (viewportCenter - from.center) / Math.max(1, to.center - from.center)));
+        const first = from.state[layout] || {}; const second = to.state[layout] || first; const numeric = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
+        const path = (Array.isArray(second.path) ? second.path : []).slice(0, 6);
+        const route = [{ x: numeric(first.x, 50), y: numeric(first.y, 60), scale: numeric(first.scale, 1), opacity: numeric(first.opacity, 1), rotation: numeric(first.rotation, 0), offset: 0 }].concat(path.map((point, index) => ({ x: numeric(point?.x, 50), y: numeric(point?.y, 60), scale: numeric(point?.scale, first.scale), opacity: numeric(point?.opacity, 1), rotation: numeric(first.rotation, 0), offset: Math.max(.001, Math.min(.999, numeric(point?.offset, (index + 1) / (path.length + 1)))) }))).concat([{ x: numeric(second.x, 50), y: numeric(second.y, 60), scale: numeric(second.scale, 1), opacity: numeric(second.opacity, 1), rotation: numeric(second.rotation, 0), offset: 1 }]).sort((a, b) => a.offset - b.offset);
+        const foundIndex = route.findIndex((point, index) => index < route.length - 1 && progress >= point.offset && progress <= route[index + 1].offset); const routeIndex = Math.max(0, Math.min(route.length - 2, foundIndex)); const part = Math.max(0, Math.min(1, (progress - route[routeIndex].offset) / Math.max(.0001, route[routeIndex + 1].offset - route[routeIndex].offset)));
+        const interpolate = (key, fallback) => numeric(route[routeIndex]?.[key], fallback) + ((numeric(route[routeIndex + 1]?.[key], fallback) - numeric(route[routeIndex]?.[key], fallback)) * part);
+        const selected = progress < .5 ? from.state : to.state; const selectedLayout = progress < .5 ? first : second; const asset = safeAsset(selected.asset);
+        if (asset && asset !== entry.currentAsset) { entry.currentAsset = asset; const isVideo = /\.(webm|mp4)(?:$|\?)/i.test(asset); const media = document.createElement(isVideo ? "video" : "img"); media.alt = ""; media.src = asset; if (isVideo) { media.muted = true; media.playsInline = true; media.loop = item.playback !== "scroll"; } host.replaceChildren(media); entry.media = media; host.classList.remove("is-changing"); void host.offsetWidth; host.classList.add("is-changing"); }
+        const x = companion.motion === "fade" ? numeric(selectedLayout.x, 50) : interpolate("x", 50); const y = companion.motion === "fade" ? numeric(selectedLayout.y, 60) : interpolate("y", 60); const scale = companion.motion === "fade" ? numeric(selectedLayout.scale, 1) : interpolate("scale", 1); const opacity = companion.motion === "fade" ? numeric(selectedLayout.opacity, 1) : interpolate("opacity", 1); const rotation = companion.motion === "fade" ? numeric(selectedLayout.rotation, 0) : interpolate("rotation", 0); const flipX = selectedLayout.flipX === true ? -1 : 1;
+        host.style.setProperty("--companion-x", `${x}%`); host.style.setProperty("--companion-y", `${y}%`); host.style.setProperty("--companion-scale", scale.toFixed(3)); host.style.setProperty("--companion-opacity", Math.max(0, Math.min(1, opacity)).toFixed(3)); host.style.setProperty("--companion-rotation", `${rotation.toFixed(2)}deg`); host.style.setProperty("--companion-flip-x", flipX);
+        if (entry.media?.tagName === "VIDEO") { if (item.playback === "scroll" || reduceMotion) { entry.media.pause(); const setTime = () => { if (Number.isFinite(entry.media.duration)) entry.media.currentTime = reduceMotion ? 0 : Math.min(entry.media.duration, Math.max(0, entry.media.duration * pageProgress)); }; entry.media.readyState >= 1 ? setTime() : entry.media.addEventListener("loadedmetadata", setTime, { once: true }); } else entry.media.play().catch(() => {}); }
+      });
     };
     addEventListener("scroll", () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
     addEventListener("resize", () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
@@ -317,14 +342,9 @@
     const section = sectionShell(config, copy, "journal.html");
     const content = document.createElement("div"); content.className = "home-journal-content"; section.append(content);
     try {
-      const [worksResponse, framesResponse] = await Promise.all([
-        fetch("../database/website/works.json", { cache: "no-store" }),
-        fetch("../database/website/frames.json", { cache: "no-store" })
-      ]);
-      if (!worksResponse.ok) throw new Error("Works export unavailable");
-      const frames = framesResponse.ok ? await framesResponse.json() : [];
-      const work = (await worksResponse.json()).filter((item) => item?.status === "published" && item?.journal?.enabled === true).sort(newestFirst)[0];
-      if (work) content.append(latestJournalEntry(work, frames, copy));
+      const [works, frames] = await Promise.all([publicData("works"), publicData("frames", true)]);
+      const work = works.filter((item) => item?.status === "published" && item?.journal?.enabled === true).sort(newestFirst)[0];
+      if (work) { section.dataset.contentId = work.id; content.append(latestJournalEntry(work, frames, copy)); }
       else { const empty = document.createElement("p"); empty.className = "home-living-empty"; empty.textContent = "今天的故事還在路上。先在 Scene 裡四處看看吧。"; content.append(empty); }
     } catch {
       const empty = document.createElement("p"); empty.className = "home-living-empty"; empty.textContent = "今天的訊號暫時沒有接上，稍後再回來看看。"; content.append(empty);
@@ -345,10 +365,21 @@
         .sort((first, second) => Number(first.order || 0) - Number(second.order || 0) || String(first.id).localeCompare(String(second.id)));
       const game = games[dailyEngine.selectIndex(games.length, dailyContext, "daily-game")];
       if (!game) throw new Error("Habit interaction unavailable");
+      section.dataset.contentId = game.id;
       const panel = document.createElement("div"); panel.className = "home-game-embed"; panel.dataset.gameId = game.id;
       const intro = document.createElement("p"); intro.className = "home-game-embed-intro"; intro.textContent = game.description || copy.intro;
       const frameStage = document.createElement("div"); frameStage.className = "home-game-frame-stage";
       const frame = document.createElement("iframe"); frame.className = "home-game-frame"; frame.src = `${game.url}${game.url.includes("?") ? "&" : "?"}embed=home`; frame.title = `${game.name || game.id} 完整遊戲`; frame.loading = "lazy"; frame.allow = "fullscreen";
+      let gameStarted = false;
+      window.addEventListener("message", event => {
+        if (event.origin !== location.origin || event.source !== frame.contentWindow || event.data?.type !== "shi-gai:game-analytics") return;
+        const name = event.data.event;
+        if (!["game_start", "game_draw", "game_interaction", "game_complete"].includes(name)) return;
+        if (name === "game_start") { if (gameStarted) return; gameStarted = true; }
+        const supplied = event.data.parameters || {};
+        const safe = Object.fromEntries(["action", "draw_count", "duration_ms", "level_id"].filter(key => ["string", "number"].includes(typeof supplied[key])).map(key => [key, supplied[key]]));
+        track(name, { ...safe, game_id: game.id, section_id: config.id, source: "home_inline" });
+      });
       if (game.id === "spot-difference") {
         frameStage.classList.add("is-awaiting-activation");
         const activate = document.createElement("button"); activate.className = "home-game-activate"; activate.type = "button";
@@ -363,6 +394,7 @@
       } else frameStage.append(frame);
       const controls = document.createElement("div"); controls.className = "home-game-embed-controls";
       const full = document.createElement("a"); full.className = "home-game-full"; full.href = game.url; full.textContent = copy.actionLabel;
+      window.ShiGaiVisualText?.apply(full, copy.actionLabel, copy.visuals?.actionLabel);
       frame.addEventListener("load", () => track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: game.id, action: "load_original_game_inline" }));
       full.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: game.id, action: "open_full_game" }));
       controls.append(full); panel.append(intro, frameStage, controls); grid.append(panel);
@@ -378,10 +410,8 @@
     const section = sectionShell(config, copy, "works.html");
     const content = document.createElement("div"); content.className = "home-archive-content"; section.append(content);
     try {
-      const [worksResponse, framesResponse] = await Promise.all([fetch("../database/website/works.json", { cache: "no-store" }), fetch("../database/website/frames.json", { cache: "no-store" })]);
-      if (!worksResponse.ok) throw new Error("Works export unavailable");
-      const frames = framesResponse.ok ? await framesResponse.json() : [];
-      const works = (await worksResponse.json()).filter((item) => item?.status === "published" && safeMediaSource(item));
+      const [allWorks, frames] = await Promise.all([publicData("works"), publicData("frames", true)]);
+      const works = allWorks.filter((item) => item?.status === "published" && safeMediaSource(item));
       let index = dailyEngine.selectIndex(works.length, dailyContext, "archive-discovery");
       let revealCount = 0;
       if (index < 0) throw new Error("Archive discovery unavailable");
@@ -398,6 +428,7 @@
         }
       };
       const renderWork = (animate = false) => {
+        section.dataset.contentId = works[index].id;
         const refresh = works.length > 1 ? async (button) => {
           const targetCount = revealCount + 1;
           const targetIndex = nextIndex(index, targetCount);
@@ -416,7 +447,14 @@
         if (animate) entry.classList.add("is-revealing");
         content.replaceChildren(entry);
       };
-      renderWork(); preloadUpcoming();
+      renderWork();
+      // Recommendation media should not compete with the first Scene.
+      if ("IntersectionObserver" in window) {
+        const preloader = new IntersectionObserver(entries => {
+          if (entries.some(entry => entry.isIntersecting)) { preloadUpcoming(); preloader.disconnect(); }
+        }, { rootMargin: "200px" });
+        preloader.observe(section);
+      }
     } catch {
       const empty = document.createElement("p"); empty.className = "home-living-empty"; empty.textContent = "今天的作品發現暫時沒有接上，仍可前往 Works 探索。"; content.append(empty);
     }
@@ -429,6 +467,14 @@
     return renderer ? renderer(config) : null;
   })).then((sections) => {
     root.replaceChildren(...sections.filter(Boolean));
+    const transitions = root.querySelectorAll("[data-transition-source]");
+    const loadTransition = image => { image.src = image.dataset.transitionSource; delete image.dataset.transitionSource; };
+    if ("IntersectionObserver" in window) {
+      const loader = new IntersectionObserver(entries => entries.forEach(entry => {
+        if (entry.isIntersecting) { loadTransition(entry.target); loader.unobserve(entry.target); }
+      }), { rootMargin: "150px" });
+      transitions.forEach(image => loader.observe(image));
+    } else transitions.forEach(loadTransition);
     enableTransitionParallax();
     enableHomeCompanion();
     window.dispatchEvent(new CustomEvent("shi-gai:home-sections-ready"));

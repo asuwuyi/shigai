@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Shi-Gai Goddess 小遊戲。">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; script-src 'self' https://www.googletagmanager.com; style-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>Goddess · Shi-Gai</title>
   <link rel="stylesheet" href="../game-shell.css?v=mobile-game-mode-1">
   <meta name="robots" content="noindex,nofollow">
@@ -19,6 +19,8 @@
       <div id="dom_overlay_container" class="game-overlay"></div>
     </div>
   </main>
-  <script src="../game-runtime.js?v=mobile-game-mode-1"></script>
+  <script src="../../assets/js/analytics.js?v=v2-20261002"></script>
+  <script src="../game-analytics.js?v=v2-20261002"></script>
+  <script src="../game-runtime.js?v=analytics-20261002"></script>
 </body>
 </html>

@@ -1,6 +1,161 @@
 {
   "websiteBrand": {
     "siteName": "Shi-Gai.Com",
+    "visualTitles": {
+      "journal": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "works": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "characters": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "games": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "about": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-latestJournal-eyebrow": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-latestJournal-title": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-latestJournal-moreLabel": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-latestJournal-actionLabel": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-dailyGame-eyebrow": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-dailyGame-title": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-dailyGame-moreLabel": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-dailyGame-actionLabel": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-archiveDiscovery-eyebrow": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-archiveDiscovery-title": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-archiveDiscovery-moreLabel": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-archiveDiscovery-actionLabel": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      }
+    },
     "icon": "",
     "nav": {
       "home": "Home",
@@ -58,6 +213,43 @@
       "errorTitle": "作品資料暫時無法載入。",
       "errorBody": "請確認網站是透過本機或網站伺服器開啟。"
     },
+    "characters": {
+      "pageTitle": "角色 Characters",
+      "menuLabel": "開啟角色導覽與搜尋",
+      "searchPlaceholder": "搜尋角色名稱",
+      "summaryLabel": "顯示 {count} 位角色",
+      "unnamedLabel": "未命名角色",
+      "workCountLabel": "{count} 件作品",
+      "viewLabel": "查看 {name} 的角色詳細頁",
+      "emptyTitle": "No Characters",
+      "emptyBody": "角色很快就會來這裡報到。",
+      "noResultsTitle": "找不到符合的角色。",
+      "noResultsBody": "試試看其他角色名稱。",
+      "errorTitle": "角色資料暫時無法載入。",
+      "errorBody": "請確認網站是透過本機或網站伺服器開啟。"
+    },
+    "games": {
+      "eyebrow": "SHI-GAI PLAYROOM",
+      "title": "遊戲室",
+      "homeLabel": "← Home",
+      "homeAriaLabel": "返回首頁",
+      "previousLabel": "上一款遊戲",
+      "nextLabel": "下一款遊戲",
+      "selectLabel": "選擇遊戲",
+      "unnamedLabel": "未命名遊戲",
+      "startLabel": "開始遊戲",
+      "comingSoonLabel": "Coming Soon",
+      "loadingLabel": "正在載入遊戲資料。",
+      "emptyLabel": "目前還沒有遊戲。",
+      "errorLabel": "遊戲資料暫時無法載入。"
+    },
+    "system": {
+      "homeSuffix": "首頁",
+      "openMenuLabel": "開啟網站選單",
+      "closeMenuLabel": "關閉網站選單",
+      "primaryNavigationLabel": "主要導覽",
+      "footerNavigationLabel": "頁尾導覽"
+    },
     "home": {
       "latestJournal": {
         "eyebrow": "TODAY IN SHI-GAI",
@@ -90,10 +282,10 @@
     "homeTransitions": {
       "latestJournal": {
         "enabled": true,
-        "asset": "assets/website/transitions/home-transition-journal-v1.png",
+        "asset": "assets/website/transitions/home-transition-journal-993e0884741e.webp",
         "mobile": {
-          "x": 18,
-          "y": 0,
+          "x": 16,
+          "y": 6,
           "scale": 0.62,
           "rotation": -4,
           "parallax": 32
@@ -108,7 +300,7 @@
       },
       "dailyGame": {
         "enabled": true,
-        "asset": "assets/website/transitions/home-transition-game-v1.png",
+        "asset": "assets/website/transitions/home-transition-game-17984510183c.webp",
         "mobile": {
           "x": 82,
           "y": 0,
@@ -126,7 +318,7 @@
       },
       "archiveDiscovery": {
         "enabled": true,
-        "asset": "assets/website/transitions/home-transition-works-v1.png",
+        "asset": "assets/website/transitions/home-transition-works-e8258fd1069b.webp",
         "mobile": {
           "x": 84,
           "y": 0,
@@ -146,19 +338,140 @@
     "homeCompanion": {
       "enabled": true,
       "motion": "straight",
+      "items": [
+        {
+          "id": "companion-1",
+          "name": "跨區物件 1",
+          "enabled": true,
+          "playback": "loop",
+          "states": {
+            "todayScene": {
+              "asset": "assets/published/characters/penguin/primary-v1.webp",
+              "mobile": {
+                "x": 17.9,
+                "y": 8.4,
+                "scale": 1.1,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 94,
+                "y": 70,
+                "scale": 0.7,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              }
+            },
+            "latestJournal": {
+              "asset": "assets/published/characters/penguin/primary-v1.webp",
+              "mobile": {
+                "x": 73.1,
+                "y": 14.9,
+                "scale": 0.6,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 94,
+                "y": 70,
+                "scale": 0.7,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              }
+            },
+            "dailyGame": {
+              "asset": "assets/published/characters/penguin/primary-v1.webp",
+              "mobile": {
+                "x": 47.8,
+                "y": 67.4,
+                "scale": 0.6,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 6,
+                "y": 62,
+                "scale": 0.7,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              }
+            },
+            "archiveDiscovery": {
+              "asset": "assets/published/characters/penguin/primary-v1.webp",
+              "mobile": {
+                "x": 93.6,
+                "y": 52.3,
+                "scale": 0.6,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 94,
+                "y": 64,
+                "scale": 0.7,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              }
+            }
+          }
+        }
+      ],
       "states": {
-        "latestJournal": {
+        "todayScene": {
           "asset": "assets/published/characters/penguin/primary-v1.webp",
           "mobile": {
-            "x": 0,
-            "y": 35.9,
-            "scale": 0.6,
+            "x": 17.9,
+            "y": 8.4,
+            "scale": 1.1,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
             "path": []
           },
           "desktop": {
             "x": 94,
             "y": 70,
-            "scale": 0.72,
+            "scale": 0.7,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
+          }
+        },
+        "latestJournal": {
+          "asset": "assets/published/characters/penguin/primary-v1.webp",
+          "mobile": {
+            "x": 73.1,
+            "y": 14.9,
+            "scale": 0.6,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
+          },
+          "desktop": {
+            "x": 94,
+            "y": 70,
+            "scale": 0.7,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
             "path": []
           }
         },
@@ -168,23 +481,19 @@
             "x": 47.8,
             "y": 67.4,
             "scale": 0.6,
-            "path": [
-              {
-                "x": 48,
-                "y": 34
-              }
-            ]
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
           },
           "desktop": {
             "x": 6,
             "y": 62,
             "scale": 0.7,
-            "path": [
-              {
-                "x": 48,
-                "y": 34
-              }
-            ]
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
           }
         },
         "archiveDiscovery": {
@@ -193,28 +502,25 @@
             "x": 93.6,
             "y": 52.3,
             "scale": 0.6,
-            "path": [
-              {
-                "x": 50,
-                "y": 82
-              }
-            ]
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
           },
           "desktop": {
             "x": 94,
             "y": 64,
-            "scale": 0.72,
-            "path": [
-              {
-                "x": 50,
-                "y": 82
-              }
-            ]
+            "scale": 0.7,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
           }
         }
       }
     },
     "about": {
+      "eyebrow": "SHI-GAI CREATOR",
       "title": "R451's Studio",
       "intro": "Shi-Gai 是我的個人創作世界。我從事動畫、動態設計與影像製作，也持續創作角色、短動畫與互動作品。",
       "servicesTitle": "Services",
@@ -227,7 +533,11 @@
       ],
       "email": "notartist@gmail.com",
       "instagram": "https://www.instagram.com/shigaishigai/",
-      "youtube": "https://www.youtube.com/@shigaishigai"
+      "youtube": "https://www.youtube.com/@shigaishigai",
+      "introLabel": "關於作者",
+      "contactKicker": "LET'S MAKE SOMETHING",
+      "contactTitle": "合作／工作邀約",
+      "socialsLabel": "社群連結"
     },
     "controls": {
       "globalMenu": true,
