@@ -37,24 +37,57 @@ function finishHomeLoading() {
   }, remaining);
 }
 function failHomeLoading() {
-  setHomeLoadingProgress(100, "暫時無法接收訊號，請重新載入");
+  if (homeElements.loadingStatus) homeElements.loadingStatus.textContent = "場景尚未載入完成，請重新載入";
   homeElements.loading?.classList.add("has-error");
   if (homeElements.loadingRetry) homeElements.loadingRetry.hidden = false;
 }
 function waitForCriticalSceneMedia() {
-  const critical = [...(homeElements.worldSceneRender?.querySelectorAll(".scene-render-object.is-background img, .scene-render-object.is-background video") || [])];
-  if (!critical.length) return Promise.resolve();
+  const critical = [...(homeElements.worldSceneRender?.querySelectorAll(".scene-render-object img, .scene-render-object video") || [])];
+  if (!homeElements.worldSceneRender?.querySelector(".scene-render-object")) return Promise.reject(new Error("Scene has no rendered objects."));
   let completed = 0;
   const update = () => {
     completed += 1;
     setHomeLoadingProgress(55 + (completed / critical.length) * 40, `正在接收場景 ${completed} / ${critical.length}`);
   };
-  return Promise.all(critical.map((media) => new Promise((resolve) => {
-    const done = () => { update(); resolve(); };
-    if ((media.tagName === "IMG" && media.complete) || (media.tagName === "VIDEO" && media.readyState >= 2)) return done();
-    media.addEventListener(media.tagName === "VIDEO" ? "canplay" : "load", done, { once: true });
-    media.addEventListener("error", done, { once: true });
-  })));
+  return new Promise((resolve, reject) => {
+    const cleanups = [];
+    const timeout = window.setTimeout(() => finish(new Error("Scene media readiness timed out.")), 8000);
+    let settled = false;
+    function finish(error) {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timeout);
+      cleanups.forEach(cleanup => cleanup());
+      if (error) reject(error); else resolve();
+    }
+    Promise.all(critical.map(media => new Promise((ready, failed) => {
+      const event = media.tagName === "VIDEO" ? "loadeddata" : "load";
+      let checking = false;
+      const fail = () => failed(new Error("Scene media could not be displayed."));
+      const check = async () => {
+        if (checking || settled) return;
+        checking = true;
+        try {
+          if (media.tagName === "IMG") {
+            if (!media.naturalWidth) throw new Error("Scene image is empty.");
+            if (typeof media.decode === "function") await media.decode();
+          }
+          if (!settled) { update(); ready(); }
+        } catch (error) { failed(error); }
+      };
+      media.addEventListener(event, check, { once: true });
+      media.addEventListener("error", fail, { once: true });
+      cleanups.push(() => { media.removeEventListener(event, check); media.removeEventListener("error", fail); });
+      if (media.tagName === "VIDEO") {
+        // Safari needs frame data, not just metadata, before revealing the Scene.
+        media.preload = "auto";
+        if (media.error) fail(); else if (media.readyState >= 2) check();
+      } else {
+        media.loading = "eager";
+        if (media.complete) check();
+      }
+    }))).then(() => finish(), finish);
+  });
 }
 function currentSceneLayout() { return window.matchMedia("(orientation: portrait)").matches ? "portrait" : "landscape"; }
 function mobileViewportSettings(scene) {
@@ -584,10 +617,7 @@ async function loadHome() {
     const scenesData = await scenesResponse.json();
     renderWorldEntranceScene(scenesData);
     setHomeLoadingProgress(55, "正在接收場景素材…");
-    await Promise.race([
-      waitForCriticalSceneMedia(),
-      new Promise((resolve) => window.setTimeout(resolve, 8000))
-    ]);
+    await waitForCriticalSceneMedia();
     finishHomeLoading();
     renderWelcomeLogo(settings?.websiteBrand?.welcome);
     if (reviewContent) {
