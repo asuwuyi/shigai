@@ -206,6 +206,9 @@
   }
   function sectionShell(config, labels, href) {
     const section = document.createElement("section"); section.className = "home-living-section"; section.dataset.homeSection = config.id; section.id = config.id;
+    const connection = document.createElement("div"); connection.className = "home-level-connection"; connection.setAttribute("aria-hidden", "true");
+    if (config.id === "latest-journal") connection.classList.add("is-journal-passage");
+    const ladder = document.createElement("span"); ladder.className = "home-level-ladder"; connection.append(ladder); section.append(connection);
     const transition = labels.transition;
     const transitionAsset = String(transition?.asset || "");
     if (transition?.enabled === true && transitionAsset.startsWith("assets/") && !transitionAsset.split("/").includes("..")) {

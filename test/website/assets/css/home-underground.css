@@ -1,0 +1,118 @@
+/* One continuous shaft, not a separate frame around each content section. */
+.home-main > .home-living-sections {
+  --underground-outside: 0px;
+  --soil-scene-overlap: clamp(18px, 4vw, 56px);
+  padding: 28px var(--underground-outside) 36px !important;
+  margin-top: calc(-1 * var(--soil-scene-overlap));
+  background: transparent;
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+}
+.home-living-sections::after {
+  content: ""; position: absolute; inset: var(--soil-scene-overlap) 0 0;
+  z-index: -1; pointer-events: none;
+  background: #ead9b3 url("../images/home/underground-continuous-wall-v1.webp") center / 100% 100% no-repeat;
+}
+.home-living-sections::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 30vw;
+  z-index: 0; pointer-events: none;
+  background: url("../images/home/journal-room-wall-v4.webp") center top / 100% auto no-repeat;
+  mask-image: linear-gradient(#000 0 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(#000 0 88%, transparent 100%);
+}
+.home-living-section {
+  box-sizing: border-box;
+  border: 0;
+  padding: clamp(36px, 4vw, 56px) 12px 136px;
+  background: transparent;
+}
+.home-living-section + .home-living-section { margin-top: 0; }
+.home-level-connection { position: absolute; z-index: 2; inset-inline: 8px; bottom: -30px; height: 138px; pointer-events: none; }
+.home-level-connection::before { content: ""; position: absolute; top: 20px; left: 64px; right: 0; height: 22px; border: 3px solid #49311f; border-radius: 3px 5px 4px 2px; background: linear-gradient(#bf8b4b 0 48%, #956132 49% 100%); box-shadow: 0 7px 0 rgba(73,49,31,.15); }
+.home-level-ladder { position: absolute; top: 0; left: 20px; width: 32px; height: 138px; border-inline: 6px solid #76502d; border-radius: 3px; background: repeating-linear-gradient(to bottom, transparent 0 20px, #b48447 20px 27px, #49311f 27px 29px); }
+.home-living-section:last-child { padding-bottom: 40px; }
+.home-living-section:last-child .home-level-connection { display: none; }
+.home-living-section:not([data-home-section="latest-journal"]) .home-level-connection { display: none; }
+.home-living-section:not([data-home-section="latest-journal"]) { padding-bottom: 40px; }
+.home-living-section[data-home-section="latest-journal"] { display: flex; flex-direction: column; padding-bottom: 0; }
+.home-main > .home-living-sections { padding-top: 0 !important; }
+.home-living-section[data-home-section="latest-journal"] {
+  padding-top: clamp(116px, 22vw, 230px);
+  background-color: transparent;
+  background-image: none;
+  background-position: center top;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+.home-living-section[data-home-section="latest-journal"] .home-living-heading { width: min(76%, 1100px); }
+.home-living-section[data-home-section="latest-journal"] .home-journal-entry { width: min(76%, 1100px); }
+.home-living-section[data-home-section="latest-journal"] .home-journal-copy { width: 100%; margin: 16px 0 0; }
+.home-living-section[data-home-section="latest-journal"] .home-journal-media { width: 100%; padding-inline: 0; }
+.home-living-section[data-home-section="latest-journal"] .home-journal-copy::before { width: 68px; }
+.home-living-section[data-home-section="latest-journal"] .home-living-more { padding: 8px 12px; border-radius: 4px; background: #f4e7c5; }
+@media (min-width: 780px) {
+  .home-living-section[data-home-section="latest-journal"] { padding-top: clamp(280px, 32vw, 520px); }
+}
+.home-level-connection.is-journal-passage {
+  position: relative;
+  inset: auto;
+  order: 10;
+  flex: none;
+  width: calc(100% + 24px);
+  height: auto;
+  aspect-ratio: 6 / 1;
+  margin: 0 -12px;
+  background: transparent;
+}
+.home-level-connection.is-journal-passage::after {
+  content: ""; position: absolute; inset: -50% 0;
+  background: url("../images/home/journal-floor-overlay-v3.webp") center / contain no-repeat;
+  pointer-events: none;
+}
+.home-level-connection.is-journal-passage::before,
+.home-level-connection.is-journal-passage .home-level-ladder { display: none; }
+.home-living-section[data-home-section="latest-journal"] .home-section-transition { display: none; }
+.home-living-section[data-home-section="latest-journal"] + .home-living-section .home-section-transition { display: none; }
+.home-living-section[data-home-section="archive-discovery"] {
+  background: transparent;
+}
+.home-living-section[data-home-section="archive-discovery"] .home-living-heading,
+.home-living-section[data-home-section="archive-discovery"] .home-archive-entry { width: min(76%, 1100px); }
+.home-living-section[data-home-section="archive-discovery"] .home-archive-media { width: 100%; padding-inline: 0; }
+.home-living-section[data-home-section="archive-discovery"] .home-living-more { padding: 8px 12px; border-radius: 4px; background: #f4e7c5; }
+.home-living-section[data-home-section="archive-discovery"] .home-archive-copy {
+  width: 100%; margin: 16px 0 0; padding: clamp(28px, 4vw, 46px);
+  background-color: #f4e7c5;
+  background-image: linear-gradient(rgba(255,255,255,.28), transparent 35%), repeating-linear-gradient(0deg, transparent 0 29px, rgba(116,82,50,.075) 29px 30px);
+}
+.home-living-section[data-home-section="archive-discovery"] .home-archive-copy::before {
+  top: -13px; left: 50%; width: 68px; height: 28px;
+  background: rgba(232,207,150,.78); box-shadow: none;
+  transform: translateX(-50%) rotate(-2deg);
+}
+.home-living-section[data-home-section="daily-game"] { background: transparent; color: #3d2b20; }
+.home-living-section::before { background: none; }
+.home-living-section .home-living-heading { color: #3d2b20; border-bottom: 1px solid rgba(84,54,28,.25); }
+.home-living-section .home-living-heading p { color: #795a35; }
+.home-living-section .home-living-more { color: #684626; }
+.home-living-section .home-journal-media,
+.home-living-section .home-archive-media {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.home-journal-copy, .home-archive-copy { border-radius: 4px; }
+.home-game-embed { background: transparent; }
+.home-game-embed-intro { color: #57452f; padding-inline: var(--page-gutter); }
+.home-game-embed-controls { background: transparent; }
+.home-game-full { color: #684626; }
+/* Original game keeps its full viewport and proportions, never a fake game panel. */
+.home-game-frame-stage { width: 100vw; margin-inline: calc(50% - 50vw); }
+@media (max-width: 779px) {
+  .home-living-heading { width: calc(100% - 32px); }
+  .home-journal-entry, .home-archive-entry { padding-bottom: 24px; }
+  .home-journal-copy, .home-archive-copy { width: calc(100% - 24px); }
+  .home-journal-artwork { max-width: 100%; }
+  .home-archive-media .home-journal-artwork { max-width: 100%; }
+}
