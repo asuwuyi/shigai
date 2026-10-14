@@ -23,6 +23,18 @@
   function layerPath(y, width, height) {
     return `M0 ${y} C${width*.12} ${y-9} ${width*.23} ${y+11} ${width*.34} ${y+5} S${width*.57} ${y-9} ${width*.69} ${y+1} S${width*.91} ${y+11} ${width} ${y} L${width} ${height} L0 ${height}Z`;
   }
+  function stageMaterial(height) {
+    // Render only the measured occupied strip, preserving the PNG's native alpha.
+    const scale = height / 136, tileWidth = 2172 * scale;
+    const pattern = element('pattern', { id: 'home-stage-wood', width: tileWidth*2, height, patternUnits: 'userSpaceOnUse' });
+    for (const [x, flip] of [[0,1],[tileWidth*2,-1]]) {
+      const group = element('g', { transform: `translate(${x} 0) scale(${flip} 1)` });
+      const crop = element('svg', { width: tileWidth, height, viewBox: '0 305 2172 136', overflow: 'hidden' });
+      crop.append(element('image', { href: new URL('stage-front-roots-v1.webp', mediaBase).href, width: 2172, height: 724 }));
+      group.append(crop); pattern.append(group);
+    }
+    return pattern;
+  }
   function cavityPath(x, y, w, h, rim) {
     const r = Math.min(34, w / 9, h / 9), n = Math.min(19, rim * .8);
     return `M${x+r} ${y} C${x+w*.27} ${y-n} ${x+w*.36} ${y+n} ${x+w*.5} ${y}
@@ -42,6 +54,9 @@
     if (!host || host.querySelector('.home-underground-backdrop')) return;
     const svg = element('svg', { class: 'home-underground-backdrop', 'aria-hidden': 'true', focusable: 'false', preserveAspectRatio: 'none' });
     host.prepend(svg);
+    const stage = document.createElement('div');
+    stage.className = 'home-stage-seam'; stage.setAttribute('aria-hidden','true');
+    host.insertBefore(stage, svg.nextSibling);
     let pending = false;
     function render() {
       pending = false;
@@ -52,6 +67,8 @@
       const boundaries = sections.slice(1).map(section => section.getBoundingClientRect().top - bounds.top + 8);
       svg.dataset.boundaries = boundaries.join(',');
       const defs = element('defs');
+      const stageHeight = stage.getBoundingClientRect().height;
+      defs.append(stageMaterial(stageHeight));
       defs.append(material('home-earth-shallow',0,941,width,'earth-shallow-v1.webp',1672,941),material('home-earth-middle',0,941,width,'earth-middle-v1.webp',1672,941),material('home-earth-rock',0,941,width,'earth-rock-v1.webp',1672,941),material('home-earth-lava',1430,1536,width));
       const blur = element('filter', { id: 'home-cut-shadow', x: '-10%', y: '-10%', width: '120%', height: '120%' });
       blur.append(element('feGaussianBlur', { stdDeviation: 3 })); defs.append(blur);
@@ -84,6 +101,7 @@
         }
         art.push(cut);
       });
+      art.push(element('rect', { 'data-stage-front': '', width, height: stageHeight, fill: 'url(#home-stage-wood)' }));
       svg.replaceChildren(defs, ...art);
     }
     function schedule() { if (!pending) { pending = true; requestAnimationFrame(render); } }

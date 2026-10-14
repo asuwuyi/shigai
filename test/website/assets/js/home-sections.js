@@ -301,7 +301,36 @@
     const keyForSection = { "latest-journal": "latestJournal", "daily-game": "dailyGame", "archive-discovery": "archiveDiscovery" };
     const scene = document.querySelector("[data-home-scene]");
     const items = Array.isArray(companion.items) && companion.items.length ? companion.items : [{ id: "companion-1", enabled: true, playback: "loop", states: companion.states || {} }];
-    const rendered = items.filter((item) => item.enabled !== false).map((item) => {
+    // Ground objects reuse the managed companion media/settings, but belong to
+    // document flow, not the viewport-following character's scroll path.
+    items.filter(item => item.enabled !== false && item.attachment === "section").forEach(item => {
+      const sectionId = Object.keys(keyForSection).find(id => keyForSection[id] === item.section);
+      const section = sectionId && root.querySelector(`#${sectionId}`);
+      const state = item.states?.[item.section];
+      const asset = String(state?.asset || "");
+      if (!section || !asset.startsWith("assets/") || asset.split("/").includes("..")) return;
+      let ground = section.querySelector('.home-ground-strip');
+      if (!ground) { ground = document.createElement('div'); ground.className = 'home-ground-strip'; ground.setAttribute('aria-hidden', 'true'); section.append(ground); }
+      const object = document.createElement('div'); object.className = 'home-ground-object'; object.dataset.companionId = item.id;
+      for (const device of ['mobile', 'desktop']) {
+        const value = state[device] || {};
+        for (const [key, fallback, suffix] of [['x',50,'%'],['y',50,'%'],['scale',1,''],['rotation',0,'deg'],['opacity',1,'']]) {
+          const number = Number.isFinite(Number(value[key])) ? Number(value[key]) : fallback;
+          object.style.setProperty(`--ground-${device}-${key}`, `${number}${suffix}`);
+        }
+        object.style.setProperty(`--ground-${device}-flip`, value.flipX ? -1 : 1);
+      }
+      const video = /\.(webm|mp4)$/i.test(asset);
+      const media = document.createElement(video ? 'video' : 'img'); media.src = `../${asset}`; media.alt = ''; media.decoding = 'async'; media.loading = 'lazy';
+      if (video) { media.muted = true; media.loop = true; media.playsInline = true; media.preload = 'none';
+        const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+          if (entry.isIntersecting && !matchMedia('(prefers-reduced-motion: reduce)').matches) media.play().catch(() => {}); else media.pause();
+        })); observer.observe(media);
+      }
+      media.addEventListener('error', () => { object.remove(); if (!ground.children.length) ground.remove(); }, { once: true });
+      object.append(media); ground.append(object);
+    });
+    const rendered = items.filter((item) => item.enabled !== false && item.attachment !== "section").map((item) => {
       const host = document.createElement("div"); host.className = "home-companion"; host.setAttribute("aria-hidden", "true"); host.dataset.motion = companion.motion === "fade" ? "fade" : "straight"; host.dataset.companionId = item.id || "companion"; document.body.append(host);
       return { item, host, media: null, currentAsset: "" };
     });

@@ -2,7 +2,13 @@
 .home-main > .home-living-sections { --soil-scene-overlap: 0px; position: relative; isolation: isolate; margin-top: 0; padding: 0 0 56px !important; background: #9c623c; }
 .home-living-sections::before,.home-living-sections::after { content: none; }
 .home-underground-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden; }
+.home-stage-seam { height: 80px; width: 100%; pointer-events: none; }
+/* The old paper at this seam is replaced visually; its Studio data remains intact. */
+#latest-journal > .home-section-transition { display: none; }
 .home-level-connection { display: none; }
+.home-ground-strip { position: relative; height: 180px; width: 100%; margin-top: 24px; pointer-events: none; overflow: hidden; }
+.home-ground-object { position: absolute; width: 160px; left: var(--ground-desktop-x); top: var(--ground-desktop-y); opacity: var(--ground-desktop-opacity); transform: translate(-50%,-50%) rotate(var(--ground-desktop-rotation)) scale(var(--ground-desktop-scale)) scaleX(var(--ground-desktop-flip)); pointer-events: none; }
+.home-ground-object img,.home-ground-object video { display: block; width: 100%; height: auto; max-height: 160px; object-fit: contain; filter: drop-shadow(0 2px 2px rgba(45,30,20,.25)); }
 .home-living-section[data-home-section] { position: relative; box-sizing: border-box; margin: 0; padding: 44px 32px 68px !important; border: 0; background: transparent; }
 .home-living-section::before { content: none; }
 .home-living-section .home-living-heading { position: relative; z-index: 1; width: min(100%,1160px); margin: 0 auto 46px; border: 0; color: #fff0ce; }
@@ -23,6 +29,10 @@
 .home-game-embed-controls { padding: 16px 0 0; background: transparent; }
 .home-game-full { color: #fff0ce; text-shadow: 0 1px 3px #30261c; }
 @media (max-width: 779px) {
+ .home-ground-strip { height: 160px; }
+ .home-ground-object { width: 112px; left: var(--ground-mobile-x); top: var(--ground-mobile-y); opacity: var(--ground-mobile-opacity); transform: translate(-50%,-50%) rotate(var(--ground-mobile-rotation)) scale(var(--ground-mobile-scale)) scaleX(var(--ground-mobile-flip)); }
+ .home-ground-object img,.home-ground-object video { max-height: 140px; }
+ .home-stage-seam { height: 55px; }
  .home-living-section[data-home-section] { padding: 36px 24px 56px !important; }
  .home-living-section .home-living-heading { margin-bottom: 38px; }
  .home-living-section .home-journal-entry,.home-living-section .home-archive-entry { width: min(100%,320px); }

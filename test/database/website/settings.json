@@ -343,6 +343,8 @@
           "id": "companion-1",
           "name": "跨區物件 1",
           "enabled": true,
+          "attachment": "viewport",
+          "section": "latestJournal",
           "playback": "loop",
           "states": {
             "todayScene": {
@@ -425,6 +427,100 @@
                 "scale": 0.7,
                 "opacity": 1,
                 "rotation": 0,
+                "flipX": false,
+                "path": []
+              }
+            }
+          }
+        },
+        {
+          "id": "ground-fossil-penguin-1",
+          "name": "土層魚（可替換）",
+          "enabled": true,
+          "attachment": "section",
+          "section": "latestJournal",
+          "playback": "loop",
+          "states": {
+            "todayScene": {
+              "asset": "assets/site/brand/home-ground-fish-20261014-v1.webm",
+              "mobile": {
+                "x": 76,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.88,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 80,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.88,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              }
+            },
+            "latestJournal": {
+              "asset": "assets/site/brand/home-ground-fish-20261014-v1.webm",
+              "mobile": {
+                "x": 76,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.88,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 80,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.88,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              }
+            },
+            "dailyGame": {
+              "asset": "assets/site/brand/home-ground-fish-20261014-v1.webm",
+              "mobile": {
+                "x": 76,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.88,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 80,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.88,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              }
+            },
+            "archiveDiscovery": {
+              "asset": "assets/site/brand/home-ground-fish-20261014-v1.webm",
+              "mobile": {
+                "x": 76,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.88,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 80,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.88,
+                "rotation": -12,
                 "flipX": false,
                 "path": []
               }
