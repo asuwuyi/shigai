@@ -34,12 +34,10 @@
   }
 
   function resolveSections(definitions, context) {
-    const rotating = definitions.filter((section) => section.enabled && section.dailySlot === true);
-    const offset = rotating.length ? context.seed % rotating.length : 0;
-    const rotatingOrder = new Map(rotating.map((section, index) => [section.id, 20 + (((index + offset) % rotating.length) * 10)]));
-    return Object.freeze(definitions.map((section) => Object.freeze({
+    // Calendar context selects content, not the placement of the three rooms.
+    return Object.freeze(definitions.map((section, index) => Object.freeze({
       ...section,
-      order: section.dailySlot === true ? rotatingOrder.get(section.id) : section.fixedOrder
+      order: section.fixedOrder ?? (index + 1) * 10
     })));
   }
 

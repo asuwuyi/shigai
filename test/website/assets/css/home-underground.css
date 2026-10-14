@@ -1,118 +1,32 @@
-/* One continuous shaft, not a separate frame around each content section. */
-.home-main > .home-living-sections {
-  --underground-outside: 0px;
-  --soil-scene-overlap: clamp(18px, 4vw, 56px);
-  padding: 28px var(--underground-outside) 36px !important;
-  margin-top: calc(-1 * var(--soil-scene-overlap));
-  background: transparent;
-  position: relative;
-  z-index: 2;
-  isolation: isolate;
-}
-.home-living-sections::after {
-  content: ""; position: absolute; inset: var(--soil-scene-overlap) 0 0;
-  z-index: -1; pointer-events: none;
-  background: #ead9b3 url("../images/home/underground-empty-space-v1.webp") center top / cover no-repeat;
-}
-.home-living-sections::before {
-  content: ""; position: absolute; inset: 0 0 auto; height: 22vw;
-  z-index: 0; pointer-events: none;
-  background: url("../images/home/journal-room-wall-v4.webp") center top / 100% auto no-repeat;
-  mask-image: linear-gradient(#000 0 75%, transparent 100%);
-  -webkit-mask-image: linear-gradient(#000 0 75%, transparent 100%);
-}
-.home-living-section {
-  box-sizing: border-box;
-  border: 0;
-  padding: clamp(36px, 4vw, 56px) 12px 136px;
-  background: transparent;
-}
-.home-living-section + .home-living-section { margin-top: 0; }
-.home-level-connection { position: absolute; z-index: 2; inset-inline: 8px; bottom: -30px; height: 138px; pointer-events: none; }
-.home-level-connection::before { content: ""; position: absolute; top: 20px; left: 64px; right: 0; height: 22px; border: 3px solid #49311f; border-radius: 3px 5px 4px 2px; background: linear-gradient(#bf8b4b 0 48%, #956132 49% 100%); box-shadow: 0 7px 0 rgba(73,49,31,.15); }
-.home-level-ladder { position: absolute; top: 0; left: 20px; width: 32px; height: 138px; border-inline: 6px solid #76502d; border-radius: 3px; background: repeating-linear-gradient(to bottom, transparent 0 20px, #b48447 20px 27px, #49311f 27px 29px); }
-.home-living-section:last-child { padding-bottom: 40px; }
-.home-living-section:last-child .home-level-connection { display: none; }
-.home-living-section:not([data-home-section="latest-journal"]) .home-level-connection { display: none; }
-.home-living-section:not([data-home-section="latest-journal"]) { padding-bottom: 40px; }
-.home-living-section[data-home-section="latest-journal"] { display: flex; flex-direction: column; padding-bottom: 0; }
-.home-main > .home-living-sections { padding-top: 0 !important; }
-.home-living-section[data-home-section="latest-journal"] {
-  padding-top: clamp(116px, 22vw, 230px);
-  background-color: transparent;
-  background-image: none;
-  background-position: center top;
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-}
-.home-living-section[data-home-section="latest-journal"] .home-living-heading { width: min(76%, 1100px); }
-.home-living-section[data-home-section="latest-journal"] .home-journal-entry { width: min(76%, 1100px); }
-.home-living-section[data-home-section="latest-journal"] .home-journal-copy { width: 100%; margin: 16px 0 0; }
-.home-living-section[data-home-section="latest-journal"] .home-journal-media { width: 100%; padding-inline: 0; }
-.home-living-section[data-home-section="latest-journal"] .home-journal-copy::before { width: 68px; }
-.home-living-section[data-home-section="latest-journal"] .home-living-more { padding: 8px 12px; border-radius: 4px; background: #f4e7c5; }
-@media (min-width: 780px) {
-  .home-living-section[data-home-section="latest-journal"] { padding-top: clamp(280px, 32vw, 520px); }
-}
-.home-level-connection.is-journal-passage {
-  position: relative;
-  inset: auto;
-  order: 10;
-  flex: none;
-  width: calc(100% + 24px);
-  height: auto;
-  aspect-ratio: 6 / 1;
-  margin: 0 -12px;
-  background: transparent;
-}
-.home-level-connection.is-journal-passage::after {
-  content: ""; position: absolute; inset: -50% 0;
-  background: url("../images/home/journal-floor-overlay-v3.webp") center / contain no-repeat;
-  pointer-events: none;
-}
-.home-level-connection.is-journal-passage::before,
-.home-level-connection.is-journal-passage .home-level-ladder { display: none; }
-.home-living-section[data-home-section="latest-journal"] .home-section-transition { display: none; }
-.home-living-section[data-home-section="latest-journal"] + .home-living-section .home-section-transition { display: none; }
-.home-living-section[data-home-section="archive-discovery"] {
-  background: transparent;
-}
-.home-living-section[data-home-section="archive-discovery"] .home-living-heading,
-.home-living-section[data-home-section="archive-discovery"] .home-archive-entry { width: min(76%, 1100px); }
-.home-living-section[data-home-section="archive-discovery"] .home-archive-media { width: 100%; padding-inline: 0; }
-.home-living-section[data-home-section="archive-discovery"] .home-living-more { padding: 8px 12px; border-radius: 4px; background: #f4e7c5; }
-.home-living-section[data-home-section="archive-discovery"] .home-archive-copy {
-  width: 100%; margin: 16px 0 0; padding: clamp(28px, 4vw, 46px);
-  background-color: #f4e7c5;
-  background-image: linear-gradient(rgba(255,255,255,.28), transparent 35%), repeating-linear-gradient(0deg, transparent 0 29px, rgba(116,82,50,.075) 29px 30px);
-}
-.home-living-section[data-home-section="archive-discovery"] .home-archive-copy::before {
-  top: -13px; left: 50%; width: 68px; height: 28px;
-  background: rgba(232,207,150,.78); box-shadow: none;
-  transform: translateX(-50%) rotate(-2deg);
-}
-.home-living-section[data-home-section="daily-game"] { background: transparent; color: #3d2b20; }
-.home-living-section::before { background: none; }
-.home-living-section .home-living-heading { color: #3d2b20; border-bottom: 1px solid rgba(84,54,28,.25); }
-.home-living-section .home-living-heading p { color: #795a35; }
-.home-living-section .home-living-more { color: #684626; }
-.home-living-section .home-journal-media,
-.home-living-section .home-archive-media {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-}
-.home-journal-copy, .home-archive-copy { border-radius: 4px; }
-.home-game-embed { background: transparent; }
-.home-game-embed-intro { color: #57452f; padding-inline: var(--page-gutter); }
-.home-game-embed-controls { background: transparent; }
-.home-game-full { color: #684626; }
-/* Original game keeps its full viewport and proportions, never a fake game panel. */
-.home-game-frame-stage { width: 100vw; margin-inline: calc(50% - 50vw); }
+/* Excavated presentation; Scene, Work/Frame and original Game SSOT stay unchanged. */
+.home-main > .home-living-sections { --soil-scene-overlap: 0px; position: relative; isolation: isolate; margin-top: 0; padding: 0 0 56px !important; background: #9c623c; }
+.home-living-sections::before,.home-living-sections::after { content: none; }
+.home-underground-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden; }
+.home-level-connection { display: none; }
+.home-living-section[data-home-section] { position: relative; box-sizing: border-box; margin: 0; padding: 44px 32px 68px !important; border: 0; background: transparent; }
+.home-living-section::before { content: none; }
+.home-living-section .home-living-heading { position: relative; z-index: 1; width: min(100%,1160px); margin: 0 auto 46px; border: 0; color: #fff0ce; }
+.home-main .home-living-section .home-living-heading h2,.home-main .home-living-section .home-living-heading p,.home-main .home-living-section .home-living-more { color: #fff0ce; text-shadow: 0 2px 3px #30261c; }
+.home-living-section .home-living-more { background: transparent; padding: 0; }
+.home-living-section .home-journal-entry,.home-living-section .home-archive-entry { position: relative; isolation: isolate; display: flex; flex-direction: column; align-items: center; gap: 0; width: min(100%,540px); margin: 0 auto; padding: 0; overflow: visible; }
+.home-living-section .home-journal-entry::before,.home-living-section .home-archive-entry::before,.home-game-embed::before { content: none; }
+.home-living-section .home-journal-media,.home-living-section .home-archive-media { position: relative; z-index: 2; width: 100%; padding: 0; margin: 0; min-height: 0; background: transparent; border: 0; box-shadow: none; }
+.home-living-section .home-journal-artwork { width: 100%; max-width: 540px; }
+.home-living-section[data-home-section] .home-journal-copy,.home-living-section[data-home-section] .home-archive-copy { position: relative; z-index: 1; box-sizing: border-box; width: min(calc(100% - 28px),490px); margin: -22px auto 0; padding: 42px 32px 28px; border: 0; border-radius: 0; background: linear-gradient(rgba(65,43,24,.17),transparent 32px),#e4c68c; box-shadow: 0 4px 12px rgba(42,25,15,.16); clip-path: polygon(0 0,100% 0,100% calc(100% - 7px),94% calc(100% - 3px),87% calc(100% - 8px),78% calc(100% - 4px),68% calc(100% - 2px),58% calc(100% - 7px),49% 100%,40% calc(100% - 5px),30% calc(100% - 8px),20% calc(100% - 3px),10% calc(100% - 6px),0 calc(100% - 4px)); }
+.home-living-section .home-journal-copy::before,.home-living-section .home-archive-copy::before { display: none; }
+.home-journal-body,.home-archive-body { max-width: 44ch; }
+.home-game-embed { position: relative; isolation: isolate; width: min(100%,1160px); margin: 0 auto; overflow: visible; background: transparent; }
+.home-game-embed-intro { color: #fff0ce; padding: 0 0 20px; text-shadow: 0 1px 3px #30261c; }
+.home-game-frame-stage { display: flex; flex-direction: column; width: 100%; margin: 0; }
+.home-game-activate { position: static; order: -1; width: fit-content; height: auto; min-height: 44px; margin: 0 0 12px; padding: 8px 16px; align-self: flex-end; }
+.home-game-frame { width: 100%; aspect-ratio: 16 / 9; border-radius: 4px; }
+.home-game-embed-controls { padding: 16px 0 0; background: transparent; }
+.home-game-full { color: #fff0ce; text-shadow: 0 1px 3px #30261c; }
 @media (max-width: 779px) {
-  .home-living-heading { width: calc(100% - 32px); }
-  .home-journal-entry, .home-archive-entry { padding-bottom: 24px; }
-  .home-journal-copy, .home-archive-copy { width: calc(100% - 24px); }
-  .home-journal-artwork { max-width: 100%; }
-  .home-archive-media .home-journal-artwork { max-width: 100%; }
+ .home-living-section[data-home-section] { padding: 36px 24px 56px !important; }
+ .home-living-section .home-living-heading { margin-bottom: 38px; }
+ .home-living-section .home-journal-entry,.home-living-section .home-archive-entry { width: min(100%,320px); }
+ .home-living-section .home-journal-artwork { max-width: 320px; }
+ .home-living-section[data-home-section] .home-journal-copy,.home-living-section[data-home-section] .home-archive-copy { width: min(calc(100% - 28px),292px); margin-top: -18px; padding: 36px 22px 24px; }
+ .home-game-frame { aspect-ratio: 9 / 16; }
 }

@@ -29,8 +29,8 @@
   }
   const sectionDefinitions = Object.freeze([
     Object.freeze({ id: "latest-journal", type: "latest-journal", enabled: true, fixedOrder: 10 }),
-    Object.freeze({ id: "daily-game", type: "habit-recommendation", enabled: true, dailySlot: true }),
-    Object.freeze({ id: "archive-discovery", type: "archive-discovery", enabled: true, dailySlot: true })
+    Object.freeze({ id: "daily-game", type: "habit-recommendation", enabled: true, fixedOrder: 20 }),
+    Object.freeze({ id: "archive-discovery", type: "archive-discovery", enabled: true, fixedOrder: 30 })
   ]);
   const composition = dailyEngine.resolveSections(sectionDefinitions, dailyContext);
   const homeCopyDefaults = Object.freeze({
@@ -469,6 +469,7 @@
     const renderer = registry.get(config.type);
     return renderer ? renderer(config) : null;
   })).then((sections) => {
+    sections.filter(Boolean).forEach((section, index) => { section.dataset.undergroundDepth = String(index); });
     root.replaceChildren(...sections.filter(Boolean));
     const transitions = root.querySelectorAll("[data-transition-source]");
     const loadTransition = image => { image.src = image.dataset.transitionSource; delete image.dataset.transitionSource; };
