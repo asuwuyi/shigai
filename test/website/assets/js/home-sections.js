@@ -62,10 +62,19 @@
   }
   const archiveMediaPreparation = new Map();
   function loadArchiveImage(source, timeout = 8000) {
-    return new Promise((resolve, reject) => {
-      const image = new Image();
-      const timer = setTimeout(() => reject(new Error("Archive image timed out")), timeout);
-      const finish = (callback) => { clearTimeout(timer); image.onload = null; image.onerror = null; callback(); };
+    let image = new Image(), settled = false;
+    image.fetchPriority = "low";
+    let promote = () => {};
+    const promise = new Promise((resolve, reject) => {
+      const expire = () => finish(() => reject(new Error("Archive image timed out")));
+      let timer = setTimeout(expire, timeout);
+      const finish = (callback) => { if (settled) return; settled = true; clearTimeout(timer); image.onload = null; image.onerror = null; image = null; callback(); };
+      promote = () => {
+        if (settled || image.fetchPriority === "high") return;
+        image.fetchPriority = "high";
+        // A background preload's age must not consume the user's click budget.
+        clearTimeout(timer); timer = setTimeout(expire, timeout);
+      };
       image.decoding = "async";
       image.onload = () => {
         const decoded = typeof image.decode === "function" ? image.decode().catch(() => {}) : Promise.resolve();
@@ -74,6 +83,7 @@
       image.onerror = () => finish(() => reject(new Error("Archive image unavailable")));
       image.src = source;
     });
+    return { promise, promote: () => promote() };
   }
   function loadArchiveVideoFrame(source, timeout = 8000) {
     return new Promise((resolve, reject) => {
@@ -86,17 +96,24 @@
       video.src = source; video.load();
     });
   }
-  function prepareArchiveWork(work) {
+  function prepareArchiveWork(work, foreground = false) {
     const source = safeMediaSource(work);
     const poster = safePosterSource(work);
     const key = `${source}|${poster}`;
     if (!source) return Promise.reject(new Error("Archive media unavailable"));
     if (!archiveMediaPreparation.has(key)) {
-      const preparation = (work.type === "video" ? (poster ? loadArchiveImage(poster) : loadArchiveVideoFrame(source)) : loadArchiveImage(source))
-        .catch((error) => { archiveMediaPreparation.delete(key); throw error; });
+      const preparation = work.type === "video" && !poster
+        ? { promise: loadArchiveVideoFrame(source), promote: () => {} }
+        : loadArchiveImage(work.type === "video" ? poster : source);
+      preparation.promise = preparation.promise.catch((error) => {
+        if (archiveMediaPreparation.get(key) === preparation) archiveMediaPreparation.delete(key);
+        throw error;
+      });
       archiveMediaPreparation.set(key, preparation);
     }
-    return archiveMediaPreparation.get(key);
+    const preparation = archiveMediaPreparation.get(key);
+    if (foreground) preparation.promote();
+    return preparation.promise;
   }
   function workDate(work) {
     return String(work?.publishDate || work?.createDate || "").replaceAll("-", " · ") || "今天";
@@ -213,7 +230,7 @@
     const transitionAsset = String(transition?.asset || "");
     if (transition?.enabled === true && transitionAsset.startsWith("assets/") && !transitionAsset.split("/").includes("..")) {
       const decoration = document.createElement("div"); decoration.className = "home-section-transition"; decoration.setAttribute("aria-hidden", "true");
-      const image = document.createElement("img"); image.dataset.transitionSource = `../${transitionAsset}`; image.alt = ""; image.decoding = "async";
+      const image = document.createElement("img"); image.dataset.transitionSource = `../${transitionAsset}`; image.alt = ""; image.decoding = "async"; image.fetchPriority = "low";
       ["mobile", "desktop"].forEach((layout) => {
         const value = transition[layout] || {};
         decoration.style.setProperty(`--transition-${layout}-x`, `${Number(value.x) || 0}%`);
@@ -467,7 +484,7 @@
           button.disabled = true; button.textContent = copy.loadingLabel;
           content.setAttribute("aria-busy", "true");
           try {
-            await prepareArchiveWork(works[targetIndex]);
+            await prepareArchiveWork(works[targetIndex], true);
             revealCount = targetCount; index = targetIndex;
             track(analyticsEvents.sectionInteraction, { section_id: "archive-discovery", content_id: works[index].id, action: "refresh_archive_work" });
             renderWork(true); preloadUpcoming();

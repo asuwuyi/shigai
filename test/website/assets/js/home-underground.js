@@ -17,7 +17,7 @@
     for (const [x, y, sx, sy] of [[0,0,1,1],[repeatWidth,0,-1,1],[0,repeatHeight,1,-1],[repeatWidth,repeatHeight,-1,-1]]) {
       const group = element('g', { transform: `translate(${x} ${y}) scale(${sx} ${sy})` });
       const crop = element('svg', { width: nativeWidth, height: h, viewBox: `0 ${start} ${nativeWidth} ${h}`, overflow: 'hidden' });
-      crop.append(element('image', { href: new URL(file, mediaBase).href, width: nativeWidth, height: nativeHeight }));
+      crop.append(element('image', { 'data-earth-source': new URL(file, mediaBase).href, width: nativeWidth, height: nativeHeight }));
       group.append(crop); pattern.append(group);
     }
     return pattern;
@@ -32,7 +32,7 @@
     for (const [x, flip] of [[0,1],[tileWidth*2,-1]]) {
       const group = element('g', { transform: `translate(${x} 0) scale(${flip} 1)` });
       const crop = element('svg', { width: tileWidth, height, viewBox: '0 305 2172 136', overflow: 'hidden' });
-      crop.append(element('image', { href: new URL('stage-front-roots-v1.webp', mediaBase).href, width: 2172, height: 724 }));
+      crop.append(element('image', { 'data-earth-source': new URL('stage-front-roots-v1.webp', mediaBase).href, width: 2172, height: 724 }));
       group.append(crop); pattern.append(group);
     }
     return pattern;
@@ -90,18 +90,50 @@
     // Decode once; failures leave the layer's warm solid underpaint, never black.
     // Strong references keep these decoded resources reusable during scrolling.
     const files = [...specs.map(spec => spec[1]),'stage-front-roots-v1.webp'];
-    const retainedImages = files.map(file => { const image = new Image(); image.decoding = 'async'; image.src = new URL(file,mediaBase).href; return image; });
+    const retainedImages = files.map(() => { const image = new Image(); image.decoding = 'async'; image.fetchPriority = 'low'; return image; });
+    const textureStates = files.map(() => 'pending');
+    const textureQueue = [];
+    let activeTexture = false;
     svg.dataset.textureState = 'loading';
     // An existing SVG pattern does not use its fallback color when its image fails.
     // Do not paint that pattern until the resource has actually decoded.
-    Promise.all(retainedImages.map((image,index) => image.decode().then(()=> {
-      if(index < surfaces.length) set(surfaces[index].paint,{fill:'url(#'+specs[index][0]+')'});
-      else set(front,{fill:'url(#home-stage-wood) #79502d'});
-      return true;
-    },()=>false))).then(results => {
-      svg.dataset.textureState = results.every(Boolean) ? 'ready' : 'fallback';
-      schedule();
-    });
+    function loadTexture(index) {
+      if (textureStates[index] !== 'pending') return;
+      textureStates[index] = 'queued'; textureQueue.push(index); drainTextures();
+    }
+    function drainTextures() {
+      if (activeTexture || !textureQueue.length) return;
+      activeTexture = true;
+      const index = textureQueue.shift();
+      textureStates[index] = 'loading';
+      const image = retainedImages[index]; image.src = new URL(files[index],mediaBase).href;
+      image.decode().then(()=> {
+        const pattern = index < patterns.length ? patterns[index] : wood;
+        pattern.querySelectorAll('[data-earth-source]').forEach(node => set(node,{href:node.getAttribute('data-earth-source')}));
+        if(index < surfaces.length) set(surfaces[index].paint,{fill:'url(#'+specs[index][0]+')'});
+        else set(front,{fill:'url(#home-stage-wood) #79502d'});
+        textureStates[index] = 'ready';
+      },()=> { textureStates[index] = 'fallback'; }).then(()=> {
+        activeTexture = false;
+        svg.dataset.textureState = textureStates.includes('fallback') ? 'fallback' : textureStates.every(value=>value==='ready') ? 'ready' : 'loading';
+        svg.dataset.decodedTextures = String(textureStates.filter(value=>value==='ready').length);
+        schedule();
+        drainTextures();
+      });
+    }
+    // Do not start the whole underground download while the Scene is visible.
+    // Keep every created paint resource alive; only its first request is deferred.
+    if ('IntersectionObserver' in window) {
+      const bottom = document.createElement('span'); bottom.setAttribute('aria-hidden','true');
+      Object.assign(bottom.style,{position:'absolute',bottom:'0',left:'0',width:'1px',height:'1px',pointerEvents:'none'}); host.append(bottom);
+      const targets = new Map([...host.querySelectorAll('.home-living-section')].map((node,index)=>[node,index]));
+      targets.set(bottom,3); targets.set(stage,4);
+      const loader = new IntersectionObserver(entries=>entries.forEach(entry=> {
+        if (!entry.isIntersecting) return;
+        loadTexture(targets.get(entry.target)); loader.unobserve(entry.target);
+      }),{rootMargin:'350px'});
+      targets.forEach((index,node)=>loader.observe(node));
+    } else files.forEach((file,index)=>loadTexture(index));
     let pending = false, previousGeometry = '';
     function set(node,attrs) {
       Object.entries(attrs).forEach(([key,value]) => { if(node.getAttribute(key)!==String(value)) node.setAttribute(key,String(value)); });
