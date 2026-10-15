@@ -10,9 +10,11 @@
   }
   function material(id, start, end, width, file = 'soil-cutaway-v1.webp', nativeWidth = 1024, nativeHeight = 1536) {
     const h = end - start;
-    const pattern = element('pattern', { id, width: nativeWidth*2, height: h * 2, patternUnits: 'userSpaceOnUse', x: (width - nativeWidth) / 2 });
-    // Mirrored native-size tiles share the same pixels at every edge; no bitmap stretch.
-    for (const [x, y, sx, sy] of [[0,0,1,1],[nativeWidth*2,0,-1,1],[0,h*2,1,-1],[nativeWidth*2,h*2,-1,-1]]) {
+    const repeatWidth = (nativeWidth - 1) * 2, repeatHeight = (h - 1) * 2;
+    const pattern = element('pattern', { id, width: repeatWidth, height: repeatHeight, patternUnits: 'userSpaceOnUse', x: (width - nativeWidth) / 2 });
+    // Native-size mirrored tiles overlap at their edges. Adjacent exact clip
+    // boundaries otherwise leak underpaint at fractional device-pixel positions.
+    for (const [x, y, sx, sy] of [[0,0,1,1],[repeatWidth,0,-1,1],[0,repeatHeight,1,-1],[repeatWidth,repeatHeight,-1,-1]]) {
       const group = element('g', { transform: `translate(${x} ${y}) scale(${sx} ${sy})` });
       const crop = element('svg', { width: nativeWidth, height: h, viewBox: `0 ${start} ${nativeWidth} ${h}`, overflow: 'hidden' });
       crop.append(element('image', { href: new URL(file, mediaBase).href, width: nativeWidth, height: nativeHeight }));
