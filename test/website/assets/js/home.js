@@ -238,6 +238,11 @@ function renderWorldEntranceScene(scenes, preferredSceneId = activeWorldEntrance
   if (!unifiedRenderer) throw new Error("Unified Scene Renderer is required.");
   const mobileViewport = mobileViewportSettings(scene);
   const useMobileViewport = layout === "portrait" && window.matchMedia("(max-width: 767px) and (pointer: coarse)").matches && mobileViewport.enabled && mobileViewport.width > 1;
+  // Reserve the canonical plane's full vertical span before mapping the Scene.
+  // A short/wide viewport may scroll through the Scene; the stage must follow it.
+  const frame = unifiedRenderer.referenceFrames[layout];
+  const frameWidth = frame.width * (useMobileViewport ? mobileViewport.width : 1);
+  homeElements.hero.style.setProperty("--home-scene-frame-ratio", `${frameWidth} / ${frame.height}`);
   const renderResult = unifiedRenderer.renderScene({
     container,
     scene,

@@ -16,7 +16,7 @@ body[data-page="home"] { width: 100%; min-height: 100vh; min-height: 100dvh; ove
 @keyframes home-loading-signal { 0% { background-position: 0 0, 0 0; filter: brightness(.82); } 50% { background-position: 4px -3px, 0 0; filter: brightness(1.1); } 100% { background-position: -3px 2px, 0 0; filter: brightness(.9); } }
 @media (prefers-reduced-motion: reduce) { .home-loading-signal { animation: none; } .home-loading-screen, .home-loading-track span { transition: none; } }
 .home-main { width: 100%; min-height: 100vh; min-height: 100dvh; margin: 0; padding: 0; }
-.home-hero { position: relative; isolation: isolate; width: 100%; height: 100%; min-height: 100vh; min-height: 100dvh; overflow: hidden; background: var(--hero-morning-start); transition: background var(--transition-standard), color var(--transition-standard); }
+.home-hero { position: relative; isolation: isolate; width: 100%; height: auto; aspect-ratio: var(--home-scene-frame-ratio, 16 / 9); min-height: 100vh; min-height: 100dvh; overflow: hidden; background: var(--hero-morning-start); transition: background var(--transition-standard), color var(--transition-standard); }
 .home-hero-background, .home-hero-environment { position: absolute; inset: 0; pointer-events: none; }
 .home-hero-background { z-index: 0; background: linear-gradient(130deg, var(--hero-morning-start), var(--hero-morning-end) 72%); transition: background var(--transition-standard); }
 .home-hero.has-scene-bleed .home-hero-background { background-color: var(--scene-world-background, var(--hero-morning-start)); background-image: var(--scene-bleed-image); background-position: center; background-size: cover; }
@@ -228,7 +228,7 @@ button.home-welcome-control { cursor: pointer; }
 .home-world-scene-render .scene-render-object[data-scene-interaction-cursor="default"] .scene-render-object-visual { cursor: default; }
 .home-world-scene-render .scene-render-object[data-scene-interaction-enabled="true"]:focus-visible .scene-render-object-visual { outline: 3px solid var(--penguin-blue); outline-offset: 6px; border-radius: 12px; }
 @media (max-width: 767px) and (pointer: coarse) {
-  .home-hero { --scene-peek-x: 0px; --scene-peek-y: 0px; height: 100svh; min-height: 100svh; touch-action: pan-y; }
+  .home-hero { --scene-peek-x: 0px; --scene-peek-y: 0px; height: auto; min-height: 100svh; touch-action: pan-y; }
   .home-hero:not([data-mobile-scene-viewport]) .home-world-scene-render .scene-render-plane { transform: translate(-50%, -50%) scale(1.04); transition: transform .45s cubic-bezier(.2,.8,.2,1); }
   .home-hero[data-mobile-scene-viewport] .home-world-scene-render .scene-render-plane { left: calc(50% + var(--scene-camera-x, 0px)); transition: left .35s cubic-bezier(.2,.8,.2,1); }
   .home-hero[data-mobile-scene-viewport].is-scene-camera-dragging .home-world-scene-render .scene-render-plane { transition: none; }
