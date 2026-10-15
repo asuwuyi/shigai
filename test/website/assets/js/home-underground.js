@@ -52,57 +52,105 @@
   function install() {
     const host = document.querySelector('[data-home-sections]');
     if (!host || host.querySelector('.home-underground-backdrop')) return;
-    const svg = element('svg', { class: 'home-underground-backdrop', 'aria-hidden': 'true', focusable: 'false', preserveAspectRatio: 'none' });
+    const svg = element('svg', { class: 'home-underground-backdrop', 'aria-hidden': 'true', focusable: 'false', preserveAspectRatio: 'none', fill: 'none' });
     host.prepend(svg);
     const stage = document.createElement('div');
     stage.className = 'home-stage-seam'; stage.setAttribute('aria-hidden','true');
     host.insertBefore(stage, svg.nextSibling);
-    let pending = false;
+    // Keep paint servers, images and large paint nodes alive across every reflow.
+    // Replacing the complete resource tree is unnecessary and risks blank frames.
+    const specs = [
+      ['home-earth-shallow','earth-shallow-v1.webp',0,941,1672,941,'#c99242'],
+      ['home-earth-middle','earth-middle-v1.webp',0,941,1672,941,'#a7623e'],
+      ['home-earth-rock','earth-rock-v1.webp',0,941,1672,941,'#847866'],
+      ['home-earth-lava','soil-cutaway-v1.webp',1430,1536,1024,1536,'#ad4922']
+    ];
+    const defs = element('defs');
+    const wood = stageMaterial(80); defs.append(wood);
+    const patterns = specs.map(([id,file,start,end,w,h]) => {
+      const pattern = material(id,start,end,0,file,w,h); defs.append(pattern); return pattern;
+    });
+    svg.append(defs);
+    const surfaces = specs.map(([id,,,,,,color],index) => {
+      const tag = index ? 'path' : 'rect';
+      const base = element(tag, { fill: color });
+      const paint = element(tag, { fill: 'none', 'data-earth-surface': id });
+      svg.append(base,paint); return { base, paint };
+    });
+    const cuts = [0,1,2].map(index => {
+      const tint = element('linearGradient', { id: 'home-cavity-tint-'+index, x1: 0, x2: 0, gradientUnits: 'userSpaceOnUse' });
+      tint.append(element('stop', { offset: 0, 'stop-color': '#211b15', 'stop-opacity': '.55' }),element('stop', { offset: 1, 'stop-color': '#211b15', 'stop-opacity': '.12' }));
+      defs.append(tint);
+      const group = element('g', { 'data-cavity-depth': index }); svg.append(group);
+      return { tint, group };
+    });
+    const front = element('rect', { 'data-stage-front': '', fill: '#79502d' }); svg.append(front);
+    // Decode once; failures leave the layer's warm solid underpaint, never black.
+    // Strong references keep these decoded resources reusable during scrolling.
+    const files = [...specs.map(spec => spec[1]),'stage-front-roots-v1.webp'];
+    const retainedImages = files.map(file => { const image = new Image(); image.decoding = 'async'; image.src = new URL(file,mediaBase).href; return image; });
+    svg.dataset.textureState = 'loading';
+    // An existing SVG pattern does not use its fallback color when its image fails.
+    // Do not paint that pattern until the resource has actually decoded.
+    Promise.all(retainedImages.map((image,index) => image.decode().then(()=> {
+      if(index < surfaces.length) set(surfaces[index].paint,{fill:'url(#'+specs[index][0]+')'});
+      else set(front,{fill:'url(#home-stage-wood) #79502d'});
+      return true;
+    },()=>false))).then(results => {
+      svg.dataset.textureState = results.every(Boolean) ? 'ready' : 'fallback';
+      schedule();
+    });
+    let pending = false, previousGeometry = '';
+    function set(node,attrs) {
+      Object.entries(attrs).forEach(([key,value]) => { if(node.getAttribute(key)!==String(value)) node.setAttribute(key,String(value)); });
+    }
     function render() {
       pending = false;
       const bounds = host.getBoundingClientRect(), width = bounds.width, height = host.offsetHeight;
       const sections = [...host.querySelectorAll('.home-living-section')];
       if (!width || !height || sections.length !== 3) return;
-      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-      const boundaries = sections.slice(1).map(section => section.getBoundingClientRect().top - bounds.top + 8);
-      svg.dataset.boundaries = boundaries.join(',');
-      const defs = element('defs');
       const stageHeight = stage.getBoundingClientRect().height;
-      defs.append(stageMaterial(stageHeight));
-      defs.append(material('home-earth-shallow',0,941,width,'earth-shallow-v1.webp',1672,941),material('home-earth-middle',0,941,width,'earth-middle-v1.webp',1672,941),material('home-earth-rock',0,941,width,'earth-rock-v1.webp',1672,941),material('home-earth-lava',1430,1536,width));
-      const blur = element('filter', { id: 'home-cut-shadow', x: '-10%', y: '-10%', width: '120%', height: '120%' });
-      blur.append(element('feGaussianBlur', { stdDeviation: 3 })); defs.append(blur);
-      const art = [element('rect', { width, height, fill: 'url(#home-earth-shallow)' }),
-        element('path', { d: layerPath(boundaries[0], width, height), fill: 'url(#home-earth-middle)' }),
-        element('path', { d: layerPath(boundaries[1], width, height), fill: 'url(#home-earth-rock)' }),
-        element('path', { d: layerPath(height - 74, width, height), fill: 'url(#home-earth-lava)' })];
-      const palettes = [['#765033','#e0ae68'],['#6c4431','#c89265'],['#4b4841','#b9b1a0']];
-      sections.forEach((section, index) => {
-        const entry = section.querySelector('.home-journal-entry,.home-game-embed,.home-archive-entry');
-        if (!entry) return;
-        const box = entry.getBoundingClientRect(), rim = width < 780 ? 13 : 24;
-        const x = box.left - bounds.left - rim, y = box.top - bounds.top - rim;
-        const w = box.width + rim*2, h = box.height + rim*2;
-        const d = cavityPath(x, y, w, h, rim);
-        const tint = element('linearGradient', { id: `home-cavity-tint-${index}`, x1: 0, y1: y, x2: 0, y2: y+65, gradientUnits: 'userSpaceOnUse' });
-        tint.append(element('stop', { offset: 0, 'stop-color': '#211b15', 'stop-opacity': '.55' }),element('stop', { offset: 1, 'stop-color': '#211b15', 'stop-opacity': '.12' })); defs.append(tint);
-        const cut = element('g', { 'data-cavity-depth': index });
-        // The interior is transparent: exactly the same global texture remains visible.
-        const inner = cavityPath(x+rim*.45,y+rim*.55,w-rim*.9,h-rim*.95,rim*.35);
-        cut.append(element('path', { d: d+' '+inner, 'fill-rule': 'evenodd', fill: palettes[index][0], 'fill-opacity': '.35' }));
-        cut.append(element('path', { d: inner, fill: `url(#home-cavity-tint-${index})` }));
-        cut.append(element('path', { d: inner, fill: 'none', stroke: '#221c16', 'stroke-opacity': '.46', 'stroke-width': rim*.4, filter: 'url(#home-cut-shadow)' }));
-        const bottom = `M${x+20} ${y+h-3} Q${x+w*.48} ${y+h+3} ${x+w-20} ${y+h-2}`;
-        cut.append(element('path', { d: bottom, fill: 'none', stroke: palettes[index][1], 'stroke-opacity': '.55', 'stroke-width': 3 }));
-        // Small chipped edges, with the layer's own cut-face color instead of a brown picture frame.
-        for (let chip = 0; chip < 5; chip++) {
-          const cy = y + 36 + (h-72)*chip/4;
-          for (const side of [x, x+w]) cut.append(element('path', { d: `M${side-4} ${cy-5} Q${side+8} ${cy-2} ${side+3} ${cy+7}`, fill: 'none', stroke: palettes[index][1], 'stroke-opacity': '.45', 'stroke-width': 2 }));
-        }
-        art.push(cut);
+      const entries = sections.map(section => section.querySelector('.home-journal-entry,.home-game-embed,.home-archive-entry')?.getBoundingClientRect());
+      const boundaries = sections.slice(1).map(section => section.getBoundingClientRect().top - bounds.top + 8);
+      const geometry = JSON.stringify([width,height,stageHeight,...boundaries,...entries.flatMap(box=>box ? [box.left-bounds.left,box.top-bounds.top,box.width,box.height] : [])].map(value=>Math.round(value*2)/2));
+      if (geometry === previousGeometry) return;
+      previousGeometry = geometry;
+      svg.dataset.paintUpdates = String(Number(svg.dataset.paintUpdates||0)+1);
+      svg.dataset.decodedTextures = String(retainedImages.filter(image=>image.complete && image.naturalWidth).length);
+      set(svg,{viewBox:'0 0 '+width+' '+height});
+      svg.dataset.boundaries = boundaries.join(',');
+      patterns.forEach((pattern,index)=>set(pattern,{x:(width-specs[index][4])/2}));
+      set(wood,{patternTransform:'scale('+(stageHeight/80)+')'});
+      surfaces.forEach(({base,paint},index) => {
+        const attrs = index ? {d:layerPath(index===3 ? height-74 : boundaries[index-1],width,height)} : {width,height};
+        set(base,attrs); set(paint,attrs);
       });
-      art.push(element('rect', { 'data-stage-front': '', width, height: stageHeight, fill: 'url(#home-stage-wood)' }));
-      svg.replaceChildren(defs, ...art);
+      const palettes = [['#765033','#e0ae68'],['#6c4431','#c89265'],['#4b4841','#b9b1a0']];
+      entries.forEach((box,index) => {
+        const {tint,group}=cuts[index]; if(!box){group.replaceChildren();return;}
+        const rim = width < 780 ? 13 : 24;
+        const x = box.left-bounds.left-rim, y = box.top-bounds.top-rim;
+        const w = box.width+rim*2, h = box.height+rim*2;
+        const d = cavityPath(x,y,w,h,rim);
+        const inner = cavityPath(x+rim*.45,y+rim*.55,w-rim*.9,h-rim*.95,rim*.35);
+        set(tint,{y1:y,y2:y+65});
+        const art = [
+          element('path',{d:d+' '+inner,'fill-rule':'evenodd',fill:palettes[index][0],'fill-opacity':'.35'}),
+          element('path',{d:inner,fill:'url(#home-cavity-tint-'+index+') none'})
+        ];
+        // Feathered translucent strokes avoid a full-page offscreen blur buffer.
+        for(const [spread,opacity] of [[.8,.025],[.62,.04],[.45,.06],[.28,.09],[.12,.12]]) {
+          art.push(element('path',{d:inner,fill:'none',stroke:'#221c16','stroke-opacity':opacity,'stroke-width':rim*spread}));
+        }
+        art.push(element('path',{d:'M'+(x+20)+' '+(y+h-3)+' Q'+(x+w*.48)+' '+(y+h+3)+' '+(x+w-20)+' '+(y+h-2),fill:'none',stroke:palettes[index][1],'stroke-opacity':'.55','stroke-width':3}));
+        for(let chip=0;chip<5;chip++){
+          const cy=y+36+(h-72)*chip/4;
+          for(const side of [x,x+w]) art.push(element('path',{d:'M'+(side-4)+' '+(cy-5)+' Q'+(side+8)+' '+(cy-2)+' '+(side+3)+' '+(cy+7),fill:'none',stroke:palettes[index][1],'stroke-opacity':'.45','stroke-width':2}));
+        }
+        // Only small vector edge paths change. Textures and paint servers remain.
+        group.replaceChildren(...art);
+      });
+      set(front,{width,height:stageHeight});
     }
     function schedule() { if (!pending) { pending = true; requestAnimationFrame(render); } }
     new ResizeObserver(schedule).observe(host);
