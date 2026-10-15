@@ -435,14 +435,14 @@
         },
         {
           "id": "ground-fossil-penguin-1",
-          "name": "土層魚（可替換）",
+          "name": "魚化石（可替換）",
           "enabled": true,
           "attachment": "section",
           "section": "latestJournal",
           "playback": "loop",
           "states": {
             "todayScene": {
-              "asset": "assets/site/brand/home-ground-fish-20261014-v1.webm",
+              "asset": "assets/site/brand/home-fish-fossil-20261015-v1.webp",
               "mobile": {
                 "x": 76,
                 "y": 50,
@@ -463,7 +463,7 @@
               }
             },
             "latestJournal": {
-              "asset": "assets/site/brand/home-ground-fish-20261014-v1.webm",
+              "asset": "assets/site/brand/home-fish-fossil-20261015-v1.webp",
               "mobile": {
                 "x": 76,
                 "y": 50,
@@ -484,7 +484,7 @@
               }
             },
             "dailyGame": {
-              "asset": "assets/site/brand/home-ground-fish-20261014-v1.webm",
+              "asset": "assets/site/brand/home-fish-fossil-20261015-v1.webp",
               "mobile": {
                 "x": 76,
                 "y": 50,
@@ -505,7 +505,7 @@
               }
             },
             "archiveDiscovery": {
-              "asset": "assets/site/brand/home-ground-fish-20261014-v1.webm",
+              "asset": "assets/site/brand/home-fish-fossil-20261015-v1.webp",
               "mobile": {
                 "x": 76,
                 "y": 50,
