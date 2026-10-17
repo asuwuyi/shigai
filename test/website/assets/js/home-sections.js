@@ -123,18 +123,6 @@
     const secondDate = Date.parse(second?.publishDate || second?.createDate || second?.createdAt || 0) || 0;
     return secondDate - firstDate || String(second?.id || "").localeCompare(String(first?.id || ""), undefined, { numeric: true });
   }
-  function mediaNode(work, className = "home-journal-media") {
-    const wrap = document.createElement("figure");
-    wrap.className = className;
-    const source = safeMediaSource(work);
-    if (!source) return wrap;
-    const media = work.type === "video" ? document.createElement("video") : document.createElement("img");
-    media.src = source;
-    if (media.tagName === "VIDEO") { media.controls = true; media.playsInline = true; media.preload = "metadata"; media.poster = safePosterSource(work); }
-    else { media.loading = "lazy"; media.alt = ""; }
-    wrap.append(media);
-    return wrap;
-  }
   function safeFrameSource(frame) {
     const source = String(frame?.asset || "");
     return source.startsWith("assets/") && !source.split("/").includes("..") ? new URL(`../${source}`, document.baseURI).href : "";

@@ -1,0 +1,21 @@
+Shi-Gai Website game runtime notices
+
+createjs.min.js includes EaselJS, TweenJS, SoundJS and PreloadJS 1.0.0.
+The embedded component metadata records a build date of 12 October 2017.
+The original combined-file header is preserved, including:
+Copyright (c) 2011-2015 gskinner.com, inc.
+
+The four upstream 1.0.0 component license texts were checked on 2026-10-16:
+https://raw.githubusercontent.com/CreateJS/EaselJS/1.0.0/LICENSE.txt
+https://raw.githubusercontent.com/CreateJS/TweenJS/1.0.0/LICENSE.txt
+https://raw.githubusercontent.com/CreateJS/SoundJS/1.0.0/LICENSE.txt
+https://raw.githubusercontent.com/CreateJS/PreloadJS/1.0.0/LICENSE.txt
+
+Each returned the same MIT license text, including its 2014 copyright.
+The unmodified text is provided in LICENSE-createjs.txt.
+Upstream license SHA-256:
+550bf73ead08a888cf0f48e0945e71e38d5e6609c1b3508ee6f5eee18824fd90
+
+These notices cover the identified runtime components, not rights to Shi-Gai
+artwork, imported media or other third-party content. No game engine update
+or change to the original combined library was performed for this notice.
