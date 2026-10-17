@@ -45,7 +45,7 @@
   }
 
   function track(eventName, parameters) {
-    window.ShiGaiAnalytics?.track(eventName, {
+    return window.ShiGaiAnalytics?.track(eventName, {
       contract_version: "v2_analytics_1",
       daily_key: dailyContext.dateKey,
       weekday: dailyContext.weekday,
@@ -248,18 +248,24 @@
   }
   function observeSection(section, sectionId) {
     if (!("IntersectionObserver" in window)) return;
+    const target = section.querySelector(".home-living-heading") || section;
+    const resume = event => { if (event.detail?.enabled) { observer.unobserve(target); observer.observe(target); } };
     const observer = new IntersectionObserver((entries) => {
+      if (window.ShiGaiAnalytics?.isEnabled?.() === false) return;
       if (!entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= .35)) return;
       track(analyticsEvents.sectionView, { section_id: sectionId, content_id: section.dataset.contentId || "" });
       observer.disconnect();
+      window.removeEventListener("shigai:analytics-consent", resume);
     }, { threshold: .35 });
-    observer.observe(section.querySelector(".home-living-heading") || section);
+    observer.observe(target);
+    window.addEventListener("shigai:analytics-consent", resume);
   }
   function observeScrollDepth() {
     const sent = new Set();
     let frame = 0;
     const report = () => {
       frame = 0;
+      if (window.ShiGaiAnalytics?.isEnabled?.() === false) return;
       if (!root.children.length || scrollY <= 0 || document.body.classList.contains("is-home-loading")) return;
       const available = document.documentElement.scrollHeight - innerHeight;
       if (available <= 0) return;
@@ -271,9 +277,15 @@
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(report); };
     addEventListener("scroll", schedule, { passive: true });
-    addEventListener("resize", schedule, { passive: true });
-    root.addEventListener("load", schedule, true);
-    window.addEventListener("shi-gai:home-sections-ready", schedule);
+    window.addEventListener("shigai:analytics-consent", event => {
+      if (!event.detail?.enabled) return;
+      // A queued pre-consent frame or a media resize must not turn into a visit.
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+      const depth = Math.round((scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight)) * 100);
+      [25, 50, 75, 100].filter(threshold => threshold <= depth).forEach(threshold => sent.add(threshold));
+      // Do not backfill thresholds already crossed before consent.
+    });
   }
   function enableTransitionParallax() {
     const transitions = [...document.querySelectorAll(".home-section-transition")];
@@ -410,6 +422,7 @@
       let gameStarted = false;
       window.addEventListener("message", event => {
         if (event.origin !== location.origin || event.source !== frame.contentWindow || event.data?.type !== "shi-gai:game-analytics") return;
+        if (window.ShiGaiAnalytics?.isEnabled?.() === false) return;
         const name = event.data.event;
         if (!["game_start", "game_draw", "game_interaction", "game_complete"].includes(name)) return;
         if (name === "game_start") { if (gameStarted) return; gameStarted = true; }

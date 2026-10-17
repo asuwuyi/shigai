@@ -1,0 +1,16 @@
+.analytics-preferences { position: fixed; z-index: 10020; left: max(12px, env(safe-area-inset-left)); bottom: max(12px, env(safe-area-inset-bottom)); width: min(460px, calc(100vw - 24px)); color: #382b21; font: 16px/1.55 system-ui, sans-serif; pointer-events: none; }
+.analytics-preferences * { box-sizing: border-box; }
+.analytics-preferences [hidden] { display: none !important; }
+.analytics-preferences button { min-height: 44px; padding: 9px 16px; border: 1px solid #6d5337; border-radius: 12px; color: #382b21; background: #f5e8cd; font: inherit; cursor: pointer; pointer-events: auto; }
+.analytics-preferences button:focus-visible, .analytics-preferences summary:focus-visible { outline: 3px solid #327585; outline-offset: 3px; }
+.analytics-preferences .analytics-preferences-open { padding: 6px 12px; background: #f5e8cdeb; font-size: 14px; box-shadow: 0 3px 12px #241b1324; }
+.analytics-preferences-panel { max-height: min(650px, calc(100svh - 90px)); margin-bottom: 8px; padding: 20px; overflow: auto; overscroll-behavior: contain; border: 1px solid #876942; border-radius: 18px; background: #fff4de; box-shadow: 0 10px 35px #241b1333; pointer-events: auto; }
+.analytics-preferences-panel h2 { margin: 0 0 10px; color: inherit; font: 700 20px/1.4 system-ui, sans-serif; }
+.analytics-preferences-panel p { margin: 0 0 14px; color: inherit; font: inherit; }
+.analytics-preferences-panel details { margin: 14px 0; }
+.analytics-preferences-panel summary { min-height: 44px; padding: 8px 0; cursor: pointer; }
+.analytics-preferences-panel .analytics-policy-body { margin-top: 10px; white-space: pre-line; }
+.analytics-preferences-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.analytics-preferences-actions button { flex: 1 1 140px; background: #e6cf9e; font-weight: 700; }
+.analytics-preferences-panel .analytics-preferences-close { margin-top: 12px; padding: 6px 12px; background: transparent; }
+@media (max-width: 480px) { .analytics-preferences-panel { padding: 16px; } }

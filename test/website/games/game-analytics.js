@@ -8,6 +8,7 @@
       for (const [name, action] of [["playLottery", "draw"], ["btn_penguinGo", "begin"], ["btn_pickFishF", "choose_front"], ["btn_pickFishR", "choose_back"]]) {
         let last = -Infinity;
         root?.[name]?.addEventListener?.("click", () => {
+          if (window.ShiGaiAnalytics?.isEnabled?.() === false) return;
           const now = performance.now(); if (now - last < 100) return; last = now;
           start();
           if (action === "draw") track("game_draw", { draw_count: ++draws });
@@ -22,15 +23,15 @@
     let wasPlaying = false, wasComplete = !complete.hidden;
     new MutationObserver(() => {
       const playing = board.classList.contains("is-playing");
-      if (playing && !wasPlaying) { start(); roundStart = performance.now(); }
+      if (playing && !wasPlaying && window.ShiGaiAnalytics?.isEnabled?.() !== false) { start(); roundStart = performance.now(); }
       wasPlaying = playing;
       const finished = !complete.hidden;
-      if (finished && !wasComplete) track("game_complete", { duration_ms: Math.max(0, Math.round(performance.now() - roundStart)) });
+      if (finished && !wasComplete && roundStart > 0) track("game_complete", { duration_ms: Math.max(0, Math.round(performance.now() - roundStart)) });
       wasComplete = finished;
     }).observe(board, { attributes: true, attributeFilter: ["class"] });
     new MutationObserver(() => {
       const finished = !complete.hidden;
-      if (finished && !wasComplete) track("game_complete", { duration_ms: Math.max(0, Math.round(performance.now() - roundStart)) });
+      if (finished && !wasComplete && roundStart > 0) track("game_complete", { duration_ms: Math.max(0, Math.round(performance.now() - roundStart)) });
       wasComplete = finished;
     }).observe(complete, { attributes: true, attributeFilter: ["hidden"] });
   });
