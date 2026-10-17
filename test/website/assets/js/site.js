@@ -154,6 +154,7 @@ if (siteFooter) {
     <p>© ${new Date().getFullYear()} ${escapeSiteText(siteBrand.copyright)}</p>`;
 }
 applyWebsiteButtonAssets();
+window.dispatchEvent(new Event("shigai:site-chrome-ready"));
 }
 
 renderSiteChrome();

@@ -85,7 +85,7 @@
     const contract = window.ShiGaiConsentCopy;
     if (!contract || document.querySelector("[data-analytics-preferences]")) return;
     const copy = Object.fromEntries(Object.entries(contract.defaults).map(([key, fallback]) => [key, typeof brand.privacy?.[key] === "string" && brand.privacy[key].trim() ? brand.privacy[key] : fallback]));
-    const stylesheet = document.createElement("link"); stylesheet.rel = "stylesheet"; stylesheet.href = new URL("../css/analytics-consent.css?v=basic-consent-20261017", scriptUrl).href; document.head.append(stylesheet);
+    const stylesheet = document.createElement("link"); stylesheet.rel = "stylesheet"; stylesheet.href = new URL("../css/analytics-consent.css?v=consent-menu-20261017", scriptUrl).href; document.head.append(stylesheet);
     const host = document.createElement("aside"); host.className = "analytics-preferences"; host.dataset.analyticsPreferences = "";
     const panel = document.createElement("section"); panel.className = "analytics-preferences-panel"; panel.hidden = true; panel.setAttribute("aria-labelledby", "analytics-preferences-title");
     const title = document.createElement("h2"); title.id = "analytics-preferences-title"; title.textContent = copy.title;
@@ -97,10 +97,32 @@
     const accept = button(copy.acceptLabel, () => choose("granted")), reject = button(copy.rejectLabel, () => choose("denied"));
     accept.dataset.analyticsChoice = "granted"; reject.dataset.analyticsChoice = "denied"; actions.append(accept, reject);
     const close = button(copy.closeLabel, () => preferences.close()); close.className = "analytics-preferences-close";
-    const opener = button(copy.settingsLabel, showPreferences); opener.className = "analytics-preferences-open"; opener.setAttribute("aria-expanded", "false"); opener.setAttribute("aria-controls", "analytics-preferences-panel"); panel.id = "analytics-preferences-panel";
-    preferences = { open() { panel.hidden = false; opener.setAttribute("aria-expanded", "true"); }, close() { const restore = panel.contains(document.activeElement); panel.hidden = true; opener.setAttribute("aria-expanded", "false"); if (restore) opener.focus(); } };
+    let returnFocus;
+    const opener = button(copy.settingsLabel, () => {
+      const toggle = document.querySelector('.site-menu-toggle, .works-exhibition-menu-button, .characters-menu-button');
+      returnFocus = toggle?.getClientRects().length ? toggle : fallbackMenu?.querySelector("summary") || opener;
+      if (toggle?.getAttribute("aria-expanded") === "true") toggle.click();
+      if (fallbackMenu) fallbackMenu.open = false;
+      showPreferences(); title.focus();
+    });
+    opener.className = "analytics-preferences-open"; opener.setAttribute("aria-expanded", "false"); opener.setAttribute("aria-controls", "analytics-preferences-panel"); panel.id = "analytics-preferences-panel"; title.tabIndex = -1;
+    let fallbackMenu;
+    const mountOpener = () => {
+      const navigation = document.querySelector('#sitePrimaryNav, .works-exhibition-nav');
+      if (navigation) { navigation.append(opener); fallbackMenu?.remove(); fallbackMenu = null; return; }
+      // Standalone game pages have no shared navigation; keep a small collapsed
+      // menu instead of leaving a permanently visible privacy label over gameplay.
+      if (opener.isConnected) return;
+      fallbackMenu = document.createElement("details"); fallbackMenu.className = "analytics-preferences-menu";
+      const menuToggle = document.createElement("summary"); menuToggle.textContent = "☰";
+      menuToggle.setAttribute("aria-label", brand.system?.openMenuLabel || "開啟網站選單");
+      fallbackMenu.append(menuToggle, opener); document.body.append(fallbackMenu);
+      fallbackMenu.addEventListener("keydown", event => { if (event.key === "Escape") { fallbackMenu.open = false; menuToggle.focus(); } });
+    };
+    preferences = { open() { panel.hidden = false; opener.setAttribute("aria-expanded", "true"); }, close() { const restore = panel.contains(document.activeElement); panel.hidden = true; opener.setAttribute("aria-expanded", "false"); if (restore) (returnFocus?.isConnected ? returnFocus : document.querySelector('.site-menu-toggle, .works-exhibition-menu-button, .characters-menu-button') || fallbackMenu?.querySelector("summary"))?.focus(); } };
     panel.addEventListener("keydown", event => { if (event.key === "Escape") { event.preventDefault(); preferences.close(); } });
-    panel.append(title, description, actions, details, close); host.append(panel, opener); document.body.append(host);
+    panel.append(title, description, actions, details, close); host.append(panel); document.body.append(host);
+    mountOpener(); window.addEventListener("shigai:site-chrome-ready", mountOpener);
     if (configured && choice === "unknown") preferences.open();
   }
   const settings = window.ShiGaiWebsiteSettings || fetch(settingsUrl).then(response => response.ok ? response.json() : {}).catch(() => ({}));

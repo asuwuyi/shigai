@@ -3,7 +3,13 @@
 .analytics-preferences [hidden] { display: none !important; }
 .analytics-preferences button { min-height: 44px; padding: 9px 16px; border: 1px solid #6d5337; border-radius: 12px; color: #382b21; background: #f5e8cd; font: inherit; cursor: pointer; pointer-events: auto; }
 .analytics-preferences button:focus-visible, .analytics-preferences summary:focus-visible { outline: 3px solid #327585; outline-offset: 3px; }
-.analytics-preferences .analytics-preferences-open { padding: 6px 12px; background: #f5e8cdeb; font-size: 14px; box-shadow: 0 3px 12px #241b1324; }
+.analytics-preferences-open { min-height: 44px; padding: 11px 12px; border: 0; border-radius: 10px; color: inherit; background: transparent; font: inherit; text-align: start; cursor: pointer; }
+.analytics-preferences-open:hover { background: #e8d5ac66; }
+.analytics-preferences-open:focus-visible, .analytics-preferences-menu summary:focus-visible { outline: 3px solid #327585; outline-offset: 3px; }
+.analytics-preferences-menu { position: fixed; z-index: 10010; top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); color: #382b21; font: 16px/1.5 system-ui, sans-serif; }
+.analytics-preferences-menu > summary { display: grid; place-items: center; width: 44px; height: 44px; margin-left: auto; border: 1px solid #876942; border-radius: 12px; background: #fff4de; cursor: pointer; list-style: none; }
+.analytics-preferences-menu > summary::-webkit-details-marker { display: none; }
+.analytics-preferences-menu[open] > .analytics-preferences-open { display: block; margin-top: 8px; border: 1px solid #876942; background: #fff4de; }
 .analytics-preferences-panel { max-height: min(650px, calc(100svh - 90px)); margin-bottom: 8px; padding: 20px; overflow: auto; overscroll-behavior: contain; border: 1px solid #876942; border-radius: 18px; background: #fff4de; box-shadow: 0 10px 35px #241b1333; pointer-events: auto; }
 .analytics-preferences-panel h2 { margin: 0 0 10px; color: inherit; font: 700 20px/1.4 system-ui, sans-serif; }
 .analytics-preferences-panel p { margin: 0 0 14px; color: inherit; font: inherit; }
