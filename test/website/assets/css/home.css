@@ -141,11 +141,28 @@ body[data-page="home"] { width: 100%; min-height: 100vh; min-height: 100dvh; ove
 .home-living-section[data-home-section="archive-discovery"] .home-living-more { color: #684626; }
 .home-journal-entry { position: relative; display: grid; width: min(calc(100% - (var(--page-gutter) * 2)), 1240px); max-width: 1240px; gap: clamp(24px, 4vw, 60px); align-items: center; margin: 0 auto; padding: 0 0 clamp(40px, 5vw, 64px); border: 0; background: transparent; }
 .home-journal-media { position: relative; display: grid; min-height: 0; margin: 0; padding: clamp(12px, 2vw, 28px); place-items: center; background: transparent; }
-.home-journal-artwork { display: block; width: min(82%, 720px); max-width: min(82%, 720px); background: transparent; }
+.home-journal-artwork { display: block; width: min(82%, 720px); max-width: min(82%, 720px); background: transparent; container-type: inline-size; overflow: visible; }
 .home-journal-artwork .work-media { --salon-frame-width: clamp(18px, 5.5vw, 48px); width: 100%; background: transparent; filter: none; }
 .home-journal-artwork .work-media::after { filter: drop-shadow(0 12px 20px rgba(27,17,11,.16)) drop-shadow(0 26px 42px rgba(27,17,11,.09)); }
 .home-journal-artwork .work-frame-opening::after { box-shadow: none; }
 .home-journal-artwork .work-frame-opening img, .home-journal-artwork .work-frame-opening video { max-height: min(58dvh, 640px); }
+/* Reserve the complete opening, then place only the calibrated frame around it.
+   Alpha gutters extend outwards rather than compressing the visible frame edge. */
+.home-journal-artwork:not([data-frame="none"]):not([data-frame="13"]):not([data-frame="14"]):not([data-frame-shape="circle"]):not([data-frame-shape="oval"]) .work-media {
+  --salon-frame-width: clamp(22px, 7cqw, 38px);
+  --frame-top: calc(var(--salon-frame-width) * var(--frame-top-scale, 1));
+  --frame-right: calc(var(--salon-frame-width) * var(--frame-right-scale, 1));
+  --frame-bottom: calc(var(--salon-frame-width) * var(--frame-bottom-scale, 1));
+  --frame-left: calc(var(--salon-frame-width) * var(--frame-left-scale, 1));
+  box-sizing: border-box; padding: var(--salon-frame-width); overflow: visible;
+}
+.home-journal-artwork:not([data-frame="none"]):not([data-frame="13"]):not([data-frame="14"]):not([data-frame-shape="circle"]):not([data-frame-shape="oval"]) .work-media::after {
+  inset: calc(var(--salon-frame-width) - var(--frame-top)) calc(var(--salon-frame-width) - var(--frame-right)) calc(var(--salon-frame-width) - var(--frame-bottom)) calc(var(--salon-frame-width) - var(--frame-left));
+  border-width: var(--frame-top) var(--frame-right) var(--frame-bottom) var(--frame-left);
+  border-image-slice: var(--salon-frame-slice, var(--custom-frame-opening-inset, 20%));
+}
+.home-journal-artwork:not([data-frame="none"]):not([data-frame="13"]):not([data-frame="14"]):not([data-frame-shape="circle"]):not([data-frame-shape="oval"]) .work-frame-opening { margin: 0; background: transparent; }
+.home-journal-artwork:not([data-frame="none"]):not([data-frame="13"]):not([data-frame="14"]):not([data-frame-shape="circle"]):not([data-frame-shape="oval"]) .work-frame-opening :is(img, video) { height: auto; max-height: none; }
 .home-journal-copy { position: relative; align-self: center; width: auto; margin: 0; padding: clamp(28px, 4vw, 46px); color: #3d2b20; background-color: #f4e7c5; background-image: linear-gradient(rgba(255,255,255,.28), transparent 35%), repeating-linear-gradient(0deg, transparent 0 29px, rgba(116,82,50,.075) 29px 30px); border: 1px solid rgba(99,67,38,.2); box-shadow: 0 10px 26px rgba(27,17,11,.14); }
 .home-journal-copy::before { position: absolute; top: -13px; left: 50%; width: 92px; height: 28px; background: rgba(232,207,150,.78); border-right: 1px solid rgba(114,78,38,.12); border-left: 1px solid rgba(114,78,38,.12); content: ""; transform: translateX(-50%) rotate(-2deg); }
 .home-journal-body { max-width: 62ch; }

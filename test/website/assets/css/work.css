@@ -29,18 +29,7 @@
 .work-detail-media { --detail-frame-width: clamp(30px, 4.4vw, 72px); --salon-opening-inset: var(--detail-frame-width); position: relative; isolation: isolate; display: inline-grid; width: fit-content; max-width: 100%; min-height: 0; padding: 0; overflow: hidden; place-items: center; background: var(--salon-frame) center / 100% 100% no-repeat; border: 0; border-radius: 0; box-shadow: none; filter: drop-shadow(0 10px 12px rgba(27,17,11,.34)) drop-shadow(0 24px 26px rgba(27,17,11,.18)); }
 .work-frame-overlay { position: absolute; z-index: 20; inset: 0; border: var(--detail-frame-width) solid transparent; border-image-source: var(--salon-frame); border-image-slice: 28%; border-image-width: 1; border-image-repeat: stretch; pointer-events: none; }
 .work-detail-media .work-frame-opening { position: relative; z-index: 1; max-width: 100%; contain: paint; }
-.work-detail-media[data-frame="01"] { --detail-frame-slice: 19.14% 16.91% 19.38% 16.91%; }
-.work-detail-media[data-frame="02"] { --detail-frame-slice: 19.62% 18.02% 20.41% 18.10%; }
-.work-detail-media[data-frame="03"] { --detail-frame-slice: 18.74% 18.34% 19.30% 18.34%; }
-.work-detail-media[data-frame="04"] { --detail-frame-slice: 17.54% 17.70% 17.94% 17.62%; }
-.work-detail-media[data-frame="05"] { --detail-frame-slice: 18.75% 15.04% 18.75% 15.04%; }
-.work-detail-media[data-frame="06"] { --detail-frame-slice: 22.41% 14.75% 23.60% 14.83%; }
-.work-detail-media[data-frame="07"] { --detail-frame-slice: 18.55% 19.27% 18.75% 19.40%; }
-.work-detail-media[data-frame="08"] { --detail-frame-slice: 19.73% 16.99% 20.31% 16.99%; }
-.work-detail-media[data-frame="09"] { --detail-frame-slice: 19.63% 21.22% 21.58% 21.35%; }
-.work-detail-media[data-frame="10"] { --detail-frame-slice: 16.11% 21.94% 19.04% 22.01%; }
-.work-detail-media[data-frame="11"] { --detail-frame-slice: 12.60% 10.05% 12.84% 9.97%; }
-.work-detail-media[data-frame="12"] { --detail-frame-slice: 19.14% 21.35% 19.34% 21.29%; }
+.work-detail-media { --detail-frame-slice: var(--salon-frame-slice, 20%); }
 .work-detail-media:not([data-frame="none"]):not([data-frame="13"]):not([data-frame="14"]):not([data-frame-shape="circle"]):not([data-frame-shape="oval"]) { box-sizing: content-box; overflow: visible; background: transparent; border: var(--detail-frame-width) solid transparent; border-image-source: var(--salon-frame); border-image-slice: var(--detail-frame-slice, 20%); border-image-width: 1; border-image-repeat: stretch; filter: drop-shadow(0 7px 9px rgba(27,17,11,.22)) drop-shadow(0 16px 20px rgba(27,17,11,.12)); }
 .work-detail-media:not([data-frame="none"]):not([data-frame="13"]):not([data-frame="14"]):not([data-frame-shape="circle"]):not([data-frame-shape="oval"]) .work-frame-opening { display: grid; width: fit-content; max-width: 100%; margin: 0; background: transparent; }
 .work-detail-media:not([data-frame="none"]):not([data-frame="13"]):not([data-frame="14"]):not([data-frame-shape="circle"]):not([data-frame-shape="oval"]) .work-frame-overlay { display: none; }
