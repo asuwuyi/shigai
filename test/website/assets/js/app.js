@@ -167,10 +167,10 @@ function applyWorksCopy() {
   const copy = state.copy;
   document.querySelector(".works-menu-header span").textContent = copy.archiveLabel;
   document.querySelector(".works-menu-header strong").textContent = copy.menuTitle;
-  const labels = document.querySelectorAll(".works-menu-section-label");
-  if (labels[0]) labels[0].textContent = copy.navigationLabel;
-  if (labels[1]) labels[1].textContent = copy.searchLabel;
-  if (labels[2]) labels[2].textContent = copy.quickPageLabel;
+  document.querySelector('[data-browse-label="search"]').textContent = copy.searchLabel;
+  document.querySelector('[data-browse-label="pages"]').textContent = copy.quickPageLabel;
+  elements.mobileSearchButton.textContent = copy.searchLabel;
+  elements.mobileSearchButton.setAttribute("aria-label", copy.searchLabel);
   elements.search.placeholder = copy.searchPlaceholder;
   elements.clearFilters.textContent = copy.clearFilters;
   elements.firstPage.textContent = copy.firstPage; elements.previousPage.textContent = copy.previousPage;
@@ -434,10 +434,16 @@ elements.menuPreviousPage.addEventListener("click", () => { goToPage(state.page 
 elements.menuNextPage.addEventListener("click", () => { goToPage(state.page + 1); closeWorksMenu(); });
 elements.menuPageSelect.addEventListener("change", () => { goToPage(Number(elements.menuPageSelect.value)); closeWorksMenu(); });
 elements.mobileSearchButton.addEventListener("click", () => {
+  document.querySelector('.site-menu-toggle[aria-expanded="true"]')?.click();
   const isOpen = elements.browsePanel.classList.toggle("is-open");
   elements.mobileSearchButton.setAttribute("aria-expanded", String(isOpen));
 });
 elements.closeMenu.addEventListener("click", closeWorksMenu);
+window.addEventListener("shigai:navigation-open", closeWorksMenu);
+elements.browsePanel.addEventListener("keydown", event => {
+  if (event.key !== "Escape") return;
+  event.preventDefault(); closeWorksMenu(); elements.mobileSearchButton.focus();
+});
 elements.corridorScene?.addEventListener("click", handleCorridorInteraction);
 elements.corridorScene?.addEventListener("keydown", (event) => {
   if (event.key === "Enter" || event.key === " ") { event.preventDefault(); handleCorridorInteraction(event); }

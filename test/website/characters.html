@@ -9,20 +9,21 @@
   <title>Characters · Shi-Gai</title>
   <link rel="icon" type="image/png" href="assets/images/brand-icon.png">
   <link rel="stylesheet" href="assets/css/style.css?v=characters-exhibition-1">
-  <link rel="stylesheet" href="assets/css/site.css?v=scroll-menu-20261018">
+  <link rel="stylesheet" href="assets/css/site.css?v=shared-world-menu-20261019">
   <link rel="stylesheet" href="assets/css/characters.css?v=characters-exhibition-1">
   <script src="assets/js/settings.js?v=shared-settings-1"></script>
   <script src="../shared/analytics-consent-copy.js?v=basic-consent-20261017"></script>
   <script src="assets/js/analytics.js?v=scroll-menu-20261018"></script>
-  <script src="assets/js/site.js?v=scroll-menu-20261018" defer></script>
+  <script src="assets/js/site.js?v=shared-world-menu-20261019" defer></script>
   <meta name="robots" content="noindex,nofollow">
 </head>
 <body data-page="characters">
+  <header class="site-header" data-site-header></header>
   <main class="characters-main">
     <h1 id="pageTitle" class="visually-hidden">角色 Characters</h1>
-    <button id="characterMenuButton" class="characters-menu-button" type="button" aria-label="開啟角色導覽與搜尋" aria-expanded="false">☰</button>
-    <section id="characterMenu" class="characters-menu" aria-label="角色導覽與搜尋">
-      <nav class="works-exhibition-nav" aria-label="主要導覽"><a href="index.html" data-site-nav="home">Home</a><a href="journal.html" data-site-nav="journal">Journal</a><a href="works.html" data-site-nav="works">Works</a><a href="characters.html" data-site-nav="characters" aria-current="page">Characters</a><a href="games.html" data-site-nav="games">Games</a><a href="about.html" data-site-nav="about">作者工作室</a></nav>
+    <button id="characterMenuButton" class="page-browse-toggle" type="button" aria-controls="characterMenu" aria-label="搜尋角色名稱" aria-expanded="false">搜尋角色名稱</button>
+    <section id="characterMenu" class="page-browse-panel" aria-label="角色搜尋">
+      <h2 id="characterMenuTitle">角色 Characters</h2>
       <label class="search-field site-search-field character-search" for="characterSearch"><span aria-hidden="true">⌕</span><input id="characterSearch" type="search" placeholder="搜尋角色名稱" autocomplete="off"></label>
       <p id="characterSummary" class="result-summary" aria-live="polite"></p>
     </section>
@@ -53,6 +54,6 @@
   </template>
 
   <script src="assets/js/work-order.js"></script>
-  <script src="assets/js/characters.js?v=storage-fallback-20261018"></script>
+  <script src="assets/js/characters.js?v=shared-world-menu-20261019"></script>
 </body>
 </html>

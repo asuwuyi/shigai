@@ -129,7 +129,8 @@ async function loadCharacters() {
     let menuTitle = document.getElementById("characterMenuTitle");
     if (!menuTitle) { menuTitle = document.createElement("h2"); menuTitle.id = "characterMenuTitle"; elements.menu.prepend(menuTitle); }
     window.ShiGaiVisualText?.apply(menuTitle, state.copy.pageTitle, settings?.websiteBrand?.visualTitles?.characters);
-    elements.menuButton.setAttribute("aria-label", state.copy.menuLabel);
+    elements.menuButton.textContent = state.copy.searchPlaceholder;
+    elements.menuButton.setAttribute("aria-label", state.copy.searchPlaceholder);
     elements.search.placeholder = state.copy.searchPlaceholder;
     elements.empty.querySelector("h2").textContent = state.copy.emptyTitle;
     elements.empty.querySelector("p").textContent = state.copy.emptyBody;
@@ -156,8 +157,17 @@ elements.search.addEventListener("keydown", (event) => {
   if (event.key === "Escape") { elements.search.value = ""; renderCharacters(); elements.search.blur(); }
 });
 elements.menuButton.addEventListener("click", () => {
+  document.querySelector('.site-menu-toggle[aria-expanded="true"]')?.click();
   const open = elements.menu.classList.toggle("is-open");
   elements.menuButton.setAttribute("aria-expanded", String(open));
+});
+window.addEventListener("shigai:navigation-open", () => {
+  if (elements.menu.contains(document.activeElement)) document.activeElement.blur();
+  elements.menu.classList.remove("is-open"); elements.menuButton.setAttribute("aria-expanded", "false");
+});
+elements.menu.addEventListener("keydown", event => {
+  if (event.key !== "Escape") return;
+  event.preventDefault(); elements.menu.classList.remove("is-open"); elements.menuButton.setAttribute("aria-expanded", "false"); elements.menuButton.focus();
 });
 document.addEventListener("click", (event) => {
   if (!elements.menu.classList.contains("is-open") || elements.menu.contains(event.target) || elements.menuButton.contains(event.target)) return;

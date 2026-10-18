@@ -110,7 +110,7 @@ function applyWebsiteButtonAssets() {
 // consent remain in their original DOM and keep their original event handlers.
 const scrollMenuBindings = new WeakMap();
 function applyScrollMenus() {
-  const pairs = [[".site-menu-toggle", "#sitePrimaryNav"], [".works-exhibition-menu-button", ".works-exhibition-menu"], [".characters-menu-button", ".characters-menu"]];
+  const pairs = [[".site-menu-toggle", "#sitePrimaryNav"]];
   pairs.forEach(([buttonSelector, panelSelector]) => {
     const button = document.querySelector(buttonSelector), panel = document.querySelector(panelSelector);
     if (!button || !panel) return;
@@ -189,6 +189,7 @@ if (siteHeader) {
     if (!menuButton.querySelector(".scroll-menu-icon")) menuButton.textContent = "☰";
   };
   const openMenu = () => {
+    window.dispatchEvent(new Event("shigai:navigation-open"));
     navigation.classList.add("is-open");
     menuButton.setAttribute("aria-expanded", "true");
     menuButton.setAttribute("aria-label", siteBrand.system.closeMenuLabel);
