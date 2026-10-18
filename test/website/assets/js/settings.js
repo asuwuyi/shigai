@@ -1,4 +1,4 @@
 // One read-only settings request shared by every script on the current page.
-window.ShiGaiWebsiteSettings = fetch("../database/website/settings.json")
+window.ShiGaiWebsiteSettings = fetch(new URL("../../../database/website/settings.json", document.currentScript.src))
   .then((response) => response.ok ? response.json() : {})
   .catch(() => ({}));

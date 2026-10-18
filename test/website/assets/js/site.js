@@ -1,6 +1,8 @@
 // Shared Shi-Gai Website navigation and footer. No data is written or persisted.
 const sitePage = document.body.dataset.page || "home";
-const siteHeader = document.querySelector("[data-site-header]");
+const siteWebsiteRoot = new URL("../../", document.currentScript.src);
+const siteEmbedded = window.parent !== window && new URLSearchParams(location.search).get("embed") === "home";
+const siteHeader = siteEmbedded ? null : document.querySelector("[data-site-header]");
 const siteFooter = document.querySelector("[data-site-footer]");
 const siteReviewMode = new URLSearchParams(window.location.search).get("review") === "1";
 let siteBrand = { siteName: "Shi-Gai", icon: "", nav: { home: "Home", journal: "Journal", works: "Works", characters: "Characters", games: "Games", about: "作者工作室" }, pages: { journal: true, works: true, characters: true, games: true, about: false }, controls: { globalBrand: true, homeNavigation: true, journalNavigation: true, worksNavigation: true, charactersNavigation: true, gamesNavigation: true, aboutNavigation: true }, analytics: { enabled: false, provider: "gtm", containerId: "" }, system: { homeSuffix: "首頁", openMenuLabel: "開啟網站選單", closeMenuLabel: "關閉網站選單", primaryNavigationLabel: "主要導覽", footerNavigationLabel: "頁尾導覽" }, footerName: "Shi-Gai", copyright: "Shi-Gai" };
@@ -14,10 +16,9 @@ const siteLinks = [
 ];
 
 function siteHref(href) {
-  if (!siteReviewMode) return href;
-  const url = new URL(href, document.baseURI);
-  url.searchParams.set("review", "1");
-  return `${url.pathname.split("/").pop()}?${url.searchParams.toString()}`;
+  const url = new URL(href, siteWebsiteRoot);
+  if (siteReviewMode) url.searchParams.set("review", "1");
+  return new URL("./", location.href).href === siteWebsiteRoot.href ? `${url.pathname.split("/").pop()}${url.search}` : url.href;
 }
 
 function escapeSiteText(value) {
@@ -43,7 +44,7 @@ window.ShiGaiVisualText = Object.freeze({
     }
     element.replaceChildren(document.createTextNode(title));
     if (settings.mode === "text") return;
-    const source = (asset) => typeof asset === "string" && asset.startsWith("assets/") && !asset.split("/").includes("..") ? new URL(`../${asset}`, document.baseURI).href : "";
+    const source = (asset) => siteAssetSource(asset);
     const asset = source(settings.asset);
     if (!asset) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
@@ -80,9 +81,9 @@ window.ShiGaiVisualText = Object.freeze({
 });
 
 function brandIconSource() {
-  return siteBrand.icon.startsWith("assets/") && !siteBrand.icon.split("/").includes("..") ? `../${siteBrand.icon}` : "assets/images/brand-icon.png";
+  return siteAssetSource(siteBrand.icon) || new URL("assets/images/brand-icon.png", siteWebsiteRoot).href;
 }
-function siteAssetSource(source) { return source?.startsWith("assets/") && !source.split("/").includes("..") ? `../${source}` : ""; }
+function siteAssetSource(source) { return typeof source === "string" && source.startsWith("assets/") && !source.split("/").includes("..") ? new URL(`../${source}`, siteWebsiteRoot).href : ""; }
 function siteChromeLinks(href) {
   return [siteHeader, siteFooter].flatMap((root) => root ? [...root.querySelectorAll(`a[href^="${href}"]`)] : []);
 }
@@ -115,8 +116,8 @@ function applyScrollMenus() {
     const button = document.querySelector(buttonSelector), panel = document.querySelector(panelSelector);
     if (!button || !panel) return;
     scrollMenuBindings.get(button)?.disconnect();
-    const closedSource = siteAssetSource(siteBrand.buttonAssets?.menu?.fallbackAsset || siteBrand.buttonAssets?.menu?.asset) || "assets/images/menu-closed-side-20261018.webp";
-    const openSource = siteAssetSource(siteBrand.buttonAssets?.menuOpen?.fallbackAsset || siteBrand.buttonAssets?.menuOpen?.asset) || "assets/images/menu-open-side-20261018.webp";
+    const closedSource = siteAssetSource(siteBrand.buttonAssets?.menu?.fallbackAsset || siteBrand.buttonAssets?.menu?.asset) || new URL("assets/images/menu-closed-side-20261018.webp", siteWebsiteRoot).href;
+    const openSource = siteAssetSource(siteBrand.buttonAssets?.menuOpen?.fallbackAsset || siteBrand.buttonAssets?.menuOpen?.asset) || new URL("assets/images/menu-open-side-20261018.webp", siteWebsiteRoot).href;
     let content = panel.querySelector(":scope > .scroll-menu-content");
     if (!content) {
       content = document.createElement("div"); content.className = "scroll-menu-content";
