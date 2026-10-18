@@ -4,8 +4,6 @@
 html:has(body[data-page="games"]), body[data-page="games"] { width: 100%; height: 100%; overflow: hidden; }
 body[data-page="games"] { min-width: 0; margin: 0; background: #24150e; }
 .games-main { position: relative; width: 100%; height: 100dvh; margin: 0; overflow: hidden; background: linear-gradient(rgba(31,19,12,.12), rgba(31,19,12,.34)), var(--works-wallpaper, #4b3026) center / cover fixed; }
-.games-home-return { position: fixed; z-index: 20; top: max(16px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left)); display: inline-flex; min-height: 38px; align-items: center; padding: 7px 11px; color: #f8f0e4; background: rgba(44,28,17,.72); border: 1px solid rgba(245,222,171,.42); border-radius: 999px; box-shadow: 0 6px 16px rgba(18,9,4,.25); font-size: 13px; font-weight: 800; text-decoration: none; backdrop-filter: blur(8px); }
-.games-home-return:hover { background: rgba(75,47,28,.86); }
 
 .games-room { position: relative; height: 100dvh; padding: clamp(68px, 7vh, 90px) clamp(16px, 5vw, 72px) clamp(46px, 6vw, 94px); overflow: hidden; }
 .games-room-heading { position: relative; z-index: 2; margin: 0 auto 8px; color: #f8f0e4; text-align: center; }

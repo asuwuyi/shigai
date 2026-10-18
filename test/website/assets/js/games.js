@@ -111,7 +111,6 @@
     document.querySelector(".games-room-heading .eyebrow").textContent = copy.eyebrow;
     document.getElementById("gamesTitle").textContent = copy.title;
     window.ShiGaiVisualText?.apply(document.getElementById("gamesTitle"), copy.title, settings?.websiteBrand?.visualTitles?.games);
-    const home = document.querySelector(".games-home-return"); home.textContent = copy.homeLabel; home.setAttribute("aria-label", copy.homeAriaLabel);
     previous.setAttribute("aria-label", copy.previousLabel); next.setAttribute("aria-label", copy.nextLabel);
     choices.setAttribute("aria-label", copy.selectLabel); state.textContent = copy.loadingLabel;
     const [gamesResponse, scenesResponse] = await Promise.all([fetch("../database/website/games.json"), fetch("../database/website/scenes.json").catch(() => ({ ok: false }))]);

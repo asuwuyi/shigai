@@ -154,9 +154,10 @@ body .page-browse-panel.is-open { display: flex; }
 body .works-page-picker select, body #menuPageSelect { appearance: none; -webkit-appearance: none; min-height: 44px; padding-inline: 28px; text-align: center; text-align-last: center; line-height: 1.2; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%234f3d2d' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-size: 10px 7px; background-position: right 10px center; }
 .works-page-picker select option, #menuPageSelect option { text-align: center; }
 body #closeWorksMenu, body #menuPreviousPage, body #menuNextPage, body .games-tv-arrow, body .work-side-navigation:not(.has-custom-button-media) { display: inline-grid; place-items: center; padding: 0; font-size: 0; line-height: 1; }
-body #closeWorksMenu::before, body #menuPreviousPage::before, body #menuNextPage::before, body .games-tv-arrow::before, body .work-side-navigation:not(.has-custom-button-media)::before { content: ""; display: block; width: 22px; height: 22px; background: currentColor; -webkit-mask: var(--control-arrow) center / contain no-repeat; mask: var(--control-arrow) center / contain no-repeat; }
+body #closeWorksMenu, body #menuPreviousPage, body #menuNextPage, body .games-tv-arrow { position: relative; }
+body #closeWorksMenu::before, body #menuPreviousPage::before, body #menuNextPage::before, body .games-tv-arrow::before, body .work-side-navigation:not(.has-custom-button-media)::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(var(--control-turn, 0deg)); display: block; width: 22px; height: 22px; background: currentColor; -webkit-mask: var(--control-arrow) center / contain no-repeat; mask: var(--control-arrow) center / contain no-repeat; pointer-events: none; }
 body #closeWorksMenu::before { -webkit-mask-image: var(--control-x); mask-image: var(--control-x); }
-#menuNextPage::before, .games-tv-next::before, .work-side-next::before { transform: rotate(180deg); }
+#menuNextPage, .games-tv-next, .work-side-next { --control-turn: 180deg; }
 body[data-standalone-game] .site-header { font: 800 16px/1.2 system-ui,sans-serif; }
 html[data-game-embed="home"] body[data-standalone-game] > .site-header { display: none; }
 body[data-standalone-game] #closeLevels { width: 44px; height: 44px; display: grid; place-items: center; padding: 0; }
