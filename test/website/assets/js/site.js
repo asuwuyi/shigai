@@ -90,7 +90,8 @@ function allSiteNavigationLinks(id, href) {
   return [...new Set([...siteChromeLinks(href), ...document.querySelectorAll(`[data-site-nav="${id}"]`)])];
 }
 function applyWebsiteButtonAssets() {
-  const selectors = { menu: ".site-menu-toggle, .works-exhibition-menu-button, .characters-menu-button", back: ".back-to-gallery", previous: ".work-side-previous, #previousPage", next: ".work-side-next, #nextPage" };
+  applyScrollMenus();
+  const selectors = { back: ".back-to-gallery", previous: ".work-side-previous, #previousPage", next: ".work-side-next, #nextPage" };
   Object.entries(selectors).forEach(([id, selector]) => {
     const source = siteAssetSource(siteBrand.buttonAssets?.[id]?.asset);
     document.querySelectorAll(selector).forEach((button) => {
@@ -102,6 +103,62 @@ function applyWebsiteButtonAssets() {
       if (media.tagName === "VIDEO") { media.autoplay = true; media.loop = true; media.muted = true; media.playsInline = true; }
       button.append(media);
     });
+  });
+}
+
+// One presentation adapter for existing navigation owners; routes, filters and
+// consent remain in their original DOM and keep their original event handlers.
+const scrollMenuBindings = new WeakMap();
+function applyScrollMenus() {
+  const pairs = [[".site-menu-toggle", "#sitePrimaryNav"], [".works-exhibition-menu-button", ".works-exhibition-menu"], [".characters-menu-button", ".characters-menu"]];
+  pairs.forEach(([buttonSelector, panelSelector]) => {
+    const button = document.querySelector(buttonSelector), panel = document.querySelector(panelSelector);
+    if (!button || !panel) return;
+    scrollMenuBindings.get(button)?.disconnect();
+    const closedSource = siteAssetSource(siteBrand.buttonAssets?.menu?.fallbackAsset || siteBrand.buttonAssets?.menu?.asset) || "assets/images/menu-closed-side-20261018.webp";
+    const openSource = siteAssetSource(siteBrand.buttonAssets?.menuOpen?.fallbackAsset || siteBrand.buttonAssets?.menuOpen?.asset) || "assets/images/menu-open-side-20261018.webp";
+    let content = panel.querySelector(":scope > .scroll-menu-content");
+    if (!content) {
+      content = document.createElement("div"); content.className = "scroll-menu-content";
+      content.append(...panel.childNodes); panel.append(content);
+    }
+    panel.querySelector(":scope > .scroll-menu-art")?.remove();
+    panel.querySelector(":scope > .scroll-menu-paper")?.remove();
+    const art = document.createElement("img"); art.className = "scroll-menu-art"; art.alt = ""; art.setAttribute("aria-hidden", "true");
+    art.addEventListener("load", () => panel.classList.add("has-scroll-paper"));
+    art.addEventListener("error", () => panel.classList.remove("has-scroll-paper"));
+    art.src = openSource;
+    const paper = document.createElement("span"); paper.className = "scroll-menu-paper"; paper.setAttribute("aria-hidden", "true");
+    const sheet = document.createElement("img"); sheet.className = "scroll-menu-paper-art"; sheet.alt = ""; sheet.src = openSource;
+    paper.append(sheet); panel.prepend(art, paper);
+    panel.classList.add("scroll-menu-panel");
+    const sync = () => {
+      const open = panel.classList.contains("is-open");
+      if (panel.id === "sitePrimaryNav") panel.style.setProperty("--scroll-menu-rows", String([...content.children].filter(node => node.matches("a, button") && !node.hidden).length || 6));
+      button.classList.toggle("is-scroll-menu-open", open && panel.classList.contains("has-scroll-paper"));
+      button.setAttribute("aria-label", open ? siteBrand.system.closeMenuLabel : siteBrand.system.openMenuLabel);
+      if (!button.querySelector(".scroll-menu-icon")) {
+        button.replaceChildren(document.createTextNode(open ? "×" : "☰"));
+        const icon = document.createElement("img"); icon.className = "scroll-menu-icon"; icon.alt = ""; icon.setAttribute("aria-hidden", "true");
+        icon.addEventListener("load", () => button.classList.add("has-scroll-icon"));
+        icon.addEventListener("error", () => { button.classList.remove("has-scroll-icon"); icon.remove(); });
+        button.append(icon);
+      }
+      const icon = button.querySelector(".scroll-menu-icon");
+      const source = open && panel.classList.contains("has-scroll-paper") ? openSource : closedSource;
+      if (icon && icon.getAttribute("src") !== source) icon.src = source;
+    };
+    const observer = new MutationObserver(sync);
+    observer.observe(panel, { attributes: true, attributeFilter: ["class"] });
+    observer.observe(content, { childList: true });
+    scrollMenuBindings.set(button, observer); sync();
+    if (!button.dataset.scrollMenuBound) {
+      button.dataset.scrollMenuBound = "true";
+      panel.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape" || !panel.classList.contains("is-open") || event.defaultPrevented) return;
+        event.preventDefault(); button.click(); button.focus();
+      });
+    }
   });
 }
 
@@ -129,18 +186,19 @@ if (siteHeader) {
     navigation.classList.remove("is-open");
     menuButton.setAttribute("aria-expanded", "false");
     menuButton.setAttribute("aria-label", siteBrand.system.openMenuLabel);
-    if (!menuButton.classList.contains("has-custom-button-media")) menuButton.textContent = "☰";
+    if (!menuButton.querySelector(".scroll-menu-icon")) menuButton.textContent = "☰";
   };
   const openMenu = () => {
     navigation.classList.add("is-open");
     menuButton.setAttribute("aria-expanded", "true");
     menuButton.setAttribute("aria-label", siteBrand.system.closeMenuLabel);
-    if (!menuButton.classList.contains("has-custom-button-media")) menuButton.textContent = "×";
+    if (!menuButton.querySelector(".scroll-menu-icon")) menuButton.textContent = "×";
   };
   menuButton.addEventListener("click", () => navigation.classList.contains("is-open") ? closeMenu() : openMenu());
   navigation.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && navigation.classList.contains("is-open")) {
+      event.preventDefault();
       closeMenu();
       menuButton.focus();
     }

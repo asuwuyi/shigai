@@ -109,7 +109,7 @@
     let fallbackMenu;
     const mountOpener = () => {
       const navigation = document.querySelector('#sitePrimaryNav, .works-exhibition-nav');
-      if (navigation) { navigation.append(opener); fallbackMenu?.remove(); fallbackMenu = null; return; }
+      if (navigation) { (navigation.querySelector(":scope > .scroll-menu-content") || navigation).append(opener); fallbackMenu?.remove(); fallbackMenu = null; return; }
       // Standalone game pages have no shared navigation; keep a small collapsed
       // menu instead of leaving a permanently visible privacy label over gameplay.
       if (opener.isConnected) return;

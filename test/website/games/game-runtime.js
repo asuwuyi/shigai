@@ -15,8 +15,12 @@
   document.documentElement.dataset.gameLayout = mobile ? "mobile" : "desktop";
   const wallpapers = ["burgundy-01", "sage-02", "navy-03", "ochre-04"];
   const wallpaperKey = "shi-gai:works-wallpaper:v1";
-  let wallpaper = sessionStorage.getItem(wallpaperKey);
-  if (!wallpapers.includes(wallpaper)) { wallpaper = wallpapers[Math.floor(Math.random() * wallpapers.length)]; sessionStorage.setItem(wallpaperKey, wallpaper); }
+  let wallpaper = wallpapers[0];
+  try {
+    const stored = sessionStorage.getItem(wallpaperKey);
+    if (wallpapers.includes(stored)) wallpaper = stored;
+    else { wallpaper = wallpapers[Math.floor(Math.random() * wallpapers.length)]; sessionStorage.setItem(wallpaperKey, wallpaper); }
+  } catch { wallpaper = wallpapers[0]; } // Decoration must never block gameplay.
   body.style.setProperty("--game-wallpaper", `url("../assets/images/wallpapers/salon-wallpaper-${wallpaper}.webp")`);
   [container, canvas, overlay, preloader].forEach((element) => { element.style.width = `${width}px`; element.style.height = `${height}px`; });
   canvas.width = width; canvas.height = height;

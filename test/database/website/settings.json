@@ -52,7 +52,7 @@
         "fallbackAsset": "",
         "mobileAsset": "",
         "mobileFallbackAsset": "",
-        "mode": "asset",
+        "mode": "text",
         "mobileWidth": 280,
         "desktopWidth": 480
       },
@@ -61,7 +61,7 @@
         "fallbackAsset": "",
         "mobileAsset": "",
         "mobileFallbackAsset": "",
-        "mode": "asset",
+        "mode": "text",
         "mobileWidth": 280,
         "desktopWidth": 480
       },
@@ -70,7 +70,7 @@
         "fallbackAsset": "",
         "mobileAsset": "",
         "mobileFallbackAsset": "",
-        "mode": "asset",
+        "mode": "text",
         "mobileWidth": 280,
         "desktopWidth": 480
       },
@@ -79,7 +79,7 @@
         "fallbackAsset": "",
         "mobileAsset": "",
         "mobileFallbackAsset": "",
-        "mode": "asset",
+        "mode": "text",
         "mobileWidth": 280,
         "desktopWidth": 480
       },
@@ -88,7 +88,7 @@
         "fallbackAsset": "",
         "mobileAsset": "",
         "mobileFallbackAsset": "",
-        "mode": "asset",
+        "mode": "text",
         "mobileWidth": 280,
         "desktopWidth": 480
       },
@@ -97,7 +97,7 @@
         "fallbackAsset": "",
         "mobileAsset": "",
         "mobileFallbackAsset": "",
-        "mode": "asset",
+        "mode": "text",
         "mobileWidth": 280,
         "desktopWidth": 480
       },
@@ -106,7 +106,7 @@
         "fallbackAsset": "",
         "mobileAsset": "",
         "mobileFallbackAsset": "",
-        "mode": "asset",
+        "mode": "text",
         "mobileWidth": 280,
         "desktopWidth": 480
       },
@@ -115,7 +115,7 @@
         "fallbackAsset": "",
         "mobileAsset": "",
         "mobileFallbackAsset": "",
-        "mode": "asset",
+        "mode": "text",
         "mobileWidth": 280,
         "desktopWidth": 480
       },
@@ -124,7 +124,7 @@
         "fallbackAsset": "",
         "mobileAsset": "",
         "mobileFallbackAsset": "",
-        "mode": "asset",
+        "mode": "text",
         "mobileWidth": 280,
         "desktopWidth": 480
       },
@@ -133,7 +133,7 @@
         "fallbackAsset": "",
         "mobileAsset": "",
         "mobileFallbackAsset": "",
-        "mode": "asset",
+        "mode": "text",
         "mobileWidth": 280,
         "desktopWidth": 480
       },
@@ -142,7 +142,7 @@
         "fallbackAsset": "",
         "mobileAsset": "",
         "mobileFallbackAsset": "",
-        "mode": "asset",
+        "mode": "text",
         "mobileWidth": 280,
         "desktopWidth": 480
       },
@@ -151,7 +151,7 @@
         "fallbackAsset": "",
         "mobileAsset": "",
         "mobileFallbackAsset": "",
-        "mode": "asset",
+        "mode": "text",
         "mobileWidth": 280,
         "desktopWidth": 480
       }
@@ -347,7 +347,7 @@
       }
     },
     "homeCompanion": {
-      "enabled": true,
+      "enabled": false,
       "motion": "straight",
       "items": [
         {
@@ -458,7 +458,7 @@
                 "x": 76,
                 "y": 50,
                 "scale": 1,
-                "opacity": 0.88,
+                "opacity": 0.9,
                 "rotation": -12,
                 "flipX": false,
                 "path": []
@@ -467,7 +467,7 @@
                 "x": 80,
                 "y": 50,
                 "scale": 1,
-                "opacity": 0.88,
+                "opacity": 0.9,
                 "rotation": -12,
                 "flipX": false,
                 "path": []
@@ -479,7 +479,7 @@
                 "x": 76,
                 "y": 50,
                 "scale": 1,
-                "opacity": 0.88,
+                "opacity": 0.9,
                 "rotation": -12,
                 "flipX": false,
                 "path": []
@@ -488,7 +488,7 @@
                 "x": 80,
                 "y": 50,
                 "scale": 1,
-                "opacity": 0.88,
+                "opacity": 0.9,
                 "rotation": -12,
                 "flipX": false,
                 "path": []
@@ -500,7 +500,7 @@
                 "x": 76,
                 "y": 50,
                 "scale": 1,
-                "opacity": 0.88,
+                "opacity": 0.9,
                 "rotation": -12,
                 "flipX": false,
                 "path": []
@@ -509,7 +509,7 @@
                 "x": 80,
                 "y": 50,
                 "scale": 1,
-                "opacity": 0.88,
+                "opacity": 0.9,
                 "rotation": -12,
                 "flipX": false,
                 "path": []
@@ -521,7 +521,7 @@
                 "x": 76,
                 "y": 50,
                 "scale": 1,
-                "opacity": 0.88,
+                "opacity": 0.9,
                 "rotation": -12,
                 "flipX": false,
                 "path": []
@@ -530,7 +530,7 @@
                 "x": 80,
                 "y": 50,
                 "scale": 1,
-                "opacity": 0.88,
+                "opacity": 0.9,
                 "rotation": -12,
                 "flipX": false,
                 "path": []
@@ -673,6 +673,10 @@
     },
     "buttonAssets": {
       "menu": {
+        "asset": "",
+        "fallbackAsset": ""
+      },
+      "menuOpen": {
         "asset": "",
         "fallbackAsset": ""
       },

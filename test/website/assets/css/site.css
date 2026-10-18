@@ -93,3 +93,37 @@ body[data-page="home"] .site-nav.is-open { display: flex; }
 .site-visual-title.site-visual-sized { width: var(--visual-desktop-width); max-width: 100%; max-height: none; height: auto; }
 @media (max-width: 700px) { .site-visual-title.site-visual-sized { width: var(--visual-mobile-width); } }
 #characterMenuTitle { margin: 0 0 16px; font-size: 24px; }
+
+/* The supplied pair shares a character registration: closed crop is 884x871;
+   open crop is 2309x3124, with the same character offset 1425px to the right.
+   Register by that character, not by the total artwork width. The character
+   stays natural; only the lower paper below source y=1100 extends vertically. */
+:root { --scroll-menu-icon-size: 80px; --scroll-menu-top: max(12px, env(safe-area-inset-top)); --scroll-menu-right: max(12px, env(safe-area-inset-right)); }
+body .has-scroll-icon:is(.site-menu-toggle, .works-exhibition-menu-button, .characters-menu-button) { position: fixed; z-index: 102; top: var(--scroll-menu-top); right: var(--scroll-menu-right); display: grid; align-items: start; width: var(--scroll-menu-icon-size); height: calc(var(--scroll-menu-icon-size) * .9875); padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; backdrop-filter: none; color: transparent; font-size: 0; pointer-events: auto; cursor: pointer; overflow: visible; }
+.scroll-menu-icon { display: block; width: 100%; height: 100%; object-fit: contain; }
+.has-scroll-icon:not(.is-scroll-menu-open) > .scroll-menu-icon { animation: scroll-menu-idle-float 3.6s ease-in-out infinite; pointer-events: none; }
+.has-scroll-icon:hover > .scroll-menu-icon, .has-scroll-icon:focus-visible > .scroll-menu-icon { animation-play-state: paused; }
+@keyframes scroll-menu-idle-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+@media (prefers-reduced-motion: reduce) { .has-scroll-icon:not(.is-scroll-menu-open) > .scroll-menu-icon { animation: none; transform: none; } }
+body .has-scroll-icon.is-scroll-menu-open { height: calc(var(--scroll-menu-icon-size) * .9875); }
+.is-scroll-menu-open .scroll-menu-icon { visibility: hidden; }
+body .scroll-menu-panel.has-scroll-paper { position: fixed; z-index: 101; top: var(--scroll-menu-top); right: var(--scroll-menu-right); display: none; box-sizing: border-box; width: calc(var(--scroll-menu-icon-size) * 2.61199095); height: min(calc(100svh - var(--scroll-menu-top) - 12px), max(calc(var(--scroll-menu-icon-size) * 3.53393665), calc(var(--scroll-menu-icon-size) * .96 + var(--scroll-menu-rows, 6) * 48px - 4px))); max-height: none; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; backdrop-filter: none; color: #493527; text-shadow: none; overflow: visible; pointer-events: none; }
+body .scroll-menu-panel.has-scroll-paper.is-open { display: block; }
+.scroll-menu-art, .scroll-menu-paper { display: none; }
+.has-scroll-paper > .scroll-menu-art { position: absolute; top: 0; left: 0; display: block; width: 100%; height: calc(var(--scroll-menu-icon-size) * 3.53393665); object-fit: contain; clip-path: inset(0 0 64.788732% 0); pointer-events: none; z-index: -1; }
+.has-scroll-paper > .scroll-menu-paper { position: absolute; top: calc(var(--scroll-menu-icon-size) * 1.24434389 - .5px); bottom: 0; left: 0; display: block; width: 100%; overflow: hidden; pointer-events: none; z-index: -1; }
+.scroll-menu-paper-art { position: absolute; top: -54.347826%; left: 0; width: 100%; height: 154.347826%; object-fit: fill; }
+.scroll-menu-content { display: flex; flex-direction: column; gap: 6px; }
+.site-nav.has-scroll-paper > .scroll-menu-content { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-rows: minmax(44px, auto); align-content: start; gap: 4px; }
+.has-scroll-paper > .scroll-menu-content { position: absolute; top: calc(var(--scroll-menu-icon-size) * .81); bottom: calc(var(--scroll-menu-icon-size) * .15); left: calc(var(--scroll-menu-icon-size) * .14); width: calc(var(--scroll-menu-icon-size) * 1.54); min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: #99734d transparent; overscroll-behavior: contain; touch-action: pan-y; pointer-events: auto; }
+.scroll-menu-panel.has-scroll-paper .scroll-menu-content > a,
+.scroll-menu-panel.has-scroll-paper .analytics-preferences-open { flex: 0 0 auto; display: grid; place-items: center; width: 100%; min-height: 44px; margin: 0; padding: 4px 0; border: 0; border-radius: 2px; background: transparent; color: #493527; font-size: 16px; font-weight: 800; line-height: 20px; text-align: center; text-decoration: none; overflow-wrap: anywhere; text-shadow: none; }
+.scroll-menu-panel.has-scroll-paper .scroll-menu-content > a:hover,
+.scroll-menu-panel.has-scroll-paper .scroll-menu-content > .is-current,
+.scroll-menu-panel.has-scroll-paper .analytics-preferences-open:hover { color: #6b3e1a; background: rgba(111,70,28,.12); }
+.scroll-menu-panel.has-scroll-paper .works-exhibition-nav { grid-template-columns: minmax(0, 1fr); gap: 4px; padding-bottom: 8px; }
+.scroll-menu-panel.has-scroll-paper .works-exhibition-nav a { min-height: 44px; padding: 4px 0; border: 0; border-radius: 2px; font-size: 16px; line-height: 20px; overflow-wrap: anywhere; }
+.scroll-menu-panel.has-scroll-paper .is-current::before { display: none; }
+.has-scroll-icon:focus-visible, .scroll-menu-content :focus-visible { outline: 3px solid #80511e; outline-offset: 2px; }
+@media (max-width: 600px) { :root { --scroll-menu-icon-size: 68px; } }
+@media (max-height: 310px) { .has-scroll-paper > .scroll-menu-content { max-height: calc(100svh - var(--scroll-menu-top) - var(--scroll-menu-icon-size) * .81 - 12px); } }

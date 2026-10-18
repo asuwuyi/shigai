@@ -94,11 +94,12 @@ function handleWorkDetailUiInteraction(event) {
 
 function selectExhibitionWallpaper() {
   const key = "shi-gai:works-wallpaper:v1";
-  let selected = sessionStorage.getItem(key);
-  if (!exhibitionWallpapers.includes(selected)) {
-    selected = exhibitionWallpapers[Math.floor(Math.random() * exhibitionWallpapers.length)];
-    sessionStorage.setItem(key, selected);
-  }
+  let selected = exhibitionWallpapers[0];
+  try {
+    const stored = sessionStorage.getItem(key);
+    if (exhibitionWallpapers.includes(stored)) selected = stored;
+    else { selected = exhibitionWallpapers[Math.floor(Math.random() * exhibitionWallpapers.length)]; sessionStorage.setItem(key, selected); }
+  } catch { selected = exhibitionWallpapers[0]; } // Decoration must never block content.
   document.body.style.setProperty("--works-wallpaper", `url("../images/wallpapers/salon-wallpaper-${selected}.webp")`);
   document.body.dataset.worksWallpaper = selected;
 }
@@ -489,6 +490,7 @@ async function loadWork() {
 }
 
 document.addEventListener("keydown", (event) => {
+  if (event.defaultPrevented || document.querySelector('.analytics-preferences-panel:not([hidden]), #sitePrimaryNav.is-open') || event.target.closest?.('input, textarea, select, [contenteditable="true"]')) return;
   if (event.key === "Escape") window.location.href = backUrl;
   else if (!corridorIsVertical() && event.key === "ArrowLeft") { event.preventDefault(); moveWorkDetail(-1); }
   else if (!corridorIsVertical() && event.key === "ArrowRight") { event.preventDefault(); moveWorkDetail(1); }

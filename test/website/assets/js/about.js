@@ -9,11 +9,12 @@ const aboutDefaults = {
 
 const wallpaperChoices = ["burgundy-01", "sage-02", "navy-03", "ochre-04"];
 const wallpaperKey = "shi-gai:works-wallpaper:v1";
-let wallpaper = sessionStorage.getItem(wallpaperKey);
-if (!wallpaperChoices.includes(wallpaper)) {
-  wallpaper = wallpaperChoices[Math.floor(Math.random() * wallpaperChoices.length)];
-  sessionStorage.setItem(wallpaperKey, wallpaper);
-}
+let wallpaper = wallpaperChoices[0];
+try {
+  const stored = sessionStorage.getItem(wallpaperKey);
+  if (wallpaperChoices.includes(stored)) wallpaper = stored;
+  else { wallpaper = wallpaperChoices[Math.floor(Math.random() * wallpaperChoices.length)]; sessionStorage.setItem(wallpaperKey, wallpaper); }
+} catch { wallpaper = wallpaperChoices[0]; } // Decoration must never block content.
 const wallpaperUrl = new URL(`assets/images/wallpapers/salon-wallpaper-${wallpaper}.webp`, document.baseURI).href;
 document.body.style.setProperty("--about-wallpaper", `url("${wallpaperUrl}")`);
 

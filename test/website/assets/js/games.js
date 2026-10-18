@@ -16,8 +16,12 @@
   let copy = copyDefaults;
   const wallpapers = ["burgundy-01", "sage-02", "navy-03", "ochre-04"];
   const wallpaperKey = "shi-gai:works-wallpaper:v1";
-  let wallpaper = sessionStorage.getItem(wallpaperKey);
-  if (!wallpapers.includes(wallpaper)) { wallpaper = wallpapers[Math.floor(Math.random() * wallpapers.length)]; sessionStorage.setItem(wallpaperKey, wallpaper); }
+  let wallpaper = wallpapers[0];
+  try {
+    const stored = sessionStorage.getItem(wallpaperKey);
+    if (wallpapers.includes(stored)) wallpaper = stored;
+    else { wallpaper = wallpapers[Math.floor(Math.random() * wallpapers.length)]; sessionStorage.setItem(wallpaperKey, wallpaper); }
+  } catch { wallpaper = wallpapers[0]; } // Decoration must never block content.
   document.body.style.setProperty("--works-wallpaper", `url("../images/wallpapers/salon-wallpaper-${wallpaper}.webp")`);
 
   let games = [], activeIndex = 0, touchStartX = null;
@@ -114,7 +118,8 @@
     if (!gamesResponse.ok) throw new Error("Games registry unavailable");
     games = (await gamesResponse.json()).filter((game) => game?.visible !== false).sort((a, b) => Number(a.order) - Number(b.order));
     if (!games.length) { state.textContent = copy.emptyLabel; return; }
-    const requestedId = decodeURIComponent(location.hash.slice(1));
+    let requestedId = "";
+    try { requestedId = decodeURIComponent(location.hash.slice(1)); } catch { /* Invalid deep links use the first game. */ }
     const requestedIndex = games.findIndex((game) => game.id === requestedId);
     if (requestedIndex >= 0) activeIndex = requestedIndex;
     renderChoices(); renderTv(); state.hidden = true;

@@ -532,7 +532,10 @@
     if (location.hash) scrollToHomeSectionFromHash();
   });
   function scrollToHomeSectionFromHash() {
-    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    let id;
+    try { id = decodeURIComponent(location.hash.slice(1)); }
+    catch { return; } // Ignore malformed external links without rejecting page setup.
+    const target = document.getElementById(id);
     if (target) target.scrollIntoView({ behavior: "auto", block: "start" });
   }
   observeScrollDepth();
