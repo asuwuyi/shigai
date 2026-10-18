@@ -7,8 +7,27 @@ body { margin: 0; color: var(--journal-ink); background: #4d3325; font-family: G
 .journal-heading h1 { margin: .35rem 0; font-size: clamp(2rem, 9vw, 3.4rem); }
 .journal-heading p { margin: 0; opacity: .84; }
 .journal-entries { display: grid; gap: 2rem; max-width: 44rem; margin: auto; }
-.journal-entry { position: relative; padding: clamp(1.1rem, 5vw, 2.25rem); overflow: hidden; background-color: var(--journal-paper); background-image: url("../images/journal-paper-v1.webp"); background-position: center; background-size: cover; border: 1px solid rgba(77,51,37,.42); box-shadow: 0 1rem 2.2rem rgba(20,10,4,.28), inset 0 0 3rem rgba(104,65,29,.12); }
-.journal-entry > * { position: relative; }
+.journal-entry { position: relative; isolation: isolate; padding: clamp(1.1rem, 5vw, 2.25rem); overflow: visible; filter: drop-shadow(0 .65rem .85rem rgba(20,10,4,.25)); }
+/* Tear only the paper surface, never the article or its focusable content.
+   Fixed-size edge tiles retain the same small tear depth on long entries. */
+.journal-entry::before { content: ""; position: absolute; z-index: 0; inset: 0; pointer-events: none; background-color: var(--journal-paper); background-image: url("../images/journal-paper-v1.webp"); background-position: center; background-size: cover; box-shadow: inset 0 0 3rem rgba(104,65,29,.12); }
+.journal-entry > * { position: relative; z-index: 1; }
+@supports ((mask-image: linear-gradient(#000,#000)) or (-webkit-mask-image: linear-gradient(#000,#000))) {
+  .journal-entry::before {
+    --tear-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 12'%3E%3Cpath d='M0 4L4 3 7 5 11 2 16 3 20 1 23 4 29 3 33 5 37 2 42 3 46 1 51 4 55 3 59 5 64 2 69 4 73 3 77 1 82 4 87 2 91 5 96 4V12H0Z'/%3E%3C/svg%3E");
+    --tear-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 12'%3E%3Cpath d='M0 0H96V8L92 10 87 7 84 9 80 8 75 11 71 8 66 10 61 7 57 9 52 8 48 11 43 9 39 10 35 7 30 9 25 8 21 11 16 9 12 10 8 7 4 9 0 8Z'/%3E%3C/svg%3E");
+    --tear-left: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 128'%3E%3Cpath d='M4 0H12V128H4L2 123 5 118 3 113 4 108 1 103 3 97 2 91 5 87 3 82 4 76 2 71 5 65 3 60 4 54 1 49 3 43 2 37 5 31 3 27 4 21 2 15 5 9 3 4Z'/%3E%3C/svg%3E");
+    --tear-right: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 128'%3E%3Cpath d='M0 0H8L10 5 7 10 9 16 8 21 11 27 9 33 10 38 7 44 9 49 8 55 11 61 9 66 10 72 7 78 9 84 8 89 10 95 7 101 9 107 8 113 11 119 9 124 8 128H0Z'/%3E%3C/svg%3E");
+    -webkit-mask-image: linear-gradient(#000,#000), var(--tear-top), var(--tear-bottom), var(--tear-left), var(--tear-right);
+    mask-image: linear-gradient(#000,#000), var(--tear-top), var(--tear-bottom), var(--tear-left), var(--tear-right);
+    -webkit-mask-size: calc(100% - 16px) calc(100% - 16px), 96px 12px, 96px 12px, 12px 128px, 12px 128px;
+    mask-size: calc(100% - 16px) calc(100% - 16px), 96px 12px, 96px 12px, 12px 128px, 12px 128px;
+    -webkit-mask-position: center, left top, left bottom, left top, right top;
+    mask-position: center, left top, left bottom, left top, right top;
+    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+  }
+}
 .journal-date { margin: 0 0 1rem; font: 700 .82rem/1 system-ui, sans-serif; letter-spacing: .12em; }
 .journal-media { display: block; width: 100%; margin: 0 0 1.35rem; background: rgba(40,25,14,.15); box-shadow: 0 .35rem 1rem rgba(45,25,10,.24); }
 .journal-media img, .journal-media video { display: block; width: 100%; height: auto; max-height: 72vh; object-fit: contain; background: rgba(41,25,14,.12); }
@@ -22,4 +41,4 @@ body { margin: 0; color: var(--journal-ink); background: #4d3325; font-family: G
 .journal-pagination button:disabled { opacity: .42; }
 .journal-empty { max-width: 40rem; margin: 3rem auto; padding: 2rem; text-align: center; background-color: var(--journal-paper-light); background-image: url("../images/journal-paper-v1.webp"); background-position: center; background-size: cover; box-shadow: 0 1rem 2.2rem rgba(20,10,4,.22); }
 .journal-entry-links { display: flex; flex-wrap: wrap; gap: .7rem 1.25rem; }
-@media (min-width: 760px) { .journal-main { padding-inline: 2rem; } .journal-entry { clip-path: polygon(.4% 1%, 99.5% 0, 100% 99%, .5% 100%); } }
+@media (min-width: 760px) { .journal-main { padding-inline: 2rem; } }
