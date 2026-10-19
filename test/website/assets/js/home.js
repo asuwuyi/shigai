@@ -18,7 +18,8 @@ let activeWorldEntranceScenes = [];
 let activeWorldEntranceSceneId = "";
 let suppressSceneInteractionUntil = 0;
 let activeMobileViewport = null;
-const welcomeSessionKey = "shi-gai:welcome-seen:v1";
+let welcomeShownForVisit = false;
+let removeWelcomeOverlay = null;
 const homeLoadingStartedAt = performance.now();
 function setHomeLoadingProgress(value, message = "") {
   const progress = Math.max(0, Math.min(100, Math.round(Number(value) || 0)));
@@ -644,8 +645,8 @@ async function loadHome() {
 
 function renderWelcomeLogo(value) {
   const welcome = value && typeof value === "object" ? value : {};
-  if (!welcome.enabled || !welcome.asset || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  try { if (sessionStorage.getItem(welcomeSessionKey)) return; sessionStorage.setItem(welcomeSessionKey, "1"); } catch {}
+  if (welcomeShownForVisit || !welcome.enabled || !welcome.asset || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  welcomeShownForVisit = true;
   const overlay = document.createElement("div"); overlay.className = "home-welcome-overlay";
   const interaction = sceneInteraction?.normalize(welcome.interaction);
   const interactive = sceneInteraction?.isActionable(interaction);
@@ -668,7 +669,25 @@ function renderWelcomeLogo(value) {
     media.style.animationDirection = animation.mode === "continuous" ? "normal" : "alternate";
   }
   if (video) { media.autoplay = true; media.muted = true; media.playsInline = true; media.loop = true; media.setAttribute("muted", ""); media.setAttribute("playsinline", ""); media.setAttribute("loop", ""); }
-  let removed = false; const dismiss = () => { if (removed) return; removed = true; overlay.classList.add("is-leaving"); window.setTimeout(() => overlay.remove(), 420); };
+  let removed = false;
+  let durationTimer = null;
+  let fadeTimer = null;
+  const remove = () => {
+    removed = true;
+    window.clearTimeout(durationTimer);
+    window.clearTimeout(fadeTimer);
+    if (video) media.pause();
+    overlay.remove();
+    if (removeWelcomeOverlay === remove) removeWelcomeOverlay = null;
+  };
+  const dismiss = () => {
+    if (removed) return;
+    removed = true;
+    window.clearTimeout(durationTimer);
+    overlay.classList.add("is-leaving");
+    fadeTimer = window.setTimeout(remove, 420);
+  };
+  removeWelcomeOverlay = remove;
   if (interactive) control.addEventListener("click", () => {
     dismiss();
     if (interaction.action === "scene") { renderWorldEntranceScene(activeWorldEntranceScenes, interaction.target); return; }
@@ -678,8 +697,19 @@ function renderWelcomeLogo(value) {
   }, { once: true });
   control.append(media); overlay.append(control); document.body.append(overlay);
   if (video) { media.addEventListener("error", dismiss, { once: true }); media.play().catch(dismiss); }
-  window.setTimeout(dismiss, Math.max(.5, Math.min(30, Number(welcome.duration) || 3)) * 1000);
+  durationTimer = window.setTimeout(dismiss, Math.max(.5, Math.min(30, Number(welcome.duration) || 3)) * 1000);
 }
+
+// History restores (including Safari's back-forward cache) do not run loadHome again.
+window.addEventListener("pagehide", () => {
+  removeWelcomeOverlay?.();
+});
+window.addEventListener("pageshow", async (event) => {
+  if (!event.persisted) return;
+  welcomeShownForVisit = false;
+  const settings = await window.ShiGaiWebsiteSettings;
+  renderWelcomeLogo(settings?.websiteBrand?.welcome);
+});
 
 homeHeroComponent.renderDynamicContent();
 window.addEventListener("DOMContentLoaded", retainReviewLinks, { once: true });
