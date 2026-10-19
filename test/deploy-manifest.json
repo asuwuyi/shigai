@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-18T17:34:19.486Z",
+  "createdAt": "2026-10-19T11:19:31.023Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1081,
@@ -13,7 +13,7 @@
     "assets": 1189,
     "files": 1317
   },
-  "bytes": 156206463,
+  "bytes": 156332253,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -1195,8 +1195,8 @@
     "assets/published/works/SG-001094/poster-v1.webp",
     "assets/published/works/SG-001094/primary-v1.webm",
     "assets/site/brand/home-fish-fossil-20261015-v1.webp",
-    "assets/site/brand/welcome-logo-1787668785393.gif",
-    "assets/site/brand/welcome-logo-1787668785393.webm",
+    "assets/site/brand/welcome-logo-1792404325378.gif",
+    "assets/site/brand/welcome-logo-1792404325378.webm",
     "assets/site/frames/frame-mtspj2a0-a17dbba3.png",
     "assets/site/frames/frame-mu18q41p-2d5703ae.png",
     "assets/site/frames/frame-mu18q42o-401bde07.png",

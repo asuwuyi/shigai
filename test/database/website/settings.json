@@ -696,12 +696,12 @@
     "footerName": "Shi-Gai",
     "copyright": "Shi-Gai",
     "welcome": {
-      "enabled": false,
-      "asset": "assets/site/brand/welcome-logo-1787668785393.webm",
-      "fallbackAsset": "assets/site/brand/welcome-logo-1787668785393.gif",
-      "duration": 4,
+      "enabled": true,
+      "asset": "assets/site/brand/welcome-logo-1792404325378.webm",
+      "fallbackAsset": "assets/site/brand/welcome-logo-1792404325378.gif",
+      "duration": 3,
       "interaction": {
-        "enabled": true,
+        "enabled": false,
         "cursor": "pointer",
         "action": "scene",
         "target": "scene-1786548379879",

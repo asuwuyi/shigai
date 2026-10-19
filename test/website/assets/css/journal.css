@@ -1,7 +1,16 @@
 :root { --journal-ink: #493523; --journal-paper: #d9b876; --journal-paper-light: #ecd39a; }
 * { box-sizing: border-box; }
-body { margin: 0; color: var(--journal-ink); background: #4d3325; font-family: Georgia, "Noto Serif TC", serif; }
-.journal-main { min-height: 100vh; padding: 7rem 1rem 4rem; background: radial-gradient(circle at 50% 0, rgba(255,255,255,.12), transparent 36%), #60402c; }
+body { margin: 0; color: var(--journal-ink); background-color: #50594a; background-image: repeating-linear-gradient(0deg, rgba(246,237,211,.055) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgba(19,27,17,.11) 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, transparent 0 13px, rgba(246,237,211,.025) 13px 14px, transparent 14px 29px); font-family: Georgia, "Noto Serif TC", serif; }
+/* One continuous cloth surface belongs to the page, not separate page bands. */
+body[data-page="journal"] .site-header { position: fixed; z-index: 100; top: 0; width: 100%; min-height: 0; padding: 0; background: transparent; pointer-events: none; }
+body[data-page="journal"] .site-brand { display: none; }
+body[data-page="journal"] .site-menu-toggle { display: grid; pointer-events: auto; }
+body[data-page="journal"] .site-nav:not(.has-scroll-paper) { position: fixed; top: 80px; right: 12px; display: none; width: min(240px, calc(100vw - 24px)); padding: 10px; flex-direction: column; background: #fff9ee; border-radius: 12px; pointer-events: auto; }
+body[data-page="journal"] .site-nav:not(.has-scroll-paper).is-open { display: flex; }
+body[data-page="journal"] .site-footer { color: #ded6bd; background: transparent; }
+body[data-page="journal"] .site-footer-name, body[data-page="journal"] .site-footer-nav a { color: #e7ddc1; }
+body[data-page="journal"] .site-footer-nav a:hover, body[data-page="journal"] .site-footer-nav .is-current { color: #fff6df; }
+.journal-main { min-height: 100vh; padding: 7rem 1rem 4rem; background: transparent; }
 .journal-heading { max-width: 44rem; margin: 0 auto 2rem; text-align: center; color: #f6e5bd; }
 .journal-heading span { font: 700 .78rem/1.4 system-ui, sans-serif; letter-spacing: .2em; }
 .journal-heading h1 { margin: .35rem 0; font-size: clamp(2rem, 9vw, 3.4rem); }
