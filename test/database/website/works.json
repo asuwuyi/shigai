@@ -26341,7 +26341,7 @@
     "description": "",
     "journal": {
       "enabled": false,
-      "text": "今天腦子裡只有斑馬..."
+      "text": ""
     },
     "file": "assets/published/works/SG-000594/primary-v1.webp",
     "thumbnail": "",
@@ -26360,7 +26360,7 @@
       "positionY": 50
     },
     "createdAt": "2026-09-09T18:26:36.427Z",
-    "updatedAt": "2026-09-09T18:26:36.427Z",
+    "updatedAt": "2026-10-19T17:24:43.373Z",
     "media": {
       "optimized": {
         "status": "ready",
@@ -34547,7 +34547,7 @@
     "tags": [],
     "description": "自從各大廠牌的發表會過後，\n手機都普遍變得非常的滑溜...",
     "journal": {
-      "enabled": true,
+      "enabled": false,
       "text": ""
     },
     "file": "assets/published/works/SG-000759/primary-v1.webp",
@@ -34567,7 +34567,7 @@
       "positionY": 50
     },
     "createdAt": "2026-09-13T14:53:16.340Z",
-    "updatedAt": "2026-09-13T18:40:57.789Z",
+    "updatedAt": "2026-10-19T17:24:36.343Z",
     "media": {
       "optimized": {
         "status": "ready",
@@ -38342,8 +38342,8 @@
     "tags": [],
     "description": "",
     "journal": {
-      "enabled": true,
-      "text": "test3"
+      "enabled": false,
+      "text": ""
     },
     "file": "assets/published/works/SG-000833/primary-v1.webp",
     "thumbnail": "",
@@ -38362,7 +38362,7 @@
       "positionY": 50
     },
     "createdAt": "2026-09-14T07:31:53.017Z",
-    "updatedAt": "2026-09-14T18:55:18.174Z",
+    "updatedAt": "2026-10-19T17:24:39.844Z",
     "media": {
       "optimized": {
         "status": "ready",
@@ -51968,6 +51968,56 @@
         "outputs": {
           "primary": "assets/published/works/SG-001094/primary-v1.webm",
           "poster": "assets/published/works/SG-001094/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001095",
+    "title": "雞翅好吃嗎？",
+    "publishDate": "2026-10-19",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "未命名的作品 4.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "雞翅至少要吃五隻以上才過癮吧",
+    "journal": {
+      "enabled": true,
+      "text": "不知道從什麼時候，我開始迷戀吃雞翅\n而且也對它有莫名的堅持\n例如：三節翅才是真雞翅，兩節翅我都覺得不能稱之為雞翅\n但也不是每個雞翅都好吃\n有難吃的。喔！我只喜歡吃炸的或烤的....\n這是我難得有的食物的堅持"
+    },
+    "file": "assets/published/works/SG-001095/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-10-19T18:34:11.161Z",
+    "updatedAt": "2026-10-19T18:45:23.007Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "2eb7005f359c852b06d4ead74689e1a3cfef0a607225ea684d173ae77dd81cf0",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001095/primary-v1.webp"
         },
         "error": ""
       }
