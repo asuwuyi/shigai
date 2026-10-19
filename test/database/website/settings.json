@@ -654,7 +654,7 @@
       "worksNavigation": true,
       "charactersNavigation": true,
       "gamesNavigation": true,
-      "aboutNavigation": false,
+      "aboutNavigation": true,
       "worksMenu": true,
       "worksFirstPage": true,
       "worksPreviousPage": true,
