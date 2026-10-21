@@ -6,6 +6,21 @@
   };
   const round = (value) => Math.round(value * 1000) / 1000;
   const easing = (value) => value === "linear" ? "linear" : "ease-in-out";
+  const properties = Object.freeze(["position", "scale", "rotation", "opacity"]);
+  function normalizeChannelValue(property, value) {
+    if (property === "position") return { x: round(clamp(value?.x, -960, 960, 0)), y: round(clamp(value?.y, -960, 960, 0)) };
+    return round(property === "opacity" ? clamp(value, 0, 1, 1) : property === "scale" ? clamp(value, .05, 10, 1) : clamp(value, -720, 720, 0));
+  }
+  function normalizeChannels(value) {
+    return Object.fromEntries(["landscape", "portrait"].map(layout => [layout, Object.fromEntries(properties.filter(p => value?.[layout]?.[p]).map(property => {
+      const track = value[layout][property], frames = new Map();
+      (Array.isArray(track.keyframes) ? track.keyframes : []).slice(0, 500).forEach(frame => {
+        const offset = round(clamp(frame?.offset, 0, 1, 0));
+        frames.set(offset, { offset, value: normalizeChannelValue(property, frame?.value) });
+      });
+      return [property, { enabled: track.enabled === true, keyframes: [...frames.values()].sort((a,b) => a.offset-b.offset) }];
+    }))]));
+  }
 
   function normalizeLegacy(source) {
     const legacyEnabled = source.type !== "keyframes" && Boolean(source.enabled || source.type === "loop");
@@ -50,14 +65,16 @@
   function normalizeKeyframes(source) {
     const landscape = normalizeKeyframeList(source.keyframes?.landscape);
     const portrait = normalizeKeyframeList(source.keyframes?.portrait);
-    const hasPlayableLayout = landscape.length >= 2 || portrait.length >= 2;
+    const channels = source.channels ? normalizeChannels(source.channels) : null;
+    const hasPlayableLayout = landscape.length >= 2 || portrait.length >= 2 || channels && Object.values(channels).some(tracks => Object.values(tracks).some(track => track.enabled && track.keyframes.length));
     return {
       type: "keyframes",
       enabled: Boolean(source.enabled && hasPlayableLayout),
       duration: round(clamp(source.duration, .1, 120, 3)),
       loop: source.loop !== false,
       easing: easing(source.easing),
-      keyframes: { landscape, portrait }
+      keyframes: { landscape, portrait },
+      ...(channels ? { channels } : {})
     };
   }
 
@@ -73,7 +90,7 @@
     return animation.keyframes[layout === "portrait" ? "portrait" : "landscape"];
   };
 
-  const api = Object.freeze({ normalize, isKeyframes, keyframesForLayout });
+  const api = Object.freeze({ normalize, isKeyframes, keyframesForLayout, properties, normalizeChannels, normalizeChannelValue });
   if (global) global.ShiGaiSceneAnimation = api;
   if (typeof module === "object" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

@@ -118,6 +118,10 @@ body .scroll-menu-panel.has-scroll-paper.is-open { display: block; }
 .has-scroll-paper > .scroll-menu-content { position: absolute; top: calc(var(--scroll-menu-icon-size) * .81); bottom: calc(var(--scroll-menu-icon-size) * .15); left: calc(var(--scroll-menu-icon-size) * .14); width: calc(var(--scroll-menu-icon-size) * 1.54); min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: #99734d transparent; overscroll-behavior: contain; touch-action: pan-y; pointer-events: auto; }
 .scroll-menu-panel.has-scroll-paper .scroll-menu-content > a,
 .scroll-menu-panel.has-scroll-paper .analytics-preferences-open { flex: 0 0 auto; display: grid; place-items: center; width: 100%; min-height: 44px; margin: 0; padding: 4px 0; border: 0; border-radius: 2px; background: transparent; color: #493527; font-size: 16px; font-weight: 800; line-height: 20px; text-align: center; text-decoration: none; overflow-wrap: anywhere; text-shadow: none; }
+.scroll-menu-content .menu-label-zh, .scroll-menu-content .menu-label-en { display: block; max-width: 100%; pointer-events: none; }
+.scroll-menu-content .menu-label-zh { font-size: 16px; line-height: 20px; }
+.scroll-menu-content .menu-label-en { font-size: 12px; line-height: 14px; font-weight: 600; }
+@media (max-width: 600px) { .scroll-menu-content .menu-label-zh { font-size: 14px; line-height: 18px; } .scroll-menu-content .menu-label-en { font-size: 11px; line-height: 14px; } }
 .scroll-menu-panel.has-scroll-paper .scroll-menu-content > a:hover,
 .scroll-menu-panel.has-scroll-paper .scroll-menu-content > .is-current,
 .scroll-menu-panel.has-scroll-paper .analytics-preferences-open:hover { color: #6b3e1a; background: rgba(111,70,28,.12); }

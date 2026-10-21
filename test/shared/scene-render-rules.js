@@ -55,7 +55,17 @@
   const sortVisibleObjects = (scene) => [...(scene?.objects || [])]
     .filter((object) => object?.visible !== false)
     .sort((first, second) => zIndex(first) - zIndex(second));
-  const api = Object.freeze({ layers, layoutNames, layoutName, clamp, rounded, cloneLayout, readLayout, ensureWritableLayout, commitLayout, layout, position, scale, rotation, flipX, flipY, zIndex, transform, sortVisibleObjects });
+  function normalizeTextBubble(value) {
+    const source = value && typeof value === 'object' ? value : {};
+    const color = (value, fallback) => /^#[0-9a-f]{6}$/i.test(String(value || '')) ? value : fallback;
+    const placement = name => {
+      const entry = source.layouts?.[name] || {};
+      return { anchor: ['above','below','left','right','center'].includes(entry.anchor) ? entry.anchor : 'above', x: rounded(entry.x,-960,960,0), y: rounded(entry.y,-960,960,0), scale: rounded(entry.scale,.1,10,1), rotation: rounded(entry.rotation,-720,720,0), fontSize: rounded(entry.fontSize ?? source.fontSize,12,160,48), maxWidth: rounded(entry.maxWidth ?? source.maxWidth,120,960,480) };
+    };
+    const animationRules = global?.ShiGaiSceneAnimation || (typeof require === 'function' ? require('./scene-animation-rules.js') : null);
+    return { enabled: source.enabled === true, color: color(source.color,'#34271f'), backgroundColor: color(source.backgroundColor,'#fffdf5'), fontWeight: [400,500,600,700,800,900].includes(Number(source.fontWeight)) ? Number(source.fontWeight) : 600, radius: rounded(source.radius,0,80,24), layouts: { landscape: placement('landscape'), portrait: placement('portrait') }, ...(source.animation && animationRules ? { animation: animationRules.normalize(source.animation) } : {}) };
+  }
+  const api = Object.freeze({ normalizeTextBubble, layers, layoutNames, layoutName, clamp, rounded, cloneLayout, readLayout, ensureWritableLayout, commitLayout, layout, position, scale, rotation, flipX, flipY, zIndex, transform, sortVisibleObjects });
   if (global) global.ShiGaiSceneRender = api;
   if (typeof module === "object" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

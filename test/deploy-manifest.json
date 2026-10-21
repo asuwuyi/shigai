@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-19T19:00:20.013Z",
+  "createdAt": "2026-10-21T15:27:30.518Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1082,
@@ -10,10 +10,10 @@
     "scenes": 3,
     "games": 3,
     "spotDifferenceLevels": 2,
-    "assets": 1190,
-    "files": 1318
+    "assets": 1198,
+    "files": 1327
   },
-  "bytes": 156630532,
+  "bytes": 156672399,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -1196,6 +1196,14 @@
     "assets/published/works/SG-001094/primary-v1.webm",
     "assets/published/works/SG-001095/primary-v1.webp",
     "assets/site/brand/home-fish-fossil-20261015-v1.webp",
+    "assets/site/brand/social-legacy/behance.svg",
+    "assets/site/brand/social-legacy/email.svg",
+    "assets/site/brand/social-legacy/facebook.svg",
+    "assets/site/brand/social-legacy/giphy.svg",
+    "assets/site/brand/social-legacy/instagram.svg",
+    "assets/site/brand/social-legacy/line-store.svg",
+    "assets/site/brand/social-legacy/twitter.svg",
+    "assets/site/brand/social-legacy/youtube.svg",
     "assets/site/brand/welcome-logo-1792404325378.gif",
     "assets/site/brand/welcome-logo-1792404325378.webm",
     "assets/site/frames/frame-mtspj2a0-a17dbba3.png",

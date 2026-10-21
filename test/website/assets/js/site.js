@@ -110,6 +110,17 @@ function applyWebsiteButtonAssets() {
 // One presentation adapter for existing navigation owners; routes, filters and
 // consent remain in their original DOM and keep their original event handlers.
 const scrollMenuBindings = new WeakMap();
+function formatBilingualMenuLabel(element) {
+  if (element.querySelector(":scope > .menu-label-zh")) return;
+  const label = element.textContent.trim();
+  // Keep the existing editable label as the only content source.
+  const parts = /^(.*[\u3400-\u9fff][^A-Za-z]*?)\s+([A-Za-z].*)$/.exec(label);
+  if (!parts) return;
+  const chinese = document.createElement("span"), english = document.createElement("span");
+  chinese.className = "menu-label-zh"; chinese.lang = "zh-Hant"; chinese.textContent = parts[1].trim();
+  english.className = "menu-label-en"; english.lang = "en"; english.textContent = parts[2].trim();
+  element.replaceChildren(chinese, document.createTextNode(" "), english);
+}
 function applyScrollMenus() {
   const pairs = [[".site-menu-toggle", "#sitePrimaryNav"]];
   pairs.forEach(([buttonSelector, panelSelector]) => {
@@ -135,6 +146,7 @@ function applyScrollMenus() {
     panel.classList.add("scroll-menu-panel");
     const sync = () => {
       const open = panel.classList.contains("is-open");
+      [...content.children].filter(node => node.matches("a, button")).forEach(formatBilingualMenuLabel);
       if (panel.id === "sitePrimaryNav") panel.style.setProperty("--scroll-menu-rows", String([...content.children].filter(node => node.matches("a, button") && !node.hidden).length || 6));
       button.classList.toggle("is-scroll-menu-open", open && panel.classList.contains("has-scroll-paper"));
       button.setAttribute("aria-label", open ? siteBrand.system.closeMenuLabel : siteBrand.system.openMenuLabel);

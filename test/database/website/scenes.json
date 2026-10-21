@@ -74,6 +74,33 @@
         "visible": true,
         "locked": false,
         "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
         "interaction": {
           "enabled": false,
           "cursor": "default",
@@ -157,6 +184,33 @@
         "visible": true,
         "locked": false,
         "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
         "interaction": {
           "enabled": true,
           "cursor": "default",
@@ -301,6 +355,33 @@
         "visible": true,
         "locked": false,
         "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
         "interaction": {
           "enabled": false,
           "cursor": "default",
@@ -340,7 +421,7 @@
         "name": "企鵝",
         "media": {
           "src": "assets/published/scenes/asset-3fefe177b957dcb0767163fee22cabbd/primary-v1.webp",
-          "format": "webp",
+          "format": "gif",
           "alt": "",
           "pipeline": {
             "optimized": {
@@ -355,35 +436,99 @@
           }
         },
         "position": {
-          "x": 0.616,
-          "y": 0.814
+          "x": 0.776,
+          "y": 0.798
         },
-        "scale": 0.073,
+        "scale": 0.474,
         "rotation": 0,
         "flipX": false,
         "flipY": false,
         "layouts": {
           "landscape": {
             "position": {
-              "x": 0.616,
-              "y": 0.814
+              "x": 0.776,
+              "y": 0.798
             },
-            "scale": 0.073,
+            "scale": 0.474,
             "rotation": 0
           },
           "portrait": {
             "position": {
-              "x": 0.617,
-              "y": 0.899
+              "x": 0.623,
+              "y": 0.885
             },
-            "scale": 0.112,
+            "scale": 0.436,
             "rotation": 0
           }
         },
         "layer": "mid",
         "visible": true,
         "locked": false,
-        "text": "",
+        "text": "Hello",
+        "textBubble": {
+          "enabled": true,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": -5.278,
+              "y": 56.044,
+              "scale": 1.005,
+              "rotation": 0,
+              "fontSize": 45,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 2.665,
+              "y": 42.204,
+              "scale": 1.075,
+              "rotation": 0,
+              "fontSize": 45,
+              "maxWidth": 480
+            }
+          },
+          "animation": {
+            "type": "keyframes",
+            "enabled": true,
+            "duration": 20,
+            "loop": true,
+            "easing": "linear",
+            "keyframes": {
+              "landscape": [],
+              "portrait": []
+            },
+            "channels": {
+              "landscape": {
+                "opacity": {
+                  "enabled": true,
+                  "keyframes": [
+                    {
+                      "offset": 0,
+                      "value": 1
+                    },
+                    {
+                      "offset": 0.15,
+                      "value": 0
+                    },
+                    {
+                      "offset": 0.397,
+                      "value": 0
+                    },
+                    {
+                      "offset": 0.52,
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              "portrait": {}
+            }
+          }
+        },
         "interaction": {
           "enabled": false,
           "cursor": "default",
@@ -392,16 +537,39 @@
           "openMode": "same-tab"
         },
         "animation": {
-          "type": "",
-          "enabled": false,
-          "position": {
-            "x": 0,
-            "y": 0
+          "type": "keyframes",
+          "enabled": true,
+          "duration": 20,
+          "loop": true,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": [],
+            "portrait": []
           },
-          "rotation": 0,
-          "duration": 3,
-          "mode": "yoyo",
-          "easing": "ease-in-out"
+          "channels": {
+            "landscape": {
+              "scale": {
+                "enabled": true,
+                "keyframes": [
+                  {
+                    "offset": 0,
+                    "value": 2.353
+                  }
+                ]
+              }
+            },
+            "portrait": {
+              "scale": {
+                "enabled": true,
+                "keyframes": [
+                  {
+                    "offset": 0,
+                    "value": 4.411
+                  }
+                ]
+              }
+            }
+          }
         },
         "scroll": {
           "speed": 1,
@@ -427,7 +595,7 @@
       }
     },
     "createdAt": "2026-08-11T10:34:54.332Z",
-    "updatedAt": "2026-10-19T13:08:11.258Z"
+    "updatedAt": "2026-10-21T15:27:24.701Z"
   },
   {
     "id": "scene-1787847732039",
@@ -504,6 +672,33 @@
         "visible": true,
         "locked": false,
         "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
         "interaction": {
           "enabled": false,
           "cursor": "default",
@@ -586,6 +781,33 @@
         "visible": true,
         "locked": false,
         "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
         "interaction": {
           "enabled": false,
           "cursor": "default",
@@ -759,6 +981,33 @@
         "visible": true,
         "locked": false,
         "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
         "interaction": {
           "enabled": false,
           "cursor": "default",
@@ -842,6 +1091,33 @@
         "visible": true,
         "locked": false,
         "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
         "interaction": {
           "enabled": false,
           "cursor": "default",

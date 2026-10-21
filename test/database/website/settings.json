@@ -158,12 +158,12 @@
     },
     "icon": "",
     "nav": {
-      "home": "Home",
-      "journal": "Journal",
-      "works": "Works",
-      "characters": "Characters",
-      "games": "Games",
-      "about": "About me"
+      "home": "這個世界的中心 Home",
+      "journal": "碎唸日誌 Journal",
+      "works": "畫廊收藏室 Works",
+      "characters": "奇怪的居民 Character",
+      "games": "遊戲實驗室 Games",
+      "about": "你在找我嗎???? About me"
     },
     "pages": {
       "journal": true,
@@ -253,8 +253,8 @@
     "privacy": {
       "title": "讓我們知道這個世界有人來過",
       "description": "是否允許使用 Google Analytics 統計瀏覽與互動？拒絕也能正常看作品、探索與玩遊戲。",
-      "acceptLabel": "同意統計",
-      "rejectLabel": "拒絕統計",
+      "acceptLabel": "同意",
+      "rejectLabel": "拒絕",
       "settingsLabel": "隱私與統計",
       "policyLabel": "統計與隱私說明",
       "closeLabel": "關閉",
@@ -264,7 +264,7 @@
     "home": {
       "latestJournal": {
         "eyebrow": "TODAY IN SHI-GAI",
-        "title": "今天留下的片段",
+        "title": "今日地球日誌",
         "moreLabel": "走進 Journal →",
         "intro": "",
         "actionLabel": "前往完整 Journal →",
@@ -644,6 +644,88 @@
       "introLabel": "關於作者",
       "contactKicker": "LET'S MAKE SOMETHING",
       "contactTitle": "合作／工作邀約",
+      "socialLinks": {
+        "enabled": true,
+        "position": "after-contact",
+        "desktop": {
+          "align": "center",
+          "size": 56,
+          "gap": 12,
+          "offsetY": 0
+        },
+        "mobile": {
+          "align": "center",
+          "size": 48,
+          "gap": 12,
+          "offsetY": 0
+        },
+        "items": [
+          {
+            "id": "email",
+            "label": "Email",
+            "description": "",
+            "url": "mailto:notartist@gmail.com",
+            "icon": "assets/site/brand/social-legacy/email.svg",
+            "enabled": true
+          },
+          {
+            "id": "facebook",
+            "label": "Facebook",
+            "description": "",
+            "url": "https://www.facebook.com/shigaihome/",
+            "icon": "assets/site/brand/social-legacy/facebook.svg",
+            "enabled": true
+          },
+          {
+            "id": "instagram",
+            "label": "Instagram",
+            "description": "",
+            "url": "https://www.instagram.com/shigaishigai/",
+            "icon": "assets/site/brand/social-legacy/instagram.svg",
+            "enabled": true
+          },
+          {
+            "id": "twitter",
+            "label": "Twitter",
+            "description": "",
+            "url": "https://twitter.com/shigai",
+            "icon": "assets/site/brand/social-legacy/twitter.svg",
+            "enabled": true
+          },
+          {
+            "id": "youtube",
+            "label": "YouTube",
+            "description": "",
+            "url": "https://www.youtube.com/@shigaishigai",
+            "icon": "assets/site/brand/social-legacy/youtube.svg",
+            "enabled": true
+          },
+          {
+            "id": "giphy",
+            "label": "GIPHY",
+            "description": "",
+            "url": "https://giphy.com/shigai",
+            "icon": "assets/site/brand/social-legacy/giphy.svg",
+            "enabled": true
+          },
+          {
+            "id": "line-store",
+            "label": "LINE STORE",
+            "description": "",
+            "url": "https://store.line.me/stickershop/author/4968/zh-Hant",
+            "icon": "assets/site/brand/social-legacy/line-store.svg",
+            "enabled": true
+          },
+          {
+            "id": "behance",
+            "label": "Behance",
+            "description": "",
+            "url": "https://www.behance.net/r451",
+            "icon": "assets/site/brand/social-legacy/behance.svg",
+            "enabled": true
+          }
+        ]
+      },
       "socialsLabel": "社群連結"
     },
     "controls": {

@@ -78,3 +78,10 @@
 .scene-render-object.has-media-error {
   display: none;
 }
+
+/* Optional object-owned speech content. Does not change media sizing or selection bounds. */
+.scene-speech-anchor { position:absolute; width:0;height:0;transform-origin:0 0;pointer-events:none; }
+.scene-speech-counterflip { position:relative;width:0;height:0;transform-origin:0 0; }
+.scene-speech-bubble { display:block;position:absolute;box-sizing:border-box;width:max-content;height:auto;padding:16px 24px;border:1px solid rgba(60,42,24,.16);box-shadow:0 4px 12px rgba(40,26,16,.16);line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;text-shadow:none;pointer-events:auto; }
+.scene-speech-anchor.is-text-only,.scene-speech-anchor.is-text-only .scene-speech-counterflip { position:relative;width:max-content;height:auto; }
+.scene-speech-anchor.is-text-only .scene-speech-bubble { position:relative; }

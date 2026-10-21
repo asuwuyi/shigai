@@ -59,18 +59,69 @@
     return Object.freeze({ x, y });
   }
 
-  function applyObjectAnimation(node, object, metrics, playAnimation = true, layout = "landscape") {
-    node?.querySelectorAll?.(".scene-render-object-orientation.is-seamless-clone")?.forEach?.((clone) => clone.remove());
+  function applyChannelAnimation(target, source, layout, metrics, text = false, editorSelectable = false) {
+    if (!target || !source?.enabled || !source.channels?.[layout]) return false;
+    let active = false;
+    const options = { duration:source.duration*1000, iterations:source.loop ? Infinity : 1, fill:"both", easing:"linear" };
+    for (const property of animationRules().properties) {
+      const channel = source.channels[layout][property];
+      const legacy = property === 'opacity' ? [] : (source.keyframes?.[layout] || []).map(f => ({offset:f.offset,value:f[property]}));
+      let frames = channel ? channel.enabled ? channel.keyframes : [] : legacy;
+      if (!frames.length) continue;
+      frames = [...frames];
+      if (frames[0].offset > 0) frames.unshift({...frames[0],offset:0});
+      if (frames.at(-1).offset < 1) frames.push({...frames.at(-1),offset:1});
+      const keyframes = frames.map(frame => {
+        const value = frame.value, entry = {offset:frame.offset,easing:source.easing};
+        if (property === 'position') entry.translate = `${value.x*(text ? 1 : metrics.width)}px ${value.y*(text ? 1 : metrics.height)}px`;
+        if (property === 'rotation') entry.rotate = `${value}deg`;
+        if (property === 'scale') entry.scale = String(value);
+        if (property === 'opacity') { entry.opacity = value; if (!text && !editorSelectable) entry.visibility = value === 0 ? 'hidden' : 'visible'; }
+        return entry;
+      });
+      const effect = target.animate(keyframes,options); effect.id = `scene-channel-${text ? 'text' : 'object'}-${property}`;
+      if (property === 'opacity' && text && !editorSelectable) {
+        const hit = target.animate(frames.map(f => ({offset:f.offset,pointerEvents:f.value === 0 ? 'none' : 'auto',easing:'steps(1,end)'})),options); hit.id = 'scene-text-hit';
+      }
+      active = true;
+    }
+    return active;
+  }
+
+  function applyObjectAnimation(node, object, metrics, playAnimation = true, layout = "landscape", editorSelectable = false) {
+    node?.querySelectorAll?.(".scene-render-object-orientation.is-seamless-clone")?.forEach?.((clone) => {clone.getAnimations?.({subtree:true}).forEach(a=>a.cancel());clone.remove();});
     const orientation = node?.querySelector?.(".scene-render-object-orientation");
-    [node, orientation].forEach((target) => target?.getAnimations?.().forEach((animation) => animation.cancel()));
+    const speechCounter = node?.querySelector?.(".scene-speech-counterflip");
+    const speechAnchor = node?.querySelector?.(".scene-speech-anchor");
+    const text = node?.querySelector?.('.scene-speech-bubble, .scene-render-object-text');
+    [node, orientation, speechCounter, speechAnchor, text].forEach((target) => target?.getAnimations?.().forEach((animation) => animation.cancel()));
     if (!node) return false;
     node.style.removeProperty("transform");
+    [node,text].forEach(target => ['translate','rotate','scale','opacity','visibility'].forEach(p => target?.style.removeProperty(p)));
     orientation?.style?.removeProperty?.("transform");
     node.removeAttribute("data-scene-animation-active");
     node.removeAttribute("data-scene-animation-type");
     node.removeAttribute("data-scene-seamless-x");
     node.removeAttribute("data-scene-seamless-y");
     const keyframeSettings = keyframeAnimationSettings(object, layout);
+    const source = animationRules().normalize(object.animation);
+    const canPlay = playAnimation && !prefersReducedMotion() && typeof node.animate === 'function';
+    const textAnimated = canPlay && text && applyChannelAnimation(text, rules()?.normalizeTextBubble(object.textBubble).animation, layout, metrics, true, editorSelectable);
+    if (canPlay && source.channels?.[layout] && Object.keys(source.channels[layout]).length) {
+      const animated = applyChannelAnimation(node,source,layout,metrics,false,editorSelectable);
+      const options = {duration:source.duration*1000,iterations:source.loop?Infinity:1,fill:'both',easing:source.easing};
+      const flips = source.keyframes[layout];
+      if (orientation && flips.some(f=>f.flipX)) {
+        const frames=flips.map(f=>({offset:f.offset,transform:`scaleX(${f.flipX?-1:1})`,easing:'steps(1,end)'}));
+        orientation.animate(frames,options); speechCounter?.animate(frames,options);
+        if(speechAnchor&&!speechAnchor.classList.contains('is-text-only')){
+          const left=parseFloat(speechAnchor.style.left);
+          if(left===0||left===100)speechAnchor.animate(flips.map(f=>({offset:f.offset,left:(f.flipX?100-left:left)+'%',easing:'steps(1,end)'})),options);
+        }
+      }
+      node.dataset.sceneAnimationActive=String(animated || textAnimated); node.dataset.sceneAnimationType='channels';
+      return animated || textAnimated;
+    }
     if (playAnimation && keyframeSettings.enabled && !prefersReducedMotion() && typeof node.animate === "function") {
       const motionFrames = keyframeSettings.keyframes.map((keyframe) => ({
         offset: keyframe.offset,
@@ -81,17 +132,22 @@
       if (orientation && keyframeSettings.keyframes.some((keyframe) => keyframe.flipX)) {
         orientation.animate(keyframeSettings.keyframes.map((keyframe) => ({ offset: keyframe.offset, transform: `scaleX(${keyframe.flipX ? -1 : 1})`, easing: "steps(1, end)" })), options);
       }
+      if (speechCounter && keyframeSettings.keyframes.some(keyframe => keyframe.flipX)) speechCounter.animate(keyframeSettings.keyframes.map(keyframe => ({ offset:keyframe.offset, transform:'scaleX(' + (keyframe.flipX ? -1 : 1) + ')', easing:'steps(1, end)' })), options);
+      if (speechAnchor && !speechAnchor.classList.contains('is-text-only') && keyframeSettings.keyframes.some(keyframe => keyframe.flipX)) {
+        const left = parseFloat(speechAnchor.style.left);
+        if (left === 0 || left === 100) speechAnchor.animate(keyframeSettings.keyframes.map(keyframe => ({ offset:keyframe.offset, left:(keyframe.flipX ? 100-left : left) + '%', easing:'steps(1, end)' })), options);
+      }
       node.dataset.sceneAnimationActive = "true";
       node.dataset.sceneAnimationType = "keyframes";
       return true;
     }
     const settings = animationSettings(object);
-    if (!playAnimation || !settings.enabled || prefersReducedMotion() || typeof node.animate !== "function") return false;
+    if (!playAnimation || !settings.enabled || prefersReducedMotion() || typeof node.animate !== "function") return Boolean(textAnimated);
     const requestedX = settings.position.x * metrics.width;
     const requestedY = settings.position.y * metrics.height;
     const travel = settings.mode === "seamless" ? seamlessTravel(node, metrics, requestedX, requestedY) : { x: requestedX, y: requestedY };
     const { x, y } = travel;
-    if (!x && !y && !settings.rotation) return false;
+    if (!x && !y && !settings.rotation) return Boolean(textAnimated);
     if (settings.mode === "seamless" && orientation?.cloneNode && (x || y)) {
       const clone = orientation.cloneNode(true);
       clone.classList.add("is-seamless-clone");
@@ -99,6 +155,7 @@
       clone.querySelectorAll?.("[id]")?.forEach?.((element) => element.removeAttribute("id"));
       clone.style.transform = `translate(${-x}px, ${-y}px)`;
       node.append(clone);
+      if(canPlay)applyChannelAnimation(clone.querySelector?.('.scene-speech-bubble, .scene-render-object-text'),rules()?.normalizeTextBubble(object.textBubble).animation,layout,metrics,true,editorSelectable);
       node.dataset.sceneSeamlessX = String(x);
       node.dataset.sceneSeamlessY = String(y);
     }
@@ -184,7 +241,32 @@
     return node;
   }
 
-  function createObjectNode({ documentRef, object, layout, surfaceScale, surfaceMetricsValue, resolveMediaSource, objectAttributes, onMediaError, playAnimation }) {
+  function applySpeechStyle(node, object, layout) {
+    const anchor = node.querySelector('.scene-speech-anchor');
+    const settings = rules().normalizeTextBubble(object.textBubble);
+    const placement = settings.layouts[layout];
+    if (!anchor) {
+      const text=node.querySelector('.scene-render-object-text');
+      if(text&&settings.animation){text.style.position='relative';text.style.left=placement.x+'px';text.style.top=placement.y+'px';text.style.transform=`rotate(${placement.rotation}deg) scale(${placement.scale})`;}
+      return;
+    }
+    const text = anchor.querySelector('.scene-speech-bubble');
+    const hasMedia = Boolean(node.querySelector('.scene-render-object-media'));
+    anchor.classList.toggle('is-text-only', !hasMedia);
+    const anchors = { above:['50%','0%','-50%','calc(-100% - 16px)'],below:['50%','100%','-50%','16px'],left:['0%','50%','calc(-100% - 16px)','-50%'],right:['100%','50%','16px','-50%'],center:['50%','50%','-50%','-50%'] };
+    let [left,top,tx,ty] = anchors[placement.anchor];
+    if (object.flipX) left = (100 - parseFloat(left)) + '%';
+    if (object.flipY) top = (100 - parseFloat(top)) + '%';
+    anchor.style.left = hasMedia ? left : '0'; anchor.style.top = hasMedia ? top : '0';
+    const inverse = hasMedia ? 1 / rules().scale(object,layout) : 1;
+    anchor.style.transform = 'scale(' + inverse * (object.flipX ? -1 : 1) + ',' + inverse * (object.flipY ? -1 : 1) + ')';
+    text.style.left = placement.x + 'px'; text.style.top = placement.y + 'px';
+    text.style.transform = (hasMedia ? 'translate(' + tx + ',' + ty + ') ' : '') + 'rotate(' + placement.rotation + 'deg) scale(' + placement.scale + ')';
+    text.style.color = settings.color; text.style.backgroundColor = settings.backgroundColor;
+    text.style.fontSize = placement.fontSize + 'px'; text.style.fontWeight = settings.fontWeight;
+    text.style.borderRadius = settings.radius + 'px'; text.style.maxWidth = placement.maxWidth + 'px';
+  }
+  function createObjectNode({ documentRef, object, layout, surfaceScale, surfaceMetricsValue, resolveMediaSource, objectAttributes, onMediaError, playAnimation, editorSelectable }) {
     const node = documentRef.createElement("div");
     const visual = documentRef.createElement("div");
     node.className = `scene-render-object is-${cleanType(object?.type)}`;
@@ -201,19 +283,27 @@
       }, { once: true });
       visual.append(media);
     }
-    if (object?.text || !media) {
+    const speech = rules().normalizeTextBubble(object.textBubble);
+    if ((!speech.enabled || !object?.text) && (object?.text || !media)) {
       const text = documentRef.createElement("span");
       text.className = "scene-render-object-text";
       text.textContent = object?.text || object?.name || "";
       visual.append(text);
+    }
+    if (speech.enabled && object?.text) {
+      const anchor = documentRef.createElement('div'); anchor.className = 'scene-speech-anchor';
+      const counter = documentRef.createElement('div'); counter.className = 'scene-speech-counterflip';
+      const text = documentRef.createElement('span'); text.className = 'scene-speech-bubble'; text.textContent = object.text;
+      counter.append(text); anchor.append(counter); visual.append(anchor);
     }
     const orientation = documentRef.createElement("div");
     orientation.className = "scene-render-object-orientation";
     orientation.append(visual);
     node.append(orientation);
     applyObjectStyle(node, object, layout, surfaceScale);
+    applySpeechStyle(node, object, layout);
     const metrics = { width: surfaceMetricsValue.width, height: surfaceMetricsValue.height };
-    applyObjectAnimation(node, object, metrics, playAnimation !== false, layout);
+    applyObjectAnimation(node, object, metrics, playAnimation !== false, layout, editorSelectable);
     if (media && animationSettings(object).mode === "seamless") {
       const refreshSeamlessBounds = () => applyObjectAnimation(node, object, metrics, playAnimation !== false, layout);
       media.addEventListener(media.tagName === "VIDEO" ? "loadedmetadata" : "load", refreshSeamlessBounds, { once: true });
@@ -263,6 +353,7 @@
     const plane = node.closest?.(".scene-render-plane");
     if (plane) { plane.style.width = `${metrics.width}px`; plane.style.height = `${metrics.height}px`; }
     applyObjectStyle(node, object, normalizedLayout, metrics.scale);
+    applySpeechStyle(node, object, normalizedLayout);
     applyObjectAnimation(node, object, metrics, playAnimation, normalizedLayout);
     container.dataset.sceneViewportScale = String(metrics.scale);
     container.dataset.sceneFitMode = metrics.fitMode;

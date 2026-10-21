@@ -39,8 +39,32 @@ window.ShiGaiWebsiteSettings
     const email = String(about.email || "").trim();
     const emailLink = document.getElementById("aboutEmail");
     emailLink.hidden = !email; emailLink.textContent = email; emailLink.href = email ? `mailto:${email}` : "#";
-    const socials = [["Instagram", about.instagram], ["YouTube", about.youtube]].map(([label, value]) => [label, safeHttpUrl(value)]).filter(([, url]) => url);
-    document.getElementById("aboutSocials").replaceChildren(...socials.map(([label, url]) => { const link = document.createElement("a"); link.textContent = label; link.href = url; link.target = "_blank"; link.rel = "noopener noreferrer"; return link; }));
-    document.getElementById("aboutContact").hidden = !email && !socials.length;
+    const registry = window.ShiGaiSocialLinks.normalize(about.socialLinks, about);
+    const socials = registry.enabled ? registry.items.filter(item => item.enabled && item.label && item.url && !(email && item.url.toLowerCase() === ('mailto:' + email).toLowerCase())) : [];
+    const host = document.getElementById("aboutSocials");
+    host.id = "aboutSocials";
+    host.classList.add('managed-socials');
+    for (const device of ['desktop','mobile']) {
+      const layout = registry[device];
+      host.style.setProperty('--social-' + device + '-align', {left:'flex-start',center:'center',right:'flex-end'}[layout.align]);
+      for (const key of ['size','gap','offsetY']) host.style.setProperty('--social-' + device + '-' + key, layout[key] + 'px');
+    }
+    host.replaceChildren(...socials.map(item => {
+      const link = document.createElement('a');
+      link.href = item.url; link.setAttribute('aria-label', item.label); link.title = item.description || item.label;
+      if (!item.url.startsWith('mailto:')) { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
+      if (item.icon) {
+        const image = document.createElement('img'); image.alt = item.label;
+        image.src = new URL('../' + item.icon, document.baseURI).href;
+        image.addEventListener('error', () => { link.replaceChildren(document.createTextNode(item.label)); }, {once:true});
+        link.append(image);
+      } else link.textContent = item.label;
+      return link;
+    }));
+    host.hidden = !socials.length;
+    if (registry.position === 'after-intro') document.getElementById('aboutIntroSection').append(host);
+    else if (registry.position === 'after-services') document.getElementById('aboutServices').after(host);
+    else document.querySelector('.about-contact-copy').append(host);
+    document.getElementById("aboutContact").hidden = !email && !(socials.length && registry.position === 'after-contact');
   })
   .catch(() => { window.location.replace("index.html"); });
