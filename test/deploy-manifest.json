@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-21T15:27:30.518Z",
+  "createdAt": "2026-10-22T07:48:47.096Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1082,
@@ -13,7 +13,7 @@
     "assets": 1198,
     "files": 1327
   },
-  "bytes": 156672399,
+  "bytes": 156997927,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -35,7 +35,6 @@
     "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp",
     "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
     "assets/published/scenes/asset-22218a5d8b8d4c772f0e3c48/primary-v1.webp",
-    "assets/published/scenes/asset-3fefe177b957dcb0767163fee22cabbd/primary-v1.webp",
     "assets/published/scenes/asset-f1e94515463f3cacf69202f9/primary-v1.webp",
     "assets/published/works/SG-000001/primary-v1.webp",
     "assets/published/works/SG-000007/primary-v1.webp",
@@ -1195,6 +1194,7 @@
     "assets/published/works/SG-001094/poster-v1.webp",
     "assets/published/works/SG-001094/primary-v1.webm",
     "assets/published/works/SG-001095/primary-v1.webp",
+    "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1792592519571.gif",
     "assets/site/brand/home-fish-fossil-20261015-v1.webp",
     "assets/site/brand/social-legacy/behance.svg",
     "assets/site/brand/social-legacy/email.svg",

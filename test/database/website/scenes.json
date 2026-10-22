@@ -420,24 +420,13 @@
         "type": "prop",
         "name": "企鵝",
         "media": {
-          "src": "assets/published/scenes/asset-3fefe177b957dcb0767163fee22cabbd/primary-v1.webp",
+          "src": "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1792592519571.gif",
           "format": "gif",
-          "alt": "",
-          "pipeline": {
-            "optimized": {
-              "status": "ready",
-              "sourceHash": "3fefe177b957dcb0767163fee22cabbd596fc09a03ad931ca274dca2939f464b",
-              "presetVersion": 1,
-              "outputs": {
-                "primary": "assets/published/scenes/asset-3fefe177b957dcb0767163fee22cabbd/primary-v1.webp"
-              },
-              "error": ""
-            }
-          }
+          "alt": ""
         },
         "position": {
-          "x": 0.776,
-          "y": 0.798
+          "x": 0.777,
+          "y": 0.787
         },
         "scale": 0.474,
         "rotation": 0,
@@ -446,8 +435,8 @@
         "layouts": {
           "landscape": {
             "position": {
-              "x": 0.776,
-              "y": 0.798
+              "x": 0.777,
+              "y": 0.787
             },
             "scale": 0.474,
             "rotation": 0
@@ -553,7 +542,7 @@
                 "keyframes": [
                   {
                     "offset": 0,
-                    "value": 2.353
+                    "value": 0.865
                   }
                 ]
               }
@@ -564,7 +553,7 @@
                 "keyframes": [
                   {
                     "offset": 0,
-                    "value": 4.411
+                    "value": 1.394
                   }
                 ]
               }
@@ -595,7 +584,7 @@
       }
     },
     "createdAt": "2026-08-11T10:34:54.332Z",
-    "updatedAt": "2026-10-21T15:27:24.701Z"
+    "updatedAt": "2026-10-22T07:48:38.786Z"
   },
   {
     "id": "scene-1787847732039",
