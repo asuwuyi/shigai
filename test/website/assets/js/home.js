@@ -14,6 +14,14 @@ const homeElements = {
 
 const isReviewMode = new URLSearchParams(window.location.search).get("review") === "1";
 let reviewPreviewDate = null;
+const sceneEnvironment = window.ShiGaiSceneEnvironment;
+const environmentWeather = Object.create(null), environmentDraws = new Map();
+function sceneEnvironmentContext(scene) { return {now:new Date(),events:[new URLSearchParams(window.location.search).get('sceneEvent')].filter(Boolean),weather:environmentWeather[scene?.id]??(scene?.background?.weather?.provider==='none'?'style-random':null),weatherByScene:environmentWeather}; }
+function environmentDraw(scene) { const minutes=sceneEnvironment.normalizeBackground(scene?.background).intervalMinutes,id=scene?.id||'scene',bucket=Math.floor(Date.now()/(minutes*60000)),previous=environmentDraws.get(id);if(previous?.bucket===bucket)return previous.value;const entry={bucket,value:Math.random()};environmentDraws.set(id,entry);return entry.value; }
+async function refreshEnvironmentWeather(scenes) { await Promise.all((scenes||[]).filter(s=>s.status==='published').map(async s=>{environmentWeather[s.id]=sceneEnvironment.normalizeWeather(s.background?.weather).provider==='none'?'style-random':await sceneEnvironment.readWeather(s.background?.weather);})); }
+function environmentScene(scene) { return {...scene,background:sceneEnvironment.resolveBackground(scene.background,sceneEnvironmentContext(scene),environmentDraw(scene))}; }
+function showWeatherAttribution(scene) { document.getElementById('sceneWeatherAttribution')?.remove();const config=sceneEnvironment.normalizeWeather(scene.background?.weather);if(config.provider==='none')return;const link=document.createElement(config.provider==='open-meteo'?'a':'span');link.id='sceneWeatherAttribution';link.textContent=config.attribution;link.style.cssText='position:absolute;left:12px;bottom:12px;font-size:12px;z-index:6;background:#fffdf5cc;color:#34271f;padding:3px 8px;border-radius:8px';if(config.provider==='open-meteo'){link.href='https://open-meteo.com/';link.target='_blank';link.rel='noopener';}homeElements.hero.append(link); }
+
 let activeWorldEntranceScenes = [];
 let activeWorldEntranceSceneId = "";
 let suppressSceneInteractionUntil = 0;
@@ -150,11 +158,9 @@ function selectWorldEntranceScene(scenes, preferredId = "", randomValue = Math.r
     .filter((scene) => scene?.status === "published")
     .sort((first, second) => Number(first.order || 0) - Number(second.order || 0));
   // A direct Scene interaction may select any published Scene; initial load remains World Entrance only.
-  if (preferredId) return published.find((scene) => scene.id === preferredId) || null;
-  const entrances = published.filter((scene) => scene.type === "world-entrance");
-  if (!entrances.length) return null;
-  const index = Math.min(entrances.length - 1, Math.max(0, Math.floor(Number(randomValue || 0) * entrances.length)));
-  return entrances[index];
+  if (preferredId) { const preferred = published.find(scene => scene.id === preferredId); return preferred ? environmentScene(preferred) : null; }
+  const selected = sceneEnvironment.selectScene(published,sceneEnvironmentContext(),randomValue);
+  return selected ? environmentScene(selected) : null;
 }
 function interactionFromNode(node) {
   return sceneInteraction?.normalize({
@@ -202,6 +208,25 @@ function handleWorldSceneInteraction(event) {
   if (interaction.action === "home-section") { scrollToHomeSection(interaction.target); return; }
   openInteractionRoute(interaction);
 }
+function updateWorldBackground(scene) {
+  sceneEnvironment.renderEffects({container:homeElements.worldSceneRender,background:scene.background,context:sceneEnvironmentContext(scene),random:environmentDraw(scene),resolveAsset:sceneMediaUrl});
+  homeElements.hero.classList.remove('has-scene-background','has-scene-bleed');
+  homeElements.hero.style.removeProperty('--scene-world-background');homeElements.hero.style.removeProperty('--scene-bleed-image');document.body.style.removeProperty('--scene-world-background');
+  const background = String(scene.background?.color || "").toUpperCase();
+  if (/^#[0-9A-F]{6}$/.test(background) && background !== "#F7F9FC") {
+    homeElements.hero.style.setProperty("--scene-world-background", background);
+    document.body.style.setProperty("--scene-world-background", background);
+    homeElements.hero.classList.add("has-scene-background");
+  }
+  const bleedSource = sceneBleedSource(scene);
+  if (bleedSource) {
+    homeElements.hero.style.setProperty("--scene-bleed-image", `url("${sceneMediaUrl(bleedSource)}")`);
+    homeElements.hero.classList.add("has-scene-bleed");
+  }
+
+  homeElements.worldSceneRender.dataset.backgroundVariant = scene.background.variantId || 'base';
+  showWeatherAttribution(scene);
+}
 function renderWorldEntranceScene(scenes, preferredSceneId = activeWorldEntranceSceneId) {
   activeWorldEntranceScenes = Array.isArray(scenes) ? scenes : [];
   const scene = selectWorldEntranceScene(activeWorldEntranceScenes, preferredSceneId);
@@ -219,21 +244,13 @@ function renderWorldEntranceScene(scenes, preferredSceneId = activeWorldEntrance
   homeElements.hero.style.setProperty("--scene-peek-x", "0px");
   homeElements.hero.style.setProperty("--scene-peek-y", "0px");
   activeWorldEntranceSceneId = scene.id;
+  container.dataset.backgroundVariant = scene.background.variantId || "base";
+  showWeatherAttribution(scene);
   window.ShiGaiAnalytics?.track("scene_enter", { scene_id: scene.id || "unknown", scene_type: scene.type || "world-entrance" });
   homeElements.hero.classList.add("has-world-scene");
 
-  const background = String(scene.background?.color || "").toUpperCase();
-  if (/^#[0-9A-F]{6}$/.test(background) && background !== "#F7F9FC") {
-    homeElements.hero.style.setProperty("--scene-world-background", background);
-    document.body.style.setProperty("--scene-world-background", background);
-    homeElements.hero.classList.add("has-scene-background");
-  }
+  updateWorldBackground(scene);
   const layout = currentSceneLayout();
-  const bleedSource = sceneBleedSource(scene);
-  if (bleedSource) {
-    homeElements.hero.style.setProperty("--scene-bleed-image", `url("${sceneMediaUrl(bleedSource)}")`);
-    homeElements.hero.classList.add("has-scene-bleed");
-  }
   container.dataset.sceneId = scene.id;
   const unifiedRenderer = window.ShiGaiSceneRenderer;
   if (!unifiedRenderer) throw new Error("Unified Scene Renderer is required.");
@@ -269,6 +286,7 @@ function renderWorldEntranceScene(scenes, preferredSceneId = activeWorldEntrance
     }
   });
   activeMobileViewport = useMobileViewport ? { ...mobileViewport, surfaceWidth: renderResult.surfaceWidth } : null;
+  sceneEnvironment.renderEffects({container,background:scene.background,context:sceneEnvironmentContext(scene),random:environmentDraw(scene),resolveAsset:sceneMediaUrl});
   configureMobileSceneCamera();
 }
 
@@ -598,8 +616,8 @@ function renderReviewPanel(content, { works, characters, categories, tags, scene
   const charactersSection = reviewSection(content, "Characters");
   characters.forEach((character) => {
     const state = characterReviewState(character, works);
-    const missing = !state.hasImage || !state.hasShortDescription || !state.hasDescription;
-    const summary = `${character.id} · ${character.name} · Image ${state.hasImage ? "Ready" : state.fallback ? "Fallback" : "Missing"} · Short ${state.hasShortDescription ? "Ready" : "Missing"} · Description ${state.hasDescription ? "Ready" : "Missing"} · ${state.characterWorks.length} works`;
+    const missing = !state.hasImage || !state.hasShortDescription;
+    const summary = `${character.id} · ${character.name} · Image ${state.hasImage ? "Ready" : state.fallback ? "Fallback" : "Missing"} · Short ${state.hasShortDescription ? "Ready" : "Missing"} · Notes ${state.hasDescription ? "Stored" : "Optional"} · ${state.characterWorks.length} works`;
     reviewRow(charactersSection, summary, { label: state.missingImage ? "Missing" : missing ? state.fallback ? "Fallback" : "Missing" : "Ready", type: state.missingImage ? "missing" : missing ? state.fallback ? "fallback" : "missing" : "ready" }, reviewUrl("character.html", { id: character.id }));
   });
 
@@ -624,11 +642,13 @@ async function loadHome() {
     if (!scenesResponse.ok) throw new Error("Website Scene export could not be loaded.");
     setHomeLoadingProgress(38, "正在建立場景…");
     const scenesData = await scenesResponse.json();
-    renderWorldEntranceScene(scenesData);
+    renderWorldEntranceScene(scenesData, "");
     setHomeLoadingProgress(55, "正在接收場景素材…");
     await waitForCriticalSceneMedia();
     finishHomeLoading();
     renderWelcomeLogo(settings?.websiteBrand?.welcome);
+    // Weather is enhancement, never a prerequisite for first paint or the welcome.
+    refreshScheduledEnvironment().catch(() => {});
     if (reviewContent) {
       const [worksResponse, charactersResponse, categoriesResponse, tagsResponse] = await Promise.all([
         fetch("../database/website/works.json"), fetch("../database/website/characters.json"),
@@ -758,3 +778,7 @@ homeElements.loadingRetry?.addEventListener("click", async () => {
   } catch (error) { failHomeLoading(); }
 });
 loadHome();
+
+// Re-evaluate conditions without re-rolling on resize or resetting an unchanged animation.
+async function refreshScheduledEnvironment(){if(document.hidden||!activeWorldEntranceScenes.length)return;await refreshEnvironmentWeather(activeWorldEntranceScenes);const current=activeWorldEntranceScenes.find(s=>s.id===activeWorldEntranceSceneId);const stillEligible=current&&!current.condition?.fallback&&sceneEnvironment.matches(current.condition,sceneEnvironmentContext(current));const target=stillEligible?current:selectWorldEntranceScene(activeWorldEntranceScenes,'',environmentDraw(current));if(!target){homeElements.worldSceneRender?.replaceChildren();homeElements.hero?.classList.remove('has-world-scene','has-scene-background','has-scene-bleed');homeElements.hero?.style.removeProperty('--scene-world-background');homeElements.hero?.style.removeProperty('--scene-bleed-image');document.body.style.removeProperty('--scene-world-background');document.getElementById('sceneWeatherAttribution')?.remove();activeWorldEntranceSceneId='';return;}const next=target.background?.variantId!==undefined?target:environmentScene(target),variant=homeElements.worldSceneRender?.dataset.backgroundVariant||'base';if(target.id!==activeWorldEntranceSceneId)renderWorldEntranceScene(activeWorldEntranceScenes,target.id);else updateWorldBackground(next);}
+window.setInterval(refreshScheduledEnvironment,60000);

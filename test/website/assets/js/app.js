@@ -81,6 +81,7 @@ function renderWorksCorridor(scenes, preferredId = "") {
       };
     }
   });
+  window.ShiGaiSceneEnvironment.bindBackground({container:elements.corridor,scene,resolveAsset:sceneMediaUrl});
 }
 
 function handleCorridorInteraction(event) {

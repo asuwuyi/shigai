@@ -90,9 +90,10 @@
     backdrop.style.backgroundColor = scene.background?.asset ? (scene.background?.color || "#4b382a") : "transparent";
     backdrop.style.backgroundImage = scene.background?.asset ? `url("${new URL(`../${scene.background.asset}`, document.baseURI).href}")` : "none";
     backdrop.style.backgroundSize = scene.background?.asset ? "cover" : "auto";
-    front.hidden = foregroundScene.objects.length === 0;
+    front.hidden = foregroundScene.objects.length === 0 && !(scene.background?.effects||[]).some(v=>v.enabled!==false&&v.layer!=='back');
     window.ShiGaiSceneRenderer.renderScene({ ...common, container: backScene, scene: backgroundScene });
     window.ShiGaiSceneRenderer.renderScene({ ...common, container: frontScene, scene: foregroundScene });
+    window.ShiGaiSceneEnvironment.bindBackground({container:backdrop,frontContainer:front,scene,resolveAsset:source=>new URL(`../${source}`,document.baseURI).href});
   }
   previous?.addEventListener("click", () => selectGame(activeIndex - 1, { direction: "previous" }));
   next?.addEventListener("click", () => selectGame(activeIndex + 1, { direction: "next" }));
