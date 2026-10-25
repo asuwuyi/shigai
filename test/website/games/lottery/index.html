@@ -9,24 +9,37 @@
   <title>Lottery · Shi-Gai</title>
   <link rel="stylesheet" href="../game-shell.css?v=mobile-game-mode-1">
   <link rel="stylesheet" href="../../assets/css/site.css?v=bilingual-menu-20261020">
+  <link rel="stylesheet" href="lottery.css?v=open-playroom-20261026">
   <script src="../../assets/js/settings.js?v=nested-settings-20261019"></script>
   <script src="../../assets/js/site.js?v=bilingual-menu-20261020" defer></script>
   <meta name="robots" content="noindex,nofollow">
 </head>
-<body data-page="games" data-standalone-game style="--mobile-game-stage:#B0CD6C" data-desktop-script="js/lotteryD.js" data-mobile-script="js/lotteryM.js" data-desktop-export="lotteryD" data-mobile-export="lotteryM" data-stage-background="#FFCD3E" data-mobile-stage-background="#B0CD6C">
+<body data-page="games" data-standalone-game data-lottery-workbench data-desktop-script="js/lotteryD.js" data-mobile-script="js/lotteryM.js" data-desktop-export="lotteryD" data-mobile-export="lotteryM" data-stage-background="#FFCD3E" data-mobile-stage-background="#B0CD6C">
   <header class="site-header" data-site-header></header>
-  <main class="game-stage">
-    <a class="game-back" href="../../games.html" aria-label="返回 Shi-Gai Games">← Games</a>
-    <p id="gameStatus" class="game-status" role="status">正在載入 Lottery…</p>
-    <div id="animation_container" class="game-animation-container">
-      <canvas id="canvas" class="game-canvas" aria-label="Lottery 遊戲畫面"></canvas>
-      <div id="_preload_div_" class="game-preloader"><img src="../shared/preloader.gif" alt=""></div>
-      <div id="dom_overlay_container" class="game-overlay"></div>
-    </div>
+  <main class="lottery-room">
+    <a class="lottery-back" href="../../games.html">← 遊戲室</a>
+    <header class="lottery-heading"><p>SHI-GAI PLAYROOM</p><h1 id="lotteryTitle">企鵝樂透號碼產生器</h1><p id="lotteryDescription">就由企鵝來幫你選吧。</p></header>
+    <section class="lottery-workspace" aria-labelledby="lotteryTitle">
+      <div class="lottery-art">
+        <p id="gameStatus" class="lottery-status" role="status">正在載入企鵝…</p>
+        <div id="animation_container" class="game-animation-container">
+          <canvas id="canvas" class="game-canvas" aria-label="六隻企鵝的抽號動畫"></canvas>
+          <div id="_preload_div_" class="game-preloader"><img src="../shared/preloader.gif" alt=""></div>
+          <div id="dom_overlay_container" class="game-overlay"></div>
+        </div>
+      </div>
+      <div class="lottery-controls">
+        <p id="lotteryHint" class="lottery-hint">讓六隻企鵝，幫你選六個號碼。</p>
+        <div id="lotteryNumbers" class="lottery-numbers" aria-label="抽出的六個號碼"><span>?</span><span>?</span><span>?</span><span>?</span><span>?</span><span>?</span></div>
+        <p id="lotteryAnnouncement" class="lottery-announcement" role="status" aria-live="polite"></p>
+        <button id="lotteryDraw" type="button" disabled>幫我選號碼</button>
+      </div>
+    </section>
   </main>
   <script src="../../../shared/analytics-consent-copy.js?v=basic-consent-20261017"></script>
   <script src="../../assets/js/analytics.js?v=scroll-menu-20261018"></script>
   <script src="../game-analytics.js?v=consent-menu-20261017"></script>
-  <script src="../game-runtime.js?v=storage-fallback-20261018"></script>
+  <script src="lottery.js?v=open-playroom-20261026"></script>
+  <script src="../game-runtime.js?v=open-playroom-20261026"></script>
 </body>
 </html>

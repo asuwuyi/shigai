@@ -1017,8 +1017,8 @@
           },
           "portrait": {
             "position": {
-              "x": -0.027,
-              "y": 0.786
+              "x": 0.509,
+              "y": 0.759
             },
             "scale": 1.308,
             "rotation": 0
@@ -1098,7 +1098,7 @@
       }
     },
     "createdAt": "2026-08-12T10:14:08.541Z",
-    "updatedAt": "2026-10-25T14:45:49.870Z"
+    "updatedAt": "2026-10-25T17:32:52.243Z"
   },
   {
     "id": "scene-1786549520650",
@@ -1291,8 +1291,8 @@
           },
           "portrait": {
             "position": {
-              "x": 0.514,
-              "y": 0.808
+              "x": 0.662,
+              "y": 0.809
             },
             "scale": 1.614,
             "rotation": 0
@@ -1372,7 +1372,7 @@
       }
     },
     "createdAt": "2026-08-12T15:45:20.650Z",
-    "updatedAt": "2026-10-25T13:53:45.051Z"
+    "updatedAt": "2026-10-25T17:32:59.500Z"
   },
   {
     "id": "scene-1786548379879",
@@ -2837,8 +2837,8 @@
           },
           "portrait": {
             "position": {
-              "x": 0.5,
-              "y": 0.5
+              "x": 0.496,
+              "y": 0.573
             },
             "scale": 1,
             "rotation": 0
@@ -2920,7 +2920,7 @@
       }
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-25T15:40:54.303Z"
+    "updatedAt": "2026-10-25T17:33:10.461Z"
   },
   {
     "id": "scene-pack-20261025-station-lounge",
@@ -3458,8 +3458,8 @@
           },
           "portrait": {
             "position": {
-              "x": 0.5,
-              "y": 0.5
+              "x": 0.509,
+              "y": 0.616
             },
             "scale": 1,
             "rotation": 0
@@ -3541,7 +3541,7 @@
       }
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-25T15:42:21.911Z"
+    "updatedAt": "2026-10-25T17:33:22.897Z"
   },
   {
     "id": "scene-pack-20261025-greenhouse-studio",
@@ -4061,8 +4061,8 @@
           "alt": ""
         },
         "position": {
-          "x": 0.499,
-          "y": 0.537
+          "x": 0.502,
+          "y": 0.567
         },
         "scale": 1,
         "rotation": 0,
@@ -4071,8 +4071,8 @@
         "layouts": {
           "landscape": {
             "position": {
-              "x": 0.499,
-              "y": 0.537
+              "x": 0.502,
+              "y": 0.567
             },
             "scale": 1,
             "rotation": 0
@@ -4080,7 +4080,7 @@
           "portrait": {
             "position": {
               "x": 0.5,
-              "y": 0.5
+              "y": 0.607
             },
             "scale": 1,
             "rotation": 0
@@ -4162,7 +4162,7 @@
       }
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-25T15:42:21.911Z"
+    "updatedAt": "2026-10-25T17:34:20.743Z"
   },
   {
     "id": "scene-pack-20261025-attic-art-studio",
@@ -4670,6 +4670,105 @@
           "translations": {}
         },
         "metadata": {}
+      },
+      {
+        "id": "object-local-1792949622756",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/scenes/media/scene-pack-20261025-attic-art-studio-object-local-1792949622756-1792949638413.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.503,
+          "y": 0.59
+        },
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.503,
+              "y": 0.59
+            },
+            "scale": 1,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.5,
+              "y": 0.604
+            },
+            "scale": 1,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
       }
     ],
     "metadata": {
@@ -4684,7 +4783,7 @@
       }
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-25T15:42:21.911Z"
+    "updatedAt": "2026-10-25T17:34:11.799Z"
   },
   {
     "id": "scene-pack-20261025-corner-cafe",
@@ -5123,16 +5222,115 @@
           },
           "portrait": {
             "position": {
-              "x": 0.5,
-              "y": 0.5
+              "x": 0.846,
+              "y": 0.487
             },
-            "scale": 2.041,
+            "scale": 2.167,
             "rotation": 0
           }
         },
         "layer": "background",
         "visible": true,
-        "locked": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1792949678908",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/scenes/media/scene-pack-20261025-corner-cafe-object-local-1792949678908-1792949755923.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.286,
+          "y": 0.587
+        },
+        "scale": 0.581,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.286,
+              "y": 0.587
+            },
+            "scale": 0.581,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.525,
+              "y": 0.641
+            },
+            "scale": 1,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
         "text": "",
         "textBubble": {
           "enabled": false,
@@ -5200,13 +5398,13 @@
       "mobileViewport": {
         "enabled": true,
         "width": 1.8,
-        "initialX": 0.5,
+        "initialX": 0.39,
         "autoPan": false,
         "speed": 9
       }
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-25T15:42:21.911Z"
+    "updatedAt": "2026-10-25T17:35:55.908Z"
   },
   {
     "id": "scene-pack-20261025-quiet-library",
@@ -5714,6 +5912,105 @@
           "translations": {}
         },
         "metadata": {}
+      },
+      {
+        "id": "object-local-1792949766674",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/scenes/media/scene-pack-20261025-quiet-library-object-local-1792949766674-1792949788212.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.5,
+          "y": 0.645
+        },
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.5,
+              "y": 0.645
+            },
+            "scale": 1,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.494,
+              "y": 0.652
+            },
+            "scale": 1,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
       }
     ],
     "metadata": {
@@ -5728,7 +6025,7 @@
       }
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-25T15:22:06.339Z"
+    "updatedAt": "2026-10-25T17:36:28.188Z"
   },
   {
     "id": "scene-pack-20261025-rooftop-terrace",
@@ -6236,6 +6533,105 @@
           "translations": {}
         },
         "metadata": {}
+      },
+      {
+        "id": "object-local-1792949799858",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/scenes/media/scene-pack-20261025-rooftop-terrace-object-local-1792949799858-1792949826121.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.492,
+          "y": 0.637
+        },
+        "scale": 0.45,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.492,
+              "y": 0.637
+            },
+            "scale": 0.45,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.506,
+              "y": 0.619
+            },
+            "scale": 0.603,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
       }
     ],
     "metadata": {
@@ -6250,7 +6646,7 @@
       }
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-25T15:22:06.339Z"
+    "updatedAt": "2026-10-25T17:37:06.109Z"
   },
   {
     "id": "scene-pack-20261025-riverside-path",
@@ -6758,6 +7154,105 @@
           "translations": {}
         },
         "metadata": {}
+      },
+      {
+        "id": "object-local-1792949838878",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/scenes/media/scene-pack-20261025-riverside-path-object-local-1792949838878-1792949861515.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.493,
+          "y": 0.591
+        },
+        "scale": 0.843,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.493,
+              "y": 0.591
+            },
+            "scale": 0.843,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.486,
+              "y": 0.639
+            },
+            "scale": 1,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
       }
     ],
     "metadata": {
@@ -6772,7 +7267,7 @@
       }
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-25T15:22:06.339Z"
+    "updatedAt": "2026-10-25T17:37:41.502Z"
   },
   {
     "id": "scene-pack-20261025-park-plaza",
@@ -7380,6 +7875,105 @@
           "translations": {}
         },
         "metadata": {}
+      },
+      {
+        "id": "object-local-1792949868469",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1792949868469-1792949898967.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.495,
+          "y": 0.621
+        },
+        "scale": 0.604,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.495,
+              "y": 0.621
+            },
+            "scale": 0.604,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.51,
+              "y": 0.687
+            },
+            "scale": 0.698,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
       }
     ],
     "metadata": {
@@ -7394,7 +7988,7 @@
       }
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-25T15:24:33.810Z"
+    "updatedAt": "2026-10-25T17:38:18.950Z"
   },
   {
     "id": "scene-pack-20261025-seaside-boardwalk",
@@ -7902,6 +8496,105 @@
           "translations": {}
         },
         "metadata": {}
+      },
+      {
+        "id": "object-local-1792949905273",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/scenes/media/scene-pack-20261025-seaside-boardwalk-object-local-1792949905273-1792949927712.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.503,
+          "y": 0.576
+        },
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.503,
+              "y": 0.576
+            },
+            "scale": 1,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.5,
+              "y": 0.619
+            },
+            "scale": 1,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
       }
     ],
     "metadata": {
@@ -7916,6 +8609,6 @@
       }
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-25T15:22:06.339Z"
+    "updatedAt": "2026-10-25T17:38:57.347Z"
   }
 ]

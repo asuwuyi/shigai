@@ -241,7 +241,14 @@
       "comingSoonLabel": "Coming Soon",
       "loadingLabel": "正在載入遊戲資料。",
       "emptyLabel": "目前還沒有遊戲。",
-      "errorLabel": "遊戲資料暫時無法載入。"
+      "errorLabel": "遊戲資料暫時無法載入。",
+      "lotteryBackLabel": "← 遊戲室",
+      "lotteryHint": "讓六隻企鵝，幫你選六個號碼。",
+      "lotteryDrawLabel": "幫我選號碼",
+      "lotteryAgainLabel": "再選一次",
+      "lotteryBusyLabel": "企鵝正在選號…",
+      "lotteryResultLabel": "第 {count} 次：{numbers}",
+      "lotteryLoadingLabel": "正在載入企鵝…"
     },
     "system": {
       "homeSuffix": "首頁",

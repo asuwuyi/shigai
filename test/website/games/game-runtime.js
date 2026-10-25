@@ -4,7 +4,8 @@
   const requestedLayout = new URLSearchParams(location.search).get("layout");
   const embeddedMode = new URLSearchParams(location.search).get("embed");
   if (embeddedMode) document.documentElement.dataset.gameEmbed = embeddedMode;
-  const mobile = requestedLayout === "mobile" || (requestedLayout !== "desktop" && (matchMedia("(orientation: portrait)").matches || (navigator.maxTouchPoints > 0 && innerWidth <= 1024)));
+  const presentation = window.ShiGaiLotteryPresentation;
+  const mobile = Boolean(presentation) || requestedLayout === "mobile" || (requestedLayout !== "desktop" && (matchMedia("(orientation: portrait)").matches || (navigator.maxTouchPoints > 0 && innerWidth <= 1024)));
   const width = mobile ? 1080 : 1920, height = mobile ? 1920 : 1080;
   const scriptPath = mobile ? body.dataset.mobileScript : body.dataset.desktopScript;
   const exportName = mobile ? body.dataset.mobileExport : body.dataset.desktopExport;
@@ -153,11 +154,13 @@
             : (body.dataset.stageBackground || library.properties.color || "#17110d");
           window.stage = stage;
           stage.enableMouseOver(); stage.addChild(window.exportRoot);
-          bridgeScaledCanvasButton(window.exportRoot, "playLottery");
+          if (!presentation) bridgeScaledCanvasButton(window.exportRoot, "playLottery");
           window.ShiGaiGameAnalytics?.bind(window.exportRoot);
           createjs.Ticker.framerate = library.properties.fps; setTicker(true);
           preloader.hidden = true; canvas.style.display = "block"; status.hidden = true;
-          makeExhibitResponsive(library); AdobeAn.compositionLoaded(library.properties.id);
+          if (presentation) presentation.mount({ root: window.exportRoot, stage, canvas, container, overlay, preloader, tvCase });
+          else makeExhibitResponsive(library);
+          AdobeAn.compositionLoaded(library.properties.id);
         } catch (error) { console.error("Shi-Gai game initialization failed", error); fail(undefined, `initialization:${String(error?.message || error)}`); }
       });
       loader.loadManifest(library.properties.manifest);
