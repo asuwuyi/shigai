@@ -311,6 +311,24 @@ function setMobileSceneCameraOffset(value) {
   updateMobileSceneBackdrop();
 }
 let mobileSceneVisible=true;
+// Visitor playback choice is temporary and separate from the author's saved Scene settings.
+const mobileScenePanOverrides=new Map();
+function mobileScenePanEnabled(){return mobileScenePanOverrides.get(activeWorldEntranceSceneId)??activeMobileViewport?.autoPan;}
+function toggleMobileScenePan(){
+  mobileScenePanOverrides.set(activeWorldEntranceSceneId,!mobileScenePanEnabled());
+  const camera=mobileSceneCamera;
+  if(camera.frame)cancelAnimationFrame(camera.frame);
+  camera.frame=0;camera.lastFrame=0;camera.resumeAt=performance.now();camera.boundaryUntil=0;
+  requestMobileSceneCameraFrame();
+}
+function sceneTapIsControl(target){
+  if(target.closest?.('button,a,input,select,textarea,label,summary,[role="button"],[role="link"],[contenteditable="true"],[data-scene-interaction-enabled="true"]'))return true;
+  const node=target.closest?.('.scene-render-object');
+  if(!node)return false;
+  const scene=activeWorldEntranceScenes.find(item=>item.id===activeWorldEntranceSceneId);
+  const object=scene?.objects?.find(item=>item.id===node.dataset.sceneObjectId);
+  return !object||(object.type!=='background'&&object.layer!=='background');
+}
 function updateMobileSceneBackdrop(){
   const hero=homeElements.hero,container=homeElements.worldSceneRender;
   const enabled=Boolean(activeMobileViewport&&hero?.hasAttribute('data-mobile-scene-viewport'));
@@ -321,7 +339,7 @@ function updateMobileSceneBackdrop(){
     parallax:activeMobileViewport?.weatherParallax!==false&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches});
   sceneCamera.applyBackdrop(homeElements.sceneBackground,frame);
 }
-function canAutoPan(){return Boolean(activeMobileViewport?.autoPan&&mobileSceneCamera.maxOffset>mobileSceneCamera.minOffset&&homeElements.hero?.hasAttribute('data-mobile-scene-viewport')&&mobileSceneVisible&&!document.hidden&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches);}
+function canAutoPan(){return Boolean(activeMobileViewport&&mobileScenePanEnabled()&&mobileSceneCamera.maxOffset>mobileSceneCamera.minOffset&&homeElements.hero?.hasAttribute('data-mobile-scene-viewport')&&mobileSceneVisible&&!document.hidden&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches);}
 function requestMobileSceneCameraFrame(){if(!mobileSceneCamera.frame&&canAutoPan())mobileSceneCamera.frame=window.requestAnimationFrame(mobileSceneCameraFrame);}
 function mobileSceneCameraFrame(time) {
   const camera = mobileSceneCamera;camera.frame=0;
@@ -357,8 +375,13 @@ function enableMobileSceneViewport() {
   document.addEventListener('visibilitychange',()=>{if(document.hidden&&mobileSceneCamera.frame){cancelAnimationFrame(mobileSceneCamera.frame);mobileSceneCamera.frame=0;mobileSceneCamera.lastFrame=0;}else requestMobileSceneCameraFrame();});
   window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',()=>{updateMobileSceneBackdrop();requestMobileSceneCameraFrame();});
   hero.addEventListener("pointerdown", (event) => {
-    if (!hero.hasAttribute("data-mobile-scene-viewport") || event.pointerType !== "touch" || event.isPrimary === false) return;
+    if (!hero.hasAttribute("data-mobile-scene-viewport") || event.pointerType !== "touch") return;
     const camera = mobileSceneCamera;
+    if(event.isPrimary===false){camera.tapEligible=false;return;}
+    // Native controls keep their own gestures. Objects still allow horizontal panning,
+    // but tapping one must never change camera playback.
+    if(event.target.closest?.('button,a,input,select,textarea,label,summary,[role="button"],[role="link"]'))return;
+    camera.tapEligible=!sceneTapIsControl(event.target);camera.tapStartedAt=performance.now();
     camera.pointerId = event.pointerId; camera.startX = event.clientX; camera.startY = event.clientY; camera.startOffset = camera.offset; camera.moved = false; camera.dragging = false;
   });
   hero.addEventListener("pointermove", (event) => {
@@ -377,8 +400,10 @@ function enableMobileSceneViewport() {
   const finish = (event) => {
     const camera = mobileSceneCamera;
     if (event.pointerId !== camera.pointerId) return;
+    const tap=event.type==='pointerup'&&camera.tapEligible&&!camera.moved&&performance.now()-camera.tapStartedAt<=500&&Math.hypot(event.clientX-camera.startX,event.clientY-camera.startY)<=7&&Date.now()>=suppressSceneInteractionUntil&&!sceneTapIsControl(event.target);
     if (camera.moved) suppressSceneInteractionUntil = Date.now() + 450;
-    camera.pointerId = null; camera.dragging = false; camera.resumeAt = performance.now() + 3000; camera.lastFrame = 0; hero.classList.remove("is-scene-camera-dragging");
+    camera.pointerId = null; camera.dragging = false; camera.tapEligible=false;camera.resumeAt = performance.now() + 3000; camera.lastFrame = 0; hero.classList.remove("is-scene-camera-dragging");
+    if(tap)toggleMobileScenePan();
   };
   hero.addEventListener("pointerup", finish); hero.addEventListener("pointercancel", finish);
 }
