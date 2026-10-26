@@ -94,20 +94,58 @@
   async function readWeather(config,{fetcher=global.fetch,now=Date.now()}={}){const s=normalizeWeather(config);if(s.provider==='none'||typeof fetcher!=='function')return null;let url=s.url;if(s.provider==='open-meteo'){if(s.latitude===null||s.longitude===null)return null;url='https://api.open-meteo.com/v1/forecast?latitude='+s.latitude+'&longitude='+s.longitude+'&current=weather_code&timezone=auto'}if(!url)return null;if(s.provider==='custom'&&global.location&&new URL(url,global.location.href).origin!==global.location.origin)return null;const cached=cache.get(url);if(cached&&now-cached.at<15*60*1000)return cached.value;if(inflight.has(url))return inflight.get(url);
     const request=(async()=>{const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),2500);try{const response=await fetcher(url,{signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer'});if(!response.ok)throw Error('weather');const data=await response.json();const value=weatherTypes.slice(1).includes(data.weather)?data.weather:weatherCode(data.current?.weather_code);cache.set(url,{at:now,value});return value}catch{cache.set(url,{at:now,value:null});return null}finally{clearTimeout(timer)}})();inflight.set(url,request);request.finally(()=>inflight.delete(url));return request;}
 
-  const mountedBackgrounds=new WeakMap(),backgroundDraws=new Map();
-  function bindBackground({container,scene,resolveAsset=value=>value,frontContainer=container,backContainer=container,onAttribution}) {
-    if(!container)return()=>{};mountedBackgrounds.get(container)?.();
-    const settings=normalizeBackground(scene?.background);if(!settings.automatic&&!settings.effects?.length)return()=>{};
-    let stopped=false,weather=settings.weather.provider==='none'?'style-random':null,attribution=null,clearAttribution=null;
-    function update(){if(stopped||!container.isConnected)return;const bucket=Math.floor(Date.now()/(settings.intervalMinutes*60000)),previous=backgroundDraws.get(scene.id);if(!previous||previous.bucket!==bucket)backgroundDraws.set(scene.id,{bucket,value:Math.random()});const context={now:new Date(),weather,events:[new URLSearchParams(global.location?.search||'').get('sceneEvent')].filter(Boolean)},random=backgroundDraws.get(scene.id).value,background=resolveBackground(settings,context,random);if(settings.automatic){container.style.backgroundColor=background.color;container.style.backgroundImage=background.asset?'url("'+resolveAsset(background.asset)+'")':'none';container.style.backgroundSize='cover';container.style.backgroundPosition='center';container.dataset.backgroundVariant=background.variantId||'base';}renderEffects({container,background:settings,context,random,resolveAsset,frontContainer,backContainer});}
-    async function refresh(){if(stopped||global.document.hidden)return;if(!container.isConnected){stop();return;}weather=settings.weather.provider==='none'?'style-random':await readWeather(settings.weather);update();}
-    const timer=setInterval(refresh,60000);
-    function stop(){stopped=true;clearInterval(timer);attribution?.remove();clearAttribution?.();renderEffects({container,background:{effects:[]},resolveAsset,frontContainer,backContainer});}
-    mountedBackgrounds.set(container,stop);update();refresh();
-    if(settings.weather.provider!=='none'&&typeof onAttribution==='function')clearAttribution=onAttribution(settings.weather);
-    else if(settings.weather.provider!=='none'){attribution=global.document.createElement(settings.weather.provider==='open-meteo'?'a':'span');attribution.textContent=settings.weather.attribution;attribution.style.cssText='position:absolute;left:12px;bottom:12px;font-size:12px;z-index:6;background:#fffdf5cc;color:#34271f;padding:3px 8px;border-radius:8px';if(settings.weather.provider==='open-meteo'){attribution.href='https://open-meteo.com/';attribution.target='_blank';attribution.rel='noopener';}container.append(attribution);}
-    return stop;
+  // A Website visit commits one environment snapshot. Late responses never repaint it.
+  const visitWeather=new Map(),visitDraws=new Map(),readyAssets=new Map();
+  const visitTime=new Date();
+  function weatherKey(scene){return JSON.stringify(normalizeWeather(scene?.background?.weather));}
+  function prepareVisitEnvironment(scenes,{waitMs=1200}={}){
+    return Promise.all((scenes||[]).map(scene=>{
+      const key=weatherKey(scene);if(!visitWeather.has(key))visitWeather.set(key,new Promise(resolve=>{
+        const config=normalizeWeather(scene?.background?.weather);
+        if(config.provider==='none'){resolve('style-random');return;}
+        let settled=false;const finish=value=>{if(settled)return;settled=true;clearTimeout(timer);resolve(value);};
+        const timer=setTimeout(()=>finish(null),waitMs);
+        readWeather(config).then(finish,()=>finish(null));
+      }));
+      return visitWeather.get(key).then(weather=>[scene.id,weather]);
+    })).then(entries=>Object.fromEntries(entries));
+  }
+  function visitDraw(scene){const id=scene?.id||'scene';if(!visitDraws.has(id))visitDraws.set(id,Math.random());return visitDraws.get(id);}
+  function visitContext(weatherByScene,scene){return {now:new Date(visitTime),events:[new URLSearchParams(global.location?.search||'').get('sceneEvent')].filter(Boolean),weather:weatherByScene?.[scene?.id]??(normalizeWeather(scene?.background?.weather).provider==='none'?'style-random':null),weatherByScene};}
+  function prepareBackgroundAsset(source,resolveAsset=value=>value){
+    if(!source||typeof global.Image!=='function')return Promise.resolve();
+    const url=resolveAsset(source);if(readyAssets.has(url))return readyAssets.get(url);
+    const ready=new Promise((resolve,reject)=>{const image=new global.Image();image.onload=async()=>{try{if(image.decode)await image.decode();resolve();}catch(error){reject(error);}};image.onerror=()=>reject(new Error('Background image could not be displayed.'));image.src=url;});
+    readyAssets.set(url,ready);ready.catch(()=>readyAssets.delete(url));return ready;
   }
 
-  const api=Object.freeze({displayPeriods,normalizeClassification,periods,weatherLabels,solarPeriod,environmentContext,normalizeProcedural,bindBackground,renderEffects,resolveEffects,normalizeCondition,normalizeBackground,normalizeWeather,localTime,matches,pick,selectScene,resolveBackground,weatherCode,readWeather});if(global)global.ShiGaiSceneEnvironment=api;if(typeof module==='object'&&module.exports)module.exports=api;
+  const mountedBackgrounds=new WeakMap(),backgroundDraws=new Map();
+  function bindBackground({container,scene,resolveAsset=value=>value,frontContainer=container,backContainer=container,onAttribution,stableVisit=false}) {
+    if(!container)return()=>{};mountedBackgrounds.get(container)?.();
+    const settings=normalizeBackground(scene?.background);if(!settings.automatic&&!settings.effects?.length)return()=>{};
+    let visitWeatherByScene=null;
+    let stopped=false,weather=settings.weather.provider==='none'?'style-random':null,attribution=null,clearAttribution=null;
+    function update(){if(stopped||!container.isConnected)return;const bucket=stableVisit?0:Math.floor(Date.now()/(settings.intervalMinutes*60000)),previous=backgroundDraws.get(scene.id);if(!previous||previous.bucket!==bucket)backgroundDraws.set(scene.id,{bucket,value:Math.random()});const context=stableVisit?visitContext(visitWeatherByScene,scene):{now:new Date(),weather,events:[new URLSearchParams(global.location?.search||'').get('sceneEvent')].filter(Boolean)},random=stableVisit?visitDraw(scene):backgroundDraws.get(scene.id).value,background=resolveBackground(settings,context,random);if(settings.automatic){container.style.backgroundColor=background.color;container.style.backgroundImage=background.asset?'url("'+resolveAsset(background.asset)+'")':'none';container.style.backgroundSize='cover';container.style.backgroundPosition='center';container.dataset.backgroundVariant=background.variantId||'base';}renderEffects({container,background:settings,context,random,resolveAsset,frontContainer,backContainer});}
+    async function refresh(){if(stopped||global.document.hidden)return;if(!container.isConnected){stop();return;}weather=settings.weather.provider==='none'?'style-random':await readWeather(settings.weather);update();}
+    const timer=stableVisit?null:setInterval(refresh,60000);
+    function stop(){stopped=true;clearInterval(timer);attribution?.remove();clearAttribution?.();renderEffects({container,background:{effects:[]},resolveAsset,frontContainer,backContainer});}
+    mountedBackgrounds.set(container,stop);
+    if(stableVisit){
+      // Hide only the environment surface while preparing, retaining layout and controls.
+      const previousOpacity=container.style.opacity;container.style.opacity='0';
+      const reveal=()=>{if(!stopped)container.style.opacity=previousOpacity;};
+      const originalStop=stop;
+      mountedBackgrounds.set(container,()=>{if(stopped)return;originalStop();container.style.opacity=previousOpacity;});
+      prepareVisitEnvironment([scene]).then(async values=>{
+        visitWeatherByScene=values;const background=resolveBackground(settings,visitContext(values,scene),visitDraw(scene));
+        await prepareBackgroundAsset(background.asset,resolveAsset);
+        update();reveal();
+      }).catch(()=>{if(!stopped){container.style.backgroundImage='none';reveal();}});
+    }else{update();refresh();}
+    if(settings.weather.provider!=='none'&&typeof onAttribution==='function')clearAttribution=onAttribution(settings.weather);
+    else if(settings.weather.provider!=='none'){attribution=global.document.createElement(settings.weather.provider==='open-meteo'?'a':'span');attribution.textContent=settings.weather.attribution;attribution.style.cssText='position:absolute;left:12px;bottom:12px;font-size:12px;z-index:6;background:#fffdf5cc;color:#34271f;padding:3px 8px;border-radius:8px';if(settings.weather.provider==='open-meteo'){attribution.href='https://open-meteo.com/';attribution.target='_blank';attribution.rel='noopener';}container.append(attribution);}
+    return mountedBackgrounds.get(container);
+  }
+
+  const api=Object.freeze({prepareVisitEnvironment,visitContext,visitDraw,prepareBackgroundAsset,displayPeriods,normalizeClassification,periods,weatherLabels,solarPeriod,environmentContext,normalizeProcedural,bindBackground,renderEffects,resolveEffects,normalizeCondition,normalizeBackground,normalizeWeather,localTime,matches,pick,selectScene,resolveBackground,weatherCode,readWeather});if(global)global.ShiGaiSceneEnvironment=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

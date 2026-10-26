@@ -81,7 +81,7 @@ function renderWorksCorridor(scenes, preferredId = "") {
       };
     }
   });
-  window.ShiGaiSceneEnvironment.bindBackground({container:elements.corridor,scene,onAttribution:config=>window.ShiGaiWeatherAttribution.set('works-corridor',config),resolveAsset:sceneMediaUrl});
+  window.ShiGaiSceneEnvironment.bindBackground({stableVisit:true,container:elements.corridor,scene,onAttribution:config=>window.ShiGaiWeatherAttribution.set('works-corridor',config),resolveAsset:sceneMediaUrl});
 }
 
 function handleCorridorInteraction(event) {
