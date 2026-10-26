@@ -1257,24 +1257,13 @@
         "type": "character",
         "name": "雞",
         "media": {
-          "src": "assets/published/scenes/asset-f99b8a324cec1d73f1688e05/primary-v1.webp",
-          "format": "webp",
-          "alt": "",
-          "pipeline": {
-            "optimized": {
-              "status": "ready",
-              "sourceHash": "f99b8a324cec1d73f1688e051778dc1c73717eae459f6e702589a41cb171e74c",
-              "presetVersion": 1,
-              "outputs": {
-                "primary": "assets/published/scenes/asset-f99b8a324cec1d73f1688e05/primary-v1.webp"
-              },
-              "error": ""
-            }
-          }
+          "src": "assets/scenes/media/scene-1786549520650-object-local-1786549533424-1793034952010.gif",
+          "format": "gif",
+          "alt": ""
         },
         "position": {
-          "x": 0.751,
-          "y": 0.801
+          "x": 0.723,
+          "y": 0.777
         },
         "scale": 1,
         "rotation": 0,
@@ -1283,27 +1272,27 @@
         "layouts": {
           "landscape": {
             "position": {
-              "x": 0.751,
-              "y": 0.801
+              "x": 0.723,
+              "y": 0.777
             },
             "scale": 1,
             "rotation": 0
           },
           "portrait": {
             "position": {
-              "x": 0.662,
-              "y": 0.809
+              "x": 0.578,
+              "y": 0.822
             },
-            "scale": 1.614,
+            "scale": 1.356,
             "rotation": 0
           }
         },
         "layer": "mid",
         "visible": true,
         "locked": false,
-        "text": "今天要喝什麼？",
+        "text": "今天喝什麼",
         "textBubble": {
-          "enabled": false,
+          "enabled": true,
           "color": "#34271f",
           "backgroundColor": "#fffdf5",
           "fontWeight": 600,
@@ -1311,8 +1300,8 @@
           "layouts": {
             "landscape": {
               "anchor": "above",
-              "x": 0,
-              "y": 0,
+              "x": 205.361,
+              "y": 67.385,
               "scale": 1,
               "rotation": 0,
               "fontSize": 48,
@@ -1320,8 +1309,8 @@
             },
             "portrait": {
               "anchor": "above",
-              "x": 0,
-              "y": 0,
+              "x": 131.183,
+              "y": 70.76,
               "scale": 1,
               "rotation": 0,
               "fontSize": 48,
@@ -1372,7 +1361,7 @@
       }
     },
     "createdAt": "2026-08-12T15:45:20.650Z",
-    "updatedAt": "2026-10-25T17:32:59.500Z"
+    "updatedAt": "2026-10-26T17:15:52.009Z"
   },
   {
     "id": "scene-1786548379879",

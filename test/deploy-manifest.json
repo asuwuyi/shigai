@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-26T17:14:34.056Z",
+  "createdAt": "2026-10-26T17:15:58.969Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1082,
@@ -13,7 +13,7 @@
     "assets": 1235,
     "files": 1373
   },
-  "bytes": 163344126,
+  "bytes": 163340110,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -39,7 +39,6 @@
     "assets/published/scenes/asset-8642908682bbb2cdf974bd52/primary-v1.webp",
     "assets/published/scenes/asset-b9af9b3cef7266ff1bbdefdc/primary-v1.webp",
     "assets/published/scenes/asset-f1e94515463f3cacf69202f9/primary-v1.webp",
-    "assets/published/scenes/asset-f99b8a324cec1d73f1688e05/primary-v1.webp",
     "assets/published/works/SG-000001/primary-v1.webp",
     "assets/published/works/SG-000007/primary-v1.webp",
     "assets/published/works/SG-000008/primary-v1.webp",
@@ -1210,6 +1209,7 @@
     "assets/scenes/media/pack-20261025-station-lounge.webp",
     "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1792592519571.gif",
     "assets/scenes/media/scene-1786529648541-background-1787568404778.jpg",
+    "assets/scenes/media/scene-1786549520650-object-local-1786549533424-1793034952010.gif",
     "assets/scenes/media/scene-pack-20261025-attic-art-studio-object-local-1792949622756-1792949638413.gif",
     "assets/scenes/media/scene-pack-20261025-corner-cafe-object-local-1792949678908-1792949755923.gif",
     "assets/scenes/media/scene-pack-20261025-greenhouse-studio-object-local-1792942910412-1792942931913.gif",
