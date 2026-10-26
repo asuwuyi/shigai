@@ -95,16 +95,17 @@
     const request=(async()=>{const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),2500);try{const response=await fetcher(url,{signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer'});if(!response.ok)throw Error('weather');const data=await response.json();const value=weatherTypes.slice(1).includes(data.weather)?data.weather:weatherCode(data.current?.weather_code);cache.set(url,{at:now,value});return value}catch{cache.set(url,{at:now,value:null});return null}finally{clearTimeout(timer)}})();inflight.set(url,request);request.finally(()=>inflight.delete(url));return request;}
 
   const mountedBackgrounds=new WeakMap(),backgroundDraws=new Map();
-  function bindBackground({container,scene,resolveAsset=value=>value,frontContainer=container,backContainer=container}) {
+  function bindBackground({container,scene,resolveAsset=value=>value,frontContainer=container,backContainer=container,onAttribution}) {
     if(!container)return()=>{};mountedBackgrounds.get(container)?.();
     const settings=normalizeBackground(scene?.background);if(!settings.automatic&&!settings.effects?.length)return()=>{};
-    let stopped=false,weather=settings.weather.provider==='none'?'style-random':null,attribution=null;
+    let stopped=false,weather=settings.weather.provider==='none'?'style-random':null,attribution=null,clearAttribution=null;
     function update(){if(stopped||!container.isConnected)return;const bucket=Math.floor(Date.now()/(settings.intervalMinutes*60000)),previous=backgroundDraws.get(scene.id);if(!previous||previous.bucket!==bucket)backgroundDraws.set(scene.id,{bucket,value:Math.random()});const context={now:new Date(),weather,events:[new URLSearchParams(global.location?.search||'').get('sceneEvent')].filter(Boolean)},random=backgroundDraws.get(scene.id).value,background=resolveBackground(settings,context,random);if(settings.automatic){container.style.backgroundColor=background.color;container.style.backgroundImage=background.asset?'url("'+resolveAsset(background.asset)+'")':'none';container.style.backgroundSize='cover';container.style.backgroundPosition='center';container.dataset.backgroundVariant=background.variantId||'base';}renderEffects({container,background:settings,context,random,resolveAsset,frontContainer,backContainer});}
     async function refresh(){if(stopped||global.document.hidden)return;if(!container.isConnected){stop();return;}weather=settings.weather.provider==='none'?'style-random':await readWeather(settings.weather);update();}
     const timer=setInterval(refresh,60000);
-    function stop(){stopped=true;clearInterval(timer);attribution?.remove();renderEffects({container,background:{effects:[]},resolveAsset,frontContainer,backContainer});}
+    function stop(){stopped=true;clearInterval(timer);attribution?.remove();clearAttribution?.();renderEffects({container,background:{effects:[]},resolveAsset,frontContainer,backContainer});}
     mountedBackgrounds.set(container,stop);update();refresh();
-    if(settings.weather.provider!=='none'){attribution=global.document.createElement(settings.weather.provider==='open-meteo'?'a':'span');attribution.textContent=settings.weather.attribution;attribution.style.cssText='position:absolute;left:12px;bottom:12px;font-size:12px;z-index:6;background:#fffdf5cc;color:#34271f;padding:3px 8px;border-radius:8px';if(settings.weather.provider==='open-meteo'){attribution.href='https://open-meteo.com/';attribution.target='_blank';attribution.rel='noopener';}container.append(attribution);}
+    if(settings.weather.provider!=='none'&&typeof onAttribution==='function')clearAttribution=onAttribution(settings.weather);
+    else if(settings.weather.provider!=='none'){attribution=global.document.createElement(settings.weather.provider==='open-meteo'?'a':'span');attribution.textContent=settings.weather.attribution;attribution.style.cssText='position:absolute;left:12px;bottom:12px;font-size:12px;z-index:6;background:#fffdf5cc;color:#34271f;padding:3px 8px;border-radius:8px';if(settings.weather.provider==='open-meteo'){attribution.href='https://open-meteo.com/';attribution.target='_blank';attribution.rel='noopener';}container.append(attribution);}
     return stop;
   }
 

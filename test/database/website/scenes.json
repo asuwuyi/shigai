@@ -934,7 +934,7 @@
       }
     },
     "createdAt": "2026-08-11T10:34:54.332Z",
-    "updatedAt": "2026-10-25T15:39:50.829Z"
+    "updatedAt": "2026-10-25T19:03:55.492Z"
   },
   {
     "id": "scene-1786529648541",
@@ -6540,33 +6540,33 @@
         "type": "prop",
         "name": "新道具",
         "media": {
-          "src": "assets/scenes/media/scene-pack-20261025-rooftop-terrace-object-local-1792949799858-1792949826121.gif",
+          "src": "assets/scenes/media/scene-pack-20261025-rooftop-terrace-object-local-1792949799858-1793029770134.gif",
           "format": "gif",
           "alt": ""
         },
         "position": {
-          "x": 0.492,
-          "y": 0.637
+          "x": 0.49,
+          "y": 0.611
         },
-        "scale": 0.45,
+        "scale": 0.927,
         "rotation": 0,
         "flipX": false,
         "flipY": false,
         "layouts": {
           "landscape": {
             "position": {
-              "x": 0.492,
-              "y": 0.637
+              "x": 0.49,
+              "y": 0.611
             },
-            "scale": 0.45,
+            "scale": 0.927,
             "rotation": 0
           },
           "portrait": {
             "position": {
-              "x": 0.506,
-              "y": 0.619
+              "x": 0.477,
+              "y": 0.638
             },
-            "scale": 0.603,
+            "scale": 1.414,
             "rotation": 0
           }
         },
@@ -6646,7 +6646,7 @@
       }
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-25T17:37:06.109Z"
+    "updatedAt": "2026-10-26T15:50:29.359Z"
   },
   {
     "id": "scene-pack-20261025-riverside-path",
@@ -7887,20 +7887,20 @@
           "alt": ""
         },
         "position": {
-          "x": 0.495,
-          "y": 0.621
+          "x": 0.497,
+          "y": 0.669
         },
-        "scale": 0.604,
+        "scale": 0.392,
         "rotation": 0,
         "flipX": false,
         "flipY": false,
         "layouts": {
           "landscape": {
             "position": {
-              "x": 0.495,
-              "y": 0.621
+              "x": 0.497,
+              "y": 0.669
             },
-            "scale": 0.604,
+            "scale": 0.392,
             "rotation": 0
           },
           "portrait": {
@@ -7988,7 +7988,7 @@
       }
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-25T17:38:18.950Z"
+    "updatedAt": "2026-10-26T15:50:10.790Z"
   },
   {
     "id": "scene-pack-20261025-seaside-boardwalk",

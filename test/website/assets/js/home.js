@@ -15,17 +15,19 @@ const homeElements = {
 const isReviewMode = new URLSearchParams(window.location.search).get("review") === "1";
 let reviewPreviewDate = null;
 const sceneEnvironment = window.ShiGaiSceneEnvironment;
+const sceneCamera = window.ShiGaiSceneCamera;
 const environmentWeather = Object.create(null), environmentDraws = new Map();
 function sceneEnvironmentContext(scene) { return {now:new Date(),events:[new URLSearchParams(window.location.search).get('sceneEvent')].filter(Boolean),weather:environmentWeather[scene?.id]??(scene?.background?.weather?.provider==='none'?'style-random':null),weatherByScene:environmentWeather}; }
 function environmentDraw(scene) { const minutes=sceneEnvironment.normalizeBackground(scene?.background).intervalMinutes,id=scene?.id||'scene',bucket=Math.floor(Date.now()/(minutes*60000)),previous=environmentDraws.get(id);if(previous?.bucket===bucket)return previous.value;const entry={bucket,value:Math.random()};environmentDraws.set(id,entry);return entry.value; }
 async function refreshEnvironmentWeather(scenes) { await Promise.all((scenes||[]).filter(s=>s.status==='published').map(async s=>{environmentWeather[s.id]=sceneEnvironment.normalizeWeather(s.background?.weather).provider==='none'?'style-random':await sceneEnvironment.readWeather(s.background?.weather);})); }
 function environmentScene(scene) { return {...scene,background:sceneEnvironment.resolveBackground(scene.background,sceneEnvironmentContext(scene),environmentDraw(scene))}; }
-function showWeatherAttribution(scene) { document.getElementById('sceneWeatherAttribution')?.remove();const config=sceneEnvironment.normalizeWeather(scene.background?.weather);if(config.provider==='none')return;const link=document.createElement(config.provider==='open-meteo'?'a':'span');link.id='sceneWeatherAttribution';link.textContent=config.attribution;link.style.cssText='position:absolute;left:12px;bottom:12px;font-size:12px;z-index:6;background:#fffdf5cc;color:#34271f;padding:3px 8px;border-radius:8px';if(config.provider==='open-meteo'){link.href='https://open-meteo.com/';link.target='_blank';link.rel='noopener';}homeElements.hero.append(link); }
+function showWeatherAttribution(scene) { window.ShiGaiWeatherAttribution.set('home-scene',sceneEnvironment.normalizeWeather(scene.background?.weather)); }
 
 let activeWorldEntranceScenes = [];
 let activeWorldEntranceSceneId = "";
 let suppressSceneInteractionUntil = 0;
 let activeMobileViewport = null;
+let activeBackdropRole = 'weather';
 let welcomeShownForVisit = false;
 let removeWelcomeOverlay = null;
 const homeLoadingStartedAt = performance.now();
@@ -105,7 +107,7 @@ function currentSceneLayout() { return window.matchMedia("(orientation: portrait
 function mobileViewportSettings(scene) {
   const source = scene?.metadata?.mobileViewport || {};
   const bounded = (value, min, max, fallback) => { const number = Number(value); return Number.isFinite(number) ? Math.max(min, Math.min(max, number)) : fallback; };
-  return { enabled: source.enabled !== false, width: bounded(source.width, 1, 3, 1.8), initialX: bounded(source.initialX, 0, 1, .5), autoPan: source.autoPan !== false, speed: bounded(source.speed, 4, 30, 9) };
+  return { enabled: source.enabled !== false, width: bounded(source.width, 1, 3, 1.8), initialX: bounded(source.initialX, 0, 1, .5), autoPan: source.autoPan !== false, speed: bounded(source.speed, 4, 30, 9), weatherParallax:source.weatherParallax!==false };
 }
 function reviewUrl(path, parameters = {}) {
   const query = new URLSearchParams(parameters);
@@ -209,6 +211,7 @@ function handleWorldSceneInteraction(event) {
   openInteractionRoute(interaction);
 }
 function updateWorldBackground(scene) {
+  activeBackdropRole=sceneCamera.backgroundRole(scene.background);
   sceneEnvironment.renderEffects({container:homeElements.worldSceneRender,background:scene.background,context:sceneEnvironmentContext(scene),random:environmentDraw(scene),resolveAsset:sceneMediaUrl});
   homeElements.hero.classList.remove('has-scene-background','has-scene-bleed');
   homeElements.hero.style.removeProperty('--scene-world-background');homeElements.hero.style.removeProperty('--scene-bleed-image');document.body.style.removeProperty('--scene-world-background');
@@ -226,6 +229,7 @@ function updateWorldBackground(scene) {
 
   homeElements.worldSceneRender.dataset.backgroundVariant = scene.background.variantId || 'base';
   showWeatherAttribution(scene);
+  updateMobileSceneBackdrop();
 }
 function renderWorldEntranceScene(scenes, preferredSceneId = activeWorldEntranceSceneId) {
   activeWorldEntranceScenes = Array.isArray(scenes) ? scenes : [];
@@ -285,7 +289,7 @@ function renderWorldEntranceScene(scenes, preferredSceneId = activeWorldEntrance
       };
     }
   });
-  activeMobileViewport = useMobileViewport ? { ...mobileViewport, surfaceWidth: renderResult.surfaceWidth } : null;
+  activeMobileViewport = useMobileViewport ? { ...mobileViewport, surfaceWidth: renderResult.surfaceWidth, surfaceHeight:renderResult.surfaceHeight } : null;
   sceneEnvironment.renderEffects({container,background:scene.background,context:sceneEnvironmentContext(scene),random:environmentDraw(scene),resolveAsset:sceneMediaUrl});
   configureMobileSceneCamera();
 }
@@ -295,34 +299,52 @@ function setMobileSceneCameraOffset(value) {
   const camera = mobileSceneCamera;
   camera.offset = Math.max(-camera.maxOffset, Math.min(camera.maxOffset, Number(value) || 0));
   homeElements.hero?.style.setProperty("--scene-camera-x", `${camera.offset.toFixed(2)}px`);
+  updateMobileSceneBackdrop();
 }
+let mobileSceneVisible=true;
+function updateMobileSceneBackdrop(){
+  const hero=homeElements.hero,container=homeElements.worldSceneRender;
+  const enabled=Boolean(activeMobileViewport&&hero?.hasAttribute('data-mobile-scene-viewport'));
+  const frame=sceneCamera.backgroundFrame({enabled,role:activeBackdropRole,
+    viewportWidth:container?.clientWidth,viewportHeight:container?.clientHeight,
+    surfaceWidth:activeMobileViewport?.surfaceWidth,surfaceHeight:activeMobileViewport?.surfaceHeight,
+    offset:mobileSceneCamera.offset,maxOffset:mobileSceneCamera.maxOffset,
+    parallax:activeMobileViewport?.weatherParallax!==false&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches});
+  sceneCamera.applyBackdrop(homeElements.sceneBackground,frame);
+}
+function canAutoPan(){return Boolean(activeMobileViewport?.autoPan&&mobileSceneCamera.maxOffset>0&&homeElements.hero?.hasAttribute('data-mobile-scene-viewport')&&mobileSceneVisible&&!document.hidden&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches);}
+function requestMobileSceneCameraFrame(){if(!mobileSceneCamera.frame&&canAutoPan())mobileSceneCamera.frame=window.requestAnimationFrame(mobileSceneCameraFrame);}
 function mobileSceneCameraFrame(time) {
-  const camera = mobileSceneCamera;
-  camera.frame = window.requestAnimationFrame(mobileSceneCameraFrame);
-  if (!activeMobileViewport?.autoPan || camera.pointerId !== null || time < camera.resumeAt || time < camera.boundaryUntil || document.hidden || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { camera.lastFrame = time; return; }
+  const camera = mobileSceneCamera;camera.frame=0;
+  if(!canAutoPan()){camera.lastFrame=0;return;}
+  if (camera.pointerId !== null || time < camera.resumeAt || time < camera.boundaryUntil) { camera.lastFrame = time;requestMobileSceneCameraFrame();return; }
   const elapsed = camera.lastFrame ? Math.min(50, time - camera.lastFrame) / 1000 : 0;
   camera.lastFrame = time;
   const next = camera.offset + camera.direction * activeMobileViewport.speed * elapsed;
   setMobileSceneCameraOffset(next);
   if (Math.abs(camera.offset) >= camera.maxOffset - .5) { camera.direction *= -1; camera.boundaryUntil = time + 1200; }
+  requestMobileSceneCameraFrame();
 }
 function configureMobileSceneCamera() {
   const hero = homeElements.hero;
   const container = homeElements.worldSceneRender;
   const active = Boolean(hero && container && activeMobileViewport && window.matchMedia("(max-width: 767px) and (pointer: coarse)").matches);
   hero?.toggleAttribute("data-mobile-scene-viewport", active);
-  if (!active) { mobileSceneCamera.maxOffset = 0; setMobileSceneCameraOffset(0); return; }
+  if (!active) { if(mobileSceneCamera.frame)cancelAnimationFrame(mobileSceneCamera.frame);mobileSceneCamera.frame=0;mobileSceneCamera.maxOffset = 0; setMobileSceneCameraOffset(0); return; }
   mobileSceneCamera.maxOffset = Math.max(0, (activeMobileViewport.surfaceWidth - container.clientWidth) / 2);
   setMobileSceneCameraOffset((.5 - activeMobileViewport.initialX) * mobileSceneCamera.maxOffset * 2);
   mobileSceneCamera.direction = activeMobileViewport.initialX >= .5 ? -1 : 1;
   mobileSceneCamera.resumeAt = performance.now() + 2000;
   mobileSceneCamera.lastFrame = 0;
-  if (!mobileSceneCamera.frame) mobileSceneCamera.frame = window.requestAnimationFrame(mobileSceneCameraFrame);
+  requestMobileSceneCameraFrame();
 }
 
 function enableMobileSceneViewport() {
   const hero = homeElements.hero;
   if (!hero) return;
+  if(typeof IntersectionObserver==='function')new IntersectionObserver(entries=>{mobileSceneVisible=entries[0]?.isIntersecting===true;if(!mobileSceneVisible&&mobileSceneCamera.frame){cancelAnimationFrame(mobileSceneCamera.frame);mobileSceneCamera.frame=0;mobileSceneCamera.lastFrame=0;}else requestMobileSceneCameraFrame();}).observe(hero);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&mobileSceneCamera.frame){cancelAnimationFrame(mobileSceneCamera.frame);mobileSceneCamera.frame=0;mobileSceneCamera.lastFrame=0;}else requestMobileSceneCameraFrame();});
+  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',()=>{updateMobileSceneBackdrop();requestMobileSceneCameraFrame();});
   hero.addEventListener("pointerdown", (event) => {
     if (!hero.hasAttribute("data-mobile-scene-viewport") || event.pointerType !== "touch" || event.isPrimary === false) return;
     const camera = mobileSceneCamera;
@@ -780,5 +802,5 @@ homeElements.loadingRetry?.addEventListener("click", async () => {
 loadHome();
 
 // Re-evaluate conditions without re-rolling on resize or resetting an unchanged animation.
-async function refreshScheduledEnvironment(){if(document.hidden||!activeWorldEntranceScenes.length)return;await refreshEnvironmentWeather(activeWorldEntranceScenes);const current=activeWorldEntranceScenes.find(s=>s.id===activeWorldEntranceSceneId);const stillEligible=current&&!current.condition?.fallback&&sceneEnvironment.matches(current.condition,sceneEnvironmentContext(current));const target=stillEligible?current:selectWorldEntranceScene(activeWorldEntranceScenes,'',environmentDraw(current));if(!target){homeElements.worldSceneRender?.replaceChildren();homeElements.hero?.classList.remove('has-world-scene','has-scene-background','has-scene-bleed');homeElements.hero?.style.removeProperty('--scene-world-background');homeElements.hero?.style.removeProperty('--scene-bleed-image');document.body.style.removeProperty('--scene-world-background');document.getElementById('sceneWeatherAttribution')?.remove();activeWorldEntranceSceneId='';return;}const next=target.background?.variantId!==undefined?target:environmentScene(target),variant=homeElements.worldSceneRender?.dataset.backgroundVariant||'base';if(target.id!==activeWorldEntranceSceneId)renderWorldEntranceScene(activeWorldEntranceScenes,target.id);else updateWorldBackground(next);}
+async function refreshScheduledEnvironment(){if(document.hidden||!activeWorldEntranceScenes.length)return;await refreshEnvironmentWeather(activeWorldEntranceScenes);const current=activeWorldEntranceScenes.find(s=>s.id===activeWorldEntranceSceneId);const stillEligible=current&&!current.condition?.fallback&&sceneEnvironment.matches(current.condition,sceneEnvironmentContext(current));const target=stillEligible?current:selectWorldEntranceScene(activeWorldEntranceScenes,'',environmentDraw(current));if(!target){homeElements.worldSceneRender?.replaceChildren();homeElements.hero?.classList.remove('has-world-scene','has-scene-background','has-scene-bleed');homeElements.hero?.style.removeProperty('--scene-world-background');homeElements.hero?.style.removeProperty('--scene-bleed-image');document.body.style.removeProperty('--scene-world-background');window.ShiGaiWeatherAttribution.set('home-scene',null);activeWorldEntranceSceneId='';activeMobileViewport=null;configureMobileSceneCamera();return;}const next=target.background?.variantId!==undefined?target:environmentScene(target),variant=homeElements.worldSceneRender?.dataset.backgroundVariant||'base';if(target.id!==activeWorldEntranceSceneId)renderWorldEntranceScene(activeWorldEntranceScenes,target.id);else updateWorldBackground(next);}
 window.setInterval(refreshScheduledEnvironment,60000);

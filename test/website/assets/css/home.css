@@ -247,7 +247,7 @@ button.home-welcome-control { cursor: pointer; }
 @media (max-width: 767px) and (pointer: coarse) {
   .home-hero { --scene-peek-x: 0px; --scene-peek-y: 0px; height: auto; min-height: 100svh; touch-action: pan-y; }
   .home-hero:not([data-mobile-scene-viewport]) .home-world-scene-render .scene-render-plane { transform: translate(-50%, -50%) scale(1.04); transition: transform .45s cubic-bezier(.2,.8,.2,1); }
-  .home-hero[data-mobile-scene-viewport] .home-world-scene-render .scene-render-plane { left: calc(50% + var(--scene-camera-x, 0px)); transition: left .35s cubic-bezier(.2,.8,.2,1); }
+  .home-hero[data-mobile-scene-viewport] .home-world-scene-render .scene-render-plane { left: 50%; transform: translate(calc(-50% + var(--scene-camera-x, 0px)), -50%); transition: none; will-change: transform; }
   .home-hero[data-mobile-scene-viewport].is-scene-camera-dragging .home-world-scene-render .scene-render-plane { transition: none; }
   .home-hero[data-mobile-scene-viewport] .scene-render-object, .home-hero[data-mobile-scene-viewport] .home-hero-background { translate: none; }
   .home-world-scene-render .scene-render-object { --scene-peek-depth: .5; translate: calc(var(--scene-peek-x) * var(--scene-peek-depth)) calc(var(--scene-peek-y) * var(--scene-peek-depth)); transition: translate .45s cubic-bezier(.2,.8,.2,1); }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-25T17:39:02.177Z",
+  "createdAt": "2026-10-26T16:30:56.259Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1082,
@@ -11,9 +11,9 @@
     "games": 3,
     "spotDifferenceLevels": 2,
     "assets": 1235,
-    "files": 1371
+    "files": 1373
   },
-  "bytes": 163363930,
+  "bytes": 163337203,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -1216,7 +1216,7 @@
     "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1792949868469-1792949898967.gif",
     "assets/scenes/media/scene-pack-20261025-quiet-library-object-local-1792949766674-1792949788212.gif",
     "assets/scenes/media/scene-pack-20261025-riverside-path-object-local-1792949838878-1792949861515.gif",
-    "assets/scenes/media/scene-pack-20261025-rooftop-terrace-object-local-1792949799858-1792949826121.gif",
+    "assets/scenes/media/scene-pack-20261025-rooftop-terrace-object-local-1792949799858-1793029770134.gif",
     "assets/scenes/media/scene-pack-20261025-seaside-boardwalk-object-local-1792949905273-1792949927712.gif",
     "assets/scenes/media/scene-pack-20261025-seaside-cabin-object-local-1792942828423-1792942854325.gif",
     "assets/scenes/media/scene-pack-20261025-station-lounge-object-local-1792942861342-1792942881784.gif",

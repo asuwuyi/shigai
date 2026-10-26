@@ -65,7 +65,7 @@ function renderWorkDetailUi(scenes) {
       return { "aria-label": object.name || "作品內頁操作", "data-ui-action": interaction.action, role: actionable ? "button" : null, tabIndex: actionable ? 0 : null };
     }
   });
-  window.ShiGaiSceneEnvironment.bindBackground({container:elements.uiLayer,scene:workDetailUiScene,resolveAsset:sceneMediaUrl});
+  window.ShiGaiSceneEnvironment.bindBackground({container:elements.uiLayer,scene:workDetailUiScene,onAttribution:config=>window.ShiGaiWeatherAttribution.set('work-detail',config),resolveAsset:sceneMediaUrl});
 }
 function moveWorkDetail(direction) {
   const target = direction < 0 ? elements.previous : elements.next;

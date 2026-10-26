@@ -179,3 +179,10 @@ body[data-spot-game] .start-bridge button { grid-template-columns: auto auto; ju
   body[data-spot-game] .game-navigation .levels-button > span::before { content: ""; width: 100%; height: 100%; transform: none; background: currentColor; -webkit-mask: var(--control-x) center / contain no-repeat; mask: var(--control-x) center / contain no-repeat; }
   body[data-spot-game] .game-bar { padding-top: 80px; padding-right: 4px; }
 }
+
+/* Flowing page-bottom source credit, never a floating Scene badge. */
+.weather-source-footer { position:relative;z-index:6;display:grid;place-items:center;padding:16px 20px max(20px,env(safe-area-inset-bottom));background:#2b211b;color:#f4e8d8;text-align:center; }
+.weather-source-credit { margin:0;font-size:12px;line-height:1.6;overflow-wrap:anywhere; }
+.weather-source-credit a { display:inline-block;min-height:28px;padding:5px 2px;color:inherit;text-decoration:underline;text-underline-offset:3px; }
+.weather-source-credit a:focus-visible { outline:2px solid currentColor;outline-offset:3px; }
+[data-site-footer] .weather-source-credit { color:#344d60;background:#fffdf5;padding:3px 10px;border-radius:6px; }

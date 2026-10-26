@@ -87,7 +87,7 @@
     front.hidden = foregroundScene.objects.length === 0 && !(scene.background?.effects||[]).some(v=>v.enabled!==false&&v.layer!=='back');
     window.ShiGaiSceneRenderer.renderScene({ ...common, container: backScene, scene: backgroundScene });
     window.ShiGaiSceneRenderer.renderScene({ ...common, container: frontScene, scene: foregroundScene });
-    window.ShiGaiSceneEnvironment.bindBackground({container:backdrop,frontContainer:front,scene,resolveAsset:source=>new URL(`../${source}`,document.baseURI).href});
+    window.ShiGaiSceneEnvironment.bindBackground({container:backdrop,frontContainer:front,scene,onAttribution:config=>window.ShiGaiWeatherAttribution.set('games-room',config),resolveAsset:source=>new URL(`../${source}`,document.baseURI).href});
   }
   try {
     const settings = await window.ShiGaiWebsiteSettings.catch(() => ({}));
