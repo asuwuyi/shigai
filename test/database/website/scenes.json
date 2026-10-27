@@ -694,8 +694,8 @@
           },
           "portrait": {
             "position": {
-              "x": 0.134,
-              "y": 0.549
+              "x": 0.236,
+              "y": 0.54
             },
             "scale": 2.309,
             "rotation": 0
@@ -922,6 +922,105 @@
           "translations": {}
         },
         "metadata": {}
+      },
+      {
+        "id": "object-local-1793109965535",
+        "order": 5,
+        "type": "text",
+        "name": "新道具",
+        "media": {
+          "src": "",
+          "format": "",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.5,
+              "y": 0.5
+            },
+            "scale": 1,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.5,
+              "y": 0.5
+            },
+            "scale": 1,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "NEWS:",
+        "textBubble": {
+          "enabled": true,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": -673.33,
+              "y": -315.79,
+              "scale": 0.714,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": -755.35,
+              "y": -26.524,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
       }
     ],
     "metadata": {
@@ -934,7 +1033,7 @@
       }
     },
     "createdAt": "2026-08-11T10:34:54.332Z",
-    "updatedAt": "2026-10-25T19:03:55.492Z"
+    "updatedAt": "2026-10-27T14:12:19.285Z"
   },
   {
     "id": "scene-1786529648541",
@@ -944,18 +1043,385 @@
     "order": 2,
     "background": {
       "color": "#F7F9FC",
-      "asset": "assets/scenes/media/scene-1786529648541-background-1787568404778.jpg",
-      "automatic": false,
+      "asset": "",
+      "automatic": true,
       "intervalMinutes": 30,
       "weather": {
-        "provider": "none",
-        "city": "",
-        "latitude": null,
-        "longitude": null,
+        "provider": "open-meteo",
+        "city": "台中",
+        "latitude": 24.1477,
+        "longitude": 120.6736,
+        "timeZone": "Asia/Taipei",
         "url": "",
         "attribution": "Weather data by Open-Meteo"
       },
-      "variants": []
+      "variants": [
+        {
+          "id": "sky-01",
+          "name": "01 黎明前・少雲",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-01.webp",
+          "assetId": "weather-20261022-01",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "dawn"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear"
+            ]
+          }
+        },
+        {
+          "id": "sky-02",
+          "name": "02 日出・少雲",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-02.webp",
+          "assetId": "weather-20261022-02",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "dawn",
+              "morning"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear"
+            ]
+          }
+        },
+        {
+          "id": "sky-03",
+          "name": "03 早晨・少雲",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-03.webp",
+          "assetId": "weather-20261022-03",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "morning"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear"
+            ]
+          }
+        },
+        {
+          "id": "sky-04",
+          "name": "04 正午・少雲",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-04.webp",
+          "assetId": "weather-20261022-04",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "noon"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear"
+            ]
+          }
+        },
+        {
+          "id": "sky-05",
+          "name": "05 正午・多雲",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-05.webp",
+          "assetId": "weather-20261022-05",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "noon",
+              "afternoon"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "cloudy"
+            ]
+          }
+        },
+        {
+          "id": "sky-06",
+          "name": "06 午後・金光",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-06.webp",
+          "assetId": "weather-20261022-06",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "afternoon"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear"
+            ]
+          }
+        },
+        {
+          "id": "sky-07",
+          "name": "07 陰天",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-07.webp",
+          "assetId": "weather-20261022-07",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": true,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": [
+              "overcast",
+              "fog"
+            ]
+          }
+        },
+        {
+          "id": "sky-08",
+          "name": "08 雨天",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-08.webp",
+          "assetId": "weather-20261022-08",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": [
+              "rain",
+              "storm"
+            ]
+          }
+        },
+        {
+          "id": "sky-09",
+          "name": "09 黃昏・暖霞",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-09.webp",
+          "assetId": "weather-20261022-09",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "dusk"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear",
+              "cloudy"
+            ]
+          }
+        },
+        {
+          "id": "sky-10",
+          "name": "10 暮色・藍調",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-10.webp",
+          "assetId": "weather-20261022-10",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "dusk",
+              "night"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear",
+              "cloudy"
+            ]
+          }
+        },
+        {
+          "id": "sky-11",
+          "name": "11 晴朗夜空",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-11.webp",
+          "assetId": "weather-20261022-11",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "night"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear"
+            ]
+          }
+        },
+        {
+          "id": "sky-12",
+          "name": "12 多雲夜空",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-12.webp",
+          "assetId": "weather-20261022-12",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "night"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "cloudy",
+              "overcast"
+            ]
+          }
+        }
+      ],
+      "effects": []
     },
     "condition": {
       "mode": "fixed",
@@ -977,6 +1443,105 @@
       "translations": {}
     },
     "objects": [
+      {
+        "id": "environment-frame-study",
+        "order": 1,
+        "type": "background",
+        "name": "書房（透明窗環境層）",
+        "media": {
+          "src": "assets/scenes/media/study-transparent-windows-20261027.webp",
+          "format": "webp",
+          "alt": "書房，兩側透明窗戶"
+        },
+        "position": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "scale": 1.112,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.5,
+              "y": 0.5
+            },
+            "scale": 1.112,
+            "rotation": 0
+          },
+          "portrait": {
+            "position": {
+              "x": 0.5,
+              "y": 0.5
+            },
+            "scale": 1.667,
+            "rotation": 0
+          }
+        },
+        "layer": "background",
+        "visible": true,
+        "locked": true,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            },
+            "portrait": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
       {
         "id": "object-local-1786546761589",
         "order": 1,
@@ -1098,7 +1663,7 @@
       }
     },
     "createdAt": "2026-08-12T10:14:08.541Z",
-    "updatedAt": "2026-10-25T17:32:52.243Z"
+    "updatedAt": "2026-10-27T13:52:39.011Z"
   },
   {
     "id": "scene-1786549520650",

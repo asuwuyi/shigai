@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-27T13:40:21.506Z",
+  "createdAt": "2026-10-27T14:12:45.961Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1082,
@@ -13,7 +13,7 @@
     "assets": 1235,
     "files": 1373
   },
-  "bytes": 163340100,
+  "bytes": 163015378,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -1208,7 +1208,6 @@
     "assets/scenes/media/pack-20261025-seaside-cabin.webp",
     "assets/scenes/media/pack-20261025-station-lounge.webp",
     "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1792592519571.gif",
-    "assets/scenes/media/scene-1786529648541-background-1787568404778.jpg",
     "assets/scenes/media/scene-1786549520650-object-local-1786549533424-1793034952010.gif",
     "assets/scenes/media/scene-pack-20261025-attic-art-studio-object-local-1792949622756-1792949638413.gif",
     "assets/scenes/media/scene-pack-20261025-corner-cafe-object-local-1792949678908-1792949755923.gif",
@@ -1220,6 +1219,7 @@
     "assets/scenes/media/scene-pack-20261025-seaside-boardwalk-object-local-1792949905273-1792949927712.gif",
     "assets/scenes/media/scene-pack-20261025-seaside-cabin-object-local-1792942828423-1792942854325.gif",
     "assets/scenes/media/scene-pack-20261025-station-lounge-object-local-1792942861342-1792942881784.gif",
+    "assets/scenes/media/study-transparent-windows-20261027.webp",
     "assets/scenes/media/weather-20261022-01.webp",
     "assets/scenes/media/weather-20261022-02.webp",
     "assets/scenes/media/weather-20261022-03.webp",
