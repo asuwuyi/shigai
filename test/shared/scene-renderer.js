@@ -247,6 +247,7 @@
     const placement = settings.layouts[layout];
     if (!anchor) {
       const text=node.querySelector('.scene-render-object-text');
+      if(text)text.style.fontFamily=rules().fontFamily(settings.fontFamily);
       if(text&&settings.animation){text.style.position='relative';text.style.left=placement.x+'px';text.style.top=placement.y+'px';text.style.transform=`rotate(${placement.rotation}deg) scale(${placement.scale})`;}
       return;
     }
@@ -262,11 +263,12 @@
     anchor.style.transform = 'scale(' + inverse * (object.flipX ? -1 : 1) + ',' + inverse * (object.flipY ? -1 : 1) + ')';
     text.style.left = placement.x + 'px'; text.style.top = placement.y + 'px';
     text.style.transform = (hasMedia ? 'translate(' + tx + ',' + ty + ') ' : '') + 'rotate(' + placement.rotation + 'deg) scale(' + placement.scale + ')';
+    text.style.fontFamily = rules().fontFamily(settings.fontFamily);
     text.style.color = settings.color; text.style.backgroundColor = settings.backgroundColor;
     text.style.fontSize = placement.fontSize + 'px'; text.style.fontWeight = settings.fontWeight;
     text.style.borderRadius = settings.radius + 'px'; text.style.maxWidth = placement.maxWidth + 'px';
   }
-  function createObjectNode({ documentRef, object, layout, surfaceScale, surfaceMetricsValue, resolveMediaSource, objectAttributes, onMediaError, playAnimation, editorSelectable }) {
+  function createObjectNode({ documentRef, object, scene, layout, surfaceScale, surfaceMetricsValue, resolveMediaSource, objectAttributes, onMediaError, playAnimation, editorSelectable }) {
     const node = documentRef.createElement("div");
     const visual = documentRef.createElement("div");
     node.className = `scene-render-object is-${cleanType(object?.type)}`;
@@ -284,13 +286,14 @@
       visual.append(media);
     }
     const speech = rules().normalizeTextBubble(object.textBubble);
-    if ((!speech.enabled || !object?.text) && (object?.text || !media)) {
+    const hasText = Boolean(object?.text) || Boolean(object?.textDisplay && rules().normalizeTextDisplay(object.textDisplay).source !== "manual");
+    if ((!speech.enabled || !hasText) && (hasText || !media)) {
       const text = documentRef.createElement("span");
       text.className = "scene-render-object-text";
       text.textContent = object?.text || object?.name || "";
       visual.append(text);
     }
-    if (speech.enabled && object?.text) {
+    if (speech.enabled && hasText) {
       const anchor = documentRef.createElement('div'); anchor.className = 'scene-speech-anchor';
       const counter = documentRef.createElement('div'); counter.className = 'scene-speech-counterflip';
       const text = documentRef.createElement('span'); text.className = 'scene-speech-bubble'; text.textContent = object.text;
@@ -304,6 +307,10 @@
     applySpeechStyle(node, object, layout);
     const metrics = { width: surfaceMetricsValue.width, height: surfaceMetricsValue.height };
     applyObjectAnimation(node, object, metrics, playAnimation !== false, layout, editorSelectable);
+    if(object.textDisplay){
+      if(!global.ShiGaiSceneText)throw new Error('ShiGaiSceneText is required for information text.');
+      node.querySelectorAll('.scene-speech-bubble, .scene-render-object-text').forEach(text=>global.ShiGaiSceneText.mount({node:text,wrapper:node,object,scene,layout,editorSelectable:!!editorSelectable}));
+    }
     if (media && animationSettings(object).mode === "seamless") {
       const refreshSeamlessBounds = () => applyObjectAnimation(node, object, metrics, playAnimation !== false, layout);
       media.addEventListener(media.tagName === "VIDEO" ? "loadedmetadata" : "load", refreshSeamlessBounds, { once: true });

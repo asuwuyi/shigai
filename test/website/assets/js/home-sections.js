@@ -18,7 +18,7 @@
   const publicDataRequests = new Map();
   function publicData(name, optional = false) {
     if (!publicDataRequests.has(name)) {
-      const request = fetch(`../database/website/${name}.json`, { cache: "no-store" }).then(response => {
+      const request = fetch(`../database/website/${name}.json`, { cache: "no-cache", priority: "low" }).then(response => {
         if (!response.ok) throw new Error(`${name} export unavailable`);
         return response.json();
       }).catch(error => { publicDataRequests.delete(name); throw error; });
@@ -262,10 +262,15 @@
   }
   function observeScrollDepth() {
     const sent = new Set();
-    let frame = 0;
+    let frame = 0, allowScrollReporting = true;
+    const armScroll = () => { allowScrollReporting = true; };
+    addEventListener('wheel', armScroll, { passive: true });
+    addEventListener('touchmove', armScroll, { passive: true });
+    addEventListener('keydown', event => { if (['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(event.key) && !event.target?.closest?.('input,textarea,select,[contenteditable="true"]')) armScroll(); });
+    addEventListener('pointerdown', event => { if (event.clientX >= document.documentElement.clientWidth - 18) armScroll(); }, { passive: true });
     const report = () => {
       frame = 0;
-      if (window.ShiGaiAnalytics?.isEnabled?.() === false) return;
+      if (!allowScrollReporting || window.ShiGaiAnalytics?.isEnabled?.() === false) return;
       if (!root.children.length || scrollY <= 0 || document.body.classList.contains("is-home-loading")) return;
       const available = document.documentElement.scrollHeight - innerHeight;
       if (available <= 0) return;
@@ -279,6 +284,8 @@
     addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("shigai:analytics-consent", event => {
       if (!event.detail?.enabled) return;
+      // Deferred embeds may focus/anchor-scroll after consent without visitor input.
+      allowScrollReporting = false;
       // A queued pre-consent frame or a media resize must not turn into a visit.
       if (frame) cancelAnimationFrame(frame);
       frame = 0;
@@ -407,7 +414,7 @@
     const section = sectionShell(config, copy, "games.html");
     const grid = document.createElement("div"); grid.className = "home-habit-grid"; section.append(grid);
     try {
-      const response = await fetch("../database/website/games.json", { cache: "no-store" });
+      const response = await fetch("../database/website/games.json", { cache: "no-cache", priority: "low" });
       if (!response.ok) throw new Error("Games export unavailable");
       const games = (await response.json())
         .filter((item) => item?.status === "published" && item?.visible !== false && item?.url)
@@ -418,7 +425,12 @@
       const panel = document.createElement("div"); panel.className = "home-game-embed"; panel.dataset.gameId = game.id;
       const intro = document.createElement("p"); intro.className = "home-game-embed-intro"; intro.textContent = game.description || copy.intro;
       const frameStage = document.createElement("div"); frameStage.className = "home-game-frame-stage";
-      const frame = document.createElement("iframe"); frame.className = "home-game-frame"; frame.src = `${game.url}${game.url.includes("?") ? "&" : "?"}embed=home`; frame.title = `${game.name || game.id} 完整遊戲`; frame.loading = "lazy"; frame.allow = "fullscreen";
+      const frame = document.createElement("iframe"); frame.className = "home-game-frame"; const gameSource = `${game.url}${game.url.includes("?") ? "&" : "?"}embed=home`;
+      const loadGame = () => { if (!frame.hasAttribute('src')) frame.src = gameSource; };
+      if ('IntersectionObserver' in window) {
+        const gameLoader = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) { loadGame(); gameLoader.disconnect(); } }, { rootMargin: '400px' });
+        gameLoader.observe(frame);
+      } else loadGame(); frame.title = `${game.name || game.id} 完整遊戲`; frame.loading = "lazy"; frame.allow = "fullscreen";
       let gameStarted = false;
       window.addEventListener("message", event => {
         if (event.origin !== location.origin || event.source !== frame.contentWindow || event.data?.type !== "shi-gai:game-analytics") return;
@@ -437,7 +449,9 @@
         activate.addEventListener("click", () => {
           frameStage.classList.remove("is-awaiting-activation");
           activate.remove();
-          frame.contentWindow?.postMessage({ type: "shi-gai:start-embedded-game" }, location.origin);
+          loadGame();
+          const startGame = () => frame.contentWindow?.postMessage({ type: "shi-gai:start-embedded-game" }, location.origin);
+          if (frame.dataset.gameLoaded === 'true') startGame(); else frame.addEventListener('load', startGame, { once: true });
           track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: game.id, action: "activate_inline_game" });
         });
         frameStage.append(frame, activate);
@@ -445,7 +459,7 @@
       const controls = document.createElement("div"); controls.className = "home-game-embed-controls";
       const full = document.createElement("a"); full.className = "home-game-full"; full.href = game.url; full.textContent = copy.actionLabel;
       window.ShiGaiVisualText?.apply(full, copy.actionLabel, copy.visuals?.actionLabel);
-      frame.addEventListener("load", () => track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: game.id, action: "load_original_game_inline" }));
+      frame.addEventListener("load", () => { if (!frame.hasAttribute('src')) return; frame.dataset.gameLoaded = 'true'; track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: game.id, action: "load_original_game_inline" }); });
       full.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: game.id, action: "open_full_game" }));
       controls.append(full); panel.append(intro, frameStage, controls); grid.append(panel);
     } catch {

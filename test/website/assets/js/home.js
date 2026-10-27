@@ -17,9 +17,48 @@ let reviewPreviewDate = null;
 const sceneEnvironment = window.ShiGaiSceneEnvironment;
 const sceneCamera = window.ShiGaiSceneCamera;
 let environmentWeather = Object.create(null);
-function sceneEnvironmentContext(scene) { return sceneEnvironment.visitContext(environmentWeather,scene); }
-function environmentDraw(scene) { return sceneEnvironment.visitDraw(scene); }
-function environmentScene(scene) { return {...scene,background:sceneEnvironment.resolveBackground(scene.background,sceneEnvironmentContext(scene),environmentDraw(scene))}; }
+let environmentTime = null;
+let environmentRevision = 0;
+let environmentRefreshTimer = null;
+let environmentRefreshPending = false;
+let environmentBlend = null;
+function sceneEnvironmentContext(scene) { return sceneEnvironment.visitContext(environmentWeather,scene,environmentTime?{now:environmentTime}:{}); }
+function environmentDraw(scene) { return sceneEnvironment.visitDraw(scene,environmentTime||undefined); }
+function environmentScene(scene,weather=environmentWeather,time=environmentTime) { return {...scene,background:sceneEnvironment.resolveBackground(scene.background,sceneEnvironment.visitContext(weather,scene,time?{now:time}:{}),sceneEnvironment.visitDraw(scene,time||undefined),{stableOrder:true})}; }
+function cancelEnvironmentBlend() { environmentBlend?.animation?.cancel();environmentBlend?.node?.remove();environmentBlend=null; }
+function blendWorldBackground(scene) {
+  cancelEnvironmentBlend();
+  const surface=homeElements.sceneBackground,style=surface&&getComputedStyle(surface);
+  if(!surface||window.matchMedia('(prefers-reduced-motion: reduce)').matches){updateWorldBackground(scene);return;}
+  const node=document.createElement('div');node.dataset.weatherTransition='';node.setAttribute('aria-hidden','true');
+  Object.assign(node.style,{position:'absolute',inset:'0',pointerEvents:'none',backgroundImage:style.backgroundImage,backgroundColor:style.backgroundColor,backgroundSize:style.backgroundSize,backgroundPosition:style.backgroundPosition});
+  surface.append(node);updateWorldBackground(scene);
+  const animation=node.animate([{opacity:1},{opacity:0}],{duration:900,easing:'ease-in-out',fill:'forwards'});
+  const blend={node,animation};environmentBlend=blend;
+  animation.finished.catch(()=>{}).finally(()=>{node.remove();if(environmentBlend===blend)environmentBlend=null;});
+}
+async function refreshHomeEnvironment() {
+  if(environmentRefreshPending||document.hidden||document.body.classList.contains('is-home-loading'))return false;
+  const scene=activeWorldEntranceScenes.find(s=>s.id===activeWorldEntranceSceneId);
+  if(!scene||(!scene.background?.automatic&&!scene.background?.effects?.length))return false;
+  const revision=environmentRevision,id=scene.id,now=new Date();environmentRefreshPending=true;
+  try{
+    const config=sceneEnvironment.normalizeWeather(scene.background?.weather);
+    const value=config.provider==='none'?'style-random':await sceneEnvironment.readWeather(config);
+    if(revision!==environmentRevision||id!==activeWorldEntranceSceneId||document.hidden)return false;
+    // A failed refresh retains the last known condition; it never becomes fictional clear weather.
+    const weather={...environmentWeather};if(value!==null)weather[id]=value;
+    const previous=environmentScene(scene),next=environmentScene(scene,weather,now);
+    const changed=previous.background.asset!==next.background.asset||previous.background.color!==next.background.color;
+    if(changed){let timeout;try{await Promise.race([sceneEnvironment.prepareBackgroundAsset(next.background.asset,sceneMediaUrl),new Promise((_,reject)=>{timeout=setTimeout(()=>reject(new Error('Weather image preparation timed out')),8000);})]);}finally{clearTimeout(timeout);}}
+    if(revision!==environmentRevision||id!==activeWorldEntranceSceneId||document.hidden)return false;
+    environmentWeather=weather;environmentTime=now;
+    if(changed)blendWorldBackground(next);else updateWorldBackground(next);
+    return true;
+  }catch{return false;}finally{environmentRefreshPending=false;}
+}
+function startHomeEnvironmentRefresh() { if(environmentRefreshTimer===null)environmentRefreshTimer=window.setInterval(refreshHomeEnvironment,60000); }
+function stopHomeEnvironmentRefresh() { if(environmentRefreshTimer!==null)clearInterval(environmentRefreshTimer);environmentRefreshTimer=null;environmentRevision++;cancelEnvironmentBlend(); }
 function waitForHomeBackground() {
   const scene=activeWorldEntranceScenes.find(item=>item.id===activeWorldEntranceSceneId);
   return sceneEnvironment.prepareBackgroundAsset(scene?environmentScene(scene).background.asset:'',sceneMediaUrl);
@@ -59,6 +98,7 @@ function failHomeLoading() {
 }
 function waitForCriticalSceneMedia() {
   const critical = [...(homeElements.worldSceneRender?.querySelectorAll(".scene-render-object img, .scene-render-object video") || [])];
+  for (const media of critical) if (media.tagName === 'IMG') media.fetchPriority = 'high';
   if (!homeElements.worldSceneRender?.querySelector(".scene-render-object")) return Promise.reject(new Error("Scene has no rendered objects."));
   let completed = 0;
   const update = () => {
@@ -242,6 +282,7 @@ function renderWorldEntranceScene(scenes, preferredSceneId = activeWorldEntrance
   if (!container || !homeElements.hero) return;
   // Never clear the active Scene when a stale, hidden or unpublished target is requested.
   if (!scene) return false;
+  environmentRevision++;cancelEnvironmentBlend();
   container.replaceChildren();
   homeElements.hero.classList.remove("has-world-scene");
   homeElements.hero.classList.remove("has-scene-background");
@@ -706,7 +747,7 @@ async function loadHome() {
     await Promise.all([waitForCriticalSceneMedia(),waitForHomeBackground(),activeMobileCoverage]);
     finishHomeLoading();
     renderWelcomeLogo(settings?.websiteBrand?.welcome);
-    // The chosen environment stays stable until the next page visit.
+    startHomeEnvironmentRefresh();
     if (reviewContent) {
       const [worksResponse, charactersResponse, categoriesResponse, tagsResponse] = await Promise.all([
         fetch("../database/website/works.json"), fetch("../database/website/characters.json"),
@@ -831,10 +872,14 @@ homeElements.loadingRetry?.addEventListener("click", async () => {
   try {
     await Promise.all([waitForCriticalSceneMedia(),waitForHomeBackground(),activeMobileCoverage]);
     finishHomeLoading();
+    startHomeEnvironmentRefresh();
     const settings = await window.ShiGaiWebsiteSettings;
     renderWelcomeLogo(settings?.websiteBrand?.welcome);
   } catch (error) { failHomeLoading(); }
 });
 loadHome();
 
-// Weather and time are sampled once before revealing this visit.
+// Initial reveal commits a prepared snapshot; later updates are transactional and preserve the Scene DOM.
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshHomeEnvironment();});
+window.addEventListener('pagehide',stopHomeEnvironmentRefresh);
+window.addEventListener('pageshow',event=>{if(event.persisted){startHomeEnvironmentRefresh();refreshHomeEnvironment();}});

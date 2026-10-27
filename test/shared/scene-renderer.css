@@ -85,3 +85,13 @@
 .scene-speech-bubble { display:block;position:absolute;box-sizing:border-box;width:max-content;height:auto;padding:16px 24px;border:1px solid rgba(60,42,24,.16);box-shadow:0 4px 12px rgba(40,26,16,.16);line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;text-shadow:none;pointer-events:auto; }
 .scene-speech-anchor.is-text-only,.scene-speech-anchor.is-text-only .scene-speech-counterflip { position:relative;width:max-content;height:auto; }
 .scene-speech-anchor.is-text-only .scene-speech-bubble { position:relative; }
+
+/* Optional information text. Width/font remain canonical Scene pixels, shared by all hosts. */
+.scene-info-text { box-sizing:border-box;overflow:hidden;min-width:0;font-variant-numeric:tabular-nums; }
+.scene-info-content { display:block;overflow:hidden;overflow-wrap:anywhere;white-space:pre-wrap; }
+.scene-info-text[data-text-mode="wrap"] .scene-info-content { display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:var(--info-lines,2); }
+.scene-info-text[data-text-mode="ellipsis"] .scene-info-content { white-space:nowrap;text-overflow:ellipsis; }
+.scene-info-text[data-text-mode="marquee"] .scene-info-content { white-space:nowrap; }
+.scene-info-track { display:flex;width:max-content;will-change:transform; }
+.scene-info-item { flex:0 0 auto;white-space:nowrap; }
+.scene-info-text:focus-visible { outline:2px solid currentColor;outline-offset:3px; }

@@ -88,11 +88,23 @@
   }
   function pick(items,random=Math.random()){const total=items.reduce((a,v)=>a+normalizeCondition(v.condition).weight,0);if(!total)return null;let n=Math.max(0,Math.min(.999999999,Number(random)||0))*total;return items.find(v=>(n-=normalizeCondition(v.condition).weight)<0)||items.at(-1);}
   function selectScene(scenes,context={},random=Math.random()){const items=(scenes||[]).filter(s=>s.status==='published'&&s.type==='world-entrance').sort((a,b)=>Number(a.order||0)-Number(b.order||0));const eligible=items.filter(s=>!s.condition?.fallback&&matches(s.condition,{...context,weather:context.weatherByScene?.[s.id]??context.weather}));return pick(eligible,random)||pick(items.filter(s=>s.condition?.fallback&&normalizeCondition(s.condition).weight>0),random);}
-  function resolveBackground(background,context={},random=Math.random()){context=environmentContext(background,context);const b=normalizeBackground(background);if(!b.automatic)return {...b,variantId:''};const all=b.variants.filter(v=>v.enabled&&!v.condition.fallback&&matches(v.condition,context));const conditional=all.filter(v=>{const c=v.condition;if(c.mode==='environment')return Boolean(c.periods.length||c.weathers.length);if(['fixed','random','weight'].includes(c.mode))return false;return c.mode!=='custom'||Boolean(c.start&&c.end||c.dates.length||c.holidays.length||c.weekdays.length||c.weather!=='any'||c.event)});const chosen=pick(conditional.length?conditional:all,random)||pick(b.variants.filter(v=>v.enabled&&v.condition.fallback),random);return chosen?{...b,color:chosen.color,asset:chosen.asset,variantId:chosen.id,variantName:chosen.name}:{...b,variantId:'',variantName:'預設備用背景'};}
+  function resolveBackground(background,context={},random=Math.random(),{stableOrder=false}={}){context=environmentContext(background,context);const b=normalizeBackground(background);if(!b.automatic)return {...b,variantId:''};const all=b.variants.filter(v=>v.enabled&&!v.condition.fallback&&matches(v.condition,context));const conditional=all.filter(v=>{const c=v.condition;if(c.mode==='environment')return Boolean(c.periods.length||c.weathers.length);if(['fixed','random','weight'].includes(c.mode))return false;return c.mode!=='custom'||Boolean(c.start&&c.end||c.dates.length||c.holidays.length||c.weekdays.length||c.weather!=='any'||c.event)});const ordered=items=>stableOrder?[...items].sort((a,b)=>{const x=a.asset||a.id,y=b.asset||b.id;return x<y?-1:x>y?1:0;}):items;const chosen=pick(ordered(conditional.length?conditional:all),random)||pick(ordered(b.variants.filter(v=>v.enabled&&v.condition.fallback)),random);return chosen?{...b,color:chosen.color,asset:chosen.asset,variantId:chosen.id,variantName:chosen.name}:{...b,variantId:'',variantName:'預設備用背景'};}
   function weatherCode(code){if(code==null)return null;const c=Number(code);return c===0?'clear':c===3?'overcast':[1,2].includes(c)?'cloudy':[45,48].includes(c)?'fog':[95,96,99].includes(c)?'storm':[71,73,75,77,85,86].includes(c)?'snow':[51,53,55,56,57,61,63,65,66,67,80,81,82].includes(c)?'rain':null;}
   const cache=new Map(),inflight=new Map();
-  async function readWeather(config,{fetcher=global.fetch,now=Date.now()}={}){const s=normalizeWeather(config);if(s.provider==='none'||typeof fetcher!=='function')return null;let url=s.url;if(s.provider==='open-meteo'){if(s.latitude===null||s.longitude===null)return null;url='https://api.open-meteo.com/v1/forecast?latitude='+s.latitude+'&longitude='+s.longitude+'&current=weather_code&timezone=auto'}if(!url)return null;if(s.provider==='custom'&&global.location&&new URL(url,global.location.href).origin!==global.location.origin)return null;const cached=cache.get(url);if(cached&&now-cached.at<15*60*1000)return cached.value;if(inflight.has(url))return inflight.get(url);
-    const request=(async()=>{const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),2500);try{const response=await fetcher(url,{signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer'});if(!response.ok)throw Error('weather');const data=await response.json();const value=weatherTypes.slice(1).includes(data.weather)?data.weather:weatherCode(data.current?.weather_code);cache.set(url,{at:now,value});return value}catch{cache.set(url,{at:now,value:null});return null}finally{clearTimeout(timer)}})();inflight.set(url,request);request.finally(()=>inflight.delete(url));return request;}
+  // Disposable per-tab weather response cache, never author/CMS data or a visitor identifier.
+  const weatherCacheKey='shigai-weather-response-v1',weatherCacheTtl=15*60*1000;
+  function storedWeather(now){
+    try{const records=JSON.parse(global.sessionStorage?.getItem(weatherCacheKey)||'{}');
+      if(!records||typeof records!=='object'||Array.isArray(records))return {};
+      return Object.fromEntries(Object.entries(records).filter(([key,item])=>key.length<=2000&&item&&Number.isFinite(item.at)&&now>=item.at&&now-item.at<weatherCacheTtl&&weatherTypes.slice(1).includes(item.value)).slice(-20));
+    }catch{return {};}
+  }
+  function rememberWeather(url,record){
+    if(!weatherTypes.slice(1).includes(record.value))return;
+    try{global.sessionStorage?.setItem(weatherCacheKey,JSON.stringify(Object.fromEntries([...Object.entries(storedWeather(record.at)).filter(([key])=>key!==url),[url,record]].slice(-20))));}catch{}
+  }
+  async function readWeather(config,{fetcher=global.fetch,now=Date.now()}={}){const s=normalizeWeather(config);if(s.provider==='none'||typeof fetcher!=='function')return null;let url=s.url;if(s.provider==='open-meteo'){if(s.latitude===null||s.longitude===null)return null;url='https://api.open-meteo.com/v1/forecast?latitude='+s.latitude+'&longitude='+s.longitude+'&current=weather_code&timezone=auto'}if(!url)return null;if(s.provider==='custom'&&global.location&&new URL(url,global.location.href).origin!==global.location.origin)return null;try{if(global.location?.href)url=new URL(url,global.location.href).href;}catch{return null;}const cached=cache.get(url);if(cached&&now>=cached.at&&now-cached.at<weatherCacheTtl)return cached.value;const persisted=storedWeather(now)[url];if(persisted){cache.set(url,persisted);return persisted.value;}if(inflight.has(url))return inflight.get(url);
+    const request=(async()=>{const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),2500);try{const response=await fetcher(url,{signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer'});if(!response.ok)throw Error('weather');const data=await response.json();const value=weatherTypes.slice(1).includes(data.weather)?data.weather:weatherCode(data.current?.weather_code);const record={at:now,value};cache.set(url,record);rememberWeather(url,record);return value}catch{cache.set(url,{at:now,value:null});return null}finally{clearTimeout(timer)}})();inflight.set(url,request);request.finally(()=>inflight.delete(url));return request;}
 
   // A Website visit commits one environment snapshot. Late responses never repaint it.
   const visitWeather=new Map(),visitDraws=new Map(),readyAssets=new Map();
@@ -110,8 +122,15 @@
       return visitWeather.get(key).then(weather=>[scene.id,weather]);
     })).then(entries=>Object.fromEntries(entries));
   }
-  function visitDraw(scene){const id=scene?.id||'scene';if(!visitDraws.has(id))visitDraws.set(id,Math.random());return visitDraws.get(id);}
-  function visitContext(weatherByScene,scene){return {now:new Date(visitTime),events:[new URLSearchParams(global.location?.search||'').get('sceneEvent')].filter(Boolean),weather:weatherByScene?.[scene?.id]??(normalizeWeather(scene?.background?.weather).provider==='none'?'style-random':null),weatherByScene};}
+  function visitDraw(scene,now=visitTime){
+    const settings=normalizeBackground(scene?.background),bucket=Math.floor(new Date(now).getTime()/(settings.intervalMinutes*60000));
+    // Same city/source and interval share a draw across reloads, pages and Scene IDs.
+    const key=JSON.stringify([weatherKey(scene),bucket]);
+    if(!visitDraws.has(key)){let hash=2166136261;for(let i=0;i<key.length;i++)hash=Math.imul(hash^key.charCodeAt(i),16777619);visitDraws.set(key,(hash>>>0)/4294967296);}
+    if(visitDraws.size>128)visitDraws.delete(visitDraws.keys().next().value);
+    return visitDraws.get(key);
+  }
+  function visitContext(weatherByScene,scene,{now=visitTime}={}){return {now:new Date(now),events:[new URLSearchParams(global.location?.search||'').get('sceneEvent')].filter(Boolean),weather:weatherByScene?.[scene?.id]??(normalizeWeather(scene?.background?.weather).provider==='none'?'style-random':null),weatherByScene};}
   function prepareBackgroundAsset(source,resolveAsset=value=>value){
     if(!source||typeof global.Image!=='function')return Promise.resolve();
     const url=resolveAsset(source);if(readyAssets.has(url))return readyAssets.get(url);
@@ -125,7 +144,7 @@
     const settings=normalizeBackground(scene?.background);if(!settings.automatic&&!settings.effects?.length)return()=>{};
     let visitWeatherByScene=null;
     let stopped=false,weather=settings.weather.provider==='none'?'style-random':null,attribution=null,clearAttribution=null;
-    function update(){if(stopped||!container.isConnected)return;const bucket=stableVisit?0:Math.floor(Date.now()/(settings.intervalMinutes*60000)),previous=backgroundDraws.get(scene.id);if(!previous||previous.bucket!==bucket)backgroundDraws.set(scene.id,{bucket,value:Math.random()});const context=stableVisit?visitContext(visitWeatherByScene,scene):{now:new Date(),weather,events:[new URLSearchParams(global.location?.search||'').get('sceneEvent')].filter(Boolean)},random=stableVisit?visitDraw(scene):backgroundDraws.get(scene.id).value,background=resolveBackground(settings,context,random);if(settings.automatic){container.style.backgroundColor=background.color;container.style.backgroundImage=background.asset?'url("'+resolveAsset(background.asset)+'")':'none';container.style.backgroundSize='cover';container.style.backgroundPosition='center';container.dataset.backgroundVariant=background.variantId||'base';}renderEffects({container,background:settings,context,random,resolveAsset,frontContainer,backContainer});}
+    function update(){if(stopped||!container.isConnected)return;const bucket=stableVisit?0:Math.floor(Date.now()/(settings.intervalMinutes*60000)),previous=backgroundDraws.get(scene.id);if(!previous||previous.bucket!==bucket)backgroundDraws.set(scene.id,{bucket,value:Math.random()});const context=stableVisit?visitContext(visitWeatherByScene,scene):{now:new Date(),weather,events:[new URLSearchParams(global.location?.search||'').get('sceneEvent')].filter(Boolean)},random=stableVisit?visitDraw(scene):backgroundDraws.get(scene.id).value,background=resolveBackground(settings,context,random,{stableOrder:stableVisit});if(settings.automatic){container.style.backgroundColor=background.color;container.style.backgroundImage=background.asset?'url("'+resolveAsset(background.asset)+'")':'none';container.style.backgroundSize='cover';container.style.backgroundPosition='center';container.dataset.backgroundVariant=background.variantId||'base';}renderEffects({container,background:settings,context,random,resolveAsset,frontContainer,backContainer});}
     async function refresh(){if(stopped||global.document.hidden)return;if(!container.isConnected){stop();return;}weather=settings.weather.provider==='none'?'style-random':await readWeather(settings.weather);update();}
     const timer=stableVisit?null:setInterval(refresh,60000);
     function stop(){stopped=true;clearInterval(timer);attribution?.remove();clearAttribution?.();renderEffects({container,background:{effects:[]},resolveAsset,frontContainer,backContainer});}
@@ -137,7 +156,7 @@
       const originalStop=stop;
       mountedBackgrounds.set(container,()=>{if(stopped)return;originalStop();container.style.opacity=previousOpacity;});
       prepareVisitEnvironment([scene]).then(async values=>{
-        visitWeatherByScene=values;const background=resolveBackground(settings,visitContext(values,scene),visitDraw(scene));
+        visitWeatherByScene=values;const background=resolveBackground(settings,visitContext(values,scene),visitDraw(scene),{stableOrder:true});
         await prepareBackgroundAsset(background.asset,resolveAsset);
         update();reveal();
       }).catch(()=>{if(!stopped){container.style.backgroundImage='none';reveal();}});

@@ -77,7 +77,7 @@
     previous.onclick = () => navigatePage(safePage - 1); next.onclick = () => navigatePage(safePage + 1);
   }
   function navigatePage(page) { const url = new URL(location.href); url.searchParams.set("page", page); location.href = url.href; }
-  Promise.all([settingsReady, fetch("../database/website/works.json", { cache: "no-store" })])
+  Promise.all([settingsReady, fetch("../database/website/works.json", { cache: "no-cache" })])
     .then(([, response]) => { if (!response.ok) throw new Error("Journal data unavailable"); return response.json(); })
     .then((works) => {
       journalWorks = window.ShiGaiWorkOrder.newestFirst(works.filter((work) => work.status === "published" && work.journal?.enabled === true));

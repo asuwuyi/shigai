@@ -55,6 +55,32 @@
   const sortVisibleObjects = (scene) => [...(scene?.objects || [])]
     .filter((object) => object?.visible !== false)
     .sort((first, second) => zIndex(first) - zIndex(second));
+  // Device font stacks only. Never accept raw CSS or silently download fonts.
+  const fontFamilies=Object.freeze([
+    Object.freeze({value:'default',label:'系統預設',stack:''}),
+    Object.freeze({value:'sans',label:'黑體',stack:'"PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif'}),
+    Object.freeze({value:'serif',label:'明體／襯線',stack:'"Songti TC", "PMingLiU", "Noto Serif TC", serif'}),
+    Object.freeze({value:'rounded',label:'圓體',stack:'"Yuanti TC", "Yuanti SC", "Arial Rounded MT Bold", "PingFang TC", "Microsoft JhengHei", sans-serif'}),
+    Object.freeze({value:'handwritten',label:'楷體／手寫感',stack:'"Kaiti TC", "BiauKai", "DFKai-SB", "STKaiti", KaiTi, cursive'}),
+    Object.freeze({value:'mono',label:'等寬（數字）',stack:'"SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "PingFang TC", "Microsoft JhengHei", monospace'}),
+    Object.freeze({value:'arial',label:'Arial',group:'英文字型',stack:'Arial, "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", sans-serif'}),
+    Object.freeze({value:'helvetica',label:'Helvetica',group:'英文字型',stack:'"Helvetica Neue", Helvetica, Arial, "PingFang TC", "Microsoft JhengHei", sans-serif'}),
+    Object.freeze({value:'georgia',label:'Georgia',group:'英文字型',stack:'Georgia, "Times New Roman", "Songti TC", PMingLiU, serif'}),
+    Object.freeze({value:'times',label:'Times New Roman',group:'英文字型',stack:'"Times New Roman", Times, "Songti TC", PMingLiU, serif'}),
+    Object.freeze({value:'verdana',label:'Verdana',group:'英文字型',stack:'Verdana, Geneva, "PingFang TC", "Microsoft JhengHei", sans-serif'}),
+    Object.freeze({value:'trebuchet',label:'Trebuchet MS',group:'英文字型',stack:'"Trebuchet MS", Arial, "PingFang TC", "Microsoft JhengHei", sans-serif'}),
+    Object.freeze({value:'impact',label:'Impact',group:'英文字型',stack:'Impact, Haettenschweiler, "Arial Narrow", Arial, "PingFang TC", "Microsoft JhengHei", sans-serif'}),
+    Object.freeze({value:'comic',label:'Comic Sans MS',group:'英文字型',stack:'"Comic Sans MS", "Comic Sans", "Chalkboard SE", "PingFang TC", "Microsoft JhengHei", cursive'}),
+    Object.freeze({value:'courier',label:'Courier New',group:'英文字型',stack:'"Courier New", Courier, Menlo, Consolas, "PingFang TC", "Microsoft JhengHei", monospace'}),
+    Object.freeze({value:'palatino',label:'Palatino',group:'英文字型',stack:'Palatino, "Palatino Linotype", "Book Antiqua", "Songti TC", PMingLiU, serif'})
+  ]);
+  const fontFamily=value=>fontFamilies.find(item=>item.value===value)?.stack||'';
+  function normalizeTextDisplay(value) {
+    const s=value&&typeof value==='object'?value:{};
+    let timeZone=['scene','visitor'].includes(s.timeZone)?s.timeZone:'scene';
+    if(typeof s.timeZone==='string'&&!['scene','visitor'].includes(s.timeZone)){try{new Intl.DateTimeFormat('en',{timeZone:s.timeZone}).format();timeZone=s.timeZone.slice(0,80);}catch{}}
+    return {version:1,source:['manual','time','date','datetime'].includes(s.source)?s.source:'manual',timeZone,hour12:s.hour12===true,showSeconds:s.showSeconds===true,weekday:s.weekday!==false,mode:['wrap','ellipsis','marquee'].includes(s.mode)?s.mode:'wrap',lines:Math.round(clamp(s.lines,1,6,2)),speed:rounded(s.speed,10,160,40),direction:s.direction==='right'?'right':'left',gap:rounded(s.gap,24,240,64)};
+  }
   function normalizeTextBubble(value) {
     const source = value && typeof value === 'object' ? value : {};
     const color = (value, fallback) => /^#[0-9a-f]{6}$/i.test(String(value || '')) ? value : fallback;
@@ -63,9 +89,9 @@
       return { anchor: ['above','below','left','right','center'].includes(entry.anchor) ? entry.anchor : 'above', x: rounded(entry.x,-960,960,0), y: rounded(entry.y,-960,960,0), scale: rounded(entry.scale,.1,10,1), rotation: rounded(entry.rotation,-720,720,0), fontSize: rounded(entry.fontSize ?? source.fontSize,12,160,48), maxWidth: rounded(entry.maxWidth ?? source.maxWidth,120,960,480) };
     };
     const animationRules = global?.ShiGaiSceneAnimation || (typeof require === 'function' ? require('./scene-animation-rules.js') : null);
-    return { enabled: source.enabled === true, color: color(source.color,'#34271f'), backgroundColor: color(source.backgroundColor,'#fffdf5'), fontWeight: [400,500,600,700,800,900].includes(Number(source.fontWeight)) ? Number(source.fontWeight) : 600, radius: rounded(source.radius,0,80,24), layouts: { landscape: placement('landscape'), portrait: placement('portrait') }, ...(source.animation && animationRules ? { animation: animationRules.normalize(source.animation) } : {}) };
+    return { enabled: source.enabled === true, ...(fontFamily(source.fontFamily)?{fontFamily:source.fontFamily}:{}), color: color(source.color,'#34271f'), backgroundColor: color(source.backgroundColor,'#fffdf5'), fontWeight: [400,500,600,700,800,900].includes(Number(source.fontWeight)) ? Number(source.fontWeight) : 600, radius: rounded(source.radius,0,80,24), layouts: { landscape: placement('landscape'), portrait: placement('portrait') }, ...(source.animation && animationRules ? { animation: animationRules.normalize(source.animation) } : {}) };
   }
-  const api = Object.freeze({ normalizeTextBubble, layers, layoutNames, layoutName, clamp, rounded, cloneLayout, readLayout, ensureWritableLayout, commitLayout, layout, position, scale, rotation, flipX, flipY, zIndex, transform, sortVisibleObjects });
+  const api = Object.freeze({ fontFamilies, fontFamily, normalizeTextDisplay, normalizeTextBubble, layers, layoutNames, layoutName, clamp, rounded, cloneLayout, readLayout, ensureWritableLayout, commitLayout, layout, position, scale, rotation, flipX, flipY, zIndex, transform, sortVisibleObjects });
   if (global) global.ShiGaiSceneRender = api;
   if (typeof module === "object" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);
