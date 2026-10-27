@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-27T14:12:45.961Z",
+  "createdAt": "2026-10-27T14:19:17.267Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1082,
@@ -13,7 +13,7 @@
     "assets": 1235,
     "files": 1373
   },
-  "bytes": 163015378,
+  "bytes": 163204537,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -35,8 +35,6 @@
     "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp",
     "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
     "assets/published/scenes/asset-2e24ca6134ff6fef285426c7/primary-v1.webp",
-    "assets/published/scenes/asset-5c634e21b76fd7429d7fde51/primary-v1.webp",
-    "assets/published/scenes/asset-8642908682bbb2cdf974bd52/primary-v1.webp",
     "assets/published/scenes/asset-b9af9b3cef7266ff1bbdefdc/primary-v1.webp",
     "assets/published/scenes/asset-f1e94515463f3cacf69202f9/primary-v1.webp",
     "assets/published/works/SG-000001/primary-v1.webp",
@@ -1197,6 +1195,8 @@
     "assets/published/works/SG-001094/poster-v1.webp",
     "assets/published/works/SG-001094/primary-v1.webm",
     "assets/published/works/SG-001095/primary-v1.webp",
+    "assets/scenes/media/bubble-tea-shop-transparent-sky-20261027.webp",
+    "assets/scenes/media/forest-pond-transparent-sky-20261027.webp",
     "assets/scenes/media/pack-20261025-attic-art-studio.webp",
     "assets/scenes/media/pack-20261025-corner-cafe.webp",
     "assets/scenes/media/pack-20261025-greenhouse-studio.webp",
