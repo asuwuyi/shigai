@@ -53,5 +53,16 @@
     "url": "games/minesweeper/",
     "order": 8,
     "visible": true
+  },
+  {
+    "id": "memory",
+    "name": "記憶翻牌 · Demo",
+    "description": "翻開兩張牌，找出相同圖案。24關，用時間與次數挑戰自己的紀錄。",
+    "mark": "▧",
+    "icon": "assets/games/icons/memory-demo.svg",
+    "status": "published",
+    "url": "games/memory/",
+    "order": 9,
+    "visible": true
   }
 ]

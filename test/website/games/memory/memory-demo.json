@@ -1,0 +1,211 @@
+{
+  "faces": [
+    {
+      "id": "1",
+      "name": "星星",
+      "symbol": "★",
+      "color": "#c79637",
+      "image": ""
+    },
+    {
+      "id": "2",
+      "name": "月亮",
+      "symbol": "☾",
+      "color": "#68618e",
+      "image": ""
+    },
+    {
+      "id": "3",
+      "name": "太陽",
+      "symbol": "☀",
+      "color": "#c77138",
+      "image": ""
+    },
+    {
+      "id": "4",
+      "name": "花朵",
+      "symbol": "✿",
+      "color": "#b85f78",
+      "image": ""
+    },
+    {
+      "id": "5",
+      "name": "愛心",
+      "symbol": "♥",
+      "color": "#b86756",
+      "image": ""
+    },
+    {
+      "id": "6",
+      "name": "音符",
+      "symbol": "♫",
+      "color": "#597e90",
+      "image": ""
+    },
+    {
+      "id": "7",
+      "name": "雨傘",
+      "symbol": "☂",
+      "color": "#468a91",
+      "image": ""
+    },
+    {
+      "id": "8",
+      "name": "雪花",
+      "symbol": "❄",
+      "color": "#548ea5",
+      "image": ""
+    },
+    {
+      "id": "9",
+      "name": "三葉草",
+      "symbol": "☘",
+      "color": "#628059",
+      "image": ""
+    },
+    {
+      "id": "10",
+      "name": "菱形",
+      "symbol": "◆",
+      "color": "#a77749",
+      "image": ""
+    },
+    {
+      "id": "11",
+      "name": "圓環",
+      "symbol": "◎",
+      "color": "#92769b",
+      "image": ""
+    },
+    {
+      "id": "12",
+      "name": "山丘",
+      "symbol": "▲",
+      "color": "#678676",
+      "image": ""
+    }
+  ],
+  "backImage": "",
+  "levels": [
+    {
+      "pairs": 2,
+      "targetSeconds": 26,
+      "targetMoves": 4
+    },
+    {
+      "pairs": 2,
+      "targetSeconds": 22,
+      "targetMoves": 4
+    },
+    {
+      "pairs": 2,
+      "targetSeconds": 18,
+      "targetMoves": 3
+    },
+    {
+      "pairs": 2,
+      "targetSeconds": 14,
+      "targetMoves": 2
+    },
+    {
+      "pairs": 3,
+      "targetSeconds": 39,
+      "targetMoves": 6
+    },
+    {
+      "pairs": 3,
+      "targetSeconds": 33,
+      "targetMoves": 5
+    },
+    {
+      "pairs": 3,
+      "targetSeconds": 27,
+      "targetMoves": 4
+    },
+    {
+      "pairs": 3,
+      "targetSeconds": 21,
+      "targetMoves": 4
+    },
+    {
+      "pairs": 4,
+      "targetSeconds": 52,
+      "targetMoves": 8
+    },
+    {
+      "pairs": 4,
+      "targetSeconds": 44,
+      "targetMoves": 7
+    },
+    {
+      "pairs": 4,
+      "targetSeconds": 36,
+      "targetMoves": 6
+    },
+    {
+      "pairs": 4,
+      "targetSeconds": 28,
+      "targetMoves": 5
+    },
+    {
+      "pairs": 6,
+      "targetSeconds": 78,
+      "targetMoves": 12
+    },
+    {
+      "pairs": 6,
+      "targetSeconds": 66,
+      "targetMoves": 10
+    },
+    {
+      "pairs": 6,
+      "targetSeconds": 54,
+      "targetMoves": 9
+    },
+    {
+      "pairs": 6,
+      "targetSeconds": 42,
+      "targetMoves": 8
+    },
+    {
+      "pairs": 8,
+      "targetSeconds": 104,
+      "targetMoves": 16
+    },
+    {
+      "pairs": 8,
+      "targetSeconds": 88,
+      "targetMoves": 14
+    },
+    {
+      "pairs": 8,
+      "targetSeconds": 72,
+      "targetMoves": 12
+    },
+    {
+      "pairs": 8,
+      "targetSeconds": 56,
+      "targetMoves": 10
+    },
+    {
+      "pairs": 12,
+      "targetSeconds": 156,
+      "targetMoves": 24
+    },
+    {
+      "pairs": 12,
+      "targetSeconds": 132,
+      "targetMoves": 21
+    },
+    {
+      "pairs": 12,
+      "targetSeconds": 108,
+      "targetMoves": 18
+    },
+    {
+      "pairs": 12,
+      "targetSeconds": 84,
+      "targetMoves": 15
+    }
+  ]
+}
