@@ -1,0 +1,108 @@
+{
+  "title": "打磚塊 · Demo",
+  "description": "移動底板反彈球，清除所有磚塊。",
+  "slots": {
+    "paddle": "底板",
+    "ball": "球",
+    "brick": "磚塊",
+    "background": "背景"
+  },
+  "levels": [
+    {
+      "rows": 3,
+      "cols": 6,
+      "speed": 260,
+      "hp": 1
+    },
+    {
+      "rows": 3,
+      "cols": 6,
+      "speed": 270,
+      "hp": 1
+    },
+    {
+      "rows": 3,
+      "cols": 6,
+      "speed": 280,
+      "hp": 1
+    },
+    {
+      "rows": 3,
+      "cols": 6,
+      "speed": 290,
+      "hp": 1
+    },
+    {
+      "rows": 4,
+      "cols": 7,
+      "speed": 300,
+      "hp": 1
+    },
+    {
+      "rows": 4,
+      "cols": 7,
+      "speed": 310,
+      "hp": 1
+    },
+    {
+      "rows": 4,
+      "cols": 7,
+      "speed": 320,
+      "hp": 1
+    },
+    {
+      "rows": 4,
+      "cols": 7,
+      "speed": 330,
+      "hp": 1
+    },
+    {
+      "rows": 5,
+      "cols": 8,
+      "speed": 340,
+      "hp": 2
+    },
+    {
+      "rows": 5,
+      "cols": 8,
+      "speed": 350,
+      "hp": 2
+    },
+    {
+      "rows": 5,
+      "cols": 8,
+      "speed": 360,
+      "hp": 2
+    },
+    {
+      "rows": 5,
+      "cols": 8,
+      "speed": 370,
+      "hp": 2
+    },
+    {
+      "rows": 6,
+      "cols": 6,
+      "speed": 380,
+      "hp": 2
+    },
+    {
+      "rows": 6,
+      "cols": 6,
+      "speed": 390,
+      "hp": 2
+    },
+    {
+      "rows": 6,
+      "cols": 6,
+      "speed": 400,
+      "hp": 2
+    },
+    {
+      "rows": 6,
+      "cols": 6,
+      "speed": 410,
+      "hp": 2
+    }
+  ]
+}

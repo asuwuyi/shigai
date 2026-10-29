@@ -1,0 +1,84 @@
+{
+  "title": "企鵝接東西 · Demo",
+  "description": "左右移動，接住食物、避開石頭。",
+  "slots": {
+    "player": "角色",
+    "good": "好東西",
+    "bad": "障礙物",
+    "background": "背景"
+  },
+  "levels": [
+    {
+      "target": 8,
+      "speed": 120,
+      "interval": 0.85,
+      "badRate": 0.12
+    },
+    {
+      "target": 10,
+      "speed": 132,
+      "interval": 0.8099999999999999,
+      "badRate": 0.13999999999999999
+    },
+    {
+      "target": 12,
+      "speed": 144,
+      "interval": 0.77,
+      "badRate": 0.16
+    },
+    {
+      "target": 14,
+      "speed": 156,
+      "interval": 0.73,
+      "badRate": 0.18
+    },
+    {
+      "target": 16,
+      "speed": 168,
+      "interval": 0.69,
+      "badRate": 0.2
+    },
+    {
+      "target": 18,
+      "speed": 180,
+      "interval": 0.6499999999999999,
+      "badRate": 0.22
+    },
+    {
+      "target": 20,
+      "speed": 192,
+      "interval": 0.61,
+      "badRate": 0.24
+    },
+    {
+      "target": 22,
+      "speed": 204,
+      "interval": 0.57,
+      "badRate": 0.26
+    },
+    {
+      "target": 24,
+      "speed": 216,
+      "interval": 0.53,
+      "badRate": 0.28
+    },
+    {
+      "target": 26,
+      "speed": 228,
+      "interval": 0.49,
+      "badRate": 0.3
+    },
+    {
+      "target": 28,
+      "speed": 240,
+      "interval": 0.44999999999999996,
+      "badRate": 0.32
+    },
+    {
+      "target": 30,
+      "speed": 252,
+      "interval": 0.41,
+      "badRate": 0.33999999999999997
+    }
+  ]
+}

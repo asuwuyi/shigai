@@ -163,6 +163,7 @@
       "works": "畫廊收藏室 Works",
       "characters": "奇怪的居民 Character",
       "games": "遊戲實驗室 Games",
+      "tools": "工具 Tools",
       "about": "你在找我嗎?? About me"
     },
     "pages": {
@@ -170,6 +171,7 @@
       "works": true,
       "characters": true,
       "games": true,
+      "tools": true,
       "about": true
     },
     "analytics": {
@@ -743,6 +745,7 @@
       "worksNavigation": true,
       "charactersNavigation": true,
       "gamesNavigation": true,
+      "toolsNavigation": true,
       "aboutNavigation": true,
       "worksMenu": true,
       "worksFirstPage": true,

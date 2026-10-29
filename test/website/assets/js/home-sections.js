@@ -417,7 +417,7 @@
       const response = await fetch("../database/website/games.json", { cache: "no-cache", priority: "low" });
       if (!response.ok) throw new Error("Games export unavailable");
       const games = (await response.json())
-        .filter((item) => item?.status === "published" && item?.visible !== false && item?.url)
+        .filter((item) => item?.status === "published" && item?.visible !== false && item?.kind !== "tool" && item?.url)
         .sort((first, second) => Number(first.order || 0) - Number(second.order || 0) || String(first.id).localeCompare(String(second.id)));
       const game = games[dailyEngine.selectIndex(games.length, dailyContext, "daily-game")];
       if (!game) throw new Error("Habit interaction unavailable");

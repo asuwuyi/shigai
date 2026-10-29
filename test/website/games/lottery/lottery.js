@@ -10,7 +10,7 @@ window.ShiGaiLotteryPresentation = {
     let copy = defaults;
     window.ShiGaiWebsiteSettings?.then(settings => {
       copy = { ...defaults, ...(settings?.websiteBrand?.games || {}) };
-      document.querySelector('.lottery-back').textContent = copy.lotteryBackLabel;
+      document.querySelector('.lottery-back').textContent = copy.lotteryBackLabel === '← 遊戲室' ? '← 工具箱' : copy.lotteryBackLabel;
       document.getElementById('lotteryHint').textContent = copy.lotteryHint;
       if (!drawCount) button.textContent = copy.lotteryDrawLabel;
     }).catch(() => {});

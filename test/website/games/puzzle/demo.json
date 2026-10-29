@@ -1,0 +1,48 @@
+{
+  "title": "作品拼圖 · Demo",
+  "description": "拖動或點選兩塊交換，把作品拼回原樣。",
+  "slots": {
+    "picture": "拼圖作品"
+  },
+  "images": {
+    "picture": "../arcade/puzzle-art.svg"
+  },
+  "levels": [
+    {
+      "size": 2
+    },
+    {
+      "size": 2
+    },
+    {
+      "size": 2
+    },
+    {
+      "size": 2
+    },
+    {
+      "size": 3
+    },
+    {
+      "size": 3
+    },
+    {
+      "size": 3
+    },
+    {
+      "size": 3
+    },
+    {
+      "size": 4
+    },
+    {
+      "size": 4
+    },
+    {
+      "size": 4
+    },
+    {
+      "size": 4
+    }
+  ]
+}

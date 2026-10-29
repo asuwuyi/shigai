@@ -36,3 +36,5 @@ body[data-page="games"] { background: #493426; }
  .game-entry-art { height: 200px; }
  .game-entry-copy { padding: 20px; }
 }
+
+body[data-page="tools"]{margin:0;min-height:100%;overflow-x:clip;background:#493426}.catalog-tabs{display:flex;justify-content:center;gap:10px;margin:0 0 25px}.catalog-tabs a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px 28px;border:1px solid #e2c69b;border-radius:24px;background:#fff8e9;color:#392d23;text-decoration:none}.catalog-tabs a[aria-current=page]{background:#365e59;color:#fff9ec}

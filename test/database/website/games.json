@@ -8,7 +8,8 @@
     "status": "published",
     "url": "games/lottery/",
     "order": 1,
-    "visible": true
+    "visible": true,
+    "kind": "tool"
   },
   {
     "id": "goddess",
@@ -41,7 +42,8 @@
     "status": "published",
     "url": "games/wheel/",
     "order": 7,
-    "visible": true
+    "visible": true,
+    "kind": "tool"
   },
   {
     "id": "minesweeper",
@@ -63,6 +65,54 @@
     "status": "published",
     "url": "games/memory/",
     "order": 9,
+    "visible": true
+  },
+  {
+    "id": "catch",
+    "kind": "game",
+    "name": "企鵝接東西 · Demo",
+    "description": "左右移動，接住食物、避開石頭。",
+    "mark": "♧",
+    "icon": "assets/games/icons/catch-demo.svg",
+    "status": "published",
+    "url": "games/catch/",
+    "order": 10,
+    "visible": true
+  },
+  {
+    "id": "puzzle",
+    "kind": "game",
+    "name": "作品拼圖 · Demo",
+    "description": "拖動或點選兩塊交換，把作品拼回原樣。",
+    "mark": "▦",
+    "icon": "assets/games/icons/puzzle-demo.svg",
+    "status": "published",
+    "url": "games/puzzle/",
+    "order": 11,
+    "visible": true
+  },
+  {
+    "id": "sokoban",
+    "kind": "game",
+    "name": "角色推箱子 · Demo",
+    "description": "把所有箱子推到圓點上；走錯可退一步。",
+    "mark": "▣",
+    "icon": "assets/games/icons/sokoban-demo.svg",
+    "status": "published",
+    "url": "games/sokoban/",
+    "order": 12,
+    "visible": true
+  },
+  {
+    "id": "breakout",
+    "kind": "game",
+    "name": "打磚塊 · Demo",
+    "description": "移動底板反彈球，清除所有磚塊。",
+    "mark": "◒",
+    "icon": "assets/games/icons/breakout-demo.svg",
+    "status": "published",
+    "url": "games/breakout/",
+    "order": 13,
     "visible": true
   }
 ]

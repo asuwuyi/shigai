@@ -7,7 +7,9 @@
   const front = document.getElementById("gamesFront");
   const frontScene = document.getElementById("gamesFrontScene");
   const copyDefaults = { eyebrow: "SHI-GAI PLAYROOM", title: "遊戲室", homeLabel: "← Home", homeAriaLabel: "返回首頁", previousLabel: "上一款遊戲", nextLabel: "下一款遊戲", selectLabel: "選擇遊戲", unnamedLabel: "未命名遊戲", startLabel: "開始遊戲", comingSoonLabel: "Coming Soon", loadingLabel: "正在載入遊戲資料。", emptyLabel: "目前還沒有遊戲。", errorLabel: "遊戲資料暫時無法載入。" };
-  let copy = copyDefaults;
+  const isTools = document.body.dataset.page === "tools";
+  const toolDefaults = { ...copyDefaults, eyebrow: "SHI-GAI TOOLS", title: "工具箱", selectLabel: "工具選擇", unnamedLabel: "未命名工具", startLabel: "開啟工具", loadingLabel: "正在載入工具。", emptyLabel: "目前還沒有工具。", errorLabel: "工具資料暫時無法載入。" };
+  let copy = isTools ? toolDefaults : copyDefaults;
   const wallpapers = ["burgundy-01", "sage-02", "navy-03", "ochre-04"];
   const wallpaperKey = "shi-gai:works-wallpaper:v1";
   let wallpaper = wallpapers[0];
@@ -91,15 +93,15 @@
   }
   try {
     const settings = await window.ShiGaiWebsiteSettings.catch(() => ({}));
-    copy = { ...copyDefaults, ...(settings?.websiteBrand?.games || {}) };
+    copy = isTools ? { ...toolDefaults, ...(settings?.websiteBrand?.tools || {}) } : { ...copyDefaults, ...(settings?.websiteBrand?.games || {}) };
     document.title = `${copy.title} · ${settings?.websiteBrand?.siteName || "Shi-Gai"}`;
     document.querySelector(".games-room-heading .eyebrow").textContent = copy.eyebrow;
     document.getElementById("gamesTitle").textContent = copy.title;
     window.ShiGaiVisualText?.apply(document.getElementById("gamesTitle"), copy.title, settings?.websiteBrand?.visualTitles?.games);
     state.textContent = copy.loadingLabel;
-    const [gamesResponse, scenesResponse] = await Promise.all([fetch("../database/website/games.json"), fetch("../database/website/scenes.json").catch(() => ({ ok: false }))]);
+    const [gamesResponse, scenesResponse] = await Promise.all([fetch("../database/website/games.json"), isTools ? Promise.resolve({ ok: false }) : fetch("../database/website/scenes.json").catch(() => ({ ok: false }))]);
     if (!gamesResponse.ok) throw new Error("Games registry unavailable");
-    games = (await gamesResponse.json()).filter((game) => game?.visible !== false).sort((a, b) => Number(a.order) - Number(b.order));
+    games = (await gamesResponse.json()).filter((game) => game?.visible !== false && (isTools ? game.kind === "tool" : game.kind !== "tool")).sort((a, b) => Number(a.order) - Number(b.order));
     if (!games.length) { state.textContent = copy.emptyLabel; return; }
     renderGames(); state.hidden = true;
     if (scenesResponse.ok) renderGameScene(await scenesResponse.json());
