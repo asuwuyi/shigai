@@ -1,0 +1,366 @@
+{
+  "mineImage": "",
+  "flagImage": "",
+  "levels": [
+    {
+      "id": 1,
+      "rows": 8,
+      "cols": 8,
+      "mines": 6
+    },
+    {
+      "id": 2,
+      "rows": 8,
+      "cols": 8,
+      "mines": 6
+    },
+    {
+      "id": 3,
+      "rows": 8,
+      "cols": 8,
+      "mines": 7
+    },
+    {
+      "id": 4,
+      "rows": 8,
+      "cols": 8,
+      "mines": 7
+    },
+    {
+      "id": 5,
+      "rows": 8,
+      "cols": 8,
+      "mines": 8
+    },
+    {
+      "id": 6,
+      "rows": 8,
+      "cols": 8,
+      "mines": 8
+    },
+    {
+      "id": 7,
+      "rows": 8,
+      "cols": 8,
+      "mines": 9
+    },
+    {
+      "id": 8,
+      "rows": 8,
+      "cols": 8,
+      "mines": 9
+    },
+    {
+      "id": 9,
+      "rows": 8,
+      "cols": 8,
+      "mines": 10
+    },
+    {
+      "id": 10,
+      "rows": 8,
+      "cols": 8,
+      "mines": 10
+    },
+    {
+      "id": 11,
+      "rows": 9,
+      "cols": 9,
+      "mines": 10
+    },
+    {
+      "id": 12,
+      "rows": 9,
+      "cols": 9,
+      "mines": 11
+    },
+    {
+      "id": 13,
+      "rows": 9,
+      "cols": 9,
+      "mines": 11
+    },
+    {
+      "id": 14,
+      "rows": 9,
+      "cols": 9,
+      "mines": 12
+    },
+    {
+      "id": 15,
+      "rows": 9,
+      "cols": 9,
+      "mines": 13
+    },
+    {
+      "id": 16,
+      "rows": 9,
+      "cols": 9,
+      "mines": 13
+    },
+    {
+      "id": 17,
+      "rows": 9,
+      "cols": 9,
+      "mines": 14
+    },
+    {
+      "id": 18,
+      "rows": 9,
+      "cols": 9,
+      "mines": 15
+    },
+    {
+      "id": 19,
+      "rows": 9,
+      "cols": 9,
+      "mines": 15
+    },
+    {
+      "id": 20,
+      "rows": 9,
+      "cols": 9,
+      "mines": 16
+    },
+    {
+      "id": 21,
+      "rows": 12,
+      "cols": 12,
+      "mines": 20
+    },
+    {
+      "id": 22,
+      "rows": 12,
+      "cols": 12,
+      "mines": 21
+    },
+    {
+      "id": 23,
+      "rows": 12,
+      "cols": 12,
+      "mines": 22
+    },
+    {
+      "id": 24,
+      "rows": 12,
+      "cols": 12,
+      "mines": 23
+    },
+    {
+      "id": 25,
+      "rows": 12,
+      "cols": 12,
+      "mines": 24
+    },
+    {
+      "id": 26,
+      "rows": 12,
+      "cols": 12,
+      "mines": 26
+    },
+    {
+      "id": 27,
+      "rows": 12,
+      "cols": 12,
+      "mines": 27
+    },
+    {
+      "id": 28,
+      "rows": 12,
+      "cols": 12,
+      "mines": 28
+    },
+    {
+      "id": 29,
+      "rows": 12,
+      "cols": 12,
+      "mines": 29
+    },
+    {
+      "id": 30,
+      "rows": 12,
+      "cols": 12,
+      "mines": 30
+    },
+    {
+      "id": 31,
+      "rows": 16,
+      "cols": 16,
+      "mines": 32
+    },
+    {
+      "id": 32,
+      "rows": 16,
+      "cols": 16,
+      "mines": 34
+    },
+    {
+      "id": 33,
+      "rows": 16,
+      "cols": 16,
+      "mines": 36
+    },
+    {
+      "id": 34,
+      "rows": 16,
+      "cols": 16,
+      "mines": 37
+    },
+    {
+      "id": 35,
+      "rows": 16,
+      "cols": 16,
+      "mines": 39
+    },
+    {
+      "id": 36,
+      "rows": 16,
+      "cols": 16,
+      "mines": 41
+    },
+    {
+      "id": 37,
+      "rows": 16,
+      "cols": 16,
+      "mines": 43
+    },
+    {
+      "id": 38,
+      "rows": 16,
+      "cols": 16,
+      "mines": 44
+    },
+    {
+      "id": 39,
+      "rows": 16,
+      "cols": 16,
+      "mines": 46
+    },
+    {
+      "id": 40,
+      "rows": 16,
+      "cols": 16,
+      "mines": 48
+    },
+    {
+      "id": 41,
+      "rows": 16,
+      "cols": 24,
+      "mines": 52
+    },
+    {
+      "id": 42,
+      "rows": 16,
+      "cols": 24,
+      "mines": 55
+    },
+    {
+      "id": 43,
+      "rows": 16,
+      "cols": 24,
+      "mines": 57
+    },
+    {
+      "id": 44,
+      "rows": 16,
+      "cols": 24,
+      "mines": 60
+    },
+    {
+      "id": 45,
+      "rows": 16,
+      "cols": 24,
+      "mines": 63
+    },
+    {
+      "id": 46,
+      "rows": 16,
+      "cols": 24,
+      "mines": 65
+    },
+    {
+      "id": 47,
+      "rows": 16,
+      "cols": 24,
+      "mines": 68
+    },
+    {
+      "id": 48,
+      "rows": 16,
+      "cols": 24,
+      "mines": 71
+    },
+    {
+      "id": 49,
+      "rows": 16,
+      "cols": 24,
+      "mines": 73
+    },
+    {
+      "id": 50,
+      "rows": 16,
+      "cols": 24,
+      "mines": 76
+    },
+    {
+      "id": 51,
+      "rows": 16,
+      "cols": 30,
+      "mines": 80
+    },
+    {
+      "id": 52,
+      "rows": 16,
+      "cols": 30,
+      "mines": 82
+    },
+    {
+      "id": 53,
+      "rows": 16,
+      "cols": 30,
+      "mines": 84
+    },
+    {
+      "id": 54,
+      "rows": 16,
+      "cols": 30,
+      "mines": 86
+    },
+    {
+      "id": 55,
+      "rows": 16,
+      "cols": 30,
+      "mines": 88
+    },
+    {
+      "id": 56,
+      "rows": 16,
+      "cols": 30,
+      "mines": 91
+    },
+    {
+      "id": 57,
+      "rows": 16,
+      "cols": 30,
+      "mines": 93
+    },
+    {
+      "id": 58,
+      "rows": 16,
+      "cols": 30,
+      "mines": 95
+    },
+    {
+      "id": 59,
+      "rows": 16,
+      "cols": 30,
+      "mines": 97
+    },
+    {
+      "id": 60,
+      "rows": 16,
+      "cols": 30,
+      "mines": 99
+    }
+  ]
+}

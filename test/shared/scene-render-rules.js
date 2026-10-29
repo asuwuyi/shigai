@@ -91,7 +91,8 @@
     const animationRules = global?.ShiGaiSceneAnimation || (typeof require === 'function' ? require('./scene-animation-rules.js') : null);
     return { enabled: source.enabled === true, ...(fontFamily(source.fontFamily)?{fontFamily:source.fontFamily}:{}), color: color(source.color,'#34271f'), backgroundColor: color(source.backgroundColor,'#fffdf5'), fontWeight: [400,500,600,700,800,900].includes(Number(source.fontWeight)) ? Number(source.fontWeight) : 600, radius: rounded(source.radius,0,80,24), layouts: { landscape: placement('landscape'), portrait: placement('portrait') }, ...(source.animation && animationRules ? { animation: animationRules.normalize(source.animation) } : {}) };
   }
-  const api = Object.freeze({ fontFamilies, fontFamily, normalizeTextDisplay, normalizeTextBubble, layers, layoutNames, layoutName, clamp, rounded, cloneLayout, readLayout, ensureWritableLayout, commitLayout, layout, position, scale, rotation, flipX, flipY, zIndex, transform, sortVisibleObjects });
+  const normalizeLivingEvents = items => (global.ShiGaiLivingEvents || (typeof require === "function" ? require("./living-events.js") : null))?.normalize(items) || [];
+  const api = Object.freeze({ normalizeLivingEvents, fontFamilies, fontFamily, normalizeTextDisplay, normalizeTextBubble, layers, layoutNames, layoutName, clamp, rounded, cloneLayout, readLayout, ensureWritableLayout, commitLayout, layout, position, scale, rotation, flipX, flipY, zIndex, transform, sortVisibleObjects });
   if (global) global.ShiGaiSceneRender = api;
   if (typeof module === "object" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

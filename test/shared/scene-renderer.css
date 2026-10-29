@@ -95,3 +95,10 @@
 .scene-info-track { display:flex;width:max-content;will-change:transform; }
 .scene-info-item { flex:0 0 auto;white-space:nowrap; }
 .scene-info-text:focus-visible { outline:2px solid currentColor;outline-offset:3px; }
+
+.living-event-controls{position:absolute;right:12px;bottom:12px;display:flex;gap:8px;z-index:10001;pointer-events:auto}.living-event-controls button{font:600 14px/1.2 sans-serif;min-height:40px;padding:8px 12px;border:1px solid #8c775b;border-radius:14px;background:#fff8e9;color:#34271f;cursor:pointer}.living-event-controls button:focus-visible{outline:3px solid #287db4;outline-offset:2px}
+
+/* Authored speech retains explicit newlines; long event lines are paginated. */
+.scene-speech-bubble{line-break:strict;text-wrap:pretty}
+.scene-dialogue-content{display:block;white-space:pre-wrap;overflow-wrap:anywhere}
+.scene-dialogue-page{display:block;margin-top:.5em;font-size:.45em;font-weight:500;line-height:1.3;text-align:end;opacity:.72;white-space:normal}

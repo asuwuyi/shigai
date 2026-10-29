@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-27T19:47:14.338Z",
+  "createdAt": "2026-10-29T18:30:01.478Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1082,
@@ -8,12 +8,12 @@
     "categories": 5,
     "tags": 0,
     "scenes": 3,
-    "games": 3,
+    "games": 5,
     "spotDifferenceLevels": 2,
-    "assets": 1210,
-    "files": 1349
+    "assets": 1212,
+    "files": 1362
   },
-  "bytes": 159396178,
+  "bytes": 159488955,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -26,6 +26,8 @@
     "assets/characters/images/fish-1787911269317.jpg",
     "assets/characters/images/penguin-1787844397632.jpg",
     "assets/characters/images/shi-gai-1787911101272.jpg",
+    "assets/games/icons/minesweeper-demo.svg",
+    "assets/games/icons/wheel-demo.svg",
     "assets/games/spot-difference/level-001/modified.jpg",
     "assets/games/spot-difference/level-001/original.jpg",
     "assets/games/spot-difference/level-002/modified-1788461712393-a615ec2e.jpg",

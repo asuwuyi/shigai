@@ -31,5 +31,27 @@
     "url": "games/spot-difference/",
     "order": 3,
     "visible": true
+  },
+  {
+    "id": "wheel",
+    "name": "選擇轉盤 · Demo",
+    "description": "輸入你的選項，按住加速或用手撥動，讓轉盤慢慢停下。",
+    "mark": "◉",
+    "icon": "assets/games/icons/wheel-demo.svg",
+    "status": "published",
+    "url": "games/wheel/",
+    "order": 7,
+    "visible": true
+  },
+  {
+    "id": "minesweeper",
+    "name": "踩地雷 · Demo",
+    "description": "用數字找出周圍地雷，從小棋盤一路挑戰 60 關。",
+    "mark": "✳",
+    "icon": "assets/games/icons/minesweeper-demo.svg",
+    "status": "published",
+    "url": "games/minesweeper/",
+    "order": 8,
+    "visible": true
   }
 ]

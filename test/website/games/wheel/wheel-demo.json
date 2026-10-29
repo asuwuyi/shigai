@@ -1,0 +1,6 @@
+{
+  "options": ["咖哩飯", "牛肉麵", "水餃", "炒飯", "披薩", "再想一下"],
+  "pointer": "top",
+  "colors": ["#e9bd62", "#8ba99a", "#c87a62", "#a6b7bf", "#d2a47b", "#b4aa83"],
+  "centerImage": ""
+}

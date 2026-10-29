@@ -311,6 +311,7 @@ function renderWorldEntranceScene(scenes, preferredSceneId = activeWorldEntrance
   const frameWidth = frame.width * (useMobileViewport ? mobileViewport.width : 1);
   homeElements.hero.style.setProperty("--home-scene-frame-ratio", `${frameWidth} / ${frame.height}`);
   const renderResult = unifiedRenderer.renderScene({
+    livingCanStart:()=>!document.body.classList.contains("is-home-loading")&&!document.querySelector(".home-welcome-overlay"),
     container,
     scene,
     layout,

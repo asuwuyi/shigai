@@ -1,5 +1,6 @@
 // Canonical Scene DOM and geometry shared by Studio and Website.
 (function exposeSceneRenderer(global) {
+  const eventControllers = new WeakMap();
   const UNIFIED = "unified";
   const mode = () => UNIFIED;
   const enabled = () => true;
@@ -319,7 +320,53 @@
     return node;
   }
 
+  function alignAuthoredSpeech(container) {
+    for(const bubble of container.querySelectorAll('.scene-speech-bubble:not(.scene-info-text)')){
+      if(bubble.dataset.dialoguePage)continue;
+      const style=global.getComputedStyle?.(bubble);if(!style)continue;
+      const line=parseFloat(style.lineHeight)||parseFloat(style.fontSize)*1.45;
+      const height=bubble.clientHeight-(parseFloat(style.paddingTop)||0)-(parseFloat(style.paddingBottom)||0);
+      bubble.style.textAlign=height>line*1.6?'start':'center';
+    }
+  }
+
+  // Measure with the same font and canonical width as the live bubble. Never
+  // shrink author type or slice UTF-16 code units to fit a dialogue page.
+  function mountEventDialogue(node, event, fullText, layout, frame) {
+    const bubble=node.querySelector('.scene-speech-bubble, .scene-render-object-text');
+    if(!bubble)return {};
+    const doc=bubble.ownerDocument, probe=bubble.cloneNode(false);
+    const width=parseFloat(bubble.style.maxWidth)||480;
+    const scale=Math.max(.1,Math.abs(parseFloat((bubble.style.transform.match(/scale\(([^)]+)\)/)||[])[1])||1));
+    bubble.style.maxWidth=Math.min(width,frame.width*.85/scale)+'px';
+    bubble.style.whiteSpace='pre-wrap';bubble.style.overflowWrap='anywhere';bubble.style.lineBreak='strict';bubble.style.textWrap='pretty';
+    probe.className='scene-dialogue-probe';probe.removeAttribute('id');
+    probe.style.cssText=bubble.style.cssText;
+    Object.assign(probe.style,{position:'fixed',left:'0',top:'0',transform:'none',visibility:'hidden',pointerEvents:'none',width:bubble.style.maxWidth,maxWidth:bubble.style.maxWidth,height:'auto',minHeight:'0',maxHeight:'none',overflow:'visible',animation:'none',transition:'none'});
+    const computed=global.getComputedStyle(bubble);
+    for(const key of ['fontFamily','fontSize','fontWeight','fontStyle','letterSpacing','lineHeight','paddingTop','paddingBottom','paddingLeft','paddingRight','borderTopWidth','borderBottomWidth','borderLeftWidth','borderRightWidth','boxSizing'])probe.style[key]=computed[key];
+    doc.body.append(probe);
+    const number=value=>parseFloat(value)||0, lineHeight=number(computed.lineHeight)||number(computed.fontSize)*1.45;
+    const extra=number(computed.paddingTop)+number(computed.paddingBottom)+number(computed.borderTopWidth)+number(computed.borderBottomWidth);
+    const limit=lineHeight*Math.max(1,Math.min(6,event.pageLines||3))+extra+1;
+    const segments=global.Intl?.Segmenter?Array.from(new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(fullText),part=>part.segment):Array.from(fullText);
+    const pages=[];let offset=0;
+    try{while(offset<segments.length){let low=1,high=segments.length-offset,best=1;
+      while(low<=high){const mid=Math.floor((low+high)/2);probe.textContent=segments.slice(offset,offset+mid).join('');if(probe.getBoundingClientRect().height<=limit){best=mid;low=mid+1;}else high=mid-1;}
+      if(offset+best<segments.length){const candidate=segments.slice(offset,offset+best).join('');const boundary=[...candidate.matchAll(/[。！？!?；;，,、\n\s]/gu)].at(-1);if(boundary&&boundary.index>=candidate.length*.65){const prefix=candidate.slice(0,boundary.index+boundary[0].length);best=global.Intl?.Segmenter?Array.from(new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(prefix)).length:Array.from(prefix).length;}}
+      pages.push(segments.slice(offset,offset+best).join(''));offset+=best;
+    }}finally{probe.remove();}
+    if(!pages.length)pages.push('');if(pages.length>1)bubble.style.width=bubble.style.maxWidth;
+    let index=0;const content=doc.createElement('span'),counter=doc.createElement('small');content.className='scene-dialogue-content';counter.className='scene-dialogue-page';bubble.replaceChildren(content);if(pages.length>1)bubble.append(counter);
+    function draw(){content.textContent=pages[index];counter.textContent=(index+1)+' / '+pages.length+(index<pages.length-1?' · 點一下繼續':'');bubble.dataset.dialoguePage=String(index+1);bubble.dataset.dialoguePages=String(pages.length);bubble.setAttribute('aria-label',pages[index]+(pages.length>1?'，第'+(index+1)+'頁，共'+pages.length+'頁':''));
+      bubble.style.textAlign=content.offsetHeight>lineHeight*1.6?'start':'center';
+    }
+    draw();
+    return {hasNextPage:()=>index<pages.length-1,nextPage:()=>{if(index>=pages.length-1)return false;index++;draw();return true;},readingSeconds:()=>event.readingTime===false?0:Math.min(120,Array.from(pages[index]).length/6+.5)};
+  }
+
   function renderScene(options = {}) {
+    if(options.container){eventControllers.get(options.container)?.destroy();eventControllers.delete(options.container);}
     const renderRules = rules();
     const { container, scene } = options;
     if (!renderRules) throw new Error("ShiGaiSceneRender is required.");
@@ -338,6 +385,7 @@
     objects.forEach((object) => fragment.append(createObjectNode({ ...options, documentRef, object, layout, surfaceScale, surfaceMetricsValue: metrics })));
     plane.append(fragment);
     container.replaceChildren(plane);
+    alignAuthoredSpeech(container);
     container.dataset.sceneRenderer = UNIFIED;
     container.dataset.sceneId = String(scene?.id || "");
     container.dataset.sceneLayout = layout;
@@ -345,6 +393,27 @@
     container.dataset.sceneViewportScale = String(surfaceScale);
     container.dataset.sceneFrameWidthMultiplier = String(metrics.frame.width / referenceFrames[layout].width);
     if (options.applyBackground !== false && scene?.background?.color) container.style.background = scene.background.color;
+    if (!options.editorSelectable && options.enableLivingEvents !== false && scene?.livingEvents?.length && global.ShiGaiLivingEvents) {
+      const controller = global.ShiGaiLivingEvents.mount({container,scene,preview:options.livingPreview===true,suppressAuto:options.livingPreview===true&&options.livingSuppressAuto!==false,...(options.livingCanStart?{canStart:options.livingCanStart}:{}),...(options.livingNow?{now:options.livingNow}:{}),replace(actor,event,text){
+        const original=getObjectNode(container,actor.id);if(!original)return null;
+        const mediaObject=scene.objects.find(o=>o.id===event.mediaObjectId);
+        // The event owns its dialogue lifetime. Preserve the authored text transform
+        // tracks, but do not let the original text's fade/hit track hide this reply.
+        const bubble=rules().normalizeTextBubble(actor.textBubble);
+        const eventBubble={...bubble,enabled:true,...(bubble.animation?{animation:{...bubble.animation,channels:Object.fromEntries(Object.entries(bubble.animation.channels||{}).map(([name,channels])=>[name,{...channels,...(channels.opacity?{opacity:{...channels.opacity,enabled:false}}:{})}]))}}:{})};
+        const changed={...actor,text,textDisplay:undefined,textBubble:eventBubble,...(mediaObject?.media?.src?{media:mediaObject.media}:{})};
+        const animations=original.getAnimations?.({subtree:true}).filter(a=>a.playState==='running')||[];animations.forEach(a=>a.pause());
+        const videos=Array.from(original.querySelectorAll('video')).filter(v=>!v.paused);videos.forEach(v=>v.pause());
+        const replacement=createObjectNode({...options,resolveMediaSource:object=>typeof options.resolveMediaSource==='function'?options.resolveMediaSource(mediaObject?.media?.src?mediaObject:object):object.media?.src,documentRef,object:changed,scene,layout,surfaceScale,surfaceMetricsValue:metrics});replacement.dataset.livingEventId=event.id;if(event.clickPolicy!=='original-first'){replacement.tabIndex=0;replacement.setAttribute('role','button');replacement.setAttribute('data-living-event-target','');replacement.setAttribute('aria-label',text+'；點擊回應');}
+        const liveText=replacement.querySelector('.scene-speech-bubble, .scene-render-object-text');if(liveText){liveText.setAttribute('role','status');liveText.setAttribute('aria-live','polite');}
+        replacement.querySelector('.scene-render-object-media')?.addEventListener('error',()=>{if(replacement.isConnected)controller.finish();},{once:true});
+        original.replaceWith(replacement);
+        const dialogue=mountEventDialogue(replacement,event,String(text||''),layout,metrics.frame);
+        const restore=()=>{replacement.querySelectorAll('video').forEach(v=>v.pause());const focused=replacement.contains(documentRef.activeElement);replacement.replaceWith(original);animations.forEach(a=>a.play());videos.forEach(v=>v.play().catch(()=>{}));if(actor.textDisplay)original.querySelectorAll('.scene-speech-bubble, .scene-render-object-text').forEach(node=>global.ShiGaiSceneText?.mount({node,wrapper:original,object:actor,scene,layout}));if(focused)original.focus({preventScroll:true});};
+        return Object.assign(restore,dialogue);
+      }});
+      eventControllers.set(container,controller);
+    }
     return Object.freeze({ mode: UNIFIED, rendered: true, layout, fitMode: metrics.fitMode, objectCount: objects.length, viewportScale: surfaceScale, referenceFrame: metrics.frame, surfaceWidth: metrics.width, surfaceHeight: metrics.height });
   }
 
@@ -361,6 +430,7 @@
     if (plane) { plane.style.width = `${metrics.width}px`; plane.style.height = `${metrics.height}px`; }
     applyObjectStyle(node, object, normalizedLayout, metrics.scale);
     applySpeechStyle(node, object, normalizedLayout);
+    alignAuthoredSpeech(node);
     applyObjectAnimation(node, object, metrics, playAnimation, normalizedLayout);
     container.dataset.sceneViewportScale = String(metrics.scale);
     container.dataset.sceneFitMode = metrics.fitMode;
@@ -380,7 +450,9 @@
     return Object.freeze({ mode: UNIFIED, resized: true, layout: normalizedLayout, fitMode: metrics.fitMode, viewportScale: metrics.scale });
   }
 
-  const api = Object.freeze({ UNIFIED, referenceFrames, mode, enabled, fitMode, surfaceMetrics, viewportScale, mappedTransform, animationSettings, keyframeAnimationSettings, applyObjectAnimation, renderScene, updateObject, resizeScene, getObjectNode });
+  const previewLivingEvent = (container,id) => eventControllers.get(container)?.preview(id) || false;
+  const stopLivingEvent = container => eventControllers.get(container)?.destroy();
+  const api = Object.freeze({ previewLivingEvent, stopLivingEvent, UNIFIED, referenceFrames, mode, enabled, fitMode, surfaceMetrics, viewportScale, mappedTransform, animationSettings, keyframeAnimationSettings, applyObjectAnimation, renderScene, updateObject, resizeScene, getObjectNode });
   if (global) global.ShiGaiSceneRenderer = api;
   if (typeof module === "object" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

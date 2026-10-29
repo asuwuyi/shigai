@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; script-src 'self' https://www.googletagmanager.com; style-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="description" content="輸入你的選項，按住加速或用手撥動，讓轉盤慢慢停下。">
+  <title>選擇轉盤 · Shi-Gai</title>
+  <link rel="stylesheet" href="../../assets/css/site.css?v=bilingual-menu-20261020">
+  <link rel="stylesheet" href="wheel.css?v=wheel-arrow-20261030">
+  <script defer src="../../assets/js/settings.js?v=nested-settings-20261019"></script>
+  <script defer src="../../assets/js/site.js?v=bilingual-menu-20261020"></script>
+  <script defer src="../../../shared/analytics-consent-copy.js?v=basic-consent-20261017"></script>
+  <script defer src="../../assets/js/analytics.js?v=scroll-menu-20261018"></script>
+  <script defer src="wheel-physics.js?v=wheel-demo-20261030"></script>
+  <script defer src="wheel.js?v=wheel-arrow-20261030"></script>
+  <meta name="robots" content="noindex,nofollow">
+</head>
+<body data-page="games" data-standalone-game>
+  <main class="wheel-room">
+    <a class="back-link" href="../../games.html"><span aria-hidden="true">←</span> 遊戲室</a>
+    <header class="wheel-heading"><p class="eyebrow">SHI-GAI PLAYROOM <span>DEMO 01</span></p><h1 id="wheelTitle">選擇轉盤</h1><p id="wheelDescription">把猶豫放上轉盤，給它一點力。</p></header>
+    <div class="wheel-layout">
+      <section class="wheel-play" aria-label="轉盤遊戲">
+        <div class="wheel-stage" id="wheelStage">
+          <canvas id="wheelCanvas" width="1000" height="1000" tabindex="0" role="img" aria-label="可拖曳旋轉的選項轉盤；也可使用下方按鈕"></canvas>
+          <div class="pointer-arm" id="pointerArm"><button class="pointer-handle" id="pointerHandle" type="button" disabled aria-label="拖曳箭頭調整位置，或使用方向鍵" aria-describedby="pointerHint"><svg viewBox="0 0 50 70" aria-hidden="true"><path d="M5 5H45L25 65Z"/></svg></button></div>
+        </div>
+        <div class="play-controls"><button class="drive-button" id="driveButton" type="button" disabled><span class="button-symbol" aria-hidden="true">↻</span><span>按住加速<span class="button-note">放開，讓它慢慢停下</span></span></button><button class="soft-button brake-button" id="brakeButton" type="button" disabled>減速停下</button></div>
+        <p class="game-status" id="wheelStatus" role="status" aria-live="polite">正在準備轉盤…</p>
+        <p class="pointer-hint" id="pointerHint">拖曳紅色箭頭調整位置；轉動時會鎖定。</p>
+        <p class="gesture-hint">手指沿轉盤邊緣撥動，越快撥，轉得越快。<br>鍵盤可聚焦「按住加速」，按住空白鍵或 Enter。</p>
+      </section>
+      <aside class="wheel-settings" aria-label="自訂轉盤">
+        <div class="settings-top"><p class="eyebrow">MAKE IT YOURS</p><span id="optionCount">6 個選項</span></div>
+        <h2>這次想選什麼？</h2>
+        <label for="optionInput">每行一個選項 <span class="field-note">2～24 個，每個最多 80 字</span></label>
+        <textarea id="optionInput" rows="7" maxlength="4096" spellcheck="false" disabled></textarea>
+        <div class="settings-row"><label for="pointerPosition">箭頭位置</label><select id="pointerPosition" disabled><option value="custom" disabled>自訂位置（拖曳）</option><option value="top">上方 ↓</option><option value="right">右側 ←</option><option value="bottom">下方 ↑</option><option value="left">左側 →</option></select></div>
+        <button type="button" class="apply-button" id="applyOptions" disabled>套用選項</button>
+        <p class="settings-feedback" id="settingsFeedback" role="status">選項與圖片只在這次開啟使用，不會上傳。</p>
+        <details class="wheel-extras"><summary>保留選項與替換圖片</summary><div class="extras-actions"><button class="soft-button" id="exportOptions" type="button" disabled>下載選項設定</button><label class="file-button">讀取選項設定<input id="importOptions" type="file" accept="application/json,.json" disabled></label><label class="file-button">替換中心圖片<input id="centerImageInput" type="file" accept="image/png,image/jpeg,image/webp" disabled></label><button class="text-button" id="clearImage" type="button" disabled>恢復中心圖案</button></div><p>圖片支援 PNG、JPG、WebP，最大 3 MB。更換只作本次試用；下載設定可保存選項和箭頭位置，不包含圖片。</p></details>
+      </aside>
+    </div>
+  </main>
+  <dialog id="resultDialog" aria-labelledby="resultTitle" aria-describedby="resultValue"><div><p class="eyebrow">THE WHEEL HAS SPOKEN</p><h2 id="resultTitle">這次就選</h2><p id="resultValue" class="result-value"></p><p class="result-detail">箭頭指到哪一格，結果就是哪一格。</p><button class="apply-button" id="resultClose" type="button">好，再轉一次</button></div></dialog>
+</body>
+</html>
