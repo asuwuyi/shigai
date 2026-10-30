@@ -1,0 +1,10 @@
+{
+  "simulated": true,
+  "sources": [
+    {"id":"a","name":"畜牧設施 A","type":"畜牧","east":1.4,"north":2.2},
+    {"id":"b","name":"堆肥設施 B","type":"堆肥","east":2.6,"north":1.3},
+    {"id":"c","name":"工業設施 C","type":"工業","east":-2.5,"north":1.2},
+    {"id":"d","name":"畜牧設施 D","type":"畜牧","east":-1.8,"north":-2.3},
+    {"id":"e","name":"廢水設施 E","type":"廢水","east":1.1,"north":-3.5}
+  ]
+}

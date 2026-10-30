@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<link rel="icon" href="../../assets/images/brand-icon.png"><title>異味雷達 Demo · Shi-Gai</title><meta name="description" content="試著轉動風向、觀察上風處，記錄你聞到的氣味。所有環境與設施資訊均為模擬。">
+<link rel="stylesheet" href="../../assets/css/site.css?v=world-menu-20261031"><link rel="stylesheet" href="radar.css?v=20261031">
+<script defer src="../../assets/js/settings.js?v=nested-settings-20261019"></script><script defer src="../../assets/js/site.js?v=island-navigation-20261031"></script>
+<script defer src="model.js?v=20261031"></script><script defer src="radar.js?v=20261031"></script>
+</head>
+<body data-page="tools"><header class="site-header" data-site-header></header>
+<main class="radar-room">
+<a class="back-link" href="../../tools.html">← 工具箱</a>
+<header class="intro"><p class="eyebrow">SHI-GAI FIELD NOTES / 01</p><h1>異味雷達 <span>Demo</span></h1><p>風從哪裡來，氣味可能從哪裡來？</p></header>
+<div class="demo-note"><strong>模擬模式</strong><span>地圖、設施、風況與 AQI 都是示範，未連接政府即時資料，也未使用你的位置。</span></div>
+<div class="radar-layout">
+<section class="map-panel panel" aria-labelledby="mapTitle"><div class="section-heading"><div><p class="eyebrow">THE WIND AROUND YOU</p><h2 id="mapTitle">從上風處找線索</h2></div><span class="tag">示意地圖</span></div>
+<div class="map-wrap"><svg id="radarMap" viewBox="0 0 600 600" role="img" aria-labelledby="mapName mapDescription"><title id="mapName">虛構設施與風向示意圖</title><desc id="mapDescription">中心為示範觀察點，北方朝上。扇形代表來風方向的正負35度，所有地點均為虛構。</desc>
+<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#65775e" stroke-opacity=".08"/></pattern><marker id="arrowhead" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#526e5b" stroke-width="1.4"/></marker></defs>
+<rect width="600" height="600" fill="#edf0e4"/><rect width="600" height="600" fill="url(#grid)"/>
+<path d="M-10 430 Q150 330 190 110 T400 -10 M420 610 Q370 450 500 360 T620 220" fill="none" stroke="#c1d7d8" stroke-width="25"/><path d="M0 240L600 370 M210 0L400 600 M0 510L600 70" stroke="#faf8ee" stroke-width="13" fill="none"/>
+<g fill="none" stroke="#9ca98b" stroke-dasharray="4 7"><circle cx="300" cy="300" r="100"/><circle cx="300" cy="300" r="200"/><circle cx="300" cy="300" r="250"/></g>
+<path id="windSector" fill="#bd8d3a" fill-opacity=".22" stroke="#aa7a32" stroke-dasharray="5 5"/>
+<g id="windArrow"><path d="M300 60V185" fill="none" stroke="#526e5b" stroke-width="3" marker-end="url(#arrowhead)"/></g>
+<g id="sourceMarkers"></g><circle cx="300" cy="300" r="18" fill="#fff9ed"/><circle cx="300" cy="300" r="9" fill="#3d6357"/><text x="300" y="340" text-anchor="middle" class="home-label">示範觀察點</text>
+<text x="300" y="25" text-anchor="middle" class="compass">北 N</text><text x="574" y="305" text-anchor="middle" class="compass">東</text><text x="300" y="582" text-anchor="middle" class="compass">南</text><text x="26" y="305" text-anchor="middle" class="compass">西</text><text x="42" y="570" class="scale-label">圓環：2 / 4 / 5 km</text>
+</svg></div>
+<div class="map-legend"><span><i class="dot home"></i>觀察點</span><span><i class="dot candidate"></i>上風處候選</span><span><i class="dot"></i>其他設施</span></div><p class="caption">虛構相對位置，非真實街道。點選下方設施可在圖上定位。</p>
+<div id="sources" class="sources" aria-label="示範設施"></div></section>
+<aside class="side-stack">
+<section class="panel controls" aria-labelledby="windTitle"><p class="eyebrow">TRY A DIFFERENT WIND</p><h2 id="windTitle">轉動風，看看變化</h2>
+<div class="presets" aria-label="風況情境"><button data-preset="45,2.5">東北風</button><button data-preset="225,2.5">西南風</button><button data-preset="0,0.2">微風</button></div>
+<label for="windFrom">來風方向 <output id="windLabel" for="windFrom"></output></label><input id="windFrom" type="range" min="0" max="359" value="45">
+<div class="two-fields"><label>風速（m/s）<input id="windSpeed" type="number" min="0" max="20" step="0.1" value="2.5" required></label><label>觀察半徑<select id="radius"><option value="3">3 公里</option><option value="5" selected>5 公里</option></select></label></div>
+<div id="assessment" class="assessment" role="status" aria-live="polite"></div><p class="caption">以來風方向 ±35° 篩選，未計算實際排放、地形或擴散；候選不代表污染來源。</p></section>
+<section class="panel air-panel" aria-labelledby="airTitle"><div class="section-heading"><div><p class="eyebrow">AIR & ODOR ARE DIFFERENT</p><h2 id="airTitle">空品與氣味分開看</h2></div><span class="tag">模擬</span></div><label for="aqiScenario">空品情境</label><select id="aqiScenario"><option value="35">AQI 35 · 良好</option><option value="85">AQI 85 · 普通</option><option value="120">AQI 120 · 對敏感族群不健康</option><option value="165">AQI 165 · 對所有族群不健康</option></select><div class="aqi-display"><strong id="aqiNumber">35</strong><div><span>示範 AQI</span><b id="aqiStatus">良好</b></div></div><p>空品良好，也可能聞到臭味。AQI 無法代表所有異味物質。</p><p class="caption">官方監測、預報與警報尚未接入。</p></section>
+</aside></div>
+<section class="panel journal" aria-labelledby="journalTitle"><div class="section-heading"><div><p class="eyebrow">KEEP A LITTLE FIELD NOTE</p><h2 id="journalTitle">這一刻，你聞到了嗎？</h2></div><span class="tag">本頁紀錄</span></div><p>「沒有異味」也值得記下，才能比較不同風況。Demo 紀錄會附上目前的模擬風況，不可作為真實溯源證據。</p>
+<div class="record-grid"><div><div class="record-fields"><label>氣味類型<select id="odorType"><option>糞便</option><option>化學</option><option>腐臭</option><option>其他</option></select></label><label>強度<select id="intensity"><option value="1">1 · 很淡</option><option value="2">2 · 可察覺</option><option value="3" selected>3 · 明顯</option><option value="4">4 · 很強</option><option value="5">5 · 難以忍受</option></select></label></div><label for="note">備註（選填）</label><input id="note" maxlength="200" placeholder="例如：剛打開窗，聞到一陣氣味"><div class="actions"><button id="recordOdor" class="primary">我聞到異味</button><button id="recordClear">現在沒有異味</button></div><p id="recordMessage" role="status" aria-live="polite" class="caption">紀錄僅留在本頁；離開前請匯出 JSON，下次可重新匯入。</p></div><div class="record-summary"><strong id="recordCount">0</strong><span>筆觀察紀錄</span><p id="summary">先記錄一次，看看氣味筆記的樣子。</p><div class="actions"><button id="exportRecords" disabled>匯出 JSON</button><button id="importRecords">匯入 JSON</button><input id="importFile" type="file" accept=".json,application/json" hidden></div></div></div>
+<div class="history-scroll"><table><caption class="sr-only">本頁異味觀察紀錄，最新在上</caption><thead><tr><th scope="col">時間</th><th scope="col">觀察</th><th scope="col">模擬風況</th><th scope="col">備註</th></tr></thead><tbody id="history"><tr><td colspan="4">目前還沒有紀錄。</td></tr></tbody></table></div></section>
+<footer class="tool-footer"><p>DEMO / 不是即時預警，沒有背景通知。設施為虛構，不指涉任何實際業者。</p><div><a href="https://airtw.moenv.gov.tw/" target="_blank" rel="noopener noreferrer">查看官方空品 ↗</a><a href="https://www.cwa.gov.tw/" target="_blank" rel="noopener noreferrer">中央氣象署 ↗</a></div></footer>
+<noscript>請開啟 JavaScript 使用互動 Demo。</noscript></main></body></html>
