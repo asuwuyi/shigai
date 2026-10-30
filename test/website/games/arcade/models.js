@@ -17,9 +17,11 @@ class Catch {
  }
 }
 class Puzzle {
- constructor(level,random=Math.random){this.size=integer(level.size,2,6);this.tiles=shuffle(Array.from({length:this.size**2},(_,i)=>i),random);if(this.tiles.every((v,i)=>v===i))this.tiles.push(this.tiles.shift());this.moves=0;this.status='ready';}
+ constructor(level,random=Math.random){this.size=integer(level.size,2,6);this.tiles=shuffle(Array.from({length:this.size**2},(_,i)=>i),random);if(this.tiles.every((v,i)=>v===i))this.tiles.push(this.tiles.shift());this.moves=0;this.status='ready';this.equivalence=Array.from({length:this.tiles.length},(_,i)=>i);}
+ setEquivalence(groups){if(!Array.isArray(groups)||groups.length!==this.tiles.length||!groups.every(group=>Number.isInteger(group)&&group>=0&&group<this.tiles.length))throw Error('拼圖群組不正確。');this.equivalence=[...groups];if(this.status==='ready'&&this.tiles.every((_,i)=>this.isCorrect(i))&&new Set(groups).size>1){const b=this.tiles.findIndex(tile=>groups[tile]!==groups[this.tiles[0]]);[this.tiles[0],this.tiles[b]]=[this.tiles[b],this.tiles[0]];}}
+ isCorrect(index){return this.equivalence[this.tiles[index]]===this.equivalence[index];}
  start(){if(this.status==='ready')this.status='playing';}
- swap(a,b){if(this.status!=='playing'||!Number.isInteger(a)||!Number.isInteger(b)||a<0||b<0||a>=this.tiles.length||b>=this.tiles.length||a===b)return false;[this.tiles[a],this.tiles[b]]=[this.tiles[b],this.tiles[a]];this.moves++;if(this.tiles.every((v,i)=>v===i))this.status='won';return true;}
+ swap(a,b){if(this.status!=='playing'||!Number.isInteger(a)||!Number.isInteger(b)||a<0||b<0||a>=this.tiles.length||b>=this.tiles.length||a===b)return false;[this.tiles[a],this.tiles[b]]=[this.tiles[b],this.tiles[a]];this.moves++;if(this.tiles.every((_,i)=>this.isCorrect(i)))this.status='won';return true;}
 }
 class Sokoban {
  constructor(level){const map=level.map;if(!Array.isArray(map)||map.length<4||map.length>12||typeof map[0]!=='string')throw Error('推箱子地圖需為4～12列。');this.rows=map.length;this.cols=map[0].length;integer(this.cols,4,12);this.walls=new Set();this.goals=new Set();this.boxes=new Set();this.player=-1;this.moves=0;this.pushes=0;this.history=[];this.status='ready';

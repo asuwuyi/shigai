@@ -13,14 +13,17 @@
   <script defer src="../../assets/js/site.js?v=tools-category-20261030"></script>
   <script defer src="../../../shared/analytics-consent-copy.js?v=basic-consent-20261017"></script>
   <script defer src="../../assets/js/analytics.js?v=scroll-menu-20261018"></script>
-  <script defer src="wheel-physics.js?v=wheel-demo-20261030"></script>
-  <script defer src="wheel.js?v=wheel-arrow-20261030"></script>
+    <script defer src="../../../shared/game-settings.js?v=studio-games-20261030"></script>
+  <script defer src="../common/game-config.js?v=studio-games-20261030"></script>
+  <link rel="stylesheet" href="../common/game-ui.css?v=studio-games-20261030">
+<script defer src="wheel-physics.js?v=wheel-demo-20261030"></script>
+  <script defer src="wheel.js?v=studio-games-20261030"></script>
   <meta name="robots" content="noindex,nofollow">
 </head>
 <body data-page="tools" data-standalone-game>
   <main class="wheel-room">
     <a class="back-link" href="../../tools.html"><span aria-hidden="true">←</span> 工具箱</a>
-    <header class="wheel-heading"><p class="eyebrow">SHI-GAI TOOLS <span>DEMO 01</span></p><h1 id="wheelTitle">選擇轉盤</h1><p id="wheelDescription">把猶豫放上轉盤，給它一點力。</p></header>
+    <header class="wheel-heading"><p class="eyebrow">SHI-GAI TOOLS </p><h1 id="wheelTitle">選擇轉盤</h1><p id="wheelDescription">把猶豫放上轉盤，給它一點力。</p></header>
     <div class="wheel-layout">
       <section class="wheel-play" aria-label="轉盤遊戲">
         <div class="wheel-stage" id="wheelStage">
@@ -30,7 +33,7 @@
         <div class="play-controls"><button class="drive-button" id="driveButton" type="button" disabled><span class="button-symbol" aria-hidden="true">↻</span><span>按住加速<span class="button-note">放開，讓它慢慢停下</span></span></button><button class="soft-button brake-button" id="brakeButton" type="button" disabled>減速停下</button></div>
         <p class="game-status" id="wheelStatus" role="status" aria-live="polite">正在準備轉盤…</p>
         <p class="pointer-hint" id="pointerHint">拖曳紅色箭頭調整位置；轉動時會鎖定。</p>
-        <p class="gesture-hint">手指沿轉盤邊緣撥動，越快撥，轉得越快。<br>鍵盤可聚焦「按住加速」，按住空白鍵或 Enter。</p>
+        <p id="gameManagedInstructions" class="gesture-hint game-ui-instructions">手指沿轉盤邊緣撥動，越快撥，轉得越快。<br>鍵盤可聚焦「按住加速」，按住空白鍵或 Enter。</p>
       </section>
       <aside class="wheel-settings" aria-label="自訂轉盤">
         <div class="settings-top"><p class="eyebrow">MAKE IT YOURS</p><span id="optionCount">6 個選項</span></div>
@@ -44,6 +47,6 @@
       </aside>
     </div>
   </main>
-  <dialog id="resultDialog" aria-labelledby="resultTitle" aria-describedby="resultValue"><div><p class="eyebrow">THE WHEEL HAS SPOKEN</p><h2 id="resultTitle">這次就選</h2><p id="resultValue" class="result-value"></p><p class="result-detail">箭頭指到哪一格，結果就是哪一格。</p><button class="apply-button" id="resultClose" type="button">好，再轉一次</button></div></dialog>
+  <dialog id="resultDialog" aria-labelledby="resultTitle" aria-describedby="resultValue"><div><p class="eyebrow">THE WHEEL HAS SPOKEN</p><h2 id="resultTitle">這次就選</h2><p id="resultValue" class="result-value"></p><p id="resultText" class="result-detail">箭頭指到哪一格，結果就是哪一格。</p><button class="apply-button" id="resultClose" type="button">好，再轉一次</button></div></dialog>
 </body>
 </html>

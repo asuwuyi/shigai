@@ -162,8 +162,7 @@
   window.addEventListener('pageshow', () => { if (busy() || roundActive) wake(); });
   async function load() {
     try {
-      const response = await fetch('wheel-demo.json', { cache: 'no-cache' }); if (!response.ok) throw Error('轉盤設定暫時無法載入。');
-      const data = await response.json(); options = P.normalizeOptions(data.options); colors = Array.isArray(data.colors) ? data.colors.filter(color => /^#[0-9a-f]{6}$/i.test(color)).slice(0,24) : []; if (!colors.length) colors = ['#e9bd62', '#8ba99a', '#c87a62'];
+      const data = await ShiGaiGameConfig.load('wheel','wheel-demo.json');if(data.pointerImage){const img=document.createElement('img');img.src=data.pointerImage;img.alt='';pointerHandle.replaceChildren(img);} options = P.normalizeOptions(data.options); colors = Array.isArray(data.colors) ? data.colors.filter(color => /^#[0-9a-f]{6}$/i.test(color)).slice(0,24) : []; if (!colors.length) colors = ['#e9bd62', '#8ba99a', '#c87a62'];
       input.value = options.join('\n'); setPointer(data.pointer,data.pointerDegrees); $('optionCount').textContent = options.length + ' 個選項';
       if (data.centerImage) { const url = new URL(data.centerImage, document.baseURI); if (url.origin === location.origin && ['http:', 'https:', 'file:'].includes(url.protocol)) try { centerImage = await imageFrom(url.href); } catch { feedback.textContent = '中心圖片讀取失敗，已使用原圖案。'; } }
       ready = true; syncControls(); paint(); status.textContent = '準備好了，按住按鈕或直接撥動轉盤。';
@@ -171,7 +170,6 @@
   }
   document.fonts?.ready.then(()=>{labelCache.clear();paint();});
   load();
-  window.ShiGaiWebsiteSettings?.then(async () => { const response = await fetch('../../../database/website/games.json'); if (!response.ok) return; const entry = (await response.json()).find(game => game.id === 'wheel'); if (entry) { $('wheelTitle').textContent = entry.name; $('wheelDescription').textContent = entry.description; document.title = entry.name + ' · Shi-Gai'; } }).catch(() => {});
   // Read-only state for diagnostics; never a second source of settings or a result setter.
   window.ShiGaiWheelDemo = Object.freeze({ state: () => ({ angle: rotor.angle, omega: rotor.omega, mode: rotor.mode, pointer, pointerDegrees, pointerLocked:busy()||!ready||assetLoading, options: [...options], ready, resultOpen: dialog.open, result: $('resultValue').textContent, centerImage: Boolean(centerImage) }) });
 })();

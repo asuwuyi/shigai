@@ -35,7 +35,7 @@
   },
   {
     "id": "wheel",
-    "name": "選擇轉盤 · Demo",
+    "name": "選擇轉盤",
     "description": "輸入你的選項，按住加速或用手撥動，讓轉盤慢慢停下。",
     "mark": "◉",
     "icon": "assets/games/icons/wheel-demo.svg",
@@ -43,76 +43,1573 @@
     "url": "games/wheel/",
     "order": 7,
     "visible": true,
-    "kind": "tool"
+    "kind": "tool",
+    "play": {
+      "version": 1,
+      "config": {
+        "pointer": "top",
+        "centerImage": "",
+        "options": [
+          "咖哩飯",
+          "牛肉麵",
+          "水餃",
+          "炒飯",
+          "披薩",
+          "再想一下"
+        ],
+        "colors": [
+          "#e9bd62",
+          "#8ba99a",
+          "#c87a62",
+          "#a6b7bf",
+          "#d2a47b",
+          "#b4aa83"
+        ]
+      },
+      "ui": {
+        "theme": {
+          "background": "#efe5d3",
+          "paper": "#fff9ed",
+          "ink": "#382b24",
+          "accent": "#3d6357",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 40,
+          "mobileTitleSize": 32,
+          "buttonRadius": 10,
+          "contentWidth": 1280
+        },
+        "phrases": {
+          "減速停下": "減速停下",
+          "套用選項": "套用選項",
+          "保留選項與替換圖片": "保留選項與替換圖片",
+          "下載選項設定": "下載選項設定",
+          "恢復中心圖案": "恢復中心圖案",
+          "好，再轉一次": "好，再轉一次"
+        },
+        "instructions": "輸入選項後套用，按住按鈕加速，或直接用手撥動轉盤；放開後會慢慢停下。箭頭可沿外圈拖動，轉動中鎖定。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
   },
   {
     "id": "minesweeper",
-    "name": "踩地雷 · Demo",
+    "name": "踩地雷",
     "description": "用數字找出周圍地雷，從小棋盤一路挑戰 60 關。",
     "mark": "✳",
     "icon": "assets/games/icons/minesweeper-demo.svg",
     "status": "published",
     "url": "games/minesweeper/",
     "order": 8,
-    "visible": true
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "levels": [
+          {
+            "rows": 8,
+            "cols": 8,
+            "mines": 6,
+            "id": 1
+          },
+          {
+            "rows": 8,
+            "cols": 8,
+            "mines": 6,
+            "id": 2
+          },
+          {
+            "rows": 8,
+            "cols": 8,
+            "mines": 7,
+            "id": 3
+          },
+          {
+            "rows": 8,
+            "cols": 8,
+            "mines": 7,
+            "id": 4
+          },
+          {
+            "rows": 8,
+            "cols": 8,
+            "mines": 8,
+            "id": 5
+          },
+          {
+            "rows": 8,
+            "cols": 8,
+            "mines": 8,
+            "id": 6
+          },
+          {
+            "rows": 8,
+            "cols": 8,
+            "mines": 9,
+            "id": 7
+          },
+          {
+            "rows": 8,
+            "cols": 8,
+            "mines": 9,
+            "id": 8
+          },
+          {
+            "rows": 8,
+            "cols": 8,
+            "mines": 10,
+            "id": 9
+          },
+          {
+            "rows": 8,
+            "cols": 8,
+            "mines": 10,
+            "id": 10
+          },
+          {
+            "rows": 9,
+            "cols": 9,
+            "mines": 10,
+            "id": 11
+          },
+          {
+            "rows": 9,
+            "cols": 9,
+            "mines": 11,
+            "id": 12
+          },
+          {
+            "rows": 9,
+            "cols": 9,
+            "mines": 11,
+            "id": 13
+          },
+          {
+            "rows": 9,
+            "cols": 9,
+            "mines": 12,
+            "id": 14
+          },
+          {
+            "rows": 9,
+            "cols": 9,
+            "mines": 13,
+            "id": 15
+          },
+          {
+            "rows": 9,
+            "cols": 9,
+            "mines": 13,
+            "id": 16
+          },
+          {
+            "rows": 9,
+            "cols": 9,
+            "mines": 14,
+            "id": 17
+          },
+          {
+            "rows": 9,
+            "cols": 9,
+            "mines": 15,
+            "id": 18
+          },
+          {
+            "rows": 9,
+            "cols": 9,
+            "mines": 15,
+            "id": 19
+          },
+          {
+            "rows": 9,
+            "cols": 9,
+            "mines": 16,
+            "id": 20
+          },
+          {
+            "rows": 12,
+            "cols": 12,
+            "mines": 20,
+            "id": 21
+          },
+          {
+            "rows": 12,
+            "cols": 12,
+            "mines": 21,
+            "id": 22
+          },
+          {
+            "rows": 12,
+            "cols": 12,
+            "mines": 22,
+            "id": 23
+          },
+          {
+            "rows": 12,
+            "cols": 12,
+            "mines": 23,
+            "id": 24
+          },
+          {
+            "rows": 12,
+            "cols": 12,
+            "mines": 24,
+            "id": 25
+          },
+          {
+            "rows": 12,
+            "cols": 12,
+            "mines": 26,
+            "id": 26
+          },
+          {
+            "rows": 12,
+            "cols": 12,
+            "mines": 27,
+            "id": 27
+          },
+          {
+            "rows": 12,
+            "cols": 12,
+            "mines": 28,
+            "id": 28
+          },
+          {
+            "rows": 12,
+            "cols": 12,
+            "mines": 29,
+            "id": 29
+          },
+          {
+            "rows": 12,
+            "cols": 12,
+            "mines": 30,
+            "id": 30
+          },
+          {
+            "rows": 16,
+            "cols": 16,
+            "mines": 32,
+            "id": 31
+          },
+          {
+            "rows": 16,
+            "cols": 16,
+            "mines": 34,
+            "id": 32
+          },
+          {
+            "rows": 16,
+            "cols": 16,
+            "mines": 36,
+            "id": 33
+          },
+          {
+            "rows": 16,
+            "cols": 16,
+            "mines": 37,
+            "id": 34
+          },
+          {
+            "rows": 16,
+            "cols": 16,
+            "mines": 39,
+            "id": 35
+          },
+          {
+            "rows": 16,
+            "cols": 16,
+            "mines": 41,
+            "id": 36
+          },
+          {
+            "rows": 16,
+            "cols": 16,
+            "mines": 43,
+            "id": 37
+          },
+          {
+            "rows": 16,
+            "cols": 16,
+            "mines": 44,
+            "id": 38
+          },
+          {
+            "rows": 16,
+            "cols": 16,
+            "mines": 46,
+            "id": 39
+          },
+          {
+            "rows": 16,
+            "cols": 16,
+            "mines": 48,
+            "id": 40
+          },
+          {
+            "rows": 16,
+            "cols": 24,
+            "mines": 52,
+            "id": 41
+          },
+          {
+            "rows": 16,
+            "cols": 24,
+            "mines": 55,
+            "id": 42
+          },
+          {
+            "rows": 16,
+            "cols": 24,
+            "mines": 57,
+            "id": 43
+          },
+          {
+            "rows": 16,
+            "cols": 24,
+            "mines": 60,
+            "id": 44
+          },
+          {
+            "rows": 16,
+            "cols": 24,
+            "mines": 63,
+            "id": 45
+          },
+          {
+            "rows": 16,
+            "cols": 24,
+            "mines": 65,
+            "id": 46
+          },
+          {
+            "rows": 16,
+            "cols": 24,
+            "mines": 68,
+            "id": 47
+          },
+          {
+            "rows": 16,
+            "cols": 24,
+            "mines": 71,
+            "id": 48
+          },
+          {
+            "rows": 16,
+            "cols": 24,
+            "mines": 73,
+            "id": 49
+          },
+          {
+            "rows": 16,
+            "cols": 24,
+            "mines": 76,
+            "id": 50
+          },
+          {
+            "rows": 16,
+            "cols": 30,
+            "mines": 80,
+            "id": 51
+          },
+          {
+            "rows": 16,
+            "cols": 30,
+            "mines": 82,
+            "id": 52
+          },
+          {
+            "rows": 16,
+            "cols": 30,
+            "mines": 84,
+            "id": 53
+          },
+          {
+            "rows": 16,
+            "cols": 30,
+            "mines": 86,
+            "id": 54
+          },
+          {
+            "rows": 16,
+            "cols": 30,
+            "mines": 88,
+            "id": 55
+          },
+          {
+            "rows": 16,
+            "cols": 30,
+            "mines": 91,
+            "id": 56
+          },
+          {
+            "rows": 16,
+            "cols": 30,
+            "mines": 93,
+            "id": 57
+          },
+          {
+            "rows": 16,
+            "cols": 30,
+            "mines": 95,
+            "id": 58
+          },
+          {
+            "rows": 16,
+            "cols": 30,
+            "mines": 97,
+            "id": 59
+          },
+          {
+            "rows": 16,
+            "cols": 30,
+            "mines": 99,
+            "id": 60
+          }
+        ],
+        "mineImage": "",
+        "flagImage": ""
+      },
+      "ui": {
+        "theme": {
+          "background": "#efe5d3",
+          "paper": "#fff9ed",
+          "ink": "#382b24",
+          "accent": "#3d6357",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 40,
+          "mobileTitleSize": 32,
+          "buttonRadius": 10,
+          "contentWidth": 1280
+        },
+        "phrases": {
+          "重玩本關": "重玩本關",
+          "下一關 →": "下一關 →",
+          "翻格": "翻格",
+          "插旗": "插旗",
+          "試換地雷與旗子素材": "試換地雷與旗子素材",
+          "恢復示範圖案": "恢復示範圖案",
+          "再試一次": "再試一次",
+          "查看棋盤": "查看棋盤"
+        },
+        "instructions": "翻開安全格，數字代表周圍八格的地雷數。手機可切換翻格／插旗，或長按插旗；第一格及附近不會有地雷。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
   },
   {
     "id": "memory",
-    "name": "記憶翻牌 · Demo",
+    "name": "記憶翻牌",
     "description": "翻開兩張牌，找出相同圖案。24關，用時間與次數挑戰自己的紀錄。",
     "mark": "▧",
     "icon": "assets/games/icons/memory-demo.svg",
     "status": "published",
     "url": "games/memory/",
     "order": 9,
-    "visible": true
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "faceSource": "works",
+        "levels": [
+          {
+            "pairs": 2,
+            "targetSeconds": 26,
+            "targetMoves": 4
+          },
+          {
+            "pairs": 2,
+            "targetSeconds": 22,
+            "targetMoves": 4
+          },
+          {
+            "pairs": 2,
+            "targetSeconds": 18,
+            "targetMoves": 3
+          },
+          {
+            "pairs": 2,
+            "targetSeconds": 14,
+            "targetMoves": 2
+          },
+          {
+            "pairs": 3,
+            "targetSeconds": 39,
+            "targetMoves": 6
+          },
+          {
+            "pairs": 3,
+            "targetSeconds": 33,
+            "targetMoves": 5
+          },
+          {
+            "pairs": 3,
+            "targetSeconds": 27,
+            "targetMoves": 4
+          },
+          {
+            "pairs": 3,
+            "targetSeconds": 21,
+            "targetMoves": 4
+          },
+          {
+            "pairs": 4,
+            "targetSeconds": 52,
+            "targetMoves": 8
+          },
+          {
+            "pairs": 4,
+            "targetSeconds": 44,
+            "targetMoves": 7
+          },
+          {
+            "pairs": 4,
+            "targetSeconds": 36,
+            "targetMoves": 6
+          },
+          {
+            "pairs": 4,
+            "targetSeconds": 28,
+            "targetMoves": 5
+          },
+          {
+            "pairs": 6,
+            "targetSeconds": 78,
+            "targetMoves": 12
+          },
+          {
+            "pairs": 6,
+            "targetSeconds": 66,
+            "targetMoves": 10
+          },
+          {
+            "pairs": 6,
+            "targetSeconds": 54,
+            "targetMoves": 9
+          },
+          {
+            "pairs": 6,
+            "targetSeconds": 42,
+            "targetMoves": 8
+          },
+          {
+            "pairs": 8,
+            "targetSeconds": 104,
+            "targetMoves": 16
+          },
+          {
+            "pairs": 8,
+            "targetSeconds": 88,
+            "targetMoves": 14
+          },
+          {
+            "pairs": 8,
+            "targetSeconds": 72,
+            "targetMoves": 12
+          },
+          {
+            "pairs": 8,
+            "targetSeconds": 56,
+            "targetMoves": 10
+          },
+          {
+            "pairs": 12,
+            "targetSeconds": 156,
+            "targetMoves": 24
+          },
+          {
+            "pairs": 12,
+            "targetSeconds": 132,
+            "targetMoves": 21
+          },
+          {
+            "pairs": 12,
+            "targetSeconds": 108,
+            "targetMoves": 18
+          },
+          {
+            "pairs": 12,
+            "targetSeconds": 84,
+            "targetMoves": 15
+          }
+        ],
+        "backImage": "",
+        "faces": [
+          {
+            "id": "1",
+            "name": "星星",
+            "symbol": "★",
+            "color": "#c79637",
+            "image": ""
+          },
+          {
+            "id": "2",
+            "name": "月亮",
+            "symbol": "☾",
+            "color": "#68618e",
+            "image": ""
+          },
+          {
+            "id": "3",
+            "name": "太陽",
+            "symbol": "☀",
+            "color": "#c77138",
+            "image": ""
+          },
+          {
+            "id": "4",
+            "name": "花朵",
+            "symbol": "✿",
+            "color": "#b85f78",
+            "image": ""
+          },
+          {
+            "id": "5",
+            "name": "愛心",
+            "symbol": "♥",
+            "color": "#b86756",
+            "image": ""
+          },
+          {
+            "id": "6",
+            "name": "音符",
+            "symbol": "♫",
+            "color": "#597e90",
+            "image": ""
+          },
+          {
+            "id": "7",
+            "name": "雨傘",
+            "symbol": "☂",
+            "color": "#468a91",
+            "image": ""
+          },
+          {
+            "id": "8",
+            "name": "雪花",
+            "symbol": "❄",
+            "color": "#548ea5",
+            "image": ""
+          },
+          {
+            "id": "9",
+            "name": "三葉草",
+            "symbol": "☘",
+            "color": "#628059",
+            "image": ""
+          },
+          {
+            "id": "10",
+            "name": "菱形",
+            "symbol": "◆",
+            "color": "#a77749",
+            "image": ""
+          },
+          {
+            "id": "11",
+            "name": "圓環",
+            "symbol": "◎",
+            "color": "#92769b",
+            "image": ""
+          },
+          {
+            "id": "12",
+            "name": "山丘",
+            "symbol": "▲",
+            "color": "#678676",
+            "image": ""
+          }
+        ]
+      },
+      "ui": {
+        "theme": {
+          "background": "#efe5d3",
+          "paper": "#fff9ed",
+          "ink": "#382b24",
+          "accent": "#3d6357",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 40,
+          "mobileTitleSize": 32,
+          "buttonRadius": 10,
+          "contentWidth": 1280
+        },
+        "phrases": {
+          "重玩本關": "重玩本關",
+          "暫停": "暫停",
+          "下一關 →": "下一關 →",
+          "繼續遊戲": "繼續遊戲",
+          "試換卡面與牌背": "試換卡面與牌背",
+          "恢復本局卡面": "恢復本局卡面",
+          "再挑戰一次": "再挑戰一次",
+          "查看卡牌": "查看卡牌",
+          "繼續": "繼續"
+        },
+        "instructions": "翻開兩張牌，找出相同作品。全部配對即可過關，時間及翻牌次數決定星等；超時仍可完成。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
   },
   {
     "id": "catch",
     "kind": "game",
-    "name": "企鵝接東西 · Demo",
+    "name": "企鵝接東西",
     "description": "左右移動，接住食物、避開石頭。",
     "mark": "♧",
     "icon": "assets/games/icons/catch-demo.svg",
     "status": "published",
     "url": "games/catch/",
     "order": 10,
-    "visible": true
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "levels": [
+          {
+            "target": 8,
+            "speed": 120,
+            "interval": 0.85,
+            "badRate": 0.12
+          },
+          {
+            "target": 10,
+            "speed": 132,
+            "interval": 0.8099999999999999,
+            "badRate": 0.13999999999999999
+          },
+          {
+            "target": 12,
+            "speed": 144,
+            "interval": 0.77,
+            "badRate": 0.16
+          },
+          {
+            "target": 14,
+            "speed": 156,
+            "interval": 0.73,
+            "badRate": 0.18
+          },
+          {
+            "target": 16,
+            "speed": 168,
+            "interval": 0.69,
+            "badRate": 0.2
+          },
+          {
+            "target": 18,
+            "speed": 180,
+            "interval": 0.6499999999999999,
+            "badRate": 0.22
+          },
+          {
+            "target": 20,
+            "speed": 192,
+            "interval": 0.61,
+            "badRate": 0.24
+          },
+          {
+            "target": 22,
+            "speed": 204,
+            "interval": 0.57,
+            "badRate": 0.26
+          },
+          {
+            "target": 24,
+            "speed": 216,
+            "interval": 0.53,
+            "badRate": 0.28
+          },
+          {
+            "target": 26,
+            "speed": 228,
+            "interval": 0.49,
+            "badRate": 0.3
+          },
+          {
+            "target": 28,
+            "speed": 240,
+            "interval": 0.44999999999999996,
+            "badRate": 0.32
+          },
+          {
+            "target": 30,
+            "speed": 252,
+            "interval": 0.41,
+            "badRate": 0.33999999999999997
+          }
+        ],
+        "slots": {
+          "player": "角色",
+          "good": "好東西",
+          "bad": "障礙",
+          "background": "背景"
+        },
+        "images": {
+          "player": "",
+          "good": "",
+          "bad": "",
+          "background": ""
+        }
+      },
+      "ui": {
+        "theme": {
+          "background": "#efe5d3",
+          "paper": "#fff9ed",
+          "ink": "#382b24",
+          "accent": "#3d6357",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 40,
+          "mobileTitleSize": 32,
+          "buttonRadius": 10,
+          "contentWidth": 1280
+        },
+        "phrases": {
+          "開始": "開始",
+          "暫停": "暫停",
+          "重玩": "重玩",
+          "下一關 →": "下一關 →",
+          "繼續遊戲": "繼續遊戲",
+          "試換素材": "試換素材",
+          "恢復示範素材": "恢復示範素材",
+          "再試一次": "再試一次",
+          "查看畫面": "查看畫面",
+          "繼續": "繼續"
+        },
+        "instructions": "拖動角色左右移動，或按左右按鈕／方向鍵。接到食物得分；碰到障礙或漏接食物扣一顆心，集滿目標即可過關。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
   },
   {
     "id": "puzzle",
     "kind": "game",
-    "name": "作品拼圖 · Demo",
+    "name": "作品拼圖",
     "description": "拖動或點選兩塊交換，把作品拼回原樣。",
     "mark": "▦",
     "icon": "assets/games/icons/puzzle-demo.svg",
     "status": "published",
     "url": "games/puzzle/",
     "order": 11,
-    "visible": true
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "pictureSource": "works",
+        "levels": [
+          {
+            "size": 2
+          },
+          {
+            "size": 2
+          },
+          {
+            "size": 2
+          },
+          {
+            "size": 2
+          },
+          {
+            "size": 2
+          },
+          {
+            "size": 2
+          },
+          {
+            "size": 3
+          },
+          {
+            "size": 3
+          },
+          {
+            "size": 3
+          },
+          {
+            "size": 3
+          },
+          {
+            "size": 3
+          },
+          {
+            "size": 3
+          },
+          {
+            "size": 4
+          },
+          {
+            "size": 4
+          },
+          {
+            "size": 4
+          },
+          {
+            "size": 4
+          },
+          {
+            "size": 4
+          },
+          {
+            "size": 4
+          },
+          {
+            "size": 5
+          },
+          {
+            "size": 5
+          },
+          {
+            "size": 5
+          },
+          {
+            "size": 5
+          },
+          {
+            "size": 5
+          },
+          {
+            "size": 5
+          },
+          {
+            "size": 6
+          },
+          {
+            "size": 6
+          },
+          {
+            "size": 6
+          },
+          {
+            "size": 6
+          },
+          {
+            "size": 6
+          },
+          {
+            "size": 6
+          }
+        ],
+        "slots": {
+          "picture": "指定拼圖圖片"
+        },
+        "images": {
+          "picture": "../arcade/puzzle-art.svg"
+        }
+      },
+      "ui": {
+        "theme": {
+          "background": "#efe5d3",
+          "paper": "#fff9ed",
+          "ink": "#382b24",
+          "accent": "#3d6357",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 40,
+          "mobileTitleSize": 32,
+          "buttonRadius": 10,
+          "contentWidth": 1280
+        },
+        "phrases": {
+          "開始": "開始",
+          "暫停": "暫停",
+          "重玩": "重玩",
+          "下一關 →": "下一關 →",
+          "繼續遊戲": "繼續遊戲",
+          "試換素材": "試換素材",
+          "恢復本局作品": "恢復本局作品",
+          "再試一次": "再試一次",
+          "查看畫面": "查看畫面",
+          "繼續": "繼續"
+        },
+        "instructions": "拖動或依序點選兩塊交換，依線條與色塊拼回原圖。相同純色留白可互換，原圖參考可展開。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
   },
   {
     "id": "sokoban",
     "kind": "game",
-    "name": "角色推箱子 · Demo",
+    "name": "角色推箱子",
     "description": "把所有箱子推到圓點上；走錯可退一步。",
     "mark": "▣",
     "icon": "assets/games/icons/sokoban-demo.svg",
     "status": "published",
     "url": "games/sokoban/",
     "order": 12,
-    "visible": true
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "levels": [
+          {
+            "map": [
+              "#######",
+              "# @   #",
+              "#   $ #",
+              "# .   #",
+              "#     #",
+              "#     #",
+              "#######"
+            ]
+          },
+          {
+            "map": [
+              "#######",
+              "#     #",
+              "# $   #",
+              "# .   #",
+              "#   @ #",
+              "#     #",
+              "#######"
+            ]
+          },
+          {
+            "map": [
+              "#######",
+              "#     #",
+              "#  @$ #",
+              "# .   #",
+              "#     #",
+              "#     #",
+              "#######"
+            ]
+          },
+          {
+            "map": [
+              "#######",
+              "#@    #",
+              "# $   #",
+              "# .   #",
+              "#     #",
+              "#     #",
+              "#######"
+            ]
+          },
+          {
+            "map": [
+              "#######",
+              "##    #",
+              "# $   #",
+              "# ..  #",
+              "#  @$ #",
+              "#    ##",
+              "#######"
+            ]
+          },
+          {
+            "map": [
+              "#######",
+              "##    #",
+              "# @   #",
+              "# ..  #",
+              "# $ $ #",
+              "#    ##",
+              "#######"
+            ]
+          },
+          {
+            "map": [
+              "#######",
+              "##    #",
+              "# $  @#",
+              "# ..  #",
+              "#   $ #",
+              "#    ##",
+              "#######"
+            ]
+          },
+          {
+            "map": [
+              "#######",
+              "##    #",
+              "# $ $ #",
+              "# ..  #",
+              "# @   #",
+              "#    ##",
+              "#######"
+            ]
+          },
+          {
+            "map": [
+              "#######",
+              "##  @ #",
+              "##$ $ #",
+              "# ... #",
+              "#   $##",
+              "#    ##",
+              "#######"
+            ]
+          },
+          {
+            "map": [
+              "#######",
+              "## @  #",
+              "##$$  #",
+              "# ... #",
+              "#  $ ##",
+              "#    ##",
+              "#######"
+            ]
+          },
+          {
+            "map": [
+              "#######",
+              "##    #",
+              "##  $ #",
+              "# ..+ #",
+              "# $ $##",
+              "#    ##",
+              "#######"
+            ]
+          },
+          {
+            "map": [
+              "#######",
+              "##    #",
+              "##$ $ #",
+              "# ... #",
+              "#  $@##",
+              "#    ##",
+              "#######"
+            ]
+          }
+        ],
+        "slots": {
+          "player": "角色",
+          "box": "箱子",
+          "goal": "目標",
+          "wall": "牆壁",
+          "floor": "地板"
+        },
+        "images": {
+          "player": "",
+          "box": "",
+          "goal": "",
+          "wall": "",
+          "floor": ""
+        }
+      },
+      "ui": {
+        "theme": {
+          "background": "#efe5d3",
+          "paper": "#fff9ed",
+          "ink": "#382b24",
+          "accent": "#3d6357",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 40,
+          "mobileTitleSize": 32,
+          "buttonRadius": 10,
+          "contentWidth": 1280
+        },
+        "phrases": {
+          "開始": "開始",
+          "暫停": "暫停",
+          "重玩": "重玩",
+          "下一關 →": "下一關 →",
+          "繼續遊戲": "繼續遊戲",
+          "試換素材": "試換素材",
+          "恢復示範素材": "恢復示範素材",
+          "再試一次": "再試一次",
+          "查看畫面": "查看畫面",
+          "繼續": "繼續"
+        },
+        "instructions": "用方向鍵、滑動或下方按鈕移動角色。箱子只能推不能拉；全部推到目標即可過關，走錯可退一步。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
   },
   {
     "id": "breakout",
     "kind": "game",
-    "name": "打磚塊 · Demo",
+    "name": "打磚塊",
     "description": "移動底板反彈球，清除所有磚塊。",
     "mark": "◒",
     "icon": "assets/games/icons/breakout-demo.svg",
     "status": "published",
     "url": "games/breakout/",
     "order": 13,
-    "visible": true
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "levels": [
+          {
+            "rows": 3,
+            "cols": 6,
+            "speed": 260,
+            "hp": 1
+          },
+          {
+            "rows": 3,
+            "cols": 6,
+            "speed": 270,
+            "hp": 1
+          },
+          {
+            "rows": 3,
+            "cols": 6,
+            "speed": 280,
+            "hp": 1
+          },
+          {
+            "rows": 3,
+            "cols": 6,
+            "speed": 290,
+            "hp": 1
+          },
+          {
+            "rows": 4,
+            "cols": 7,
+            "speed": 300,
+            "hp": 1
+          },
+          {
+            "rows": 4,
+            "cols": 7,
+            "speed": 310,
+            "hp": 1
+          },
+          {
+            "rows": 4,
+            "cols": 7,
+            "speed": 320,
+            "hp": 1
+          },
+          {
+            "rows": 4,
+            "cols": 7,
+            "speed": 330,
+            "hp": 1
+          },
+          {
+            "rows": 5,
+            "cols": 8,
+            "speed": 340,
+            "hp": 2
+          },
+          {
+            "rows": 5,
+            "cols": 8,
+            "speed": 350,
+            "hp": 2
+          },
+          {
+            "rows": 5,
+            "cols": 8,
+            "speed": 360,
+            "hp": 2
+          },
+          {
+            "rows": 5,
+            "cols": 8,
+            "speed": 370,
+            "hp": 2
+          },
+          {
+            "rows": 6,
+            "cols": 6,
+            "speed": 380,
+            "hp": 2
+          },
+          {
+            "rows": 6,
+            "cols": 6,
+            "speed": 390,
+            "hp": 2
+          },
+          {
+            "rows": 6,
+            "cols": 6,
+            "speed": 400,
+            "hp": 2
+          },
+          {
+            "rows": 6,
+            "cols": 6,
+            "speed": 410,
+            "hp": 2
+          }
+        ],
+        "slots": {
+          "paddle": "底板",
+          "ball": "球",
+          "brick": "磚塊",
+          "background": "背景"
+        },
+        "images": {
+          "paddle": "",
+          "ball": "",
+          "brick": "",
+          "background": ""
+        }
+      },
+      "ui": {
+        "theme": {
+          "background": "#efe5d3",
+          "paper": "#fff9ed",
+          "ink": "#382b24",
+          "accent": "#3d6357",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 40,
+          "mobileTitleSize": 32,
+          "buttonRadius": 10,
+          "contentWidth": 1280
+        },
+        "phrases": {
+          "開始": "開始",
+          "暫停": "暫停",
+          "重玩": "重玩",
+          "下一關 →": "下一關 →",
+          "繼續遊戲": "繼續遊戲",
+          "試換素材": "試換素材",
+          "恢復示範素材": "恢復示範素材",
+          "再試一次": "再試一次",
+          "查看畫面": "查看畫面",
+          "繼續": "繼續"
+        },
+        "instructions": "拖動底板左右移動，或按左右按鈕／方向鍵。反彈球清除磚塊，球掉落扣一顆心；擊中底板不同位置會改變反彈方向。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
+  },
+  {
+    "id": "magnifier",
+    "kind": "game",
+    "name": "作品放大鏡",
+    "description": "看作品局部，從四張作品找出答案；提示逐步揭露，每輪20題。",
+    "mark": "⌕",
+    "icon": "assets/games/icons/magnifier-demo.svg",
+    "status": "published",
+    "url": "games/magnifier/",
+    "order": 14,
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "rounds": 20,
+        "baseScore": 1000,
+        "minimumScore": 100,
+        "hintPenalty": 150,
+        "wrongPenalty": 150,
+        "timePenalty": 5,
+        "maxTimePenalty": 300,
+        "hintFractions": [
+          0.36,
+          0.62,
+          1
+        ]
+      },
+      "ui": {
+        "theme": {
+          "background": "#efe5d3",
+          "paper": "#fff9ed",
+          "ink": "#382b24",
+          "accent": "#3d6357",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 40,
+          "mobileTitleSize": 32,
+          "buttonRadius": 10,
+          "contentWidth": 1280
+        },
+        "phrases": {
+          "開始挑戰": "開始挑戰",
+          "看更多提示": "看更多提示",
+          "暫停": "暫停",
+          "重新挑戰": "重新挑戰",
+          "繼續挑戰": "繼續挑戰",
+          "計分與素材": "計分與素材",
+          "下一題 →": "下一題 →",
+          "查看答案": "查看答案"
+        },
+        "instructions": "看局部線索，從四件作品選出答案。答錯可繼續，提示逐步擴大畫面，直到整張作品。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
+  },
+  {
+    "id": "palette",
+    "kind": "game",
+    "name": "作品配色挑戰",
+    "description": "看作品，找出它的五種代表色。",
+    "mark": "◕",
+    "icon": "assets/games/icons/palette-demo.svg",
+    "status": "published",
+    "url": "games/palette/",
+    "order": 15,
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "rounds": 20,
+        "baseScore": 1000,
+        "minimumScore": 100,
+        "hintPenalty": 150,
+        "wrongPenalty": 150,
+        "timePenalty": 5,
+        "maxTimePenalty": 300,
+        "kind": "palette",
+        "memorySeconds": 5
+      },
+      "ui": {
+        "theme": {
+          "background": "#efe5d3",
+          "paper": "#fff9ed",
+          "ink": "#382b24",
+          "accent": "#3d6357",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 40,
+          "mobileTitleSize": 32,
+          "buttonRadius": 10,
+          "contentWidth": 1280
+        },
+        "phrases": {
+          "開始挑戰": "開始挑戰",
+          "我記好了": "我記好了",
+          "提示": "提示",
+          "暫停": "暫停",
+          "重新挑戰": "重新挑戰",
+          "繼續": "繼續",
+          "計分與素材": "計分與素材",
+          "下一關 →": "下一關 →",
+          "查看畫面": "查看畫面"
+        },
+        "instructions": "觀察作品，從四組色票選出它的代表配色。答錯可繼續，提示會顯示一種代表色。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
+  },
+  {
+    "id": "missing",
+    "kind": "game",
+    "name": "哪張不見了？",
+    "description": "記住作品，再找出偷偷消失的那一張。",
+    "mark": "◌",
+    "icon": "assets/games/icons/missing-demo.svg",
+    "status": "published",
+    "url": "games/missing/",
+    "order": 16,
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "rounds": 20,
+        "baseScore": 1000,
+        "minimumScore": 100,
+        "hintPenalty": 150,
+        "wrongPenalty": 150,
+        "timePenalty": 5,
+        "maxTimePenalty": 300,
+        "memorySeconds": 5,
+        "kind": "missing"
+      },
+      "ui": {
+        "theme": {
+          "background": "#efe5d3",
+          "paper": "#fff9ed",
+          "ink": "#382b24",
+          "accent": "#3d6357",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 40,
+          "mobileTitleSize": 32,
+          "buttonRadius": 10,
+          "contentWidth": 1280
+        },
+        "phrases": {
+          "開始挑戰": "開始挑戰",
+          "我記好了": "我記好了",
+          "提示": "提示",
+          "暫停": "暫停",
+          "重新挑戰": "重新挑戰",
+          "繼續": "繼續",
+          "計分與素材": "計分與素材",
+          "下一關 →": "下一關 →",
+          "查看畫面": "查看畫面"
+        },
+        "instructions": "先記住畫面中的作品，等倒數結束或按「我記好了」。有一件作品會消失，從四個選項找回它；提示可再看一次。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
+  },
+  {
+    "id": "rotation",
+    "kind": "game",
+    "name": "旋轉復原",
+    "description": "點擊旋轉圖塊，讓作品回到原來的樣子。",
+    "mark": "↻",
+    "icon": "assets/games/icons/rotation-demo.svg",
+    "status": "published",
+    "url": "games/rotation/",
+    "order": 17,
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "rounds": 20,
+        "baseScore": 1000,
+        "minimumScore": 100,
+        "hintPenalty": 150,
+        "wrongPenalty": 150,
+        "timePenalty": 5,
+        "maxTimePenalty": 300,
+        "kind": "rotation",
+        "memorySeconds": 5
+      },
+      "ui": {
+        "theme": {
+          "background": "#efe5d3",
+          "paper": "#fff9ed",
+          "ink": "#382b24",
+          "accent": "#3d6357",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 40,
+          "mobileTitleSize": 32,
+          "buttonRadius": 10,
+          "contentWidth": 1280
+        },
+        "phrases": {
+          "開始挑戰": "開始挑戰",
+          "我記好了": "我記好了",
+          "提示": "提示",
+          "暫停": "暫停",
+          "重新挑戰": "重新挑戰",
+          "繼續": "繼續",
+          "計分與素材": "計分與素材",
+          "下一關 →": "下一關 →",
+          "查看畫面": "查看畫面",
+          "查看原圖": "查看原圖",
+          "收起原圖": "收起原圖"
+        },
+        "instructions": "每點一下圖塊就順時針轉90度，將所有有方向差異的圖塊轉正。可以查看原圖，純色及對稱區塊不要求猜不可辨識的方向。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
   }
 ]

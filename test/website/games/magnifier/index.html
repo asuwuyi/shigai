@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; script-src 'self' https://www.googletagmanager.com; style-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="description" content="看作品局部，從四張作品中找出答案。">
+  <title>作品放大鏡 · Shi-Gai</title>
+  <link rel="stylesheet" href="../../assets/css/site.css?v=bilingual-menu-20261020">
+  <link rel="stylesheet" href="../arcade/arcade.css?v=puzzle-works-20261030">
+  <script defer src="../../assets/js/settings.js?v=nested-settings-20261019"></script>
+  <script defer src="../../assets/js/site.js?v=tools-category-20261030"></script>
+  <script defer src="../../../shared/analytics-consent-copy.js?v=basic-consent-20261017"></script>
+  <script defer src="../../assets/js/analytics.js?v=scroll-menu-20261018"></script>
+  <link rel="stylesheet" href="magnifier.css?v=magnifier-20261030">
+    <script defer src="../../../shared/game-settings.js?v=studio-games-20261030"></script>
+  <script defer src="../common/game-config.js?v=studio-games-20261030"></script>
+  <link rel="stylesheet" href="../common/game-ui.css?v=studio-games-20261030">
+<script defer src="../memory/memory-works.js?v=puzzle-works-20261030"></script>
+  <script defer src="magnifier-engine.js?v=magnifier-20261030"></script>
+  <script defer src="magnifier.js?v=studio-games-20261030"></script>
+  <meta name="robots" content="noindex,nofollow">
+</head>
+<body data-page="games" data-standalone-game><main class="arcade-room"><a class="back-link" href="../../games.html">← 遊戲室</a><header><p class="eyebrow">SHI-GAI PLAYROOM</p><h1 id="gameTitle">作品放大鏡</h1><p id="gameDescription">看看局部，猜猜是哪張作品。</p></header>
+<div class="game-layout"><section class="play-area" aria-label="作品猜謎"><div class="toolbar"><button id="startButton" disabled>開始挑戰</button><button id="hintButton" disabled>看更多提示</button><button id="pauseButton" disabled>暫停</button><button id="restartButton">重新挑戰</button></div><div id="stats" class="stats"></div><p id="gameStatus" role="status" class="status">正在準備你的作品…</p><div id="questionArea" aria-busy="true"><div class="clue-frame"><canvas id="clue" width="640" height="640" role="img" aria-label="作品局部線索"></canvas></div><div id="choices" class="choices" aria-label="選擇完整作品"></div><div id="pauseCover"><p id="coverText">準備好了嗎？</p><button id="resumeButton" hidden>繼續挑戰</button></div></div></section>
+<aside class="settings"><p class="eyebrow">LOOK A LITTLE CLOSER</p><h2>怎麼玩？</h2><p id="gameManagedInstructions" class="game-ui-instructions">看上方的局部線索，再選出下方對應的完整作品。答錯可以繼續猜。
+看不出來時按「看更多提示」，畫面會逐步擴大，最後顯示整張作品。
+每輪<span data-game-rounds="{rounds}">20</span>題；答得越快、提示及答錯越少，分數越高。沒有強迫倒數，慢慢看也能完成。</p><details><summary>計分與素材</summary><p>每題基本1,000分，每次提示或答錯扣150分；作答時間每秒扣5分，時間最多扣300分，答對至少100分。
+只使用已公開作品；影片使用封面、動圖取靜態影格。作品不足或載入失敗會提示重試，不會加入不明示範圖。
+本次進度只留在頁面，重新整理會重置。</p></details></aside></div></main>
+<dialog id="resultDialog" aria-labelledby="resultTitle"><p class="eyebrow">A LITTLE DISCOVERY</p><h2 id="resultTitle"></h2><img id="answerImage" alt="本題完整作品"><p id="answerName"></p><p id="resultText"></p><div class="dialog-actions"><button id="nextButton">下一題 →</button><button id="playAgain">重新挑戰</button><button id="resultClose">查看答案</button></div></dialog></body></html>

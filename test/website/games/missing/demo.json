@@ -1,0 +1,13 @@
+{
+  "kind": "missing",
+  "title": "哪張不見了？ · Demo",
+  "description": "記住作品，再找出偷偷消失的那一張。",
+  "rounds": 20,
+  "baseScore": 1000,
+  "minimumScore": 100,
+  "wrongPenalty": 150,
+  "hintPenalty": 150,
+  "timePenalty": 5,
+  "maxTimePenalty": 300,
+  "memorySeconds": 5
+}

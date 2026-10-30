@@ -192,8 +192,7 @@
   }
   async function load() {
     try {
-      const response = await fetch('memory-demo.json', { cache: 'no-cache' }); if (!response.ok) throw Error('無法載入記憶翻牌設定。');
-      const config = await response.json();
+      const config = await ShiGaiGameConfig.load('memory','memory-demo.json');
       if (!Array.isArray(config.faces) || config.faces.length < 2 || config.faces.length > 36 || !Array.isArray(config.levels) || !config.levels.length || config.levels.length > 200) throw Error('請檢查卡面與關卡設定。');
       fallbackFaces = config.faces.map(face => {
         if (!face || typeof face.id !== 'string' || !/^[a-zA-Z0-9_-]{1,40}$/.test(face.id) || face.id === 'back' || typeof face.name !== 'string' || !face.name.trim() || face.name.length > 80 || typeof face.symbol !== 'string' || !face.symbol || face.symbol.length > 12) throw Error('卡面 ID、名稱或示範符號不正確。');
@@ -216,5 +215,4 @@
   document.addEventListener('visibilitychange', () => { if (document.hidden) pauseRound(); }); window.addEventListener('pagehide', pauseRound);
   window.ShiGaiMemoryDemo = Object.freeze({ state: () => ({ ready: !!round && !preparing, preparing, faceSource, poolCount: workPool.length, drawnWorkIds: faces.filter(face=>face.workId).map(face=>face.workId), faceImages: faces.map(face=>({id:face.id,image:face.image,asset:face.asset||'',workId:face.workId||''})), level: levelIndex + 1, totalLevels: levels.length, cards: round?.cards.map(c => ({ ...c })), status: round?.status, pending: round?.pending.length, moves: round?.moves, matches: round?.matches, seconds: milliseconds() / 1000, paused, resultOpen: dialog.open, best: Object.fromEntries([...best].map(([index, value]) => [index + 1, value])), customFaces: [...customImages.keys()], customBack: blobUrls.has(backImage) }) });
   load();
-  window.ShiGaiWebsiteSettings?.then(async () => { const response = await fetch('../../../database/website/games.json'); if (!response.ok) return; const entry = (await response.json()).find(game => game.id === 'memory'); if (entry) { $('gameTitle').textContent = entry.name; $('gameDescription').textContent = entry.description; document.title = entry.name + ' · Shi-Gai'; } }).catch(() => {});
 })();

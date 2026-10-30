@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-30T07:57:46.515Z",
+  "createdAt": "2026-10-30T11:19:03.161Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1082,
@@ -8,12 +8,12 @@
     "categories": 5,
     "tags": 0,
     "scenes": 3,
-    "games": 10,
+    "games": 14,
     "spotDifferenceLevels": 2,
-    "assets": 1217,
-    "files": 1386
+    "assets": 1221,
+    "files": 1408
   },
-  "bytes": 159589317,
+  "bytes": 159709737,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -28,9 +28,13 @@
     "assets/characters/images/shi-gai-1787911101272.jpg",
     "assets/games/icons/breakout-demo.svg",
     "assets/games/icons/catch-demo.svg",
+    "assets/games/icons/magnifier-demo.svg",
     "assets/games/icons/memory-demo.svg",
     "assets/games/icons/minesweeper-demo.svg",
+    "assets/games/icons/missing-demo.svg",
+    "assets/games/icons/palette-demo.svg",
     "assets/games/icons/puzzle-demo.svg",
+    "assets/games/icons/rotation-demo.svg",
     "assets/games/icons/sokoban-demo.svg",
     "assets/games/icons/wheel-demo.svg",
     "assets/games/spot-difference/level-001/modified.jpg",

@@ -1,0 +1,16 @@
+{
+  "title": "作品放大鏡 · Demo",
+  "description": "看看局部，猜猜是哪張作品。",
+  "rounds": 20,
+  "hintPenalty": 150,
+  "wrongPenalty": 150,
+  "timePenalty": 5,
+  "maxTimePenalty": 300,
+  "baseScore": 1000,
+  "minimumScore": 100,
+  "hintFractions": [
+    0.36,
+    0.62,
+    1
+  ]
+}

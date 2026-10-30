@@ -13,14 +13,17 @@
   <script defer src="../../assets/js/site.js?v=tools-category-20261030"></script>
   <script defer src="../../../shared/analytics-consent-copy.js?v=basic-consent-20261017"></script>
   <script defer src="../../assets/js/analytics.js?v=scroll-menu-20261018"></script>
-  <script defer src="mines-engine.js?v=mines-demo-20261030"></script>
-  <script defer src="mines.js?v=mines-demo-20261030"></script>
+    <script defer src="../../../shared/game-settings.js?v=studio-games-20261030"></script>
+  <script defer src="../common/game-config.js?v=studio-games-20261030"></script>
+  <link rel="stylesheet" href="../common/game-ui.css?v=studio-games-20261030">
+<script defer src="mines-engine.js?v=mines-demo-20261030"></script>
+  <script defer src="mines.js?v=studio-games-20261030"></script>
   <meta name="robots" content="noindex,nofollow">
 </head>
 <body data-page="games" data-standalone-game>
 <main class="mine-room">
   <a class="back-link" href="../../games.html">← 遊戲室</a>
-  <header><p class="eyebrow">SHI-GAI PLAYROOM · DEMO 02</p><h1 id="gameTitle">踩地雷</h1><p id="gameDescription">看懂數字，慢慢找出安全的路。</p></header>
+  <header><p class="eyebrow">SHI-GAI PLAYROOM 02</p><h1 id="gameTitle">踩地雷</h1><p id="gameDescription">看懂數字，慢慢找出安全的路。</p></header>
   <div class="game-layout">
     <section class="play-area" aria-label="踩地雷遊戲">
       <div class="toolbar"><label for="levelSelect">關卡 <select id="levelSelect" disabled></select></label><button id="restart" disabled>重玩本關</button><button id="nextLevel" disabled>下一關 →</button></div>
@@ -31,11 +34,11 @@
       <p class="board-hint">大棋盤可左右滑動；不縮小數字，保留好按的格子。</p>
     </section>
     <aside class="settings">
-      <p class="eyebrow">HOW TO PLAY</p><h2>每個數字，都是線索</h2>
+      <p class="eyebrow">HOW TO PLAY</p><h2>每個數字，都是線索</h2><p id="gameManagedInstructions" class="game-ui-instructions"></p>
       <ul><li>數字表示周圍八格的地雷數量。</li><li>翻開所有安全格就過關，不必插滿旗。</li><li>第一格與周圍八格保證沒有地雷。</li><li>右鍵或長按插旗；手機也可切換「插旗」。</li><li>數字周圍旗子數量相符，再點數字可展開剩餘格；插錯旗仍可能踩雷。</li></ul>
       <p>鍵盤：方向鍵移動、Enter 翻格、F 插旗。每次重玩重新佈雷，部分局面需要推測。</p>
       <details><summary>試換地雷與旗子素材</summary><p>PNG、JPG、WebP，單張最大 3 MB；只在這次頁面試用，不會上傳或改寫作者設定。</p><label class="file-button">替換地雷圖片<input id="mineUpload" type="file" accept="image/png,image/jpeg,image/webp"></label><label class="file-button">替換旗子圖片<input id="flagUpload" type="file" accept="image/png,image/jpeg,image/webp"></label><button id="resetArt">恢復示範圖案</button><p id="artStatus" role="status"></p></details>
-      <p class="session-note">60 關都可直接選擇。本次過關紀錄只留在頁面，重新開啟會重置；Studio 目前僅管理名稱、介紹、封面與入口。</p>
+      <p class="session-note">60 關都可直接選擇。本次過關紀錄只留在頁面，重新開啟會重置；</p>
     </aside>
   </div>
 </main>

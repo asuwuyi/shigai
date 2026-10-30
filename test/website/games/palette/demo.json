@@ -1,0 +1,13 @@
+{
+  "kind": "palette",
+  "title": "作品配色挑戰 · Demo",
+  "description": "看作品，找出它的五種代表色。",
+  "rounds": 20,
+  "baseScore": 1000,
+  "minimumScore": 100,
+  "wrongPenalty": 150,
+  "hintPenalty": 150,
+  "timePenalty": 5,
+  "maxTimePenalty": 300,
+  "memorySeconds": 5
+}

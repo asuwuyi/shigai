@@ -121,11 +121,10 @@
     } catch (error) { if (url) releaseUpload(url); if (version === uploadVersion[kind]) $('artStatus').textContent = error.message; }
   }
   $('mineUpload').onchange = event => upload('mine', event.target); $('flagUpload').onchange = event => upload('flag', event.target);
-  $('resetArt').onclick = () => { for (const kind of ['mine', 'flag']) { uploadVersion[kind]++; releaseUpload(art[kind]); art[kind] = ''; } render(); $('artStatus').textContent = '已恢復示範圖案。'; };
+  $('resetArt').onclick = () => { for (const kind of ['mine', 'flag']) { uploadVersion[kind]++; releaseUpload(art[kind]); art[kind] = ''; } render(); $('artStatus').textContent = '已恢復預設圖案。'; };
   async function load() {
     try {
-      const response = await fetch('mines-demo.json', { cache: 'no-cache' }); if (!response.ok) throw Error('無法載入關卡設定。');
-      const config = await response.json(); if (!Array.isArray(config.levels) || !config.levels.length || config.levels.length > 200) throw Error('關卡設定需為 1～200 關。');
+      const config = await ShiGaiGameConfig.load('minesweeper','mines-demo.json'); if (!Array.isArray(config.levels) || !config.levels.length || config.levels.length > 200) throw Error('關卡設定需為 1～200 關。');
       levels = config.levels.map(engine.validateLevel);
       for (const kind of ['mine', 'flag']) if (config[kind + 'Image']) {
         const url = new URL(config[kind + 'Image'], document.baseURI); if (url.origin !== location.origin || !['http:', 'https:'].includes(url.protocol)) throw Error('圖案必須使用網站內的圖片。');
@@ -139,5 +138,4 @@
   document.addEventListener('visibilitychange', () => { cancelPress(); updateClock(); }); window.addEventListener('blur', cancelPress); window.addEventListener('pagehide', cancelPress);
   window.ShiGaiMinesDemo = Object.freeze({ state: () => ({ ready: !!board, level: levelIndex + 1, totalLevels: levels.length, completed: [...completed].map(i => i + 1), mode, seconds: clock(), status: board?.status, rows: board?.rows, cols: board?.cols, mines: board?.mines, flags: board?.flags, opened: board?.opened, cells: board?.cells.map(c => ({ ...c })), art: { mine: !!art.mine, flag: !!art.flag }, resultOpen: dialog.open }) });
   load();
-  window.ShiGaiWebsiteSettings?.then(async () => { const response = await fetch('../../../database/website/games.json'); if (!response.ok) return; const entry = (await response.json()).find(game => game.id === 'minesweeper'); if (entry) { $('gameTitle').textContent = entry.name; $('gameDescription').textContent = entry.description; document.title = entry.name + ' · Shi-Gai'; } }).catch(() => {});
 })();

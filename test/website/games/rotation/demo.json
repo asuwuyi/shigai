@@ -1,0 +1,13 @@
+{
+  "kind": "rotation",
+  "title": "旋轉復原 · Demo",
+  "description": "點擊旋轉圖塊，讓作品回到原來的樣子。",
+  "rounds": 20,
+  "baseScore": 1000,
+  "minimumScore": 100,
+  "wrongPenalty": 150,
+  "hintPenalty": 150,
+  "timePenalty": 5,
+  "maxTimePenalty": 300,
+  "memorySeconds": 5
+}
