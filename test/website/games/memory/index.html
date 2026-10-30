@@ -14,7 +14,8 @@
   <script defer src="../../../shared/analytics-consent-copy.js?v=basic-consent-20261017"></script>
   <script defer src="../../assets/js/analytics.js?v=scroll-menu-20261018"></script>
   <script defer src="memory-engine.js?v=memory-demo-20261030"></script>
-  <script defer src="memory.js?v=memory-demo-20261030"></script>
+  <script defer src="memory-works.js?v=memory-works-20261030"></script>
+  <script defer src="memory.js?v=memory-works-20261030"></script>
   <meta name="robots" content="noindex,nofollow">
 </head>
 <body data-page="games" data-standalone-game>
@@ -25,11 +26,11 @@
     <section class="play-area" aria-label="記憶配對遊戲">
       <div class="toolbar"><label for="levelSelect">關卡 <select id="levelSelect" disabled></select></label><button id="restart" disabled>重玩本關</button><button id="pause" disabled>暫停</button><button id="nextLevel" disabled>下一關 →</button></div>
       <div class="stats"><span>配對 <strong id="matches">—</strong></span><span>翻牌 <strong id="moves">0</strong> 次</span><span>時間 <strong id="timer">00:00</strong></span></div>
-      <p class="target" id="targetText"></p><p class="status" id="gameStatus" role="status" aria-live="polite">正在準備卡牌…</p>
+      <p class="target" id="targetText"></p><p class="target" id="artSourceNote"></p><p class="status" id="gameStatus" role="status" aria-live="polite">正在準備卡牌…</p>
       <div class="board-wrap"><div id="board" class="board" aria-label="記憶卡牌"></div><div id="pauseCover" class="pause-cover" hidden><p>先休息一下</p><button id="resume">繼續遊戲</button></div></div>
     </section>
     <aside class="settings"><p class="eyebrow">FIND A FAMILIAR FACE</p><h2>記住，再相遇</h2><ul><li>每次翻兩張，圖案相同就配對成功。</li><li>不同的牌會稍停一下，再蓋回去。</li><li>全部配對就過關；時間與翻牌次數決定星等。</li><li>超過目標仍能完成，不會強迫重來。</li></ul><p>三星：時間及次數都達標。<br>二星：兩者都在目標的 1.5 倍以內。<br>一星：完成即可。</p><p>第一張翻開才計時。切到其他分頁會自動暫停並遮住卡牌，回來後按「繼續遊戲」。</p>
-    <details id="artDetails"><summary>試換卡面與牌背</summary><p>每個圖案的兩張牌會一起更換。PNG／JPG／WebP，每張最大 3 MB，只供本頁試用，不會上傳。</p><div id="faceLibrary" class="face-library"></div><label class="file-button">替換共用牌背<input id="backUpload" type="file" accept="image/png,image/jpeg,image/webp"></label><button id="resetArt">恢復示範素材</button><p id="artStatus" role="status"></p></details>
+    <details id="artDetails"><summary>試換卡面與牌背</summary><p>每局隨機抽取公開作品；同一作品的兩張牌會一起更換。本局試換卡面會在重玩後重抽。PNG／JPG／WebP，每張最大 3 MB，只供本頁試用，不會上傳。</p><div id="faceLibrary" class="face-library"></div><label class="file-button">替換共用牌背<input id="backUpload" type="file" accept="image/png,image/jpeg,image/webp"></label><button id="resetArt">恢復本局卡面</button><p id="artStatus" role="status"></p></details>
     <p class="session-note">24 關可直接選擇；本次最佳星等留在頁面，重整後重置。Studio 目前僅管理名稱、介紹、封面與入口。</p></aside>
   </div>
 </main>
