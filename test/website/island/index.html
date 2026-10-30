@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="description" content="換個角度，走進 Shi-Gai。可以旋轉與縮放的島嶼探索入口。">
+  <title>Shi-Gai 島 · 換個角度，逛逛日常</title>
+  <link rel="icon" href="../assets/images/brand-icon.png">
+  <link rel="stylesheet" href="island.css?v=island-20261030">
+  <script defer src="boot.js?v=island-20261030"></script>
+</head>
+<body data-light="day">
+  <header class="island-header">
+    <a class="island-brand" href="../index.html" aria-label="Shi-Gai 首頁"><span class="brand-seal" aria-hidden="true">島</span><span><b>SHI-GAI ISLAND</b><small>日常，有另一種走法。</small></span></a>
+    <span class="header-note">一座小島，幾個喜歡的地方。</span>
+    <nav aria-label="島嶼導覽"><a class="home-link" href="../index.html">回到首頁 <span aria-hidden="true">↗</span></a><button id="placesToggle" type="button" aria-expanded="false" aria-controls="placesList"><span aria-hidden="true">☷</span> 地點清單 <small>04</small></button></nav>
+  </header>
+  <main id="islandStage" aria-label="Shi-Gai 3D 島嶼探索">
+    <div id="islandCanvas" class="island-canvas"></div>
+    <div class="intro"><p class="eyebrow">WELCOME TO OUR LITTLE WORLD</p><h1>換個角度，<br>逛逛 Shi-Gai。</h1><p>有作品的地方，也有角色的日常。<br>挑一個地方，靠近看看。</p></div>
+    <div id="mapLabels" class="map-labels" aria-label="島上地點"></div>
+    <div id="islandLoading" class="loading-state" role="status"><span aria-hidden="true" class="loading-mark">✦</span><p>正在把小島帶到你面前…</p></div>
+    <p id="islandWarning" class="island-warning" role="status" hidden></p>
+    <aside id="placesList" class="places-list" aria-labelledby="placesTitle" hidden><div class="places-heading"><h2 id="placesTitle">想去哪裡？</h2><button id="placesClose" type="button" aria-label="收起地點清單">×</button></div><p>選個地方，慢慢靠近。</p><a href="../works.html" data-place="gallery"><small>01</small><span><b>畫廊</b><em>看看創作，發現喜歡的作品。</em></span><span aria-hidden="true">↗</span></a><a href="../journal.html" data-place="study"><small>02</small><span><b>書房</b><em>翻翻最近留下的日誌。</em></span><span aria-hidden="true">↗</span></a><a href="../games.html" data-place="games"><small>03</small><span><b>遊戲室</b><em>和角色一起，玩一小局。</em></span><span aria-hidden="true">↗</span></a><a href="../index.html" data-place="tea"><small>04</small><span><b>手搖店</b><em>回到今天的生活場景。</em></span><span aria-hidden="true">↗</span></a></aside>
+    <section id="placeDetail" class="place-detail" aria-labelledby="placeTitle" hidden><button id="detailClose" type="button" class="detail-close" aria-label="關閉地點介紹">×</button><p id="placeEyebrow" class="eyebrow"></p><h2 id="placeTitle" tabindex="-1"></h2><p id="placeDescription"></p><p id="placeExtra" class="place-extra"></p><a id="placeLink" class="place-enter" href="../index.html">前往 <span aria-hidden="true">↗</span></a></section>
+    <div class="map-caption" aria-hidden="true"><span class="caption-dot"></span>四個地方，慢慢逛。<span class="caption-line"></span><small>SHI-GAI · EXPLORATION 01</small></div>
+  </main>
+  <footer class="island-controls"><p class="gesture-hint"><span class="desktop-hint">拖曳旋轉 · 滾輪縮放</span><span class="mobile-hint">單指轉動 · 雙指縮放與平移</span></p><div class="control-group"><button id="viewReset" type="button" title="回到全島視角"><span aria-hidden="true">⌂</span><span>全島</span></button><span class="control-divider"></span><button id="zoomOut" type="button" aria-label="縮小地圖">−</button><button id="zoomIn" type="button" aria-label="放大地圖">＋</button><span class="control-divider"></span><button id="lightToggle" type="button" aria-pressed="false"><span aria-hidden="true">☼</span><span id="lightLabel">日光</span></button><button id="motionToggle" type="button" aria-pressed="true"><span aria-hidden="true">Ⅱ</span><span id="motionLabel">暫停動態</span></button></div><button id="helpOpen" class="help-button" type="button" aria-label="操作說明">?</button></footer>
+  <dialog id="islandHelp" class="help-dialog" aria-labelledby="helpTitle"><button id="helpClose" class="detail-close" type="button" aria-label="關閉操作說明">×</button><p class="eyebrow">TAKE YOUR TIME</p><h2 id="helpTitle">不用趕路，隨意逛逛。</h2><p>電腦：拖曳旋轉、滾輪縮放；右鍵拖曳可以平移。</p><p>手機：單指旋轉，雙指縮放與平移。</p><p>點建築或地點標籤靠近，再按「前往」進入內容。也可以直接使用右上角的地點清單。</p><p>鍵盤：在地圖上用方向鍵旋轉，＋／−縮放，Home回到全島；Esc關閉地點介紹。</p><small>這是 Shi-Gai 島的第一版探索 Demo。日光／夜色為場景試看，尚未連接即時氣象。</small></dialog>
+  <noscript><nav class="no-script" aria-label="直接前往"><a href="../works.html">作品</a><a href="../journal.html">日誌</a><a href="../games.html">遊戲</a><a href="../index.html">首頁</a></nav></noscript>
+</body>
+</html>

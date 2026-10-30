@@ -1,0 +1,7 @@
+{
+  "version": "0.187.0",
+  "url": "https://registry.npmjs.org/three/-/three-0.187.0.tgz",
+  "integrity": "sha512-Qiu7R+Cmh8CstZsY1uJOSWnVlfo7ZtNLV7mF8Jltk3LB3AtDu9cRZlcnRKkAk8Y4z6KKw35z7Y7Urd7jWY8etA==",
+  "bundleSha256": "61adb2ba37f0794685730abeaccf2e73fdece6af2e98bd5d1314376dad2a87c6",
+  "build": "esbuild 0.25.12; bundle/minify/esm/legal-comments=inline; entry reexports Three WebGL module and OrbitControls"
+}
