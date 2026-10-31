@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-30T11:19:03.161Z",
+  "createdAt": "2026-10-31T13:29:26.794Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1082,
@@ -8,12 +8,12 @@
     "categories": 5,
     "tags": 0,
     "scenes": 3,
-    "games": 14,
+    "games": 15,
     "spotDifferenceLevels": 2,
     "assets": 1221,
-    "files": 1408
+    "files": 1431
   },
-  "bytes": 159709737,
+  "bytes": 159785516,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -32,6 +32,7 @@
     "assets/games/icons/memory-demo.svg",
     "assets/games/icons/minesweeper-demo.svg",
     "assets/games/icons/missing-demo.svg",
+    "assets/games/icons/odor-radar-demo.svg",
     "assets/games/icons/palette-demo.svg",
     "assets/games/icons/puzzle-demo.svg",
     "assets/games/icons/rotation-demo.svg",
@@ -1203,9 +1204,8 @@
     "assets/published/works/SG-001094/poster-v1.webp",
     "assets/published/works/SG-001094/primary-v1.webm",
     "assets/published/works/SG-001095/primary-v1.webp",
-    "assets/scenes/media/bubble-tea-shop-transparent-sky-20261027.webp",
-    "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1792592519571.gif",
-    "assets/scenes/media/scene-1786549520650-object-local-1786549533424-1793034952010.gif",
+    "assets/scenes/media/pack-20261025-park-plaza.webp",
+    "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1792949868469-1792949898967.gif",
     "assets/scenes/media/weather-20261022-01.webp",
     "assets/scenes/media/weather-20261022-02.webp",
     "assets/scenes/media/weather-20261022-03.webp",

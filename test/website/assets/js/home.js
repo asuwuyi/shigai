@@ -304,11 +304,12 @@ function renderWorldEntranceScene(scenes, preferredSceneId = activeWorldEntrance
   const unifiedRenderer = window.ShiGaiSceneRenderer;
   if (!unifiedRenderer) throw new Error("Unified Scene Renderer is required.");
   const mobileViewport = mobileViewportSettings(scene);
-  const useMobileViewport = layout === "portrait" && window.matchMedia("(max-width: 767px) and (pointer: coarse)").matches && mobileViewport.enabled && mobileViewport.width > 1;
+  const useMobileViewport = layout === "portrait" && window.matchMedia("(max-width: 767px) and (pointer: coarse)").matches && mobileViewport.enabled && (window.ShiGaiSceneRender.isSharedComposition(scene) || mobileViewport.width > 1);
   // Reserve the canonical plane's full vertical span before mapping the Scene.
   // A short/wide viewport may scroll through the Scene; the stage must follow it.
-  const frame = unifiedRenderer.referenceFrames[layout];
-  const frameWidth = frame.width * (useMobileViewport ? mobileViewport.width : 1);
+  const commonComposition = window.ShiGaiSceneRender.isSharedComposition(scene);
+  const frame = unifiedRenderer.referenceFrames[commonComposition ? "landscape" : layout];
+  const frameWidth = frame.width * (useMobileViewport && !commonComposition ? mobileViewport.width : 1);
   homeElements.hero.style.setProperty("--home-scene-frame-ratio", `${frameWidth} / ${frame.height}`);
   const renderResult = unifiedRenderer.renderScene({
     livingCanStart:()=>!document.body.classList.contains("is-home-loading")&&!document.querySelector(".home-welcome-overlay"),
@@ -316,7 +317,7 @@ function renderWorldEntranceScene(scenes, preferredSceneId = activeWorldEntrance
     scene,
     layout,
     fitMode: "cover",
-    frameWidthMultiplier: useMobileViewport ? mobileViewport.width : 1,
+    frameWidthMultiplier: useMobileViewport && !commonComposition ? mobileViewport.width : 1,
     applyBackground: false,
     resolveMediaSource: (object) => object.media?.src ? sceneMediaUrl(object.media.src) : "",
     objectAttributes: (object) => {

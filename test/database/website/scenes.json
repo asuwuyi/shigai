@@ -1,12 +1,536 @@
 [
   {
-    "id": "scene-1786549520650",
-    "name": "手搖店",
-    "type": "world-entrance",
+    "id": "scene-1787847732039",
+    "name": "作品廊道",
+    "type": "work",
     "status": "published",
-    "order": 4,
+    "order": 5,
+    "background": {
+      "color": "#392B22",
+      "asset": "",
+      "automatic": false,
+      "intervalMinutes": 30,
+      "weather": {
+        "provider": "none",
+        "city": "",
+        "latitude": null,
+        "longitude": null,
+        "url": "",
+        "attribution": "Weather data by Open-Meteo"
+      },
+      "variants": []
+    },
+    "condition": {
+      "mode": "fixed",
+      "timezone": "visitor",
+      "start": "",
+      "end": "",
+      "time": "",
+      "dates": [],
+      "holidays": [],
+      "weekdays": [],
+      "weather": "any",
+      "weight": 1,
+      "random": false,
+      "event": "",
+      "fallback": false
+    },
+    "language": {
+      "defaultLocale": "zh-Hant",
+      "translations": {}
+    },
+    "objects": [
+      {
+        "id": "object-local-1787870141396",
+        "order": 2,
+        "type": "prop",
+        "name": "地毯",
+        "media": {
+          "src": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "0ac2d27d800b76c5bf1695c70850341c176c932b466fc15f11effda58960c34e",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.495,
+          "y": 0.387
+        },
+        "scale": 0.909,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.495,
+              "y": 0.387
+            },
+            "scale": 0.909,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": false,
+          "duration": 4,
+          "loop": false,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": []
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1787871545771",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "16bd73612327b1b09b965f85c063e456f1e88b1d764aabe5752618d5e1091147",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.894,
+          "y": 0.448
+        },
+        "scale": 0.333,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.894,
+              "y": 0.448
+            },
+            "scale": 0.333,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": true,
+          "duration": 20,
+          "loop": true,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": [
+              {
+                "offset": 0,
+                "position": {
+                  "x": 0.173,
+                  "y": 0.017
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              },
+              {
+                "offset": 0.5,
+                "position": {
+                  "x": -0.982,
+                  "y": 0.028
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": true
+              },
+              {
+                "offset": 1,
+                "position": {
+                  "x": 0.163,
+                  "y": 0.003
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              }
+            ]
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      }
+    ],
+    "metadata": {
+      "composition": "shared-landscape-v1"
+    },
+    "createdAt": "2026-08-27T16:22:12.039Z",
+    "updatedAt": "2026-09-03T07:21:27.420Z"
+  },
+  {
+    "id": "scene-1788159835341",
+    "name": "遊戲室前方",
+    "type": "game",
+    "status": "published",
+    "order": 7,
     "background": {
       "color": "#F7F9FC",
+      "asset": "",
+      "automatic": false,
+      "intervalMinutes": 30,
+      "weather": {
+        "provider": "none",
+        "city": "",
+        "latitude": null,
+        "longitude": null,
+        "url": "",
+        "attribution": "Weather data by Open-Meteo"
+      },
+      "variants": []
+    },
+    "condition": {
+      "mode": "fixed",
+      "timezone": "visitor",
+      "start": "",
+      "end": "",
+      "time": "",
+      "dates": [],
+      "holidays": [],
+      "weekdays": [],
+      "weather": "any",
+      "weight": 1,
+      "random": false,
+      "event": "",
+      "fallback": false
+    },
+    "language": {
+      "defaultLocale": "zh-Hant",
+      "translations": {}
+    },
+    "objects": [
+      {
+        "id": "object-local-1788193069792",
+        "order": 1,
+        "type": "background",
+        "name": "地毯",
+        "media": {
+          "src": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "0ac2d27d800b76c5bf1695c70850341c176c932b466fc15f11effda58960c34e",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.489,
+          "y": 0.513
+        },
+        "scale": 1.484,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.489,
+              "y": 0.513
+            },
+            "scale": 1.484,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1788193133638",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "16bd73612327b1b09b965f85c063e456f1e88b1d764aabe5752618d5e1091147",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.996,
+          "y": 0.704
+        },
+        "scale": 0.436,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.996,
+              "y": 0.704
+            },
+            "scale": 0.436,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": true,
+          "duration": 4,
+          "loop": true,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": [
+              {
+                "offset": 0,
+                "position": {
+                  "x": 0,
+                  "y": 0
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              },
+              {
+                "offset": 0.5,
+                "position": {
+                  "x": -0.981,
+                  "y": -0.009
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": true
+              },
+              {
+                "offset": 1,
+                "position": {
+                  "x": 0,
+                  "y": 0
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              }
+            ]
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      }
+    ],
+    "metadata": {
+      "composition": "shared-landscape-v1"
+    },
+    "createdAt": "2026-08-31T07:03:55.341Z",
+    "updatedAt": "2026-09-04T15:58:26.663Z"
+  },
+  {
+    "id": "scene-pack-20261025-park-plaza",
+    "name": "公園廣場",
+    "type": "world-entrance",
+    "status": "published",
+    "order": 16,
+    "background": {
+      "color": "#B7D4E5",
       "asset": "",
       "automatic": true,
       "intervalMinutes": 30,
@@ -385,7 +909,107 @@
           }
         }
       ],
-      "effects": []
+      "effects": [
+        {
+          "id": "weather-rain-1792941746442-ll3t",
+          "name": "即時雨",
+          "enabled": true,
+          "asset": "",
+          "procedural": {
+            "type": "rain",
+            "intensity": 0.55,
+            "speed": 1,
+            "wind": 0.2
+          },
+          "layer": "front",
+          "group": "weather-rain",
+          "opacity": 1,
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": []
+          }
+        },
+        {
+          "id": "weather-fog-1792941747091-waz9",
+          "name": "即時霧",
+          "enabled": true,
+          "asset": "",
+          "procedural": {
+            "type": "fog",
+            "intensity": 0.55,
+            "speed": 1,
+            "wind": 0.2
+          },
+          "layer": "back",
+          "group": "weather-fog",
+          "opacity": 1,
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": []
+          }
+        },
+        {
+          "id": "weather-lightning-1792941747750-sxk9",
+          "name": "即時雷電",
+          "enabled": true,
+          "asset": "",
+          "procedural": {
+            "type": "lightning",
+            "intensity": 0.55,
+            "speed": 1,
+            "wind": 0.2
+          },
+          "layer": "back",
+          "group": "weather-lightning",
+          "opacity": 1,
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": []
+          }
+        }
+      ]
     },
     "condition": {
       "mode": "fixed",
@@ -408,38 +1032,30 @@
     },
     "objects": [
       {
-        "id": "object-local-1786549542441",
+        "id": "environment-frame-park-plaza",
         "order": 1,
         "type": "background",
-        "name": "新 Object",
+        "name": "公園廣場（透明環境層）",
         "media": {
-          "src": "assets/scenes/media/bubble-tea-shop-transparent-sky-20261027.webp",
+          "src": "assets/scenes/media/pack-20261025-park-plaza.webp",
           "format": "webp",
-          "alt": "手搖店，透明戶外天空"
+          "alt": "公園廣場"
         },
         "position": {
-          "x": 0.498,
-          "y": 0.406
+          "x": 0.5,
+          "y": 0.5
         },
-        "scale": 1.173,
+        "scale": 1.149,
         "rotation": 0,
         "flipX": false,
         "flipY": false,
         "layouts": {
           "landscape": {
             "position": {
-              "x": 0.498,
-              "y": 0.406
+              "x": 0.5,
+              "y": 0.5
             },
-            "scale": 1.173,
-            "rotation": 0
-          },
-          "portrait": {
-            "position": {
-              "x": 0.804,
-              "y": 0.479
-            },
-            "scale": 1.776,
+            "scale": 1.149,
             "rotation": 0
           }
         },
@@ -462,8 +1078,81 @@
               "rotation": 0,
               "fontSize": 48,
               "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1792949868469",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1792949868469-1792949898967.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.502,
+          "y": 0.713
+        },
+        "scale": 0.251,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.502,
+              "y": 0.713
             },
-            "portrait": {
+            "scale": 0.251,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
               "anchor": "above",
               "x": 0,
               "y": 0,
@@ -505,1070 +1194,22 @@
           "translations": {}
         },
         "metadata": {}
-      },
-      {
-        "id": "object-local-1786549533424",
-        "order": 2,
-        "type": "character",
-        "name": "雞",
-        "media": {
-          "src": "assets/scenes/media/scene-1786549520650-object-local-1786549533424-1793034952010.gif",
-          "format": "gif",
-          "alt": ""
-        },
-        "position": {
-          "x": 0.723,
-          "y": 0.777
-        },
-        "scale": 1,
-        "rotation": 0,
-        "flipX": false,
-        "flipY": false,
-        "layouts": {
-          "landscape": {
-            "position": {
-              "x": 0.723,
-              "y": 0.777
-            },
-            "scale": 1,
-            "rotation": 0
-          },
-          "portrait": {
-            "position": {
-              "x": 0.578,
-              "y": 0.822
-            },
-            "scale": 1.356,
-            "rotation": 0
-          }
-        },
-        "layer": "mid",
-        "visible": true,
-        "locked": false,
-        "text": "今天喝什麼",
-        "textBubble": {
-          "enabled": true,
-          "color": "#34271f",
-          "backgroundColor": "#fffdf5",
-          "fontWeight": 600,
-          "radius": 24,
-          "layouts": {
-            "landscape": {
-              "anchor": "above",
-              "x": 203.809,
-              "y": 69.566,
-              "scale": 1,
-              "rotation": 0,
-              "fontSize": 48,
-              "maxWidth": 480
-            },
-            "portrait": {
-              "anchor": "above",
-              "x": 131.183,
-              "y": 70.76,
-              "scale": 1,
-              "rotation": 0,
-              "fontSize": 48,
-              "maxWidth": 480
-            }
-          }
-        },
-        "interaction": {
-          "enabled": false,
-          "cursor": "default",
-          "action": "none",
-          "target": "",
-          "openMode": "same-tab"
-        },
-        "animation": {
-          "type": "",
-          "enabled": false,
-          "position": {
-            "x": 0,
-            "y": 0
-          },
-          "rotation": 0,
-          "duration": 3,
-          "mode": "yoyo",
-          "easing": "ease-in-out"
-        },
-        "scroll": {
-          "speed": 1,
-          "parallax": 0,
-          "fade": false,
-          "scale": false,
-          "trigger": ""
-        },
-        "language": {
-          "defaultLocale": "zh-Hant",
-          "translations": {}
-        },
-        "metadata": {}
-      },
-      {
-        "id": "object-local-1793128518777",
-        "order": 3,
-        "type": "prop",
-        "name": "企鵝",
-        "media": {
-          "src": "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1792592519571.gif",
-          "format": "gif",
-          "alt": ""
-        },
-        "position": {
-          "x": 0.273,
-          "y": 0.799
-        },
-        "scale": 0.815,
-        "rotation": 0,
-        "flipX": false,
-        "flipY": false,
-        "layouts": {
-          "landscape": {
-            "position": {
-              "x": 0.273,
-              "y": 0.799
-            },
-            "scale": 0.815,
-            "rotation": 0
-          },
-          "portrait": {
-            "position": {
-              "x": 0.882,
-              "y": 0.803
-            },
-            "scale": 1.174,
-            "rotation": 0
-          }
-        },
-        "layer": "mid",
-        "visible": true,
-        "locked": false,
-        "text": "Hello",
-        "textBubble": {
-          "enabled": true,
-          "color": "#34271f",
-          "backgroundColor": "#fffdf5",
-          "fontWeight": 600,
-          "radius": 24,
-          "layouts": {
-            "landscape": {
-              "anchor": "above",
-              "x": -5.278,
-              "y": 56.044,
-              "scale": 1.005,
-              "rotation": 0,
-              "fontSize": 45,
-              "maxWidth": 480
-            },
-            "portrait": {
-              "anchor": "above",
-              "x": 2.665,
-              "y": 42.204,
-              "scale": 1.075,
-              "rotation": 0,
-              "fontSize": 45,
-              "maxWidth": 480
-            }
-          },
-          "animation": {
-            "type": "keyframes",
-            "enabled": true,
-            "duration": 20,
-            "loop": true,
-            "easing": "linear",
-            "keyframes": {
-              "landscape": [],
-              "portrait": []
-            },
-            "channels": {
-              "landscape": {
-                "opacity": {
-                  "enabled": true,
-                  "keyframes": [
-                    {
-                      "offset": 0,
-                      "value": 1
-                    },
-                    {
-                      "offset": 0.15,
-                      "value": 0
-                    },
-                    {
-                      "offset": 0.397,
-                      "value": 0
-                    },
-                    {
-                      "offset": 0.52,
-                      "value": 1
-                    }
-                  ]
-                }
-              },
-              "portrait": {}
-            }
-          }
-        },
-        "interaction": {
-          "enabled": false,
-          "cursor": "default",
-          "action": "none",
-          "target": "",
-          "openMode": "same-tab"
-        },
-        "animation": {
-          "type": "keyframes",
-          "enabled": true,
-          "duration": 20,
-          "loop": true,
-          "easing": "linear",
-          "keyframes": {
-            "landscape": [],
-            "portrait": []
-          },
-          "channels": {
-            "landscape": {
-              "scale": {
-                "enabled": true,
-                "keyframes": [
-                  {
-                    "offset": 0,
-                    "value": 0.971
-                  }
-                ]
-              }
-            },
-            "portrait": {
-              "scale": {
-                "enabled": true,
-                "keyframes": [
-                  {
-                    "offset": 0,
-                    "value": 1.394
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "scroll": {
-          "speed": 1,
-          "parallax": 0,
-          "fade": false,
-          "scale": false,
-          "trigger": ""
-        },
-        "language": {
-          "defaultLocale": "zh-Hant",
-          "translations": {}
-        },
-        "metadata": {}
-      },
-      {
-        "id": "object-local-1793132204004",
-        "order": 4,
-        "type": "text",
-        "name": "時鐘",
-        "media": {
-          "src": "",
-          "format": "",
-          "alt": ""
-        },
-        "position": {
-          "x": 0.323,
-          "y": 0.417
-        },
-        "scale": 1,
-        "rotation": 0,
-        "flipX": false,
-        "flipY": false,
-        "layouts": {
-          "landscape": {
-            "position": {
-              "x": 0.323,
-              "y": 0.417
-            },
-            "scale": 1,
-            "rotation": 0
-          },
-          "portrait": {
-            "position": {
-              "x": 0.5,
-              "y": 0.5
-            },
-            "scale": 1,
-            "rotation": 0
-          }
-        },
-        "layer": "mid",
-        "visible": true,
-        "locked": false,
-        "text": "NEWS:",
-        "textDisplay": {
-          "version": 1,
-          "source": "time",
-          "timeZone": "scene",
-          "hour12": false,
-          "showSeconds": false,
-          "weekday": true,
-          "mode": "marquee",
-          "lines": 2,
-          "speed": 40,
-          "direction": "left",
-          "gap": 64
-        },
-        "textBubble": {
-          "enabled": true,
-          "color": "#34271f",
-          "backgroundColor": "#fffdf5",
-          "fontWeight": 900,
-          "radius": 24,
-          "layouts": {
-            "landscape": {
-              "anchor": "above",
-              "x": 213.698,
-              "y": -11.722,
-              "scale": 0.714,
-              "rotation": 0,
-              "fontSize": 71,
-              "maxWidth": 355
-            },
-            "portrait": {
-              "anchor": "above",
-              "x": -834.558,
-              "y": -99.373,
-              "scale": 1,
-              "rotation": 0,
-              "fontSize": 48,
-              "maxWidth": 480
-            }
-          }
-        },
-        "interaction": {
-          "enabled": false,
-          "cursor": "default",
-          "action": "none",
-          "target": "",
-          "openMode": "same-tab"
-        },
-        "animation": {
-          "type": "",
-          "enabled": false,
-          "position": {
-            "x": 0,
-            "y": 0
-          },
-          "rotation": 0,
-          "duration": 3,
-          "mode": "yoyo",
-          "easing": "ease-in-out"
-        },
-        "scroll": {
-          "speed": 1,
-          "parallax": 0,
-          "fade": false,
-          "scale": false,
-          "trigger": ""
-        },
-        "language": {
-          "defaultLocale": "zh-Hant",
-          "translations": {}
-        },
-        "metadata": {}
-      }
-    ],
-    "livingEvents": [
-      {
-        "displayMode": "continuous",
-        "interval": 10,
-        "id": "binding-f08a9c01-307c-442b-874d-201fd5588f52",
-        "name": "04 點我決定吃什麼｜全天點擊",
-        "trigger": "click",
-        "start": "00:00",
-        "end": "00:00",
-        "lines": [
-          "不知道吃什麼嗎？問我啊！",
-          "我幫你想一個選擇。"
-        ],
-        "replies": [
-          "咖哩飯！",
-          "牛肉麵！",
-          "水餃！",
-          "便當！",
-          "蛋餅也可以。"
-        ],
-        "duration": 5,
-        "cooldown": 0,
-        "dailyLimit": 20,
-        "priority": 1,
-        "objectId": "object-local-1793128518777",
-        "mediaObjectId": "",
-        "enabled": true
       }
     ],
     "metadata": {
+      "source": "generated-scene-pack-20261025",
+      "environmentKind": "outdoor",
       "mobileViewport": {
         "enabled": true,
         "width": 1.8,
-        "initialX": 0.5,
+        "initialX": 0.502,
         "autoPan": true,
-        "speed": 9
-      }
-    },
-    "createdAt": "2026-08-12T15:45:20.650Z",
-    "updatedAt": "2026-10-28T18:26:57.909Z"
-  },
-  {
-    "id": "scene-1787847732039",
-    "name": "作品廊道",
-    "type": "work",
-    "status": "published",
-    "order": 5,
-    "background": {
-      "color": "#392B22",
-      "asset": "",
-      "automatic": false,
-      "intervalMinutes": 30,
-      "weather": {
-        "provider": "none",
-        "city": "",
-        "latitude": null,
-        "longitude": null,
-        "url": "",
-        "attribution": "Weather data by Open-Meteo"
+        "speed": 9,
+        "weatherParallax": true
       },
-      "variants": []
+      "composition": "shared-landscape-v1"
     },
-    "condition": {
-      "mode": "fixed",
-      "timezone": "visitor",
-      "start": "",
-      "end": "",
-      "time": "",
-      "dates": [],
-      "holidays": [],
-      "weekdays": [],
-      "weather": "any",
-      "weight": 1,
-      "random": false,
-      "event": "",
-      "fallback": false
-    },
-    "language": {
-      "defaultLocale": "zh-Hant",
-      "translations": {}
-    },
-    "objects": [
-      {
-        "id": "object-local-1787870141396",
-        "order": 2,
-        "type": "prop",
-        "name": "地毯",
-        "media": {
-          "src": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp",
-          "format": "webp",
-          "alt": "",
-          "pipeline": {
-            "optimized": {
-              "status": "ready",
-              "sourceHash": "0ac2d27d800b76c5bf1695c70850341c176c932b466fc15f11effda58960c34e",
-              "presetVersion": 1,
-              "outputs": {
-                "primary": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp"
-              },
-              "error": ""
-            }
-          }
-        },
-        "position": {
-          "x": 0.495,
-          "y": 0.387
-        },
-        "scale": 0.909,
-        "rotation": 0,
-        "flipX": false,
-        "flipY": false,
-        "layouts": {
-          "landscape": {
-            "position": {
-              "x": 0.495,
-              "y": 0.387
-            },
-            "scale": 0.909,
-            "rotation": 0
-          },
-          "portrait": {
-            "position": {
-              "x": 0.493,
-              "y": 0.441
-            },
-            "scale": 1.091,
-            "rotation": 0
-          }
-        },
-        "layer": "mid",
-        "visible": true,
-        "locked": false,
-        "text": "",
-        "textBubble": {
-          "enabled": false,
-          "color": "#34271f",
-          "backgroundColor": "#fffdf5",
-          "fontWeight": 600,
-          "radius": 24,
-          "layouts": {
-            "landscape": {
-              "anchor": "above",
-              "x": 0,
-              "y": 0,
-              "scale": 1,
-              "rotation": 0,
-              "fontSize": 48,
-              "maxWidth": 480
-            },
-            "portrait": {
-              "anchor": "above",
-              "x": 0,
-              "y": 0,
-              "scale": 1,
-              "rotation": 0,
-              "fontSize": 48,
-              "maxWidth": 480
-            }
-          }
-        },
-        "interaction": {
-          "enabled": false,
-          "cursor": "default",
-          "action": "none",
-          "target": "",
-          "openMode": "same-tab"
-        },
-        "animation": {
-          "type": "keyframes",
-          "enabled": false,
-          "duration": 4,
-          "loop": false,
-          "easing": "linear",
-          "keyframes": {
-            "landscape": [],
-            "portrait": []
-          }
-        },
-        "scroll": {
-          "speed": 1,
-          "parallax": 0,
-          "fade": false,
-          "scale": false,
-          "trigger": ""
-        },
-        "language": {
-          "defaultLocale": "zh-Hant",
-          "translations": {}
-        },
-        "metadata": {}
-      },
-      {
-        "id": "object-local-1787871545771",
-        "order": 2,
-        "type": "prop",
-        "name": "新道具",
-        "media": {
-          "src": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
-          "format": "webp",
-          "alt": "",
-          "pipeline": {
-            "optimized": {
-              "status": "ready",
-              "sourceHash": "16bd73612327b1b09b965f85c063e456f1e88b1d764aabe5752618d5e1091147",
-              "presetVersion": 1,
-              "outputs": {
-                "primary": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp"
-              },
-              "error": ""
-            }
-          }
-        },
-        "position": {
-          "x": 0.894,
-          "y": 0.448
-        },
-        "scale": 0.333,
-        "rotation": 0,
-        "flipX": false,
-        "flipY": false,
-        "layouts": {
-          "landscape": {
-            "position": {
-              "x": 0.894,
-              "y": 0.448
-            },
-            "scale": 0.333,
-            "rotation": 0
-          },
-          "portrait": {
-            "position": {
-              "x": 1.138,
-              "y": 0.437
-            },
-            "scale": 0.402,
-            "rotation": 0
-          }
-        },
-        "layer": "mid",
-        "visible": true,
-        "locked": false,
-        "text": "",
-        "textBubble": {
-          "enabled": false,
-          "color": "#34271f",
-          "backgroundColor": "#fffdf5",
-          "fontWeight": 600,
-          "radius": 24,
-          "layouts": {
-            "landscape": {
-              "anchor": "above",
-              "x": 0,
-              "y": 0,
-              "scale": 1,
-              "rotation": 0,
-              "fontSize": 48,
-              "maxWidth": 480
-            },
-            "portrait": {
-              "anchor": "above",
-              "x": 0,
-              "y": 0,
-              "scale": 1,
-              "rotation": 0,
-              "fontSize": 48,
-              "maxWidth": 480
-            }
-          }
-        },
-        "interaction": {
-          "enabled": false,
-          "cursor": "default",
-          "action": "none",
-          "target": "",
-          "openMode": "same-tab"
-        },
-        "animation": {
-          "type": "keyframes",
-          "enabled": true,
-          "duration": 20,
-          "loop": true,
-          "easing": "linear",
-          "keyframes": {
-            "landscape": [
-              {
-                "offset": 0,
-                "position": {
-                  "x": 0.173,
-                  "y": 0.017
-                },
-                "rotation": 0,
-                "scale": 1,
-                "flipX": false
-              },
-              {
-                "offset": 0.5,
-                "position": {
-                  "x": -0.982,
-                  "y": 0.028
-                },
-                "rotation": 0,
-                "scale": 1,
-                "flipX": true
-              },
-              {
-                "offset": 1,
-                "position": {
-                  "x": 0.163,
-                  "y": 0.003
-                },
-                "rotation": 0,
-                "scale": 1,
-                "flipX": false
-              }
-            ],
-            "portrait": [
-              {
-                "offset": 0,
-                "position": {
-                  "x": 0.013,
-                  "y": 0.012
-                },
-                "rotation": 0,
-                "scale": 1,
-                "flipX": false
-              },
-              {
-                "offset": 0.5,
-                "position": {
-                  "x": -1.286,
-                  "y": 0.009
-                },
-                "rotation": 0,
-                "scale": 1,
-                "flipX": true
-              },
-              {
-                "offset": 1,
-                "position": {
-                  "x": 0.017,
-                  "y": 0.013
-                },
-                "rotation": 0,
-                "scale": 1,
-                "flipX": false
-              }
-            ]
-          }
-        },
-        "scroll": {
-          "speed": 1,
-          "parallax": 0,
-          "fade": false,
-          "scale": false,
-          "trigger": ""
-        },
-        "language": {
-          "defaultLocale": "zh-Hant",
-          "translations": {}
-        },
-        "metadata": {}
-      }
-    ],
-    "metadata": {},
-    "createdAt": "2026-08-27T16:22:12.039Z",
-    "updatedAt": "2026-09-03T07:21:27.420Z"
-  },
-  {
-    "id": "scene-1788159835341",
-    "name": "遊戲室前方",
-    "type": "game",
-    "status": "published",
-    "order": 7,
-    "background": {
-      "color": "#F7F9FC",
-      "asset": "",
-      "automatic": false,
-      "intervalMinutes": 30,
-      "weather": {
-        "provider": "none",
-        "city": "",
-        "latitude": null,
-        "longitude": null,
-        "url": "",
-        "attribution": "Weather data by Open-Meteo"
-      },
-      "variants": []
-    },
-    "condition": {
-      "mode": "fixed",
-      "timezone": "visitor",
-      "start": "",
-      "end": "",
-      "time": "",
-      "dates": [],
-      "holidays": [],
-      "weekdays": [],
-      "weather": "any",
-      "weight": 1,
-      "random": false,
-      "event": "",
-      "fallback": false
-    },
-    "language": {
-      "defaultLocale": "zh-Hant",
-      "translations": {}
-    },
-    "objects": [
-      {
-        "id": "object-local-1788193069792",
-        "order": 1,
-        "type": "background",
-        "name": "地毯",
-        "media": {
-          "src": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp",
-          "format": "webp",
-          "alt": "",
-          "pipeline": {
-            "optimized": {
-              "status": "ready",
-              "sourceHash": "0ac2d27d800b76c5bf1695c70850341c176c932b466fc15f11effda58960c34e",
-              "presetVersion": 1,
-              "outputs": {
-                "primary": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp"
-              },
-              "error": ""
-            }
-          }
-        },
-        "position": {
-          "x": 0.489,
-          "y": 0.513
-        },
-        "scale": 1.484,
-        "rotation": 0,
-        "flipX": false,
-        "flipY": false,
-        "layouts": {
-          "landscape": {
-            "position": {
-              "x": 0.489,
-              "y": 0.513
-            },
-            "scale": 1.484,
-            "rotation": 0
-          },
-          "portrait": {
-            "position": {
-              "x": 0.488,
-              "y": 0.895
-            },
-            "scale": 0.74,
-            "rotation": 0
-          }
-        },
-        "layer": "mid",
-        "visible": true,
-        "locked": false,
-        "text": "",
-        "textBubble": {
-          "enabled": false,
-          "color": "#34271f",
-          "backgroundColor": "#fffdf5",
-          "fontWeight": 600,
-          "radius": 24,
-          "layouts": {
-            "landscape": {
-              "anchor": "above",
-              "x": 0,
-              "y": 0,
-              "scale": 1,
-              "rotation": 0,
-              "fontSize": 48,
-              "maxWidth": 480
-            },
-            "portrait": {
-              "anchor": "above",
-              "x": 0,
-              "y": 0,
-              "scale": 1,
-              "rotation": 0,
-              "fontSize": 48,
-              "maxWidth": 480
-            }
-          }
-        },
-        "interaction": {
-          "enabled": false,
-          "cursor": "default",
-          "action": "none",
-          "target": "",
-          "openMode": "same-tab"
-        },
-        "animation": {
-          "type": "",
-          "enabled": false,
-          "position": {
-            "x": 0,
-            "y": 0
-          },
-          "rotation": 0,
-          "duration": 3,
-          "mode": "yoyo",
-          "easing": "ease-in-out"
-        },
-        "scroll": {
-          "speed": 1,
-          "parallax": 0,
-          "fade": false,
-          "scale": false,
-          "trigger": ""
-        },
-        "language": {
-          "defaultLocale": "zh-Hant",
-          "translations": {}
-        },
-        "metadata": {}
-      },
-      {
-        "id": "object-local-1788193133638",
-        "order": 2,
-        "type": "prop",
-        "name": "新道具",
-        "media": {
-          "src": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
-          "format": "webp",
-          "alt": "",
-          "pipeline": {
-            "optimized": {
-              "status": "ready",
-              "sourceHash": "16bd73612327b1b09b965f85c063e456f1e88b1d764aabe5752618d5e1091147",
-              "presetVersion": 1,
-              "outputs": {
-                "primary": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp"
-              },
-              "error": ""
-            }
-          }
-        },
-        "position": {
-          "x": 0.996,
-          "y": 0.704
-        },
-        "scale": 0.436,
-        "rotation": 0,
-        "flipX": false,
-        "flipY": false,
-        "layouts": {
-          "landscape": {
-            "position": {
-              "x": 0.996,
-              "y": 0.704
-            },
-            "scale": 0.436,
-            "rotation": 0
-          },
-          "portrait": {
-            "position": {
-              "x": 1.167,
-              "y": 0.852
-            },
-            "scale": 0.253,
-            "rotation": 0
-          }
-        },
-        "layer": "mid",
-        "visible": true,
-        "locked": false,
-        "text": "",
-        "textBubble": {
-          "enabled": false,
-          "color": "#34271f",
-          "backgroundColor": "#fffdf5",
-          "fontWeight": 600,
-          "radius": 24,
-          "layouts": {
-            "landscape": {
-              "anchor": "above",
-              "x": 0,
-              "y": 0,
-              "scale": 1,
-              "rotation": 0,
-              "fontSize": 48,
-              "maxWidth": 480
-            },
-            "portrait": {
-              "anchor": "above",
-              "x": 0,
-              "y": 0,
-              "scale": 1,
-              "rotation": 0,
-              "fontSize": 48,
-              "maxWidth": 480
-            }
-          }
-        },
-        "interaction": {
-          "enabled": false,
-          "cursor": "default",
-          "action": "none",
-          "target": "",
-          "openMode": "same-tab"
-        },
-        "animation": {
-          "type": "keyframes",
-          "enabled": true,
-          "duration": 4,
-          "loop": true,
-          "easing": "linear",
-          "keyframes": {
-            "landscape": [
-              {
-                "offset": 0,
-                "position": {
-                  "x": 0,
-                  "y": 0
-                },
-                "rotation": 0,
-                "scale": 1,
-                "flipX": false
-              },
-              {
-                "offset": 0.5,
-                "position": {
-                  "x": -0.981,
-                  "y": -0.009
-                },
-                "rotation": 0,
-                "scale": 1,
-                "flipX": true
-              },
-              {
-                "offset": 1,
-                "position": {
-                  "x": 0,
-                  "y": 0
-                },
-                "rotation": 0,
-                "scale": 1,
-                "flipX": false
-              }
-            ],
-            "portrait": [
-              {
-                "offset": 0,
-                "position": {
-                  "x": -0.004,
-                  "y": 0.021
-                },
-                "rotation": 0,
-                "scale": 2.032,
-                "flipX": false
-              },
-              {
-                "offset": 0.5,
-                "position": {
-                  "x": -1.358,
-                  "y": 0.015
-                },
-                "rotation": 0,
-                "scale": 2.178,
-                "flipX": true
-              },
-              {
-                "offset": 1,
-                "position": {
-                  "x": -0.04,
-                  "y": 0.034
-                },
-                "rotation": 0,
-                "scale": 2.348,
-                "flipX": false
-              }
-            ]
-          }
-        },
-        "scroll": {
-          "speed": 1,
-          "parallax": 0,
-          "fade": false,
-          "scale": false,
-          "trigger": ""
-        },
-        "language": {
-          "defaultLocale": "zh-Hant",
-          "translations": {}
-        },
-        "metadata": {}
-      }
-    ],
-    "metadata": {},
-    "createdAt": "2026-08-31T07:03:55.341Z",
-    "updatedAt": "2026-09-04T15:58:26.663Z"
+    "createdAt": "2026-10-25T00:00:00.000Z",
+    "updatedAt": "2026-10-31T13:29:20.015Z"
   }
 ]

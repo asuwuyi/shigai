@@ -1,1 +1,35 @@
-body.game-managed{--paper:var(--game-paper);--ink:var(--game-ink);--accent:var(--game-accent);color:var(--game-ink)!important;background-color:var(--game-background)!important;background-image:var(--game-backgroundImage)!important;background-size:cover;background-attachment:scroll;font-family:var(--game-font)!important;font-size:var(--game-fontSize)!important}.game-managed .arcade-room,.game-managed .wheel-room,.game-managed .memory-room,.game-managed .mines-room{max-width:var(--game-contentWidth)}.game-managed h1{font-size:var(--game-titleSize)!important;font-family:var(--game-font)!important;color:var(--game-ink)}.game-managed button,.game-managed select,.game-managed input,.game-managed textarea{font-family:var(--game-font)!important;color:var(--game-ink)}.game-managed button:not(.puzzle-tile):not(.rotation-cell):not(.card):not(.cell),.game-managed select,.game-managed input,.game-managed textarea{border-radius:var(--game-buttonRadius)!important}.game-managed .settings,.game-managed .wheel-settings,.game-managed dialog{background-color:var(--game-paper)!important;background-image:var(--game-panelImage);color:var(--game-ink)!important}.game-managed button:not(.puzzle-tile):not(.rotation-cell):not(.cell):not(.card){background-image:var(--game-buttonImage);background-size:100% 100%}.game-managed #startButton:enabled,.game-managed #nextButton:enabled,.game-managed #resumeButton,.game-managed #resultNext,.game-managed #driveButton{background-color:var(--game-accent)!important;color:var(--game-paper)!important}.game-managed .settings,.game-managed .status,.game-managed .game-status{font-size:var(--game-fontSize)!important}.game-managed .eyebrow{color:var(--game-accent)}.game-managed #stats{scroll-margin-top:65px}.game-managed .game-ui-instructions{white-space:pre-line;line-height:1.8}.game-managed .session-note{font-size:14px}@media(max-width:800px){.game-managed h1{font-size:var(--game-mobileTitleSize)!important}}@media(prefers-reduced-motion:reduce){.game-managed *{scroll-behavior:auto!important}}
+/* A shared, editable paper-and-gallery presentation. Gameplay geometry is owned by each game. */
+:root {--game-paper:#fff9ed;--game-ink:#493527;--game-accent:#806044;--game-accentInk:#fff9ed;--game-font:"PingFang TC","Microsoft JhengHei",system-ui,sans-serif;--game-fontSize:16px;--game-buttonRadius:10px;--game-line:color-mix(in srgb,var(--game-ink) 25%,var(--game-paper));}
+body.game-managed {--paper:var(--game-paper);--ink:var(--game-ink);--accent:var(--game-accent);color:var(--game-ink)!important;background-color:var(--game-background)!important;background-image:var(--game-backgroundImage),repeating-linear-gradient(0deg,transparent 0 5px,#5b402006 5px 6px)!important;background-size:cover,12px 12px;background-attachment:scroll;font-family:var(--game-font)!important;font-size:var(--game-fontSize)!important;}
+.game-managed :is(.arcade-room,.wheel-room,.memory-room,.mines-room) {max-width:var(--game-contentWidth);}
+body[data-standalone-game] :is(.arcade-room,.wheel-room,.memory-room,.mines-room)>header {padding-right:calc(var(--scroll-menu-icon-size,80px) + 12px);min-height:88px;}
+.game-managed h1 {font-size:var(--game-titleSize)!important;font-family:var(--game-font)!important;color:var(--game-ink);line-height:1.3;overflow-wrap:anywhere;}
+.game-managed :is(main,dialog) :is(button,select,input,textarea) {font-family:var(--game-font)!important;color:var(--game-ink);}
+.game-managed :is(main,dialog) :is(select,input,textarea),.game-managed :is(main,dialog) button:not(.puzzle-tile):not(.rotation-cell):not(.card):not(.cell) {border-radius:var(--game-buttonRadius)!important;}
+.game-managed :is(main,dialog) button:not(.puzzle-tile):not(.rotation-cell):not(.card):not(.cell) {display:inline-flex;align-items:center;justify-content:center;gap:.4em;min-height:44px;line-height:1.35;background-image:var(--game-buttonImage);background-size:100% 100%;}
+.game-managed :is(main,dialog) :is(button,select,input,textarea) {border-color:var(--game-line);}
+.game-managed :is(.settings,.wheel-settings,dialog) {background-color:var(--game-paper)!important;background-image:var(--game-panelImage),repeating-linear-gradient(90deg,transparent 0 9px,#73532905 9px 10px);background-size:cover,10px 10px;color:var(--game-ink)!important;border:1px solid var(--game-line);border-radius:16px;box-shadow:0 6px 18px #3f2a1610;}
+.game-managed dialog {max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:auto;padding:24px;line-height:1.8;}
+.game-managed dialog::backdrop {background:#34271f80;}
+.game-managed :is(#startButton,#nextButton,#resumeButton,#resultNext,#driveButton,#nextLevel,#continueGame,#resume):enabled {background-color:var(--game-accent)!important;color:var(--game-accentInk)!important;border-color:var(--game-accent);box-shadow:0 3px 10px #34271f16;}
+.game-managed :is(.settings,.status,.game-status) {font-size:var(--game-fontSize)!important;}
+.game-managed .eyebrow {color:var(--game-accent);letter-spacing:.16em;font-size:12px;}
+.game-managed #stats {scroll-margin-top:96px;}
+.game-managed .game-ui-instructions {white-space:pre-line;line-height:1.8;}
+.game-managed .session-note {font-size:14px;}
+.game-managed :is(.toolbar,.stats) {gap:10px;}
+.game-managed .stats {font-variant-numeric:tabular-nums;line-height:1.6;}
+.game-managed .stats>span {padding:6px 10px;border:1px solid var(--game-line);border-radius:10px;background:var(--game-paper);}
+.game-managed .back-link {color:var(--game-ink);border-bottom:1px solid var(--game-line);}
+.game-managed .card-side {box-shadow:0 3px 9px #34271f20;}
+.game-managed :is(main,dialog) :is(button,select,input,textarea,a):focus-visible {outline:3px solid var(--game-accent);outline-offset:3px;}
+/* Keep the original spotting controls and exported canvases intact, soften their surrounding surfaces. */
+body[data-spot-game] .game-bar {padding-right:calc(var(--scroll-menu-icon-size,80px) + 20px);border-width:1px;border-color:#b6a387;box-shadow:0 6px 18px #34271f16;}
+body[data-spot-game] :is(.stat-pill,.levels-dialog,.complete>.card) {border-width:1px;border-color:#b6a387;box-shadow:0 6px 18px #34271f16;}
+body[data-spot-game] :is(.back,.levels-button) {box-shadow:none;border-width:1px;}
+@media(max-width:800px){.game-managed h1{font-size:var(--game-mobileTitleSize)!important}.game-managed .toolbar :is(button,select){font-size:14px;min-height:44px}.game-managed .stats{gap:7px}.game-managed .settings{line-height:1.85}}
+@media(prefers-reduced-motion:reduce){.game-managed *{scroll-behavior:auto!important}}
+
+/* Exported legacy games share the same paper navigation without changing their canvas artwork. */
+body[data-standalone-game] .game-back {color:#493527;background:#fff9ed;border:1px solid #b6a387;border-radius:12px;box-shadow:0 3px 10px #34271f20;}
+html[data-game-layout="mobile"] body[data-standalone-game] .game-back {color:#493527;background:#fff9ed;border-color:#b6a387;min-width:44px;min-height:44px;}

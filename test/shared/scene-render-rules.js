@@ -92,7 +92,28 @@
     return { enabled: source.enabled === true, ...(fontFamily(source.fontFamily)?{fontFamily:source.fontFamily}:{}), color: color(source.color,'#34271f'), backgroundColor: color(source.backgroundColor,'#fffdf5'), fontWeight: [400,500,600,700,800,900].includes(Number(source.fontWeight)) ? Number(source.fontWeight) : 600, radius: rounded(source.radius,0,80,24), layouts: { landscape: placement('landscape'), portrait: placement('portrait') }, ...(source.animation && animationRules ? { animation: animationRules.normalize(source.animation) } : {}) };
   }
   const normalizeLivingEvents = items => (global.ShiGaiLivingEvents || (typeof require === "function" ? require("./living-events.js") : null))?.normalize(items) || [];
-  const api = Object.freeze({ normalizeLivingEvents, fontFamilies, fontFamily, normalizeTextDisplay, normalizeTextBubble, layers, layoutNames, layoutName, clamp, rounded, cloneLayout, readLayout, ensureWritableLayout, commitLayout, layout, position, scale, rotation, flipX, flipY, zIndex, transform, sortVisibleObjects });
+  // One authoring composition. Portrait records are legacy input, never a second edit target.
+  const isSharedComposition = scene => scene?.metadata?.composition === 'shared-landscape-v1';
+  function sharedComposition(scene) {
+    const next = JSON.parse(JSON.stringify(scene && typeof scene === 'object' && !Array.isArray(scene) ? scene : {}));
+    next.metadata = {...next.metadata, composition:'shared-landscape-v1'};
+    const collapse = owner => {
+      if (!owner || typeof owner !== 'object') return;
+      for (const key of ['layouts','keyframes','channels']) {
+        const map = owner[key];
+        if (map && typeof map === 'object') delete map.portrait;
+      }
+      collapse(owner.animation);
+    };
+    for (const object of Array.isArray(next.objects) ? next.objects : []) {
+      if (!object || typeof object !== 'object') continue;
+      // Retain the established landscape/legacy fallback before removing old mobile data.
+      object.layouts = {...object.layouts,landscape:readLayout(object,'landscape')};
+      collapse(object); collapse(object.textBubble);
+    }
+    return next;
+  }
+  const api = Object.freeze({ isSharedComposition, sharedComposition, normalizeLivingEvents, fontFamilies, fontFamily, normalizeTextDisplay, normalizeTextBubble, layers, layoutNames, layoutName, clamp, rounded, cloneLayout, readLayout, ensureWritableLayout, commitLayout, layout, position, scale, rotation, flipX, flipY, zIndex, transform, sortVisibleObjects });
   if (global) global.ShiGaiSceneRender = api;
   if (typeof module === "object" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

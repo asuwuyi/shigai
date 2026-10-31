@@ -186,3 +186,10 @@ body[data-spot-game] .start-bridge button { grid-template-columns: auto auto; ju
 .weather-source-credit a { display:inline-block;min-height:28px;padding:5px 2px;color:inherit;text-decoration:underline;text-underline-offset:3px; }
 .weather-source-credit a:focus-visible { outline:2px solid currentColor;outline-offset:3px; }
 [data-site-footer] .weather-source-credit { color:#344d60;background:#fffdf5;padding:3px 10px;border-radius:6px; }
+
+/* Every route uses the same character-and-scroll world menu. */
+body:is([data-standalone-game],[data-page="island"],[data-page="tools"]) > .site-header {position:fixed;z-index:100;top:0;left:0;width:100%;height:0;min-height:0;margin:0;padding:0;pointer-events:none;}
+body:is([data-standalone-game],[data-page="island"],[data-page="tools"]) > .site-header .site-brand {display:none;}
+body:is([data-standalone-game],[data-page="island"],[data-page="tools"]) > .site-header .site-menu-toggle {display:grid;pointer-events:auto;}
+body:is([data-standalone-game],[data-page="island"],[data-page="tools"]) > .site-header .site-nav:not(.has-scroll-paper) {position:fixed;top:92px;right:var(--scroll-menu-right);display:none;flex-direction:column;width:min(240px,calc(100vw - 24px));max-height:calc(100svh - 110px);overflow:auto;padding:12px;background:#fff9ee;color:#493527;border:1px solid #c7ae83;border-radius:12px;pointer-events:auto;}
+body:is([data-standalone-game],[data-page="island"],[data-page="tools"]) > .site-header .site-nav:not(.has-scroll-paper).is-open {display:flex;}

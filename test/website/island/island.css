@@ -5,3 +5,7 @@
 
 /* Let the destination itself lead when the visitor moves in close. */
 #islandStage.is-close-view .intro,#islandStage.is-close-view .map-caption{visibility:hidden}
+
+/* Keep local map tools away from the shared character menu. */
+.island-header {padding-right:calc(var(--scroll-menu-icon-size,80px) + 30px);}
+@media(max-width:600px){.island-header{padding-right:calc(var(--scroll-menu-icon-size,68px) + 20px)}.island-brand small,.island-header .home-link{display:none}#placesToggle{font-size:11px;padding:5px 8px}}

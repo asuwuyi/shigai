@@ -372,7 +372,7 @@
     if (!renderRules) throw new Error("ShiGaiSceneRender is required.");
     if (!container || typeof container.replaceChildren !== "function") throw new TypeError("A Scene container is required.");
     const documentRef = container.ownerDocument || global.document;
-    const layout = renderRules.layoutName(options.layout);
+    const layout = renderRules.isSharedComposition(scene) ? "landscape" : renderRules.layoutName(options.layout);
     const metrics = surfaceMetrics(container, layout, options.fitMode, { widthMultiplier: options.frameWidthMultiplier });
     const surfaceScale = metrics.scale;
     const plane = documentRef.createElement("div");
@@ -388,6 +388,7 @@
     alignAuthoredSpeech(container);
     container.dataset.sceneRenderer = UNIFIED;
     container.dataset.sceneId = String(scene?.id || "");
+    container.dataset.sceneComposition = renderRules.isSharedComposition(scene) ? "shared-landscape-v1" : "legacy";
     container.dataset.sceneLayout = layout;
     container.dataset.sceneFitMode = metrics.fitMode;
     container.dataset.sceneViewportScale = String(surfaceScale);
@@ -424,7 +425,7 @@
   function updateObject({ container, object, layout = "landscape", fitMode: requestedFitMode, playAnimation = true } = {}) {
     const node = getObjectNode(container, object?.id);
     if (!node) return Object.freeze({ mode: UNIFIED, updated: false, reason: "object-not-found" });
-    const normalizedLayout = rules().layoutName(layout);
+    const normalizedLayout = container?.dataset?.sceneComposition === "shared-landscape-v1" ? "landscape" : rules().layoutName(layout);
     const metrics = surfaceMetrics(container, normalizedLayout, requestedFitMode || container?.dataset?.sceneFitMode, { widthMultiplier: container?.dataset?.sceneFrameWidthMultiplier });
     const plane = node.closest?.(".scene-render-plane");
     if (plane) { plane.style.width = `${metrics.width}px`; plane.style.height = `${metrics.height}px`; }
@@ -439,7 +440,7 @@
 
   function resizeScene({ container, scene, layout = "landscape", fitMode: requestedFitMode, playAnimation = true } = {}) {
     if (!container || !scene) return Object.freeze({ mode: UNIFIED, resized: false, reason: "missing-container-or-scene" });
-    const normalizedLayout = rules().layoutName(layout);
+    const normalizedLayout = container?.dataset?.sceneComposition === "shared-landscape-v1" ? "landscape" : rules().layoutName(layout);
     const metrics = surfaceMetrics(container, normalizedLayout, requestedFitMode || container?.dataset?.sceneFitMode, { widthMultiplier: container?.dataset?.sceneFrameWidthMultiplier });
     if (!metrics.width || !metrics.height) return Object.freeze({ mode: UNIFIED, resized: false, reason: "zero-size-container" });
     const plane = container.querySelector?.(".scene-render-plane");

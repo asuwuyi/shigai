@@ -7,22 +7,22 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; script-src 'self' https://www.googletagmanager.com; style-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="description" content="點擊旋轉圖塊，讓作品回到原來的樣子。">
   <title>旋轉復原 · Shi-Gai</title>
-  <link rel="stylesheet" href="../../assets/css/site.css?v=bilingual-menu-20261020">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=world-menu-20261031">
   <link rel="stylesheet" href="../arcade/arcade.css?v=puzzle-works-20261030">
   <script defer src="../../assets/js/settings.js?v=nested-settings-20261019"></script>
-  <script defer src="../../assets/js/site.js?v=tools-category-20261030"></script>
+  <script defer src="../../assets/js/site.js?v=island-navigation-20261031"></script>
   <script defer src="../../../shared/analytics-consent-copy.js?v=basic-consent-20261017"></script>
   <script defer src="../../assets/js/analytics.js?v=scroll-menu-20261018"></script>
   <link rel="stylesheet" href="../art-games/game.css?v=art-games-20261030">
     <script defer src="../../../shared/game-settings.js?v=studio-games-20261030"></script>
-  <script defer src="../common/game-config.js?v=studio-games-20261030"></script>
-  <link rel="stylesheet" href="../common/game-ui.css?v=studio-games-20261030">
+  <script defer src="../common/game-config.js?v=world-game-ui-20261031"></script>
+  <link rel="stylesheet" href="../common/game-ui.css?v=world-game-ui-20261031">
 <script defer src="../memory/memory-works.js?v=puzzle-works-20261030"></script>
   <script defer src="../art-games/engine.js?v=art-games-20261030"></script>
   <script defer src="../art-games/works.js?v=art-games-20261030"></script>
   <script defer src="../art-games/game.js?v=studio-games-20261030"></script>
   <meta name="robots" content="noindex,nofollow">
 </head>
-<body data-page="games" data-standalone-game data-art-game="rotation"><main class="arcade-room"><a class="back-link" href="../../games.html">← 遊戲室</a><header><p class="eyebrow">SHI-GAI PLAYROOM</p><h1 id="gameTitle">旋轉復原</h1><p id="gameDescription">點擊旋轉圖塊，讓作品回到原來的樣子。</p></header><div class="game-layout"><section class="play-area" aria-label="遊戲操作"><div class="toolbar"><button id="startButton" disabled>開始挑戰</button><button id="actionButton" hidden>我記好了</button><button id="hintButton" disabled>提示</button><button id="pauseButton" disabled>暫停</button><button id="restartButton">重新挑戰</button></div><div id="stats" class="stats"></div><p id="gameStatus" class="status" role="status">正在準備公開作品…</p><div id="questionArea" aria-busy="true"><div id="playContent"><div id="artStage"></div><div id="hintArea" hidden></div><div id="choices" class="choices"></div></div><div id="pauseCover"><p id="coverText">正在準備作品…</p><button id="resumeButton" hidden>繼續</button></div></div></section><aside class="settings"><p class="eyebrow">PLAY WITH YOUR ART</p><h2>怎麼玩？</h2><p id="gameManagedInstructions" class="game-ui-instructions">每點一下圖塊，就順時針轉90度。將所有有方向差異的圖塊轉正即可過關。可查看原圖，但會扣提示分。</p><p>每輪<span data-game-rounds="{rounds}">20</span>關，換關及重玩重新抽公開作品；目前進度只保留在本次頁面。沒有強迫作答倒數，慢慢看也能完成。</p><details><summary>計分與素材</summary><p>每關1,000分，答錯或每次提示扣150分；作答時間每秒扣5分，時間最多扣300分，過關至少100分。記憶觀察階段不計作答時間。
+<body data-page="games" data-standalone-game data-art-game="rotation"><header class="site-header" data-site-header></header><main class="arcade-room"><a class="back-link" href="../../games.html">← 遊戲室</a><header><p class="eyebrow">SHI-GAI PLAYROOM</p><h1 id="gameTitle">旋轉復原</h1><p id="gameDescription">點擊旋轉圖塊，讓作品回到原來的樣子。</p></header><div class="game-layout"><section class="play-area" aria-label="遊戲操作"><div class="toolbar"><button id="startButton" disabled>開始挑戰</button><button id="actionButton" hidden>我記好了</button><button id="hintButton" disabled>提示</button><button id="pauseButton" disabled>暫停</button><button id="restartButton">重新挑戰</button></div><div id="stats" class="stats"></div><p id="gameStatus" class="status" role="status">正在準備公開作品…</p><div id="questionArea" aria-busy="true"><div id="playContent"><div id="artStage"></div><div id="hintArea" hidden></div><div id="choices" class="choices"></div></div><div id="pauseCover"><p id="coverText">正在準備作品…</p><button id="resumeButton" hidden>繼續</button></div></div></section><aside class="settings"><p class="eyebrow">PLAY WITH YOUR ART</p><h2>怎麼玩？</h2><p id="gameManagedInstructions" class="game-ui-instructions">每點一下圖塊，就順時針轉90度。將所有有方向差異的圖塊轉正即可過關。可查看原圖，但會扣提示分。</p><p>每輪<span data-game-rounds="{rounds}">20</span>關，換關及重玩重新抽公開作品；目前進度只保留在本次頁面。沒有強迫作答倒數，慢慢看也能完成。</p><details><summary>計分與素材</summary><p>每關1,000分，答錯或每次提示扣150分；作答時間每秒扣5分，時間最多扣300分，過關至少100分。記憶觀察階段不計作答時間。
 使用公開作品，動圖取靜態影格、影片取封面，不改原作。資料不足或載入失敗會提示重試。
 重新整理會重置本次進度。</p></details></aside></div></main><dialog id="resultDialog" aria-labelledby="resultTitle"><p class="eyebrow">ANOTHER DISCOVERY</p><h2 id="resultTitle"></h2><img id="answerImage" alt="本關完整作品"><p id="answerName"></p><p id="resultText"></p><div class="dialog-actions"><button id="nextButton">下一關 →</button><button id="playAgain">重新挑戰</button><button id="resultClose">查看畫面</button></div></dialog></body></html>
