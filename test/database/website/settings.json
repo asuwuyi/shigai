@@ -164,6 +164,7 @@
       "characters": "奇怪的居民 Character",
       "games": "遊戲實驗室 Games",
       "tools": "工具 Tools",
+      "island": "Shi-Gai 島 Island",
       "about": "你在找我嗎?? About me"
     },
     "pages": {
@@ -172,6 +173,7 @@
       "characters": true,
       "games": true,
       "tools": true,
+      "island": true,
       "about": true
     },
     "analytics": {
@@ -746,6 +748,7 @@
       "charactersNavigation": true,
       "gamesNavigation": true,
       "toolsNavigation": true,
+      "islandNavigation": true,
       "aboutNavigation": true,
       "worksMenu": true,
       "worksFirstPage": true,
