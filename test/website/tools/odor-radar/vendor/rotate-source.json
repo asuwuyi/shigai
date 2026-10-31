@@ -1,0 +1,11 @@
+{
+  "name": "@tomickigrzegorz/leaflet-rotate",
+  "version": "0.3.0",
+  "license": "MIT",
+  "source": "https://github.com/tomickigrzegorz/leaflet-rotate",
+  "download": "https://unpkg.com/@tomickigrzegorz/leaflet-rotate@0.3.0/dist/leaflet-rotate.umd.js",
+  "hashes": {
+    "leaflet-rotate.js": "9215803a89f3001436242c2d84afe80ee8427714841e7e206e3e8f1b1c4a36d3",
+    "leaflet-rotate-LICENSE": "6fa3ebf510cc314802fff147cd740fef308c5dfa5abe2ed55f096a92970be033"
+  }
+}
