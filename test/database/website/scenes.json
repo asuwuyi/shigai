@@ -1390,6 +1390,216 @@
           "translations": {}
         },
         "metadata": {}
+      },
+      {
+        "id": "object-local-1793471906713",
+        "order": 4,
+        "type": "prop",
+        "name": "企鵝",
+        "media": {
+          "src": "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1792592519571.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.692,
+          "y": 0.671
+        },
+        "scale": 0.453,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.692,
+              "y": 0.671
+            },
+            "scale": 0.453,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "Hello",
+        "textBubble": {
+          "enabled": true,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": -5.278,
+              "y": 59.086,
+              "scale": 0.756,
+              "rotation": 0,
+              "fontSize": 45,
+              "maxWidth": 480
+            }
+          },
+          "animation": {
+            "type": "keyframes",
+            "enabled": true,
+            "duration": 20,
+            "loop": true,
+            "easing": "linear",
+            "keyframes": {
+              "landscape": []
+            },
+            "channels": {
+              "landscape": {
+                "opacity": {
+                  "enabled": true,
+                  "keyframes": [
+                    {
+                      "offset": 0,
+                      "value": 1
+                    },
+                    {
+                      "offset": 0.15,
+                      "value": 0
+                    },
+                    {
+                      "offset": 0.397,
+                      "value": 0
+                    },
+                    {
+                      "offset": 0.52,
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": true,
+          "duration": 20,
+          "loop": true,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": []
+          },
+          "channels": {
+            "landscape": {
+              "scale": {
+                "enabled": true,
+                "keyframes": [
+                  {
+                    "offset": 0,
+                    "value": 0.865
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1793471919509",
+        "order": 5,
+        "type": "character",
+        "name": "雞",
+        "media": {
+          "src": "assets/scenes/media/scene-1786549520650-object-local-1786549533424-1793034952010.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.339,
+          "y": 0.672
+        },
+        "scale": 0.474,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.339,
+              "y": 0.672
+            },
+            "scale": 0.474,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "今天喝什麼",
+        "textBubble": {
+          "enabled": true,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 4.75,
+              "y": 45.759,
+              "scale": 0.707,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
       }
     ],
     "livingEvents": [
@@ -1458,6 +1668,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-31T18:26:50.941Z"
+    "updatedAt": "2026-10-31T18:39:59.345Z"
   }
 ]

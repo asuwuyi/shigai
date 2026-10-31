@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-31T18:31:34.245Z",
+  "createdAt": "2026-10-31T18:40:05.472Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1082,
@@ -10,10 +10,10 @@
     "scenes": 3,
     "games": 15,
     "spotDifferenceLevels": 2,
-    "assets": 1221,
-    "files": 1435
+    "assets": 1223,
+    "files": 1437
   },
-  "bytes": 159864216,
+  "bytes": 160963732,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -1205,6 +1205,8 @@
     "assets/published/works/SG-001094/primary-v1.webm",
     "assets/published/works/SG-001095/primary-v1.webp",
     "assets/scenes/media/pack-20261025-park-plaza.webp",
+    "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1792592519571.gif",
+    "assets/scenes/media/scene-1786549520650-object-local-1786549533424-1793034952010.gif",
     "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1792949868469-1792949898967.gif",
     "assets/scenes/media/weather-20261022-01.webp",
     "assets/scenes/media/weather-20261022-02.webp",
