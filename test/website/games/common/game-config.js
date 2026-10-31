@@ -10,3 +10,88 @@ function apply(){if(!entry)return;for(const id of ['gameTitle','wheelTitle'])if(
 async function load(id,fallback){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),5000);let list;try{const response=await fetch('../../../database/website/games.json',{cache:'no-cache',signal:controller.signal});if(!response.ok)throw Error('遊戲清單無法讀取');list=await response.json();}finally{clearTimeout(timer);}entry=Array.isArray(list)?list.find(game=>game.id===id):null;if(entry?.play){play=S.normalize(id,entry.play);apply();return{...resolveAssets(play.config),title:entry.name,description:entry.description};}
 const response=await fetch(fallback,{cache:'no-cache'});if(!response.ok)throw Error('遊戲設定無法讀取');const config=await response.json();apply();return config;}
 window.ShiGaiGameConfig=Object.freeze({load,entry:()=>entry?S.clone(entry):null,apply});})();
+
+(() => {
+  'use strict';
+  const room = document.querySelector('.memory-room,.mine-room,.arcade-room,.wheel-room');
+  if (!room) return;
+  const header = room.querySelector(':scope > header');
+  const aside = room.querySelector('aside.settings,aside.wheel-settings');
+  if (!header || !aside) return;
+  document.body.classList.add('game-compact');
+  const title = header.querySelector('h1');
+  const description = header.querySelector('#gameDescription,#wheelDescription');
+  const back = room.querySelector(':scope > .back-link');
+  const wheel = room.classList.contains('wheel-room');
+  const toolbar = room.querySelector('.toolbar');
+  function button(label, text) {
+    const node = document.createElement('button');
+    node.type = 'button'; node.textContent = text; node.setAttribute('aria-label', label);
+    return node;
+  }
+  function modal(id, label) {
+    const dialog = document.createElement('dialog');
+    dialog.id = id; dialog.className = 'game-info-dialog';
+    dialog.setAttribute('aria-labelledby', id + 'Title');
+    const bar = document.createElement('div'); bar.className = 'game-info-heading';
+    const heading = document.createElement('h2'); heading.id = id + 'Title'; heading.textContent = label;
+    const close = button('關閉' + label, '×'); close.className = 'game-info-close';
+    close.addEventListener('click', () => dialog.close());
+    const content = document.createElement('div'); content.className = 'game-info-content';
+    bar.append(heading, close); dialog.append(bar, content); document.body.append(dialog);
+    dialog.addEventListener('click', e => { if (e.target !== dialog) return; const r = dialog.getBoundingClientRect(); if(e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dialog.close(); });
+    return { dialog, content };
+  }
+  const help = modal('gameHelp', '玩法說明');
+  const options = modal('gameOptions', wheel ? '轉盤選項' : '關卡與設定');
+  const helpButton = button('查看玩法說明', '?'); helpButton.id = 'gameHelpButton';
+  const optionsButton = button(wheel ? '編輯轉盤選項' : '開啟關卡與設定', wheel ? '選項' : toolbar?.querySelector('select') ? '關卡' : '設定'); optionsButton.id = 'gameOptionsButton';
+  function open(target) {
+    window.dispatchEvent(new Event('shigai:navigation-open'));
+    if (!target.open) target.showModal();
+  }
+  helpButton.addEventListener('click', () => open(help.dialog));
+  optionsButton.addEventListener('click', () => open(options.dialog));
+  if (description) help.content.append(description);
+  for (const node of [...header.querySelectorAll('.eyebrow')]) node.remove();
+  if (back) { back.setAttribute('aria-label', back.textContent.trim()); back.textContent = '←'; header.prepend(back); }
+  header.append(helpButton, optionsButton);
+  if (title) title.title = title.textContent;
+  if (wheel) {
+    options.content.append(aside);
+    for (const node of room.querySelectorAll('.pointer-hint,.gesture-hint')) help.content.append(node);
+  } else {
+    help.content.append(aside);
+    const controls = document.createElement('div'); controls.className = 'game-option-controls';
+    for (const node of [...(toolbar?.children || [])]) {
+      if (node.matches('label') || ['restart','restartButton','nextLevel','nextButton'].includes(node.id)) controls.append(node);
+    }
+    const size = room.querySelector('.size-label'); if (size) controls.append(size);
+    options.content.append(controls);
+    if (!controls.children.length) optionsButton.hidden = true;
+    for (const node of room.querySelectorAll('.target,.board-hint,#puzzleSourceNote')) help.content.append(node);
+  }
+  // Nodes are moved, not cloned: existing IDs, uploads, state and Studio copy continue to work.
+  const area = room.querySelector('.play-area,.wheel-play');
+  const stage = room.querySelector('.board-wrap,.board-viewport,.stage-wrap,#questionArea,.wheel-stage');
+  let pending = false;
+  function fit() {
+    pending = false; if (!stage || !area) return;
+    const controls = room.querySelector('#gameControls,.play-controls');
+    const tail = wheel ? (controls?.getBoundingClientRect().height || 90) + 64 : (controls?.getBoundingClientRect().height || 0) + (controls?.children.length ? 18 : 0) + 18;
+    const height = Math.max(200, Math.floor((window.visualViewport?.height || innerHeight) - (stage.getBoundingClientRect().top + scrollY) - tail));
+    const value = height + 'px'; if (room.style.getPropertyValue('--play-height') !== value) room.style.setProperty('--play-height', value);
+    const board = room.querySelector('.board-wrap .board,.sokoban-board');
+    if (board) {
+      const style = getComputedStyle(board), cols = board.classList.contains('sokoban-board') ? Number(style.getPropertyValue('--cols')) : Number(style.getPropertyValue(innerWidth <= 800 ? '--mobile-columns' : '--columns')) || 4;
+      const rows = Math.max(1, Math.ceil(board.children.length / cols));
+      const width = board.classList.contains('sokoban-board') ? Math.max(cols * 32, height * cols / rows) : Math.max(cols * 48, (height - (rows - 1) * 6) / rows * .75 * cols + (cols - 1) * 6);
+      board.style.maxWidth = Math.floor(Math.min(area.clientWidth, width)) + 'px';
+    }
+  }
+  function schedule() { if (!pending) { pending = true; requestAnimationFrame(fit); } }
+  if (window.ResizeObserver) { const observer = new ResizeObserver(schedule); observer.observe(header); if (area) observer.observe(area); }
+  if (stage) new MutationObserver(schedule).observe(stage, {childList:true,subtree:true});
+  window.addEventListener('resize', schedule); window.visualViewport?.addEventListener('resize', schedule);
+  schedule();
+})();

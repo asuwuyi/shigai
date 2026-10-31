@@ -1204,6 +1204,244 @@
           "translations": {}
         },
         "metadata": {}
+      },
+      {
+        "id": "object-local-1793469012869",
+        "order": 3,
+        "type": "character",
+        "name": "我騎車",
+        "media": {
+          "src": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "16bd73612327b1b09b965f85c063e456f1e88b1d764aabe5752618d5e1091147",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.855,
+          "y": 0.798
+        },
+        "scale": 0.259,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.855,
+              "y": 0.798
+            },
+            "scale": 0.259,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "about",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": true,
+          "duration": 20,
+          "loop": true,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": [
+              {
+                "offset": 0,
+                "position": {
+                  "x": 0.214,
+                  "y": 0.006
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              },
+              {
+                "offset": 0.5,
+                "position": {
+                  "x": -0.925,
+                  "y": -0.002
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": true
+              },
+              {
+                "offset": 1,
+                "position": {
+                  "x": 0.214,
+                  "y": 0.001
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              }
+            ]
+          },
+          "channels": {
+            "landscape": {
+              "position": {
+                "enabled": true,
+                "keyframes": [
+                  {
+                    "offset": 0,
+                    "value": {
+                      "x": 0.214,
+                      "y": 0.006
+                    }
+                  },
+                  {
+                    "offset": 0.5,
+                    "value": {
+                      "x": -0.925,
+                      "y": -0.002
+                    }
+                  },
+                  {
+                    "offset": 1,
+                    "value": {
+                      "x": 0.214,
+                      "y": 0.001
+                    }
+                  }
+                ]
+              },
+              "scale": {
+                "enabled": true,
+                "keyframes": [
+                  {
+                    "offset": 0,
+                    "value": 1
+                  },
+                  {
+                    "offset": 0.5,
+                    "value": 1
+                  },
+                  {
+                    "offset": 1,
+                    "value": 1
+                  }
+                ]
+              },
+              "rotation": {
+                "enabled": true,
+                "keyframes": [
+                  {
+                    "offset": 0,
+                    "value": 0
+                  },
+                  {
+                    "offset": 0.5,
+                    "value": 0
+                  },
+                  {
+                    "offset": 1,
+                    "value": 0
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      }
+    ],
+    "livingEvents": [
+      {
+        "displayMode": "continuous",
+        "interval": 5,
+        "id": "binding-885e77f9-4039-4fc2-b752-6607390e2a63",
+        "name": "我打招呼",
+        "trigger": "both",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "Hello",
+          "按我"
+        ],
+        "replies": [
+          "好久不見",
+          "右上角有導覽喔",
+          "今天過得好嗎"
+        ],
+        "duration": 8,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 0,
+        "objectId": "object-local-1793469012869",
+        "mediaObjectId": "",
+        "enabled": true
+      },
+      {
+        "displayMode": "continuous",
+        "interval": 5,
+        "id": "binding-f47fe4a6-4574-4a0f-9f7e-f10257ce1cdf",
+        "name": "我打招呼",
+        "trigger": "both",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "Hello",
+          "按我"
+        ],
+        "replies": [
+          "好久不見",
+          "右上角有導覽喔",
+          "今天過得好嗎"
+        ],
+        "duration": 8,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 0,
+        "objectId": "object-local-1792949868469",
+        "mediaObjectId": "",
+        "enabled": true
       }
     ],
     "metadata": {
@@ -1212,7 +1450,7 @@
       "mobileViewport": {
         "enabled": true,
         "width": 1.8,
-        "initialX": 0.502,
+        "initialX": 0.504,
         "autoPan": true,
         "speed": 9,
         "weatherParallax": true
@@ -1220,6 +1458,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-31T13:29:20.015Z"
+    "updatedAt": "2026-10-31T18:26:50.941Z"
   }
 ]
