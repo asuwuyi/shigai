@@ -940,7 +940,11 @@
             "fallback": false,
             "periods": [],
             "periodVersion": 2,
-            "weathers": []
+            "weathers": [
+              "rain",
+              "storm"
+            ],
+            "followWeather": true
           }
         },
         {
@@ -973,7 +977,10 @@
             "fallback": false,
             "periods": [],
             "periodVersion": 2,
-            "weathers": []
+            "weathers": [
+              "fog"
+            ],
+            "followWeather": true
           }
         },
         {
@@ -1006,7 +1013,10 @@
             "fallback": false,
             "periods": [],
             "periodVersion": 2,
-            "weathers": []
+            "weathers": [
+              "storm"
+            ],
+            "followWeather": true
           }
         }
       ]
