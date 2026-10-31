@@ -1,73 +1,79 @@
 (async function(){
-  'use strict';
-  const $=id=>document.getElementById(id), M=window.OdorModel;
-  let sources=[], records=[], selected='', exported=false;
-  const wind=()=>({from:Number($('windFrom').value),speed:Number($('windSpeed').value)});
-  function validWind(){const w=wind();return Number.isFinite(w.speed)&&$('windSpeed').value!==''&&w.speed>=0&&w.speed<=20;}
-  function element(tag,text,className){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(className)e.className=className;return e;}
-  function render(){
-    const w=wind(), valid=validWind(), calm=w.speed<.5;
-    $('windLabel').textContent=`${M.direction(w.from)}風 · ${w.from}°`;
-    $('windFrom').setAttribute('aria-valuetext',`${M.direction(w.from)}風，從${w.from}度吹來`);
-    const candidates=M.analyze(sources,valid?w:{from:NaN,speed:0},Number($('radius').value));
-    $('windSector').setAttribute('d',M.sector(w.from,Number($('radius').value)*50));
-    $('windSector').style.display=valid&&!calm?'':'none';
-    $('windArrow').setAttribute('transform',`rotate(${w.from} 300 300)`);
-    $('windArrow').style.display=valid&&!calm?'':'none';
-    const count=candidates.filter(s=>s.upwind).length, assessment=$('assessment');
-    assessment.classList.toggle('caution',count>0||calm||!valid);
-    const title=!valid?'請輸入有效風速':calm?'風太弱，暫不判斷方向':count?`${count} 個示範設施位於上風處`:'目前扇形內沒有示範設施';
-    const description=!valid?'風速範圍為 0～20 m/s。':calm?'微風時方向不穩定，不能可靠地用扇形縮小範圍。':count?'如果真的聞到異味，可留意室外氣味並視需要關窗。這不是異味預報。':'沒有候選不代表沒有異味，也可能有未收錄的來源。';
-    assessment.replaceChildren(element('strong',title),element('span',description));
-    $('sourceMarkers').replaceChildren();$('sources').replaceChildren();
-    for(const s of candidates){
-      const x=300+s.east*50,y=300-s.north*50;
-      const g=document.createElementNS('http://www.w3.org/2000/svg','g'),circle=document.createElementNS(g.namespaceURI,'circle'),text=document.createElementNS(g.namespaceURI,'text');
-      circle.setAttribute('cx',x);circle.setAttribute('cy',y);circle.setAttribute('r','15');circle.setAttribute('class',`source-dot${s.upwind?' source-upwind':''}${selected===s.id?' source-selected':''}`);
-      text.setAttribute('x',x);text.setAttribute('y',y+6);text.setAttribute('text-anchor','middle');text.setAttribute('class','source-label');text.textContent=s.id.toUpperCase();g.append(circle,text);$('sourceMarkers').append(g);
-      const button=element('button',s.name,'source-button');button.type='button';button.dataset.upwind=String(s.upwind);button.setAttribute('aria-pressed',String(selected===s.id));button.dataset.source=s.id;
-      button.append(element('span',`${s.distance.toFixed(1)} km · ${M.direction(s.bearing)}方${s.upwind?' · 上風處':''}`));
-      button.onclick=()=>{const focus=s.id;selected=selected===s.id?'':s.id;render();document.querySelector(`[data-source="${focus}"]`).focus({preventScroll:true});};$('sources').append(button);
-    }
-    const aqi=Number($('aqiScenario').value);$('aqiNumber').textContent=aqi;$('aqiStatus').textContent=$('aqiScenario').selectedOptions[0].textContent.split(' · ')[1];
-    $('aqiNumber').style.color=aqi<=50?'#3d6357':aqi<=100?'#846724':aqi<=150?'#a35725':'#a53c35';
-  }
-  const dateFormatter=new Intl.DateTimeFormat('zh-TW',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Taipei',hour12:false});
-  function renderHistory(){
-    $('recordCount').textContent=records.length;$('exportRecords').disabled=records.length===0;
-    const yes=records.filter(r=>r.odor),no=records.length-yes.length;
-    $('summary').textContent=records.length?`有異味 ${yes.length} 次／沒有異味 ${no} 次。這些是手動回報搭配模擬風況，尚不能推算真實風險機率。`:'先記錄一次，看看氣味筆記的樣子。';
-    $('history').replaceChildren();
-    if(!records.length){const row=element('tr'),cell=element('td','目前還沒有紀錄。');cell.colSpan=4;row.append(cell);$('history').append(row);return;}
-    for(const r of [...records].sort((a,b)=>Date.parse(b.time)-Date.parse(a.time))){const row=element('tr');[dateFormatter.format(new Date(r.time))+'（台灣）',r.odor?`${r.type} · ${r.intensity}/5`:'沒有異味',`${M.direction(r.wind.from)}風 / ${r.wind.speed} m/s`,r.note||'—'].forEach(value=>row.append(element('td',value)));$('history').append(row);}
-  }
-  function record(odor){
-    if(!validWind()){ $('recordMessage').textContent='請先輸入有效風速（0～20 m/s），再記錄。';$('windSpeed').focus();return; }
-    if(records.length>=500){$('recordMessage').textContent='已達 500 筆上限，請先匯出紀錄；重新開啟本頁可開始新的紀錄。';return;}
-    records.push({id:crypto.randomUUID(),time:new Date().toISOString(),odor,intensity:odor?Number($('intensity').value):0,type:odor?$('odorType').value:'無',note:$('note').value.trim(),simulated:true,wind:wind(),aqi:Number($('aqiScenario').value)});
-    exported=false;$('note').value='';renderHistory();$('recordMessage').textContent='已加入本頁紀錄（附模擬風況）。離開前請匯出 JSON 保存。';
-  }
-  ['windFrom','windSpeed','radius','aqiScenario'].forEach(id=>$(id).addEventListener('input',render));
-  document.querySelectorAll('[data-preset]').forEach(button=>button.onclick=()=>{const [from,speed]=button.dataset.preset.split(',');$('windFrom').value=from;$('windSpeed').value=speed;render();});
-  $('recordOdor').onclick=()=>record(true);$('recordClear').onclick=()=>record(false);
-  $('exportRecords').onclick=()=>{
-    const data={format:'shi-gai-odor-demo-v1',exportedAt:new Date().toISOString(),notice:'所有風況、AQI與設施皆為模擬，非真實監測或溯源證據。',records};
-    const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'}),url=URL.createObjectURL(blob),a=element('a');a.href=url;a.download=`odor-demo-${new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}.json`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);exported=true;$('recordMessage').textContent='已產生 JSON 下載，請確認檔案已保存；下次用「匯入 JSON」讀回。';
-  };
-  $('importRecords').onclick=()=>$('importFile').click();
-  $('importFile').onchange=async event=>{
-    const file=event.target.files[0];if(!file)return;
-    $('importRecords').disabled=true;
-    try{
-      if(file.size>1024*1024)throw Error('檔案過大，請使用 1 MB 以內的 JSON。');
-      const incoming=M.validateImport(JSON.parse(await file.text()));
-      const existing=new Set(records.map(r=>r.id)),additions=incoming.filter(r=>!existing.has(r.id));
-      if(records.length+additions.length>500)throw Error('合併後超過 500 筆，未匯入任何資料。');
-      records.push(...additions);if(additions.length)exported=false;renderHistory();$('recordMessage').textContent=`已合併 ${additions.length} 筆，略過 ${incoming.length-additions.length} 筆重複紀錄。`;
-    }catch(error){$('recordMessage').textContent=error instanceof SyntaxError?'JSON 無法解析，未匯入任何資料。':error.message;}
-    finally{event.target.value='';$('importRecords').disabled=false;}
-  };
-  addEventListener('beforeunload',event=>{if(records.length&&!exported){event.preventDefault();event.returnValue='';}});
-  try{const response=await fetch('demo.json');if(!response.ok)throw Error('fixture');const data=await response.json();if(data.simulated!==true||!Array.isArray(data.sources))throw Error('fixture');sources=data.sources;render();renderHistory();}
-  catch{ $('assessment').textContent='示範設施載入失敗，請重新整理。';$('recordOdor').disabled=true;$('recordClear').disabled=true; }
+'use strict';
+const $=id=>document.getElementById(id),M=window.OdorModel;
+const state={providers:null,air:[],weather:[],forecast:[],position:null,wind:null,airStation:null,sources:[],records:[],exported:true,map:null,layers:null,facilityLayers:null,picking:false,revision:0,facilityController:null,facilityBusy:false,facilityLastStart:0,facilityCache:new Map(),attempts:{},errors:{},loaded:{},selected:''};
+const dateTime=new Intl.DateTimeFormat('zh-TW',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Taipei',hour12:false}),day=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'});
+const node=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;};
+const formatTime=t=>M.time(t)===null?'時間不明':dateTime.format(new Date(M.time(t)))+'（台灣）';
+const positionText=p=>p?`${p.lat.toFixed(3)}, ${p.lon.toFixed(3)}`:'—';
+const field=()=>Number($('radius').value);
+const link=(text,url)=>{const a=node('a',text);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;};
+async function getJSON(url,timeout=20000,options={}){const response=await fetch(url,{...options,signal:options.signal||AbortSignal.timeout(timeout),credentials:'omit',referrerPolicy:'strict-origin-when-cross-origin'});if(!response.ok)throw Error(`HTTP ${response.status}`);return response.json();}
+function status(){const labels={weather:'氣象署風況',air:'環境部空品',forecast:'空品預報'};const text=Object.keys(labels).map(k=>`${labels[k]}：${state.errors[k]?'讀取失敗，可重試':state.loaded[k]?'已接入':'載入中'}`);$('dataStatus').textContent=text.join(' ／ ');}
+function initMap(){
+ if(!window.L){$('mapMessage').textContent='地圖元件無法載入，仍可使用測站或座標設定。';return;}
+ state.map=L.map('liveMap',{scrollWheelZoom:false}).setView([23.7,120.9],7);L.tileLayer(state.providers.tiles.url,{maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>',referrerPolicy:'strict-origin-when-cross-origin',keepBuffer:1}).on('tileerror',()=>{$('mapMessage').textContent='部分地圖圖磚未載入；可稍後移動地圖重試，或繼續使用測站／座標資料。';}).on('load',()=>{if(!state.picking)$('mapMessage').textContent='北方朝上。拖曳瀏覽、使用＋／－縮放；需要改位置時按「在地圖選觀察點」。';}).addTo(state.map);
+ L.control.scale({imperial:false}).addTo(state.map);state.layers=L.layerGroup().addTo(state.map);state.facilityLayers=L.layerGroup().addTo(state.map);
+ state.map.on('click',e=>{if(!state.picking)return;state.picking=false;$('pickMap').setAttribute('aria-pressed','false');$('liveMap').classList.remove('map-picking');setPosition({lat:e.latlng.lat,lon:e.latlng.lng},'地圖選點');});
+}
+function marker(p,color,label,layer,radius=6){const m=L.circleMarker([p.lat,p.lon],{radius,color,weight:2,fillColor:color,fillOpacity:.75}).bindTooltip(node('span',label));layer.addLayer(m);return m;}
+function drawBase(){if(!state.map||!state.position)return;state.layers.clearLayers();const p=state.position,w=state.wind;
+ L.circle([p.lat,p.lon],{radius:field()*1000,color:'#6c7c5b',weight:1,dashArray:'5 7',fillOpacity:.025}).addTo(state.layers);
+ marker(p,'#3d6357','觀察點（'+positionText(p)+'）',state.layers,9);
+ if(w){marker(w,'#477f97',`${w.provider} ${w.name}站`,state.layers,6);if(w.speed>=.5&&w.from!==null){const points=[[p.lat,p.lon]];for(let a=w.from-35;a<=w.from+35;a+=5){const d=M.destination(p,a,field());points.push([d.lat,d.lon]);}L.polygon(points,{color:'#a97d32',weight:1,fillColor:'#deb55d',fillOpacity:.2,interactive:false}).addTo(state.layers);
+ const a=M.destination(p,w.from,field()*.75),b=M.destination(p,w.from,field()*.25),left=M.destination(b,w.from-25,field()*.15),right=M.destination(b,w.from+25,field()*.15);L.polyline([[a.lat,a.lon],[b.lat,b.lon]],{color:'#3d6357',weight:3,interactive:false}).addTo(state.layers);L.polyline([[left.lat,left.lon],[b.lat,b.lon],[right.lat,right.lon]],{color:'#3d6357',weight:3,interactive:false}).addTo(state.layers);}}
+ if(state.airStation&&(!w||state.airStation.id!==w.id||w.provider!=='環境部'))marker(state.airStation,'#476c9a',`環境部 ${state.airStation.name}站`,state.layers);
+}
+function renderFacilities(){
+ $('sources').replaceChildren();state.facilityLayers?.clearLayers();if(!state.position)return;
+ const candidates=M.analyze(state.sources,state.position,state.wind,field());
+ for(const s of candidates){const card=node('div',undefined,'source-card');card.dataset.upwind=String(s.upwind);card.dataset.source=s.id;card.setAttribute('aria-current',String(state.selected===s.id));const button=node('button',s.name);button.type='button';button.append(node('span',`${s.type} · ${s.distance.toFixed(1)} km · ${M.direction(s.bearing)}方${s.upwind?' · 上風處':''}`));button.append(node('span',s.controls+'列管・管制編號 '+s.id));card.append(button,link('查看官方資料集 ↗',s.url));$('sources').append(card);
+ let m;if(state.map)m=marker(s,s.upwind?'#a8792b':'#86947d',`${s.name}（${s.type}，不是已確認排放源）`,state.facilityLayers);
+ button.onclick=()=>{state.selected=s.id;document.querySelectorAll('.source-card').forEach(c=>c.setAttribute('aria-current',String(c.dataset.source===s.id)));m?.openTooltip();state.map?.panTo([s.lat,s.lon]);};}
+}
+function assessment(){const box=$('assessment');box.classList.remove('caution');if(!state.position){box.textContent='尚未設定觀察位置。';return;}const w=state.wind;if(!w){box.textContent='附近沒有符合時效與距離的有效風況，暫停方向分析。';box.classList.add('caution');return;}if(w.speed<.5){box.textContent='目前測站風太弱，風向不穩定，暫停候選方向判斷。';box.classList.add('caution');return;}if(!state.sources.length){box.textContent='風況已就緒。可按「查詢附近設施」取得官方名冊線索；尚未建立異味預測。';return;}const n=M.analyze(state.sources,state.position,w,field()).filter(s=>s.upwind).length;box.replaceChildren(node('strong',n?`${n} 個列管事業位於上風處`:'目前列管事業候選未落在來風扇形內'),node('span',n?'只表示位置符合來風方向，不能確認正在排放或已造成異味。':'不代表附近沒有異味來源，名冊或座標可能不完整。'));box.classList.toggle('caution',n>0);}
+function renderForecast(){
+ $('forecastDays').replaceChildren();const county=state.airStation?.county,area=Object.entries(state.providers.areas).find(([,counties])=>counties.includes(county))?.[0];if(!area){$('forecastArea').textContent='設定位置後，依附近空品站所在縣市對應空品區。';$('forecastText').textContent='尚未選定空品區。';return;}
+ const dates=state.forecast.filter(r=>r.area===area&&M.time(r.publishtime)!==null&&M.time(r.publishtime)<=Date.now()+300000).sort((a,b)=>M.time(b.publishtime)-M.time(a.publishtime));
+ const latest=dates[0];if(!latest||!M.fresh(latest.publishtime,Date.now(),2880)){$('forecastArea').textContent=`${area}空品區：預報缺漏或已過期。`;$('forecastText').textContent='請查看環境部官方預報。';return;}
+ const today=day.format(new Date()),end=day.format(new Date(Date.now()+2*86400000)),days=dates.filter(r=>r.publishtime===latest.publishtime&&r.forecastdate>=today&&r.forecastdate<=end).sort((a,b)=>a.forecastdate.localeCompare(b.forecastdate));
+ $('forecastArea').textContent=`${area}空品區（依${state.airStation.name}站所屬縣市）・發布 ${formatTime(latest.publishtime)}`;
+ const seen=new Set();for(const r of days){if(seen.has(r.forecastdate))continue;seen.add(r.forecastdate);const a=M.number(r.aqi);if(a===null||a<0||a>500)continue;const line=node('div',undefined,'forecast-day');line.append(node('span',r.forecastdate.slice(5)+' · '+M.aqiLabel(a)),node('strong',String(a)));$('forecastDays').append(line);}if(!seen.size)$('forecastDays').textContent='目前沒有未來三天可用的預報數值。';$('forecastText').textContent=String(latest.content||'尚無說明');
+}
+function render(){
+ if(!state.providers)return;status();const p=state.position,now=Date.now();state.wind=null;state.airStation=null;
+ if(p){const cw=M.chooseWind(state.weather,p,now,state.providers.limits.windDistanceKm),env=M.chooseWind(state.air,p,now,state.providers.limits.windDistanceKm);state.wind=cw?{...cw,provider:'中央氣象署'}:env?{...env,provider:'環境部'}:null;const nearest=M.nearby(state.air,p)[0];if(nearest&&nearest.distance<=state.providers.limits.aqiDistanceKm)state.airStation=nearest;}
+ const w=state.wind;$('windDisplay').replaceChildren(node('strong',w?w.speed<.5?'微風 / 近乎無風':`${M.direction(w.from)}風 · ${Math.round(w.from)}°`:'—'),node('span',w?`${w.speed.toFixed(1)} m/s${w.provider==='環境部'?'（氣象署無有效值，使用空品站風況）':''}`:p?'附近有效風況缺漏或過期':'設定位置後比對氣象署測站'));
+ $('windStation').textContent=w?`${w.provider} ${w.name}站・距觀察點 ${w.distance.toFixed(1)} km\n觀測 ${formatTime(w.observedAt)}；測站風不等於住家實際風。`:'只採用附近 30 公里、3 小時內有效值。';
+ const air=state.airStation,airFresh=air&&M.fresh(air.observedAt,now,state.providers.limits.aqiAgeMinutes);$('aqiNumber').textContent=air?.aqi??'—';$('aqiStatus').textContent=air?M.aqiLabel(air.aqi):'尚無附近測站資料';$('airTag').textContent=air?airFresh?'官方測站':'資料過期':p?'50 km 內無測站':'待設定位置';$('aqiNumber').style.color=air?.aqi===null||!air?'#756b5c':air.aqi<=50?'#3d6357':air.aqi<=100?'#846724':air.aqi<=150?'#a35725':'#a53c35';
+ $('airStation').textContent=air?`${air.county} ${air.name}站・距觀察點 ${air.distance.toFixed(1)} km\n發布 ${formatTime(air.observedAt)}${!airFresh?'；已超過 3 小時，請勿當作即時值。':''}`:'空品測站可能距離住家較遠，僅供區域參考。';$('pm25').textContent=`PM2.5：${air?.pm25??'—'}${air?.pm25!==null&&air?' μg/m³':''}`;
+ const caution=airFresh&&air.aqi!==null&&air.aqi>100;$('airAdvice').textContent=caution?`附近測站 AQI ${air.aqi}（${M.aqiLabel(air.aqi)}），請留意官方空品特報。這不是異味警報。`:'空品良好，也可能聞到臭味；AQI 不涵蓋所有異味物質。';$('airAdvice').classList.toggle('warning',!!caution);
+ drawBase();renderFacilities();assessment();renderForecast();$('recordOdor').disabled=!p;$('recordClear').disabled=!p;$('searchFacilities').disabled=!p||state.facilityBusy;
+}
+function populateStations(){const old=$('county').value,counties=[...new Set(state.air.map(s=>s.county))].sort((a,b)=>a.localeCompare(b,'zh-TW'));$('county').replaceChildren(new Option('請選縣市',''),...counties.map(c=>new Option(c,c)));$('county').disabled=!counties.length;if(counties.includes(old))$('county').value=old;stationOptions();}
+function stationOptions(){const previous=$('referenceStation').value,list=state.air.filter(s=>s.county===$('county').value);$('referenceStation').replaceChildren(new Option('請選參考測站',''),...list.map(s=>new Option(s.name,s.id)));if(list.some(s=>s.id===previous))$('referenceStation').value=previous;$('referenceStation').disabled=!list.length;$('useStation').disabled=!$('referenceStation').value;}
+async function refresh(force=false){const now=Date.now(),jobs=[];for(const key of ['air','weather','forecast']){const ttl=key==='forecast'?3600000:900000;if(now-(state.attempts[key]||0)<(force?60000:ttl))continue;state.attempts[key]=now;const cfg=key==='air'?state.providers.aqi:state.providers[key];jobs.push((async()=>{try{const data=await getJSON(cfg.url,key==='weather'?25000:20000);if(key==='air'){state.air=M.normalizeAir(data);populateStations();}else if(key==='weather')state.weather=M.normalizeWeather(data);else{const rows=Array.isArray(data)?data:data.records;if(!Array.isArray(rows))throw Error('預報格式變更');state.forecast=rows.filter(r=>typeof r.area==='string'&&typeof r.publishtime==='string'&&typeof r.forecastdate==='string');}state.loaded[key]=Date.now();delete state.errors[key];}catch(error){state.errors[key]=true;console.warn('OdorRadar provider '+key+': '+error.name+' '+String(error.message).replace(/https?:\/\/[^ ]+/g,'[provider URL]'));if(key==='air'&&!state.air.length){$('county').replaceChildren(new Option('測站讀取失敗，可更新重試',''));$('locationMessage').textContent='空品站暫時無法讀取，仍可輸入座標或使用地圖選點。';}}render();})());}
+ if(!jobs.length){if(force)$('dataStatus').textContent='已在最近一分鐘提出更新，請稍後再試；資料時間仍顯示於各測站。';return;}$('refreshData').disabled=true;await Promise.allSettled(jobs);$('refreshData').disabled=false;status();}
+function setPosition(p,label){p={lat:Number(p.lat.toFixed(3)),lon:Number(p.lon.toFixed(3))};if(!M.position(p)){$('locationMessage').textContent='目前支援臺灣及離島範圍（緯度 20–27、經度 118–123.5）。';return;}state.position=p;state.revision++;state.facilityController?.abort();state.facilityBusy=false;state.sources=[];state.selected='';$('latitude').value=p.lat.toFixed(3);$('longitude').value=p.lon.toFixed(3);$('locationTag').textContent=label;$('locationMessage').textContent=`觀察點：${positionText(p)}（${label}）。這是本頁位置，不會自動保存。`;$('facilityStatus').textContent='觀察位置已更新，請重新查詢附近設施。';state.map?.setView([p.lat,p.lon],13);render();}
+async function searchFacilities(){
+ if(!state.position||state.facilityBusy)return;const p={...state.position},radius=field(),revision=state.revision,key=JSON.stringify(M.facilityBounds(p,radius)),cached=state.facilityCache.get(key);
+ if(cached&&Date.now()-cached.at<600000){state.sources=cached.sources;$('facilityStatus').textContent=cached.message+'（本頁 10 分鐘快取）';render();return;}
+ if(Date.now()-state.facilityLastStart<30000){$('facilityStatus').textContent='請間隔 30 秒再查詢，避免重複請求。';return;}state.facilityLastStart=Date.now();state.facilityBusy=true;const controller=new AbortController();state.facilityController=controller;const timer=setTimeout(()=>controller.abort(),30000);$('searchFacilities').disabled=true;$('facilityStatus').textContent='正在查詢環境部空污／水污列管事業，最多等待 30 秒…';
+ try{const responses=await Promise.all(['isair','iswater'].map(kind=>getJSON(M.facilityUrl(state.providers.facilities.url,p,radius,kind),30000,{signal:controller.signal})));if(revision!==state.revision)return;const rows=responses.map(r=>Array.isArray(r)?r:r.records);if(rows.some(r=>!Array.isArray(r)))throw Error('invalid official response');const unique=M.normalizeFacilities(rows.flat()),within=M.analyze(unique,p,null,radius),truncated=rows.some(r=>r.length>=501),limited=within.length>200;state.sources=within.slice(0,200);const message='取得 '+within.length+' 個半徑內現行空污／水污列管事業'+(limited?'；依距離顯示最近 200 筆':'')+(truncated?'。查詢達資料上限，名單不完整，建議改用 3 公里':'')+'。查詢取得時間：'+formatTime(new Date().toISOString())+'。';state.facilityCache.set(key,{sources:state.sources,at:Date.now(),message});if(state.facilityCache.size>10)state.facilityCache.delete(state.facilityCache.keys().next().value);$('facilityStatus').textContent=message;}
+ catch{if(revision===state.revision){state.sources=[];$('facilityStatus').textContent='官方設施查詢暫時失敗或逾時，沒有用示範資料替代。請稍後重試，或開啟官方列管污染源查詢。';}}
+ finally{clearTimeout(timer);if(revision===state.revision){state.facilityBusy=false;render();}}
+}
+function renderHistory(){const list=state.records,live=list.filter(r=>r.mode==='live'),yes=live.filter(r=>r.odor).length;$('recordCount').textContent=list.length;$('exportRecords').disabled=!list.length;$('summary').textContent=list.length?`正式觀察 ${live.length} 筆：有異味 ${yes} 次／無異味 ${live.length-yes} 次。另有 ${list.length-live.length} 筆舊示範紀錄，分開計算，尚不推算風險機率。`:'先設定位置，再記下一次觀察。';$('history').replaceChildren();if(!list.length){const row=node('tr'),cell=node('td','目前還沒有紀錄。');cell.colSpan=5;row.append(cell);$('history').append(row);return;}
+ for(const r of [...list].sort((a,b)=>M.time(b.time)-M.time(a.time))){const row=node('tr');const values=[`${formatTime(r.time)}\n${r.mode==='demo'?'舊示範紀錄':positionText(r.position)}`,r.odor?`${r.type} · ${r.intensity}/5`:'沒有異味',r.wind?`${M.direction(r.wind.from)}風 / ${r.wind.speed} m/s\n${r.wind.provider} ${r.wind.station}\n${r.wind.observedAt?formatTime(r.wind.observedAt):'模擬時間'}`:'風況缺值／過期',r.air?.aqi??'—',r.note||'—'];values.forEach(v=>row.append(node('td',String(v))));$('history').append(row);}}
+function record(odor){if(!state.position)return;if(state.records.length>=500){$('recordMessage').textContent='已達 500 筆上限，請先匯出；重新開啟頁面可開始新的一批。';return;}render();const w=state.wind,a=state.airStation,airFresh=a&&M.fresh(a.observedAt,Date.now());state.records.push({id:crypto.randomUUID(),time:new Date().toISOString(),mode:'live',position:{...state.position},odor,intensity:odor?Number($('intensity').value):0,type:odor?$('odorType').value:'無',note:$('note').value.trim(),wind:w?{from:w.from,speed:w.speed,station:w.name,provider:w.provider,observedAt:w.observedAt}:null,air:airFresh?{aqi:a.aqi,station:a.name,observedAt:a.observedAt}:null});state.exported=false;$('note').value='';renderHistory();$('recordMessage').textContent='已記下觀察，附上目前可用的官方資料；離開前請匯出保存。';}
+$('county').onchange=stationOptions;$('referenceStation').onchange=()=>$('useStation').disabled=!$('referenceStation').value;
+$('useStation').onclick=()=>{const s=state.air.find(s=>s.id===$('referenceStation').value);if(s)setPosition(s,`${s.name}測站參考點，非住家`);};
+$('useCoordinates').onclick=()=>{const lat=M.number($('latitude').value),lon=M.number($('longitude').value);if(lat===null||lon===null||!M.position({lat,lon})){$('locationMessage').textContent='請輸入臺灣範圍內的有效經緯度。';return;}setPosition({lat,lon},'自訂座標');};
+$('pickMap').onclick=()=>{if(!state.map){$('locationMessage').textContent='地圖未載入，請改用座標。';return;}state.picking=!state.picking;$('pickMap').setAttribute('aria-pressed',String(state.picking));$('liveMap').classList.toggle('map-picking',state.picking);$('mapMessage').textContent=state.picking?'選點模式：請在地圖點一下設定觀察位置；再按一次按鈕可取消。':'已取消選點。';};
+$('locate').onclick=()=>{if(!navigator.geolocation){$('locationMessage').textContent='此瀏覽器不支援定位，請改用測站或座標。';return;}$('locate').disabled=true;$('locationMessage').textContent='等待瀏覽器定位權限，可拒絕並改用測站或座標。';navigator.geolocation.getCurrentPosition(pos=>{$('locate').disabled=false;setPosition({lat:pos.coords.latitude,lon:pos.coords.longitude},'約略定位');},()=>{$('locate').disabled=false;$('locationMessage').textContent='未取得定位；請改選參考測站、輸入座標或地圖選點。';},{enableHighAccuracy:false,timeout:10000,maximumAge:300000});};
+$('radius').onchange=()=>{state.revision++;state.facilityController?.abort();state.facilityBusy=false;state.sources=[];$('facilityStatus').textContent='半徑已變更，請重新查詢設施。';render();};$('searchFacilities').onclick=searchFacilities;$('refreshData').onclick=()=>refresh(true);$('recordOdor').onclick=()=>record(true);$('recordClear').onclick=()=>record(false);
+$('exportRecords').onclick=()=>{const data={format:'shi-gai-odor-observations-v2',exportedAt:new Date().toISOString(),notice:'位置與備註只由使用者自行保存。官方風況／AQI是測站參考，不是污染來源證據；舊demo紀錄另標示。',records:state.records},url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'})),a=node('a');a.href=url;a.download=`odor-observations-${day.format(new Date())}.json`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);state.exported=true;$('recordMessage').textContent='已產生 JSON 下載，請確認已保存。檔案含你選定的觀察位置與備註，分享前請自行檢查。';};
+$('importRecords').onclick=()=>$('importFile').click();$('importFile').onchange=async event=>{const file=event.target.files[0];if(!file)return;$('importRecords').disabled=true;try{if(file.size>1024*1024)throw Error('請選擇 1 MB 以內的 JSON。');const incoming=M.validateImport(JSON.parse(await file.text())),ids=new Set(state.records.map(r=>r.id)),newRows=incoming.filter(r=>!ids.has(r.id));if(state.records.length+newRows.length>500)throw Error('合併後超過 500 筆，未匯入。');state.records.push(...newRows);if(newRows.length)state.exported=false;renderHistory();$('recordMessage').textContent=`已合併 ${newRows.length} 筆、略過 ${incoming.length-newRows.length} 筆重複。舊示範紀錄不列入正式觀察統計。`;}catch(e){$('recordMessage').textContent=e instanceof SyntaxError?'JSON 無法解析，未匯入任何資料。':e.message;}finally{event.target.value='';$('importRecords').disabled=false;}};
+addEventListener('beforeunload',event=>{if(state.records.length&&!state.exported){event.preventDefault();event.returnValue='';}});
+try{state.providers=await getJSON('providers.json?v=live-20261031');initMap();renderHistory();render();await refresh();setInterval(()=>{if(!document.hidden){render();refresh();}},60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden){render();refresh();}});}catch{$('dataStatus').textContent='資料來源設定載入失敗，請重新整理。';$('refreshData').disabled=true;}
 })();

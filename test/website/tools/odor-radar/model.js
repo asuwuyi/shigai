@@ -1,28 +1,38 @@
 (function(root){
-  'use strict';
-  const normalize = n => ((n % 360) + 360) % 360;
-  const names = ['北','東北','東','東南','南','西南','西','西北'];
-  function direction(degrees){return names[Math.round(normalize(degrees)/45)%8];}
-  function analyze(sources, wind, radius){
-    const valid = Number.isFinite(wind.from) && Number.isFinite(wind.speed) && wind.speed >= .5;
-    return sources.map(s=>{const distance=Math.hypot(s.east,s.north),bearing=normalize(Math.atan2(s.east,s.north)*180/Math.PI),difference=Math.abs(((bearing-wind.from+540)%360)-180);
-      return {...s,distance,bearing,difference,upwind:valid&&distance<=radius&&difference<=35};
-    }).sort((a,b)=>Number(b.upwind)-Number(a.upwind)||a.distance-b.distance);
-  }
-  function sector(from,radius){
-    const point = a => [300 + Math.sin(a*Math.PI/180)*radius,300-Math.cos(a*Math.PI/180)*radius];
-    const a=point(from-35), b=point(from+35);
-    return `M300 300 L${a.join(' ')} A${radius} ${radius} 0 0 1 ${b.join(' ')} Z`;
-  }
-  function validateImport(data){
-    if(!data || data.format!=='shi-gai-odor-demo-v1'||!Array.isArray(data.records)||data.records.length>500) throw Error('請選擇本工具匯出的 JSON，最多 500 筆。');
-    const ids=new Set();
-    const records=data.records.map(r=>{
-      if(!r||typeof r.id!=='string'||!/^[a-zA-Z0-9-]{1,80}$/.test(r.id)||ids.has(r.id)||typeof r.time!=='string'||!Number.isFinite(Date.parse(r.time))||typeof r.odor!=='boolean'||!Number.isInteger(r.intensity)||r.intensity<(r.odor?1:0)||r.intensity>(r.odor?5:0)||!['糞便','化學','腐臭','其他','無'].includes(r.type)||(!r.odor&&r.type!=='無')||typeof r.note!=='string'||r.note.length>200||r.simulated!==true||!r.wind||!Number.isFinite(r.wind.from)||r.wind.from<0||r.wind.from>=360||!Number.isFinite(r.wind.speed)||r.wind.speed<0||r.wind.speed>20||!Number.isInteger(r.aqi)||r.aqi<0||r.aqi>500) throw Error('紀錄格式不正確；未匯入任何資料。');
-      ids.add(r.id);return {id:r.id,time:new Date(r.time).toISOString(),odor:r.odor,intensity:r.intensity,type:r.type,note:r.note,simulated:true,wind:{from:r.wind.from,speed:r.wind.speed},aqi:r.aqi};
-    });
-    return records;
-  }
-  const api={normalize,direction,analyze,sector,validateImport};
-  if(typeof module==='object'&&module.exports)module.exports=api; else root.OdorModel=Object.freeze(api);
+'use strict';
+const rad=Math.PI/180, names=['北','東北','東','東南','南','西南','西','西北'];
+const number=v=>v===null||v===undefined||String(v).trim()===''?null:Number.isFinite(Number(v))?Number(v):null;
+const normalize=n=>((n%360)+360)%360;
+const direction=n=>Number.isFinite(n)?names[Math.round(normalize(n)/45)%8]:'不明';
+function position(p){return !!p&&Number.isFinite(p.lat)&&Number.isFinite(p.lon)&&p.lat>=20&&p.lat<=27&&p.lon>=118&&p.lon<=123.5;}
+function distance(a,b){const dlat=(b.lat-a.lat)*rad,dlon=(b.lon-a.lon)*rad,h=Math.sin(dlat/2)**2+Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dlon/2)**2;return 6371*2*Math.atan2(Math.sqrt(Math.min(1,h)),Math.sqrt(Math.max(0,1-h)));}
+function bearing(a,b){const dl=(b.lon-a.lon)*rad;return normalize(Math.atan2(Math.sin(dl)*Math.cos(b.lat*rad),Math.cos(a.lat*rad)*Math.sin(b.lat*rad)-Math.sin(a.lat*rad)*Math.cos(b.lat*rad)*Math.cos(dl))*180/Math.PI);}
+function destination(p,deg,km){const d=km/6371,b=deg*rad,lat=p.lat*rad,lon=p.lon*rad,l=Math.asin(Math.sin(lat)*Math.cos(d)+Math.cos(lat)*Math.sin(d)*Math.cos(b));return {lat:l/rad,lon:(lon+Math.atan2(Math.sin(b)*Math.sin(d)*Math.cos(lat),Math.cos(d)-Math.sin(lat)*Math.sin(l)))/rad};}
+function time(v){if(typeof v!=='string')return null;let s=v.trim().replaceAll('/','-').replace(' ','T');if(/^\d{4}-\d\d-\d\dT\d\d:\d\d(?::\d\d)?$/.test(s))s+='+08:00';const n=Date.parse(s);return Number.isFinite(n)?n:null;}
+function fresh(at,now,maxMinutes=180){const stamp=time(at);return stamp!==null&&stamp<=now+300000&&now-stamp<=maxMinutes*60000;}
+function wind(from,speed){let f=number(from),s=number(speed);if(f===null||f<0||f>360)f=null;else f=normalize(f);if(s===null||s<0||s>100)s=null;return {from:f,speed:s};}
+function normalizeAir(raw){const rows=Array.isArray(raw)?raw:raw?.records;if(!Array.isArray(rows))throw Error('空品資料格式已變更');const result=[];for(const r of rows){const p={lat:number(r.latitude),lon:number(r.longitude)};if(!position(p)||!r.siteid||!r.publishtime)continue;const aq=number(r.aqi),pm=number(r['pm2.5']);result.push({id:String(r.siteid),name:String(r.sitename||r.siteid),county:String(r.county||''),...p,observedAt:r.publishtime,aqi:Number.isInteger(aq)&&aq>=0&&aq<=500?aq:null,pm25:pm!==null&&pm>=0?pm:null,status:String(r.status||''),...wind(r.wind_direc,r.wind_speed)});}const unique=new Map();for(const s of result)if(!unique.has(s.id)||(time(s.observedAt)||0)>(time(unique.get(s.id).observedAt)||0))unique.set(s.id,s);if(!unique.size)throw Error('沒有有效空品測站');return [...unique.values()];}
+function normalizeWeather(raw){const rows=raw?.cwaopendata?.dataset?.Station||raw?.records?.Station;if(!Array.isArray(rows))throw Error('氣象資料格式已變更');const result=[];for(const r of rows){const c=r.GeoInfo?.Coordinates?.find(c=>c.CoordinateName==='WGS84');const p={lat:number(c?.StationLatitude),lon:number(c?.StationLongitude)};if(!position(p)||!r.StationId)continue;result.push({id:String(r.StationId),name:String(r.StationName||r.StationId),county:String(r.GeoInfo?.CountyName||''),town:String(r.GeoInfo?.TownName||''),...p,observedAt:r.ObsTime?.DateTime||'',...wind(r.WeatherElement?.WindDirection,r.WeatherElement?.WindSpeed)});}if(!result.length)throw Error('沒有有效氣象測站');return result;}
+function nearby(stations,p){return stations.map(s=>({...s,distance:distance(p,s)})).sort((a,b)=>a.distance-b.distance);}
+function chooseWind(stations,p,now,maxDistance=30){return nearby(stations,p).find(s=>s.distance<=maxDistance&&fresh(s.observedAt,now)&&s.speed!==null&&(s.from!==null||s.speed<.5))||null;}
+function analyze(sources,p,w,radius){return sources.map(s=>{const d=distance(p,s),b=bearing(p,s),difference=w?.from===null||!Number.isFinite(w?.from)?null:Math.abs(((b-w.from+540)%360)-180);return {...s,distance:d,bearing:b,difference,upwind:!!w&&w.speed>=.5&&difference!==null&&difference<=35&&d>0&&d<=radius};}).filter(s=>s.distance<=radius).sort((a,b)=>Number(b.upwind)-Number(a.upwind)||a.distance-b.distance);}
+function normalizeFacilities(data){const rows=Array.isArray(data)?data:data?.records;if(!Array.isArray(rows))throw Error('官方設施資料格式不正確');const list=[],seen=new Set();for(const r of rows){const p={lat:number(r.wgs84lat),lon:number(r.wgs84lon)},id=String(r.emsno||'');if(!position(p)||!/^[a-zA-Z0-9]{4,20}$/.test(id)||seen.has(id))continue;const air=String(r.isair)==='1'&&!String(r.airreleasedate||'').trim(),water=String(r.iswater)==='1'&&!String(r.waterreleasedate||'').trim();if(!air&&!water)continue;seen.add(id);const flags=[...(air?['空污']:[]),...(water?['水污']:[])];list.push({id,...p,name:String(r.facilityname||id).slice(0,120),type:String(r.industryname||flags.join('／')+'列管事業').slice(0,100),controls:flags.join('／'),url:'https://data.moenv.gov.tw/dataset/detail/EMS_S_01',provider:'環境部 EMS_S_01',precision:'registered-coordinate'});}return list;}
+function facilityBounds(p,radius){const lat=Math.round(p.lat*100)/100,lon=Math.round(p.lon*100)/100,km=radius+1,dlat=km/111,dlon=km/(111*Math.cos(lat*rad));return {minLat:(lat-dlat).toFixed(3),maxLat:(lat+dlat).toFixed(3),minLon:(lon-dlon).toFixed(3),maxLon:(lon+dlon).toFixed(3)};}
+function facilityUrl(base,p,radius,kind){if(!['isair','iswater'].includes(kind))throw Error('不支援的列管類型');const b=facilityBounds(p,radius),u=new URL(base);u.searchParams.set('filters','wgs84lat,GR,'+b.minLat+'|wgs84lat,LE,'+b.maxLat+'|wgs84lon,GR,'+b.minLon+'|wgs84lon,LE,'+b.maxLon+'|'+kind+',EQ,1');return u.href;}
+function aqiLabel(a){return a===null?'缺值':a<=50?'良好':a<=100?'普通':a<=150?'對敏感族群不健康':a<=200?'對所有族群不健康':a<=300?'非常不健康':'危害';}
+const cleanText=(v,n)=>typeof v==='string'&&v.length<=n;
+function validateImport(data){
+ if(!data||!Array.isArray(data.records)||data.records.length>500)throw Error('請使用本工具匯出的 JSON，最多 500 筆。');
+ const legacy=data.format==='shi-gai-odor-demo-v1';if(!legacy&&data.format!=='shi-gai-odor-observations-v2')throw Error('不支援的紀錄格式');const ids=new Set();
+ return data.records.map(r=>{
+  if(!r||typeof r!=='object')throw Error('紀錄格式不正確，未匯入任何資料。');const demo=legacy||r.mode==='demo';
+  if(!r||!cleanText(r.id,80)||!/^[a-zA-Z0-9-]+$/.test(r.id)||ids.has(r.id)||time(r.time)===null||typeof r.odor!=='boolean'||!Number.isInteger(r.intensity)||r.intensity<(r.odor?1:0)||r.intensity>(r.odor?5:0)||!['糞便','化學','腐臭','其他','無'].includes(r.type)||(!r.odor&&r.type!=='無')||!cleanText(r.note,200)||(!demo&&r.mode!=='live')||(legacy&&r.simulated!==true))throw Error('紀錄格式不正確，未匯入任何資料。');ids.add(r.id);
+  const safe={id:r.id,time:new Date(time(r.time)).toISOString(),odor:r.odor,intensity:r.intensity,type:r.type,note:r.note,mode:demo?'demo':'live',position:null,wind:null,air:null};
+  if(!demo){if(!position(r.position))throw Error('觀察位置格式不正確');safe.position={lat:r.position.lat,lon:r.position.lon};}
+  if(r.wind){const w=wind(r.wind.from,r.wind.speed);if(w.from!==r.wind.from||w.speed!==r.wind.speed)throw Error('風況格式不正確');safe.wind={...w,observedAt:demo?null:r.wind.observedAt,station:demo?'示範':r.wind.station,provider:demo?'demo':r.wind.provider};if(!demo&&(time(safe.wind.observedAt)===null||!cleanText(safe.wind.station,120)||!['中央氣象署','環境部'].includes(safe.wind.provider)))throw Error('風況來源不正確');}
+  const air=legacy?{aqi:r.aqi,station:'示範',observedAt:null}:r.air;
+  if(air){if(air.aqi!==null&&(!Number.isInteger(air.aqi)||air.aqi<0||air.aqi>500))throw Error('AQI 格式不正確');if(!demo&&(time(air.observedAt)===null||!cleanText(air.station,120)))throw Error('空品來源不正確');safe.air={aqi:air.aqi,station:demo?'示範':air.station,observedAt:demo?null:air.observedAt};}return safe;
+ });
+}
+const api={number,normalize,direction,position,distance,bearing,destination,time,fresh,wind,normalizeAir,normalizeWeather,nearby,chooseWind,analyze,normalizeFacilities,facilityBounds,facilityUrl,aqiLabel,validateImport};if(typeof module==='object'&&module.exports)module.exports=api;else root.OdorModel=Object.freeze(api);
 })(typeof globalThis==='object'?globalThis:this);

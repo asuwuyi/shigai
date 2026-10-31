@@ -1615,8 +1615,8 @@
   {
     "id": "odor-radar",
     "kind": "tool",
-    "name": "異味雷達 · Demo",
-    "description": "切換模擬風向、查看上風處的虛構設施，記錄有無異味並匯出 JSON。非即時監測。",
+    "name": "異味雷達",
+    "description": "真實地圖、氣象署風況、環境部空品與區域預報；記錄有無異味並匯出 JSON。",
     "mark": "◎",
     "icon": "assets/games/icons/odor-radar-demo.svg",
     "status": "published",
