@@ -4,6 +4,7 @@
 const normalize=n=>((n%360)+360)%360;
 function heading(event,screenAngle=0){
  if(typeof event.webkitCompassHeading==='number'&&Number.isFinite(event.webkitCompassHeading)){
+  if(event.webkitCompassHeading<0||event.webkitCompassHeading>360)return null;
   if(typeof event.webkitCompassAccuracy==='number'&&(event.webkitCompassAccuracy<0||event.webkitCompassAccuracy>50))return null;
   return normalize(event.webkitCompassHeading+screenAngle);
  }
