@@ -108,3 +108,5 @@
 .living-event-controls summary::-webkit-details-marker{display:none;}
 
 .scene-render-fixed-plane{pointer-events:none;}
+
+.scene-plain-anchor,.scene-speech-counterflip.is-plain-counter{display:block;position:relative;width:max-content;height:auto;transform-origin:0 0;}

@@ -248,7 +248,8 @@
     const placement = settings.layouts[layout];
     if (!anchor) {
       const text=node.querySelector('.scene-render-object-text');
-      if(text){Object.assign(text.style,{fontFamily:rules().fontFamily(settings.fontFamily),fontSize:placement.fontSize+'px',fontWeight:String(settings.fontWeight),color:settings.color,maxWidth:placement.maxWidth+'px',lineHeight:String(settings.lineHeight),letterSpacing:settings.letterSpacing+'px'});text.dataset.textAlign=settings.align;if(settings.align!=='auto')text.style.textAlign=settings.align;}
+      const plain=node.querySelector('.scene-plain-anchor');if(plain)plain.style.transform='scale('+ (object.flipX?-1:1)+','+(object.flipY?-1:1)+')';
+      if(text){Object.assign(text.style,{fontFamily:rules().fontFamily(settings.fontFamily),fontSize:placement.fontSize+'px',fontWeight:String(settings.fontWeight),color:settings.color,maxWidth:placement.maxWidth+'px',width:settings.fixedWidth?placement.maxWidth+'px':'max-content',lineHeight:String(settings.lineHeight),letterSpacing:settings.letterSpacing+'px'});text.dataset.textAlign=settings.align;if(settings.align!=='auto')text.style.textAlign=settings.align;}
       if(text){text.style.position='relative';text.style.left=placement.x+'px';text.style.top=placement.y+'px';text.style.transform=`rotate(${placement.rotation}deg) scale(${placement.scale})`;}
       return;
     }
@@ -268,7 +269,7 @@
     text.style.fontFamily = rules().fontFamily(settings.fontFamily);
     text.style.color = settings.color; text.style.backgroundColor = settings.backgroundColor;
     text.style.fontSize = placement.fontSize + 'px'; text.style.fontWeight = settings.fontWeight;
-    text.style.borderRadius = settings.radius + 'px'; text.style.maxWidth = placement.maxWidth + 'px';
+    text.style.borderRadius = settings.radius + 'px'; text.style.maxWidth = placement.maxWidth + 'px';text.style.width=settings.fixedWidth?placement.maxWidth+'px':'max-content';
   }
   function createObjectNode({ documentRef, object, scene, layout, surfaceScale, surfaceMetricsValue, resolveMediaSource, objectAttributes, onMediaError, playAnimation, editorSelectable }) {
     const node = documentRef.createElement("div");
@@ -294,7 +295,7 @@
       const text = documentRef.createElement("span");
       text.className = "scene-render-object-text";
       text.textContent = object?.text || object?.name || "";
-      visual.append(text);
+      const plain=documentRef.createElement('span');plain.className='scene-plain-anchor';const counter=documentRef.createElement('span');counter.className='scene-speech-counterflip is-plain-counter';counter.append(text);plain.append(counter);visual.append(plain);
     }
     if (speech.enabled && hasText) {
       const anchor = documentRef.createElement('div'); anchor.className = 'scene-speech-anchor';
@@ -410,7 +411,7 @@
         // Retain the animated actor and its current clock; only its dialogue/media change.
         const replacement=createObjectNode({...options,playAnimation:false,resolveMediaSource:object=>typeof options.resolveMediaSource==='function'?options.resolveMediaSource(mediaObject?.media?.src?mediaObject:object):object.media?.src,documentRef,object:changed,scene,layout,surfaceScale,surfaceMetricsValue:metrics});
         const visual=original.querySelector('.scene-render-object-visual');
-        const oldText=visual.querySelector(':scope > .scene-speech-anchor, :scope > .scene-render-object-text');
+        const oldText=visual.querySelector(':scope > .scene-speech-anchor, :scope > .scene-plain-anchor, :scope > .scene-render-object-text');
         const newText=replacement.querySelector('.scene-speech-anchor, .scene-render-object-text');
         const textTimes=new Map((oldText?.getAnimations?.({subtree:true})||[]).map(a=>[a.id,{time:a.currentTime,state:a.playState}]));
         if(oldText)oldText.replaceWith(newText);else visual.append(newText);
@@ -420,6 +421,8 @@
         const newMedia=mediaObject?.media?.src?replacement.querySelector('.scene-render-object-media'):null;
         const resumeMedia=Boolean(newMedia&&oldMedia?.tagName==='VIDEO'&&!oldMedia.paused);if(newMedia&&oldMedia){if(resumeMedia)oldMedia.pause();oldMedia.replaceWith(newMedia);}newMedia?.addEventListener('error',()=>{if(newMedia.isConnected&&original.dataset.livingEventId===event.id)controller.finish();},{once:true});
         original.dataset.livingEventId=event.id;
+        const counter=original.querySelector('.scene-speech-counterflip'),orientation=original.querySelector('.scene-render-object-orientation'),anchor=original.querySelector('.scene-speech-anchor');
+        if(counter&&options.playAnimation!==false&&!prefersReducedMotion())for(const motion of orientation?.getAnimations?.()||[]){const frames=motion.effect?.getKeyframes?.();if(!frames?.length||!frames.every(f=>String(f.transform||'').startsWith('scaleX(')))continue;const copyClock=(target,keyframes)=>{const animation=target.animate(keyframes,motion.effect.getTiming());animation.playbackRate=motion.playbackRate;if(motion.playState==='running'&&motion.startTime!==null)animation.startTime=motion.startTime;else{animation.currentTime=motion.currentTime;if(motion.playState==='paused')animation.pause();}return animation;};copyClock(counter,frames);const left=parseFloat(anchor?.style.left);if(anchor&&!anchor.classList.contains('is-text-only')&&(left===0||left===100))copyClock(anchor,frames.map(f=>({offset:f.offset,left:(String(f.transform).includes('-1')?100-left:left)+'%',easing:f.easing})));}
         const dialogue=mountEventDialogue(original,event,String(text||''),layout,{...metrics.frame,width:Math.min(metrics.frame.width,container.clientWidth/surfaceScale)});
         const restore=()=>{newMedia?.pause?.();if(newMedia&&oldMedia){newMedia.replaceWith(oldMedia);if(resumeMedia)oldMedia.play().catch(()=>{});}if(oldText)newText.replaceWith(oldText);else newText.remove();delete original.dataset.livingEventId;if(actor.textDisplay)original.querySelectorAll('.scene-speech-bubble, .scene-render-object-text').forEach(node=>global.ShiGaiSceneText?.mount({node,wrapper:original,object:actor,scene,layout}));};
         return Object.assign(restore,dialogue);

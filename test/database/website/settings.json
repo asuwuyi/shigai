@@ -158,14 +158,14 @@
     },
     "icon": "",
     "nav": {
-      "home": "這個世界的中心 Home",
-      "journal": "碎唸日誌 Journal",
-      "works": "畫廊收藏室 Works",
-      "characters": "奇怪的居民 Character",
-      "games": "遊戲實驗室 Games",
-      "tools": "工具 Tools",
+      "home": "宇宙的中心 Home",
+      "journal": "事件記錄簿 Journal",
+      "works": "收藏庫 Works",
+      "characters": "居民介紹 Character",
+      "games": "活動空間 Games",
+      "tools": "工具庫 Tools",
       "island": "Shi-Gai 島 Island",
-      "about": "你在找我嗎?? About me"
+      "about": "櫃檯聯絡 About me"
     },
     "pages": {
       "journal": true,
