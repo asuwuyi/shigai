@@ -277,6 +277,7 @@
     node.className = `scene-render-object is-${cleanType(object?.type)}`;
     visual.className = "scene-render-object-visual";
     node.dataset.sceneObjectId = String(object?.id || "");
+    node.dataset.sceneLayer = String(object?.layer || "");
     setAttributes(node, typeof objectAttributes === "function" ? objectAttributes(object) : null);
 
     const source = String(typeof resolveMediaSource === "function" ? resolveMediaSource(object) || "" : object?.media?.src || "").trim();

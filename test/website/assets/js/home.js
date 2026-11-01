@@ -40,7 +40,7 @@ function blendWorldBackground(scene) {
 async function refreshHomeEnvironment() {
   if(environmentRefreshPending||document.hidden||document.body.classList.contains('is-home-loading'))return false;
   const scene=activeWorldEntranceScenes.find(s=>s.id===activeWorldEntranceSceneId);
-  if(!scene||(!scene.background?.automatic&&!scene.background?.effects?.length))return false;
+  if(!scene||(!scene.background?.automatic&&!scene.background?.effects?.length&&!scene.background?.lighting?.enabled))return false;
   const revision=environmentRevision,id=scene.id,now=new Date();environmentRefreshPending=true;
   try{
     const config=sceneEnvironment.normalizeWeather(scene.background?.weather);

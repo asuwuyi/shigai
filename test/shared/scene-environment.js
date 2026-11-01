@@ -14,7 +14,47 @@
   const clock=v=>/^([01]\d|2[0-3]):[0-5]\d$/.test(v)?v:'';
   const asset=v=>{const p=text(v,500).replaceAll('\\','/');return p.startsWith('assets/')&&!p.split('/').includes('..')&&!/[?#\x00-\x1f]/.test(p)?p:''};
   const color=v=>/^#[0-9a-f]{6}$/i.test(v||'')?v.toUpperCase():'#F7F9FC';
-  function normalizeProcedural(value){if(!value||!['rain','fog','lightning'].includes(value.type))return null;return {type:value.type,intensity:number(value.intensity,0,1,.55),speed:number(value.speed,.2,2,1),wind:number(value.wind,-1,1,.2)};}
+  function normalizeProcedural(value){if(!value||!['rain','fog','lightning','clouds','sun'].includes(value.type))return null;return {type:value.type,intensity:number(value.intensity,0,1,.55),speed:number(value.speed,.2,2,1),wind:number(value.wind,-1,1,.2),...(['clouds','sun'].includes(value.type)?{size:number(value.size,.2,2,1)}:{}),...(value.type==='clouds'?{count:Math.round(number(value.count,1,12,5)),altitude:number(value.altitude,.05,.65,.22)}:{})};}
+  function normalizeLighting(value){return {enabled:value?.enabled===true,mode:value?.mode==='indoor'?'indoor':'outdoor',strength:number(value?.strength,0,1,.65)};}
+  function lightingState(background,context={}){
+    const settings=normalizeLighting(background?.lighting),c=environmentContext(background,context),sun=solarPeriod(background?.weather,c.now),date=new Date(c.now??Date.now());
+    const presets={dawn:[.8,.95,.87,.08],morning:[1,1,1,0],noon:[1.03,1.02,1.02,0],afternoon:[.99,1,1,.01],dusk:[.82,.94,.9,.2],night:[.52,.9,.68,0]};
+    let values=presets[c.phase]||presets.night;
+    // Between actual sunrise/sunset use a continuous daylight curve, not clock steps.
+    if(!c._phaseOverride&&sun.sunrise!=null&&sun.sunset!=null){
+      const t=date.getTime(),rise=sun.sunrise,set=sun.sunset,edge=45*60000,mix=(a,b,k)=>a.map((v,i)=>v+(b[i]-v)*Math.max(0,Math.min(1,k)));
+      if(t<rise-edge||t>set+edge)values=presets.night;
+      else if(t<rise+edge)values=mix(presets.night,presets.morning,(t-rise+edge)/(2*edge));
+      else if(t>set)values=mix(presets.dusk,presets.night,(t-set)/edge);
+      else if(t>set-2*edge)values=mix(presets.afternoon,presets.dusk,(t-set+2*edge)/(2*edge));
+      else{const p=(t-rise)/(set-rise),day=Math.sin(Math.PI*p);values=[.94+.09*day,.98+.04*day,.96+.06*day,Math.max(0,(p-.65)*.35)];}
+    }
+    const shade=({cloudy:.07,overcast:.15,rain:.18,storm:.23,fog:.1,snow:.07})[c.weather]||0;
+    const amount=settings.enabled?settings.strength*(settings.mode==='indoor'?.55:1):0;
+    return {brightness:1+(values[0]-shade-1)*amount,contrast:1+(values[1]-Math.min(.06,shade*.3)-1)*amount,saturation:1+(values[2]-shade*.2-1)*amount,warmth:values[3]*amount,enabled:settings.enabled&&amount>0};
+  }
+  const lightingMounts=new WeakMap();
+  function applyLighting(container,background,context={}){
+    if(!container)return;
+    let state=lightingMounts.get(container);
+    if(!state){state={records:new Map(),background,context,observer:null};lightingMounts.set(container,state);}
+    state.background=background;state.context=context;
+    const light=lightingState(background,context);
+    const restore=(node,record)=>{node.style.filter=record.filter;node.style.transition=record.transition;delete node.dataset.sceneLighting;};
+    if(!light.enabled){state.observer?.disconnect();state.observer=null;for(const[n,v]of state.records)restore(n,v);state.records.clear();return;}
+    const current=new Set(container.querySelectorAll('.scene-render-object-media'));
+    for(const[n,v]of state.records)if(!current.has(n)){restore(n,v);state.records.delete(n);}
+    for(const node of current){
+      let record=state.records.get(node);const first=!record;if(!record){record={filter:node.style.filter,transition:node.style.transition,base:global.getComputedStyle?.(node).filter||'none'};state.records.set(node,record);}
+      const object=node.closest('.scene-render-object'),stage=object?.classList.contains('is-background')||object?.dataset.sceneLayer==='background';
+      const weight=stage?1:.3,blend=v=>1+(v-1)*weight;
+      const filter='brightness('+blend(light.brightness).toFixed(4)+') contrast('+blend(light.contrast).toFixed(4)+') saturate('+blend(light.saturation).toFixed(4)+') sepia('+(light.warmth*weight).toFixed(4)+')';
+      // Affect pixels only: speech, clocks, handles and animation transforms stay independent.
+      node.style.filter=(record.base==='none'?'':record.base+' ')+filter;node.dataset.sceneLighting=stage?'scenery':'object';
+      node.style.transition=(first||global.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'none':(record.transition?record.transition+', ':'')+'filter 6s ease-in-out');
+    }
+    if(!state.observer&&global.MutationObserver){state.observer=new global.MutationObserver(()=>applyLighting(container,state.background,state.context));state.observer.observe(container,{childList:true,subtree:true});}
+  }
   function normalizeCondition(value){
     const s=value&&typeof value==='object'?value:{};
     const legacy=/^(\d\d:\d\d)\s*[-–]\s*(\d\d:\d\d)$/.exec(s.time||'');
@@ -44,17 +84,24 @@
     const phase=ms<sunrise-30*60000||ms>=sunset+30*60000?'night':ms<dawnEnd?'dawn':ms<noonStart?'morning':ms<noonEnd?'noon':ms<dusk?'afternoon':'dusk';
     return {period,phase,source:'solar',sunrise,sunset};
   }
-  function environmentContext(background,context={}){const solar=solarPeriod(background?.weather,context.now),phase=context.phase||solar.phase;return {...context,phase,period:context.period||(context.phase?(['dawn','morning'].includes(phase)?'morning':['noon','afternoon'].includes(phase)?'day':phase):solar.period)};}
-  function normalizeBackground(value){const s=value||{},seen=new Set();const result={color:color(s.color),asset:asset(s.asset),automatic:s.automatic===true,intervalMinutes:Math.round(number(s.intervalMinutes,1,1440,30)),weather:normalizeWeather(s.weather),variants:(Array.isArray(s.variants)?s.variants:[]).filter(v=>v&&typeof v==='object').slice(0,60).map((v,i)=>{let id=/^[a-zA-Z0-9_-]{1,100}$/.test(v.id||'')?v.id:'background-'+(i+1);while(seen.has(id))id+='-copy';seen.add(id);return{id,name:text(v.name)||'背景 '+(i+1),enabled:v.enabled!==false,color:color(v.color),asset:asset(v.asset),...(v.assetId?{assetId:text(v.assetId,100)}:{}),condition:normalizeCondition(v.condition)}})};
-    if(Array.isArray(s.effects))result.effects=s.effects.filter(v=>v&&typeof v==='object').slice(0,60).map((v,i)=>({id:/^[a-zA-Z0-9_-]{1,100}$/.test(v.id||'')?v.id:'effect-'+i,name:text(v.name)||'環境效果',enabled:v.enabled!==false,asset:asset(v.asset),...(v.assetId?{assetId:text(v.assetId,100)}:{}),...(normalizeProcedural(v.procedural)?{procedural:normalizeProcedural(v.procedural)}:{}),layer:v.layer==='back'?'back':'front',group:text(v.group,80),opacity:number(v.opacity,0,1,1),condition:normalizeCondition(v.condition)})).filter((v,i,a)=>a.findIndex(x=>x.id===v.id)===i);
+  function environmentContext(background,context={}){const solar=solarPeriod(background?.weather,context.now),phase=context.phase||solar.phase;return {...context,_phaseOverride:context._phaseOverride??Boolean(context.phase),phase,period:context.period||(context.phase?(['dawn','morning'].includes(phase)?'morning':['noon','afternoon'].includes(phase)?'day':phase):solar.period)};}
+  function normalizeBackground(value){const s=value||{},seen=new Set();const result={...(s.lighting?{lighting:normalizeLighting(s.lighting)}:{}),color:color(s.color),asset:asset(s.asset),automatic:s.automatic===true,intervalMinutes:Math.round(number(s.intervalMinutes,1,1440,30)),weather:normalizeWeather(s.weather),variants:(Array.isArray(s.variants)?s.variants:[]).filter(v=>v&&typeof v==='object').slice(0,60).map((v,i)=>{let id=/^[a-zA-Z0-9_-]{1,100}$/.test(v.id||'')?v.id:'background-'+(i+1);while(seen.has(id))id+='-copy';seen.add(id);return{id,name:text(v.name)||'背景 '+(i+1),enabled:v.enabled!==false,color:color(v.color),asset:asset(v.asset),...(v.assetId?{assetId:text(v.assetId,100)}:{}),condition:normalizeCondition(v.condition)}})};
+    if(Array.isArray(s.effects))result.effects=s.effects.filter(v=>v&&typeof v==='object').slice(0,60).map((v,i)=>({id:/^[a-zA-Z0-9_-]{1,100}$/.test(v.id||'')?v.id:'effect-'+i,name:text(v.name)||'環境效果',enabled:v.enabled!==false,asset:asset(v.asset),...(v.assetId?{assetId:text(v.assetId,100)}:{}),...(normalizeProcedural(v.procedural)?{procedural:normalizeProcedural(v.procedural)}:{}),layer:['clouds','sun'].includes(v.procedural?.type)?'back':v.layer==='back'?'back':'front',group:text(v.group,80),opacity:number(v.opacity,0,1,1),condition:normalizeCondition(v.condition)})).filter((v,i,a)=>a.findIndex(x=>x.id===v.id)===i);
     return result;
   }
-  function resolveEffects(background,context={},random=.5){context=environmentContext(background,context);const items=(normalizeBackground(background).effects||[]).filter(v=>v.enabled&&(v.asset||v.procedural)&&v.condition.weight>0&&(!v.condition.followWeather||v.condition.weathers.includes(context.weather))),groups=new Map();for(const item of items){if(!groups.has(item.group))groups.set(item.group,[]);groups.get(item.group).push(item);}const result=[];for(const [name,group]of groups){const eligible=group.filter(v=>!v.condition.fallback&&matches(v.condition,context)),candidates=eligible.length?eligible:group.filter(v=>v.condition.fallback);if(!name)result.push(...candidates);else{const chosen=pick(candidates,random);if(chosen)result.push(chosen);}}return result;}
+  function skyState(background,context={}){
+    const c=environmentContext(background,context),sun=solarPeriod(background?.weather,c.now),date=new Date(c.now??Date.now());
+    const minute=localTime(date,background?.weather?.timeZone||'visitor').minutes;
+    const byPhase={dawn:.03,morning:.22,noon:.5,afternoon:.72,dusk:.97,night:-1};
+    const progress=c._phaseOverride?byPhase[c.phase]:sun.sunrise!=null&&sun.sunset!=null?(date.getTime()-sun.sunrise)/(sun.sunset-sun.sunrise):sun.phase==='night'?-1:(minute-360)/720;
+    return {phase:c.phase,weather:c.weather,progress,sunVisible:Number.isFinite(progress)&&progress>=0&&progress<=1&&['clear','cloudy','style-random'].includes(c.weather),density:({clear:.35,cloudy:.7,overcast:1,rain:1,storm:1,fog:.6,snow:.9})[c.weather]??.6};
+  }
+  function resolveEffects(background,context={},random=.5){const sky=skyState(background,context);context=environmentContext(background,context);const items=(normalizeBackground(background).effects||[]).filter(v=>v.enabled&&(v.asset||v.procedural)&&v.condition.weight>0&&(v.procedural?.type!=='sun'||sky.sunVisible)&&(!v.condition.followWeather||v.condition.weathers.includes(context.weather))),groups=new Map();for(const item of items){if(!groups.has(item.group))groups.set(item.group,[]);groups.get(item.group).push(item);}const result=[];for(const [name,group]of groups){const eligible=group.filter(v=>!v.condition.fallback&&matches(v.condition,context)),candidates=eligible.length?eligible:group.filter(v=>v.condition.fallback);if(!name)result.push(...candidates);else{const chosen=pick(candidates,random);if(chosen)result.push(chosen);}}return result;}
   const effectMounts=new WeakMap();
   function renderEffects({container,background,context={},random=.5,resolveAsset=value=>value,frontContainer=container,backContainer=container,respectMotion=true}){
-    if(!container)return;const reduced=respectMotion&&global.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if(!container)return;applyLighting(container,background,context);const reduced=respectMotion&&global.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const chosen=reduced?[]:resolveEffects(background,context,random),signature=JSON.stringify(chosen.map(v=>[v.id,v.asset,v.layer,v.opacity,v.procedural]));
-    const previous=effectMounts.get(container);if(previous?.signature===signature&&previous.front===frontContainer&&previous.back===backContainer&&previous.nodes.every(n=>n.isConnected))return;
+    const sky=skyState(background,context);const previous=effectMounts.get(container);if(previous?.signature===signature&&previous.front===frontContainer&&previous.back===backContainer&&previous.nodes.every(n=>n.isConnected)){previous.nodes.forEach(n=>n.weatherStop?.updateSky?.(sky));return;}
     previous?.nodes.forEach(n=>{n.weatherStop?.();n.querySelectorAll('video').forEach(v=>{v.pause();v.removeAttribute('src');v.load();});n.remove();});const nodes=[];
     if(chosen.length)for(const parent of new Set([container,frontContainer,backContainer])){const plane=parent?.querySelector(':scope > .scene-render-plane');if(plane)plane.style.zIndex='2';}
     for(const item of chosen){const host=global.document.createElement('div');host.dataset.environmentEffect=item.id;host.setAttribute('aria-hidden','true');host.style.cssText='position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:'+(item.layer==='back'?1:9999)+';opacity:'+item.opacity;
@@ -62,14 +109,16 @@
         const parent=item.layer==='back'?backContainer:frontContainer;
         const plane=item.layer==='back'&&parent?.querySelector(':scope > .scene-render-plane');
         if(plane){
+          // Sky belongs below transparent scenery; rain/fog/lightning retain their original placement.
+          const skyLayer=['clouds','sun'].includes(item.procedural.type);
           // "Behind characters" must still be above opaque background Objects.
           // Stay inside the same stacking context without changing any Object z-index.
           const objects=[...plane.children].filter(n=>n.classList.contains('scene-render-object'));
           const foreground=objects.filter(n=>!n.classList.contains('is-background')).sort((a,b)=>Number(a.style.zIndex)-Number(b.style.zIndex));
-          const first=foreground[0];host.style.zIndex=String(first?Number(first.style.zIndex)||1:Math.max(0,...objects.map(n=>Number(n.style.zIndex)||0))+1);
-          host.dataset.environmentPlacement='above-background-below-objects';plane.insertBefore(host,first||null);
+          const first=foreground[0];if(skyLayer){host.style.zIndex=String(Math.min(1,...objects.map(n=>Number(n.style.zIndex)||0))-(item.procedural.type==='sun'?2:1));host.dataset.environmentPlacement='behind-scenery';plane.prepend(host);}else{host.style.zIndex=String(first?Number(first.style.zIndex)||1:Math.max(0,...objects.map(n=>Number(n.style.zIndex)||0))+1);
+          host.dataset.environmentPlacement='above-background-below-objects';plane.insertBefore(host,first||null);}
         }else parent?.append(host);
-        host.weatherStop=global.ShiGaiWeatherEffects?.mount(host,item.procedural);nodes.push(host);continue;
+        host.weatherStop=global.ShiGaiWeatherEffects?.mount(host,{...item.procedural,sky});nodes.push(host);continue;
       }
       const media=global.document.createElement(/\.(webm|mp4)$/i.test(item.asset)?'video':'img');if(media.tagName==='VIDEO'){media.muted=true;media.loop=true;media.autoplay=true;media.playsInline=true;}else media.alt='';media.src=resolveAsset(item.asset);media.style.cssText='width:100%;height:100%;object-fit:cover;pointer-events:none';host.append(media);(item.layer==='back'?backContainer:frontContainer)?.append(host);nodes.push(host);
     }effectMounts.set(container,{signature,nodes,front:frontContainer,back:backContainer});
@@ -141,7 +190,7 @@
   const mountedBackgrounds=new WeakMap(),backgroundDraws=new Map();
   function bindBackground({container,scene,resolveAsset=value=>value,frontContainer=container,backContainer=container,onAttribution,stableVisit=false}) {
     if(!container)return()=>{};mountedBackgrounds.get(container)?.();
-    const settings=normalizeBackground(scene?.background);if(!settings.automatic&&!settings.effects?.length)return()=>{};
+    const settings=normalizeBackground(scene?.background);if(!settings.automatic&&!settings.effects?.length&&!settings.lighting?.enabled)return()=>{};
     let visitWeatherByScene=null;
     let stopped=false,weather=settings.weather.provider==='none'?'style-random':null,attribution=null,clearAttribution=null;
     function update(){if(stopped||!container.isConnected)return;const bucket=stableVisit?0:Math.floor(Date.now()/(settings.intervalMinutes*60000)),previous=backgroundDraws.get(scene.id);if(!previous||previous.bucket!==bucket)backgroundDraws.set(scene.id,{bucket,value:Math.random()});const context=stableVisit?visitContext(visitWeatherByScene,scene):{now:new Date(),weather,events:[new URLSearchParams(global.location?.search||'').get('sceneEvent')].filter(Boolean)},random=stableVisit?visitDraw(scene):backgroundDraws.get(scene.id).value,background=resolveBackground(settings,context,random,{stableOrder:stableVisit});if(settings.automatic){container.style.backgroundColor=background.color;container.style.backgroundImage=background.asset?'url("'+resolveAsset(background.asset)+'")':'none';container.style.backgroundSize='cover';container.style.backgroundPosition='center';container.dataset.backgroundVariant=background.variantId||'base';}renderEffects({container,background:settings,context,random,resolveAsset,frontContainer,backContainer});}
@@ -166,5 +215,5 @@
     return mountedBackgrounds.get(container);
   }
 
-  const api=Object.freeze({prepareVisitEnvironment,visitContext,visitDraw,prepareBackgroundAsset,displayPeriods,normalizeClassification,periods,weatherLabels,solarPeriod,environmentContext,normalizeProcedural,bindBackground,renderEffects,resolveEffects,normalizeCondition,normalizeBackground,normalizeWeather,localTime,matches,pick,selectScene,resolveBackground,weatherCode,readWeather});if(global)global.ShiGaiSceneEnvironment=api;if(typeof module==='object'&&module.exports)module.exports=api;
+  const api=Object.freeze({normalizeLighting,lightingState,applyLighting,prepareVisitEnvironment,visitContext,visitDraw,prepareBackgroundAsset,displayPeriods,normalizeClassification,periods,weatherLabels,solarPeriod,environmentContext,skyState,normalizeProcedural,bindBackground,renderEffects,resolveEffects,normalizeCondition,normalizeBackground,normalizeWeather,localTime,matches,pick,selectScene,resolveBackground,weatherCode,readWeather});if(global)global.ShiGaiSceneEnvironment=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

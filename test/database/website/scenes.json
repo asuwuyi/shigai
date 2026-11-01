@@ -1777,7 +1777,7 @@
         },
         "textBubble": {
           "fixedWidth": true,
-          "align": "auto",
+          "align": "center",
           "lineHeight": 1.45,
           "letterSpacing": 0,
           "enabled": false,
@@ -1981,6 +1981,13 @@
         "enabled": false
       },
       {
+        "dataCondition": {
+          "type": "rain-probability",
+          "threshold": 50,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
         "id": "binding-7e1ad9cf-cef8-4998-a2f3-31d1662f36b4",
         "name": "帶傘提醒｜未來降雨機率",
         "trigger": "both",
@@ -2003,6 +2010,13 @@
         "enabled": true
       },
       {
+        "dataCondition": {
+          "type": "temperature",
+          "threshold": 30,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
         "id": "binding-02aa7f90-1fa8-4118-a17c-00785c0bf0a8",
         "name": "高溫反應｜氣溫達30°C",
         "trigger": "both",
@@ -2025,6 +2039,13 @@
         "enabled": true
       },
       {
+        "dataCondition": {
+          "type": "sunrise",
+          "threshold": 0,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
         "id": "binding-f0bff040-9127-4f79-85f8-0dc2f98db719",
         "name": "日出提醒｜所在地日出前後",
         "trigger": "both",
@@ -2047,6 +2068,13 @@
         "enabled": true
       },
       {
+        "dataCondition": {
+          "type": "sunset",
+          "threshold": 0,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
         "id": "binding-ac6aeef0-3e59-4efd-bb12-4cd1d3026982",
         "name": "日落提醒｜所在地日落前後",
         "trigger": "both",
@@ -2069,6 +2097,13 @@
         "enabled": true
       },
       {
+        "dataCondition": {
+          "type": "official-alert",
+          "threshold": 0,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
         "id": "binding-8579d1a6-2fd6-4ad8-86d7-583fab7fab09",
         "name": "所在地官方氣象特報",
         "trigger": "both",
@@ -2090,6 +2125,13 @@
         "enabled": true
       },
       {
+        "dataCondition": {
+          "type": "pm25",
+          "threshold": 0,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
         "id": "binding-a4527d64-097f-488b-a80a-60d8f8727a76",
         "name": "附近測站 PM2.5",
         "trigger": "both",
@@ -2111,6 +2153,13 @@
         "enabled": true
       },
       {
+        "dataCondition": {
+          "type": "aqi",
+          "threshold": 0,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
         "id": "binding-3dbd38ad-a6a2-4985-ad4a-9b12a4bb80f0",
         "name": "附近測站空氣品質 AQI",
         "trigger": "both",
@@ -2147,6 +2196,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-11-01T20:27:59.349Z"
+    "updatedAt": "2026-11-01T20:37:56.859Z"
   }
 ]
