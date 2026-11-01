@@ -1883,7 +1883,7 @@
       },
       {
         "id": "binding-f67bca21-8326-4241-a956-b90cf15c57e2",
-        "name": "01 午餐時間｜11:00–13:00",
+        "name": "午餐時間｜11:00–13:00",
         "trigger": "both",
         "start": "11:00",
         "end": "13:00",
@@ -1907,7 +1907,7 @@
       },
       {
         "id": "binding-b6de059b-1836-4971-8d5f-4b588f619a99",
-        "name": "02 晚餐時間｜17:00–19:00",
+        "name": "晚餐時間｜17:00–19:00",
         "trigger": "both",
         "start": "17:00",
         "end": "19:00",
@@ -1931,7 +1931,7 @@
       },
       {
         "id": "binding-5bd0a87d-271d-4be4-857e-b8586b0144f4",
-        "name": "03 深夜提醒｜22:00–06:00",
+        "name": "深夜提醒｜22:00–06:00",
         "trigger": "both",
         "start": "22:00",
         "end": "06:00",
@@ -1957,7 +1957,7 @@
         "displayMode": "continuous",
         "interval": 10,
         "id": "binding-b75c9f75-2d8d-402e-bdd1-a24aed8af5e4",
-        "name": "04 點我決定吃什麼｜全天點擊",
+        "name": "吃什麼靈感",
         "trigger": "click",
         "start": "00:00",
         "end": "00:00",
@@ -1982,17 +1982,17 @@
       },
       {
         "id": "binding-7e1ad9cf-cef8-4998-a2f3-31d1662f36b4",
-        "name": "05 帶傘提醒｜點擊示意・天氣條件待接",
-        "trigger": "click",
+        "name": "帶傘提醒｜未來降雨機率",
+        "trigger": "both",
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "【範例示意】等一下可能會下雨，記得帶傘。",
-          "【範例示意】出門前確認一下預報吧。"
+          "{{city}}未來{{forecastHours}}小時最高降雨機率{{rainProbability}}%，出門記得帶傘。",
+          "等一下可能會下雨，出門前看看預報吧。"
         ],
         "replies": [
-          "這是台詞試看，尚未連接未來降雨機率。",
-          "拿雨傘的專用動畫尚未指定，可再替換素材。"
+          "預報時段：{{forecastStart}}～{{forecastEnd}}。這是降雨機率，不代表現在已經下雨。",
+          "雨傘帶著比較安心；{{city}}未來{{forecastHours}}小時最高降雨機率為{{rainProbability}}%。"
         ],
         "duration": 10,
         "cooldown": 60,
@@ -2000,21 +2000,21 @@
         "priority": 5,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": false
+        "enabled": true
       },
       {
         "id": "binding-02aa7f90-1fa8-4118-a17c-00785c0bf0a8",
-        "name": "06 高溫反應｜點擊示意・氣溫條件待接",
-        "trigger": "click",
+        "name": "高溫反應｜氣溫達30°C",
+        "trigger": "both",
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "【範例示意】好熱，我快融化了。",
-          "【範例示意】想找個涼快的地方休息。"
+          "{{city}}目前模式氣溫約{{temperature}}°C，好熱啊。",
+          "現在約{{temperature}}°C，想找個涼快的地方休息。"
         ],
         "replies": [
-          "這是台詞試看，尚未依實際30°C門檻觸發。",
-          "流汗動畫尚未指定，可再替換素材。"
+          "先找個涼快的地方吧。目前氣溫約{{temperature}}°C。",
+          "記得適時休息、補充水分。"
         ],
         "duration": 10,
         "cooldown": 60,
@@ -2022,21 +2022,21 @@
         "priority": 3,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": false
+        "enabled": true
       },
       {
         "id": "binding-f0bff040-9127-4f79-85f8-0dc2f98db719",
-        "name": "09 日出提醒｜日出條件待接",
-        "trigger": "click",
+        "name": "日出提醒｜所在地日出前後",
+        "trigger": "both",
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "【範例示意】早安，天快亮了！",
-          "【範例示意】新的一天要開始了。"
+          "早安，{{city}}今天日出約在{{sunrise}}。",
+          "新的一天要開始了，日出約{{sunrise}}。"
         ],
         "replies": [
-          "日出提醒尚未綁定所在地日出時間；目前只供台詞試看。",
-          "之後可共用場景的城市與日出日落計算，不必重複設定固定時刻。"
+          "{{city}}今天日出約{{sunrise}}；依設定地點計算，實際可見時間仍受地形和雲層影響。",
+          "慢慢醒來，準備開始今天吧。"
         ],
         "duration": 10,
         "cooldown": 60,
@@ -2048,17 +2048,17 @@
       },
       {
         "id": "binding-ac6aeef0-3e59-4efd-bb12-4cd1d3026982",
-        "name": "10 日落提醒｜日落條件待接",
-        "trigger": "click",
+        "name": "日落提醒｜所在地日落前後",
+        "trigger": "both",
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "【範例示意】太陽快下山了。",
-          "【範例示意】準備迎接晚上的Shi-Gai吧。"
+          "{{city}}今天日落約{{sunset}}，準備迎接晚上吧。",
+          "太陽快下山了，今天的日落約在{{sunset}}。"
         ],
         "replies": [
-          "這是日落對話示意，目前沒有依實際日落時間自動出現。",
-          "將來可以跟天空共用同一個地區與日落時間。"
+          "{{city}}今天日落約{{sunset}}，是依設定地點計算的約略時間。",
+          "辛苦一天了，要不要休息一下？"
         ],
         "duration": 10,
         "cooldown": 60,
@@ -2070,16 +2070,16 @@
       },
       {
         "id": "binding-8579d1a6-2fd6-4ad8-86d7-583fab7fab09",
-        "name": "11 官方示警｜公告來源待接",
-        "trigger": "click",
+        "name": "所在地官方氣象特報",
+        "trigger": "both",
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "【範例示意，非官方警報】所在地若有官方示警，這裡會提示查看公告。"
+          "{{alertArea}}目前有「{{alertTitle}}」，有效至{{alertUntil}}。"
         ],
         "replies": [
-          "目前未接官方示警來源，不提供即時災害通知。",
-          "正式接入時應顯示發布單位、影響地區、有效時間與原始公告連結。"
+          "{{alertText}}",
+          "中央氣象署發布時間：{{alertIssued}}；適用地區：{{alertArea}}；有效至{{alertUntil}}。請查看原始官方公告。"
         ],
         "duration": 10,
         "cooldown": 60,
@@ -2087,50 +2087,50 @@
         "priority": 8,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": false
+        "enabled": true
       },
       {
         "id": "binding-a4527d64-097f-488b-a80a-60d8f8727a76",
-        "name": "08 PM2.5 資訊｜資料條件待接",
-        "trigger": "click",
+        "name": "附近測站 PM2.5",
+        "trigger": "both",
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "【範例示意，非即時資料】一起看看附近測站的PM2.5。"
+          "{{station}}測站 PM2.5 為 {{pm25}} µg/m³。"
         ],
         "replies": [
-          "未來會顯示PM2.5濃度、單位與資料時間；目前未接來源。",
-          "AQI和PM2.5是不同欄位，不能直接當成相同數值。"
+          "資料時間：{{dataTime}}，{{station}}測站 PM2.5 為 {{pm25}} µg/m³。",
+          "PM2.5 是濃度，AQI 是空氣品質指標，兩者不是同一個數值。"
         ],
         "duration": 10,
         "cooldown": 60,
         "dailyLimit": 2,
-        "priority": 2,
+        "priority": 0,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": false
+        "enabled": true
       },
       {
         "id": "binding-3dbd38ad-a6a2-4985-ad4a-9b12a4bb80f0",
-        "name": "07 空氣品質 AQI｜資料條件待接",
-        "trigger": "click",
+        "name": "附近測站空氣品質 AQI",
+        "trigger": "both",
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "【範例示意，非即時資料】今天的空氣品質怎麼樣？",
-          "【範例示意】點我查看所在地空氣品質資訊。"
+          "附近{{station}}測站 AQI {{aqi}}，目前為「{{aqiStatus}}」。",
+          "一起看看附近測站的空氣品質：AQI {{aqi}}（{{aqiStatus}}）。"
         ],
         "replies": [
-          "未來這裡會顯示所在地的AQI、測站、資料時間與來源。",
-          "這個範例尚未讀取真實AQI，不代表目前空氣品質狀況。"
+          "{{station}}測站 AQI {{aqi}}（{{aqiStatus}}），資料時間：{{dataTime}}。",
+          "這是測站周邊的參考資料，不是你所在位置的精確測量。"
         ],
         "duration": 10,
         "cooldown": 60,
         "dailyLimit": 2,
-        "priority": 2,
+        "priority": 0,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": false
+        "enabled": true
       }
     ],
     "metadata": {
@@ -2147,6 +2147,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-11-01T17:32:55.188Z"
+    "updatedAt": "2026-11-01T20:27:59.349Z"
   }
 ]

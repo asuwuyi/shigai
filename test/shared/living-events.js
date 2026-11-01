@@ -1,6 +1,7 @@
 // Optional, authored Scene events. No network, author writes or persistent visitor storage.
 (function(global){
   'use strict';
+  const dataApi=()=>global.ShiGaiLivingEventData||(typeof require==='function'?require('./living-event-data'):null);
   const clean=(v,n=120)=>String(v??'').trim().slice(0,n);
   const num=(v,min,max,f)=>Number.isFinite(Number(v))?Math.max(min,Math.min(max,Number(v))):f;
   const clock=v=>/^([01]\d|2[0-3]):[0-5]\d$/.test(String(v))?String(v):'00:00';
@@ -9,7 +10,7 @@
       v=v&&typeof v==='object'?v:{};let id=clean(v.id)||'event-'+(i+1),suffix=0;while(ids.has(id))id='event-'+(i+1)+'-'+(++suffix);ids.add(id);
       if(clean(v.templateId))return {id,templateId:clean(v.templateId),objectId:clean(v.objectId),mediaObjectId:clean(v.mediaObjectId),enabled:v.enabled===true,...(v.clickPolicy==='original-first'?{clickPolicy:'original-first'}:{})};
       const lines=a=>(Array.isArray(a)?a:[]).slice(0,50).map(x=>clean(x,500)).filter(Boolean);
-      return {...(v.pageLines!==undefined?{pageLines:Math.round(num(v.pageLines,1,6,3))}:{}),...(v.readingTime!==undefined?{readingTime:v.readingTime!==false}:{}),...(v.displayMode==='continuous'?{displayMode:'continuous',interval:num(v.interval,5,300,10)}:{}),...(v.clickPolicy==='original-first'?{clickPolicy:'original-first'}:{}),id,name:clean(v.name)||'新生活事件',enabled:v.enabled===true,objectId:clean(v.objectId),mediaObjectId:clean(v.mediaObjectId),trigger:['time','click','both'].includes(v.trigger)?v.trigger:'click',start:clock(v.start),end:clock(v.end),lines:lines(v.lines),replies:lines(v.replies),duration:num(v.duration,2,120,8),cooldown:num(v.cooldown,0,1440,60),dailyLimit:Math.round(num(v.dailyLimit,1,20,2)),priority:Math.round(num(v.priority,0,10,0))};
+      return {...(dataApi()?.normalize(v.dataCondition)?{dataCondition:dataApi().normalize(v.dataCondition)}:{}),...(v.pageLines!==undefined?{pageLines:Math.round(num(v.pageLines,1,6,3))}:{}),...(v.readingTime!==undefined?{readingTime:v.readingTime!==false}:{}),...(v.displayMode==='continuous'?{displayMode:'continuous',interval:num(v.interval,5,300,10)}:{}),...(v.clickPolicy==='original-first'?{clickPolicy:'original-first'}:{}),id,name:clean(v.name)||'新生活事件',enabled:v.enabled===true,objectId:clean(v.objectId),mediaObjectId:clean(v.mediaObjectId),trigger:['time','click','both'].includes(v.trigger)?v.trigger:'click',start:clock(v.start),end:clock(v.end),lines:lines(v.lines),replies:lines(v.replies),duration:num(v.duration,2,120,8),cooldown:num(v.cooldown,0,1440,60),dailyLimit:Math.round(num(v.dailyLimit,1,20,2)),priority:Math.round(num(v.priority,0,10,0))};
     });
   }
   function normalizeLibrary(items){
@@ -26,7 +27,8 @@
     const p=Object.fromEntries(new Intl.DateTimeFormat('en-CA',options).formatToParts(date).map(x=>[x.type,x.value]));return {day:p.year+'-'+p.month+'-'+p.day,minute:Number(p.hour)*60+Number(p.minute)};
   }
   function inWindow(event,minute){const n=s=>Number(s.slice(0,2))*60+Number(s.slice(3)),a=n(event.start),b=n(event.end);return a===b|| (a<b?minute>=a&&minute<b:minute>=a||minute<b);}
-  function eligible(event,scene,{now=new Date(),stats,click=false}={}){
+  function eligible(event,scene,{now=new Date(),stats,click=false,data}={}){
+    if(event.dataCondition&&!dataApi()?.evaluate(event.dataCondition,scene,data,now).matches)return false;
     if(!event.enabled||!event.lines?.length||!scene?.objects?.some(o=>o.id===event.objectId&&o.visible!==false))return false;
     if(event.displayMode!=='continuous'&&(click?event.trigger==='time':event.trigger==='click'))return false;
     const time=localClock(scene,now);if((event.displayMode==='continuous'||event.trigger!=='click')&&!inWindow(event,time.minute))return false;
@@ -37,7 +39,15 @@
   const history=new Map(),controllers=new Set();let major=null;
   function mount({container,scene,replace,preview=false,suppressAuto=false,canStart=()=>true,random=Math.random,now=()=>new Date()}){
     const events=normalize(scene.livingEvents);let current=null,timer=null,ended=false,observer;const abort=new AbortController(),session=preview?new Map():history;
-    const standby=new Map();
+    const standby=new Map();let liveData=null,dataRequest=null,nextDataAt=0;
+    const conditioned=events.filter(e=>e.enabled&&e.dataCondition);
+    const dataResult=event=>dataApi()?.evaluate(event.dataCondition,scene,liveData,now())||{matches:!event.dataCondition,variables:{}};
+    const canCondition=event=>!event.dataCondition||dataResult(event).matches;
+    function renderDialogue(actor,event,line){const result=dataResult(event);return replace(actor,event.dataCondition?{...event,dataSource:result.source}:event,event.dataCondition?dataApi().format(line,result,scene):line);}
+    function refreshData(){
+      if(!conditioned.length||dataRequest||Date.now()<nextDataAt||ended||global.document.hidden||!dataApi())return;
+      dataRequest=dataApi().read(scene,conditioned.map(e=>e.dataCondition.type)).then(value=>{if(ended)return;liveData=value;nextDataAt=Date.now()+900000;container.dispatchEvent(new CustomEvent('living-data-status',{detail:conditioned.map(e=>({id:e.id,...dataResult(e)}))}));tick();}).catch(()=>{liveData=null;nextDataAt=Date.now()+300000;}).finally(()=>{dataRequest=null;});
+    }
     const hasContent=actor=>Boolean(String(actor?.text||'').trim())||Boolean(actor?.textDisplay&&['time','date','datetime'].includes(actor.textDisplay.source));
     const actorFor=e=>scene.objects.find(o=>o.id===e.objectId&&o.visible!==false);
     const paused=new Set();const key=e=>scene.id+':'+e.id;
@@ -45,7 +55,7 @@
     function standbyEligible(event) {
       const actor=actorFor(event),time=localClock(scene,now());
       return !!actor&&!hasContent(actor)&&event.enabled&&event.lines.length&&!paused.has(event.id)
-        &&inWindow(event,time.minute)&&session.get(key(event))?.dismissedDay!==time.day;
+        &&canCondition(event)&&inWindow(event,time.minute)&&session.get(key(event))?.dismissedDay!==time.day;
     }
     function clearStandby(id) {
       const entry=standby.get(id);if(!entry)return;
@@ -65,11 +75,12 @@
         const top=candidates.filter(e=>e.priority===candidates[0]?.priority),previous=standby.get(id);
         let event=top.find(e=>e.id===previous?.event.id)||top[0];
         if(!event){clearStandby(id);continue;}
-        if(previous&&event.id===previous.event.id&&rotateId!==id)continue;
+        const signature=JSON.stringify(dataResult(event).variables);
+        if(previous&&event.id===previous.event.id&&rotateId!==id&&previous.signature===signature)continue;
         if(previous&&rotateId===id)event=top[(top.findIndex(e=>e.id===previous.event.id)+1)%top.length];
         const picked=choose(event.lines,previous?.event.id===event.id?previous.index:undefined);
-        clearStandby(id);const restore=replace(actorFor(event),event,picked.text);if(!restore)continue;
-        const entry={event,restore,index:picked.index,timer:null};standby.set(id,entry);armStandby(entry);
+        clearStandby(id);const restore=renderDialogue(actorFor(event),event,picked.text);if(!restore)continue;
+        const entry={event,restore,index:picked.index,timer:null,signature:JSON.stringify(dataResult(event).variables)};standby.set(id,entry);armStandby(entry);
       }
     }
     function finish(){
@@ -84,23 +95,24 @@
       if(current.restore.hasNextPage?.())return;
       const event=current.event,continuous=event.displayMode==='continuous';
       const seconds=Math.max(continuous&&!current.reply?event.interval:event.duration,current.restore.readingSeconds?.()||0);
-      current.timer=setTimeout(()=>{if(ended||!current)return;if(!hasContent(actorFor(event)))finish();else if(continuous&&eligible(event,scene,{now:now(),stats:session.get(key(event))}))show(event,false,false);else finish();},seconds*1000);
+      current.timer=setTimeout(()=>{if(ended||!current)return;if(!hasContent(actorFor(event)))finish();else if(continuous&&eligible(event,scene,{now:now(),stats:session.get(key(event)),data:liveData}))show(event,false,false);else finish();},seconds*1000);
     }
     function choose(lines,last){if(!lines.length)return '';let i=Math.floor(random()*lines.length)%lines.length;if(lines.length>1&&i===last)i=(i+1)%lines.length;return {text:lines[i],index:i};}
     function show(event,force=false,reply=false){
-      if(ended||(!force&&!(reply&&standbyEligible(event))&&!eligible(event,scene,{now:now(),stats:session.get(key(event)),click:reply})))return false;
+      if(!canCondition(event))return false;
+      if(ended||(!force&&!(reply&&standbyEligible(event))&&!eligible(event,scene,{now:now(),stats:session.get(key(event)),click:reply,data:liveData})))return false;
       if(!preview&&major&&major!==controller)return false;
       const actor=scene.objects.find(o=>o.id===event.objectId&&o.visible!==false);if(!actor)return false;
       const last=session.get(key(event));const pick=choose(reply&&event.replies.length?event.replies:event.lines,last?.index);if(!pick)return false;
-      finish();clearStandby(actor.id);const restore=replace(actor,event,pick.text);if(!restore)return false;
+      finish();clearStandby(actor.id);const restore=renderDialogue(actor,event,pick.text);if(!restore)return false;
       const controls=container.ownerDocument.createElement('div');controls.className='living-event-controls';controls.setAttribute('role','group');controls.setAttribute('aria-label',event.name);const more=container.ownerDocument.createElement('details'),summary=container.ownerDocument.createElement('summary');summary.textContent='⋯';summary.setAttribute('aria-label','生活事件選項');more.append(summary);controls.append(more);
       for(const [label,action]of [['關閉',()=>{if(event.displayMode==='continuous'||!hasContent(actor))paused.add(event.id);finish();}],['今日不再提醒',()=>{const s=session.get(key(event))||{};session.set(key(event),{...s,dismissedDay:localClock(scene,now()).day});finish();}]]){const b=container.ownerDocument.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',e=>{e.stopPropagation();action();});more.append(b);}
       container.append(controls);current={event,restore,controls,index:pick.index,reply,timer:null};if(!preview)major=controller;
       if(!force&&hasContent(actor)){const day=localClock(scene,now()).day;session.set(key(event),reply?{...last,last:now().getTime(),index:pick.index}:{day,count:(last?.day===day?last.count:0)+1,last:now().getTime(),index:pick.index,dismissedDay:last?.dismissedDay});if(session.size>500)session.delete(session.keys().next().value);}
       scheduleDialogue();container.dispatchEvent(new CustomEvent('living-event-start',{detail:{id:event.id}}));return true;
     }
-    function click(e){if(e.target.closest('.living-event-controls'))return;const node=e.target.closest('[data-scene-object-id]');if(!node||!container.contains(node))return;const id=node.dataset.sceneObjectId;
-      if(current?.event.objectId===id&&current.event.clickPolicy!=='original-first'){e.preventDefault();e.stopImmediatePropagation();if(current.restore.nextPage?.()){scheduleDialogue();return;}const event=current.event,pick=choose(event.replies.length?event.replies:event.lines,current.index);if(pick){current.restore();current.restore=replace(scene.objects.find(o=>o.id===id),event,pick.text);current.index=pick.index;current.reply=true;scheduleDialogue();}return;}
+    function click(e){if(e.target.closest('.living-event-controls, .scene-event-data-source'))return;const node=e.target.closest('[data-scene-object-id]');if(!node||!container.contains(node))return;const id=node.dataset.sceneObjectId;
+      if(current?.event.objectId===id&&current.event.clickPolicy!=='original-first'){e.preventDefault();e.stopImmediatePropagation();if(current.restore.nextPage?.()){scheduleDialogue();return;}const event=current.event,pick=choose(event.replies.length?event.replies:event.lines,current.index);if(pick){current.restore();current.restore=renderDialogue(scene.objects.find(o=>o.id===id),event,pick.text);current.index=pick.index;current.reply=true;scheduleDialogue();}return;}
       const idle=standby.get(id);
       if(idle&&idle.event.clickPolicy!=='original-first'){
         e.preventDefault();e.stopImmediatePropagation();
@@ -109,16 +121,16 @@
       }
       // Ownership is stable while the authored event applies. Frequency limits
       // suppress dialogue, not silently switch a dialogue target into a link.
-      const event=sorted.find(v=>v.objectId===id&&v.enabled&&v.lines.length&&(hasContent(actorFor(v))||inWindow(v,localClock(scene,now()).minute))&&(v.displayMode==='continuous'||v.trigger!=='time')&&((v.displayMode!=='continuous'&&v.trigger==='click')||inWindow(v,localClock(scene,now()).minute)));
+      const event=sorted.find(v=>v.objectId===id&&v.enabled&&v.lines.length&&canCondition(v)&&(hasContent(actorFor(v))||inWindow(v,localClock(scene,now()).minute))&&(v.displayMode==='continuous'||v.trigger!=='time')&&((v.displayMode!=='continuous'&&v.trigger==='click')||inWindow(v,localClock(scene,now()).minute)));
       if(!event||event.clickPolicy==='original-first')return;
       e.preventDefault();e.stopImmediatePropagation();
-      if(eligible(event,scene,{now:now(),stats:session.get(key(event)),click:true}))show(event,false,true);
+      if(eligible(event,scene,{now:now(),stats:session.get(key(event)),click:true,data:liveData}))show(event,false,true);
     }
     function tick(){
-      clearTimeout(timer);if(ended)return;if(!container.isConnected){destroy();return;}
+      clearTimeout(timer);if(ended)return;refreshData();if(current&&!canCondition(current.event))finish();if(!container.isConnected){destroy();return;}
       if(current&&(current.event.displayMode==='continuous'||!hasContent(actorFor(current.event)))&&!inWindow(current.event,localClock(scene,now()).minute))finish();
       refreshStandby();
-      if(!global.document.hidden&&canStart()&&!suppressAuto&&!current){const e=sorted.find(v=>hasContent(actorFor(v))&&!paused.has(v.id)&&eligible(v,scene,{now:now(),stats:session.get(key(v))}));if(e)show(e);}
+      if(!global.document.hidden&&canStart()&&!suppressAuto&&!current){const e=sorted.find(v=>hasContent(actorFor(v))&&!paused.has(v.id)&&eligible(v,scene,{now:now(),stats:session.get(key(v)),data:liveData}));if(e)show(e);}
       timer=setTimeout(tick,30000);
     }
     function destroy(){if(ended)return;ended=true;clearTimeout(timer);finish();for(const id of [...standby.keys()])clearStandby(id);abort.abort();observer?.disconnect();controllers.delete(controller);}

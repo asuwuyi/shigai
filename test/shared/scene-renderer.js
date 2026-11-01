@@ -367,6 +367,9 @@
     }}finally{probe.remove();}
     if(!pages.length)pages.push('');if(pages.length>1)bubble.style.width=bubble.style.maxWidth;
     let index=0;const content=doc.createElement('span'),counter=doc.createElement('small');content.className='scene-dialogue-content';counter.className='scene-dialogue-page';bubble.replaceChildren(content);if(pages.length>1)bubble.append(counter);
+    if(event.dataSource?.url&&['https://open-meteo.com/','https://data.moenv.gov.tw/dataset/detail/AQX_P_432','https://www.cwa.gov.tw/V8/C/P/Warning/Warning.html','https://gml.noaa.gov/grad/solcalc/'].includes(event.dataSource.url)){
+      const source=doc.createElement('a');source.className='scene-event-data-source';source.href=event.dataSource.url;source.textContent='查看資料來源';source.title=event.dataSource.label;source.target='_blank';source.rel='noopener noreferrer';source.addEventListener('click',e=>e.stopPropagation());bubble.append(source);
+    }
     function draw(){content.textContent=pages[index];counter.textContent=(index+1)+' / '+pages.length+(index<pages.length-1?' · 點一下繼續':'');bubble.dataset.dialoguePage=String(index+1);bubble.dataset.dialoguePages=String(pages.length);bubble.setAttribute('aria-label',pages[index]+(pages.length>1?'，第'+(index+1)+'頁，共'+pages.length+'頁':''));
       if(!bubble.dataset.textAlign||bubble.dataset.textAlign==='auto')bubble.style.textAlign=content.offsetHeight>lineHeight*1.6?'start':'center';
     }

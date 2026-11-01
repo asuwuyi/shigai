@@ -110,3 +110,5 @@
 .scene-render-fixed-plane{pointer-events:none;}
 
 .scene-plain-anchor,.scene-speech-counterflip.is-plain-counter{display:block;position:relative;width:max-content;height:auto;transform-origin:0 0;}
+
+.scene-event-data-source{display:block;font-size:.45em;line-height:1.5;margin-top:.3em;color:inherit;text-decoration:underline;pointer-events:auto;}
