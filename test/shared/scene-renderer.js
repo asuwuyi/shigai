@@ -475,8 +475,9 @@
   }
 
   const previewLivingEvent = (container,id) => eventControllers.get(container)?.preview(id) || false;
+  const refreshLivingEvents = container => eventControllers.get(container)?.refresh();
   const stopLivingEvent = container => eventControllers.get(container)?.destroy();
-  const api = Object.freeze({ previewLivingEvent, stopLivingEvent, UNIFIED, referenceFrames, mode, enabled, fitMode, surfaceMetrics, viewportScale, mappedTransform, animationSettings, keyframeAnimationSettings, applyObjectAnimation, renderScene, updateObject, resizeScene, getObjectNode });
+  const api = Object.freeze({ previewLivingEvent, refreshLivingEvents, stopLivingEvent, UNIFIED, referenceFrames, mode, enabled, fitMode, surfaceMetrics, viewportScale, mappedTransform, animationSettings, keyframeAnimationSettings, applyObjectAnimation, renderScene, updateObject, resizeScene, getObjectNode });
   if (global) global.ShiGaiSceneRenderer = api;
   if (typeof module === "object" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

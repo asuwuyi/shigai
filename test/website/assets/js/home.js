@@ -87,6 +87,7 @@ function finishHomeLoading() {
   window.setTimeout(() => {
     homeElements.loading?.classList.add("is-leaving");
     document.body.classList.remove("is-home-loading");
+    window.ShiGaiSceneRenderer?.refreshLivingEvents?.(homeElements.worldSceneRender);
     window.setTimeout(() => homeElements.loading?.remove(), 380);
   }, remaining);
 }
@@ -799,6 +800,7 @@ function renderWelcomeLogo(value) {
     window.clearTimeout(fadeTimer);
     if (video) media.pause();
     overlay.remove();
+    window.ShiGaiSceneRenderer?.refreshLivingEvents?.(homeElements.worldSceneRender);
     if (removeWelcomeOverlay === remove) removeWelcomeOverlay = null;
   };
   const dismiss = () => {

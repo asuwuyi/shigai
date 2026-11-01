@@ -1790,10 +1790,10 @@
               "anchor": "above",
               "x": 3.727,
               "y": 72.192,
-              "scale": 0.396,
+              "scale": 0.319,
               "rotation": 0,
               "fontSize": 48,
-              "maxWidth": 575.079
+              "maxWidth": 695.63
             }
           }
         },
@@ -2000,7 +2000,7 @@
         "priority": 5,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": false
       },
       {
         "id": "binding-02aa7f90-1fa8-4118-a17c-00785c0bf0a8",
@@ -2022,7 +2022,7 @@
         "priority": 3,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": false
       },
       {
         "id": "binding-f0bff040-9127-4f79-85f8-0dc2f98db719",
@@ -2087,7 +2087,7 @@
         "priority": 8,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": false
       },
       {
         "id": "binding-a4527d64-097f-488b-a80a-60d8f8727a76",
@@ -2108,7 +2108,7 @@
         "priority": 2,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": false
       },
       {
         "id": "binding-3dbd38ad-a6a2-4985-ad4a-9b12a4bb80f0",
@@ -2130,7 +2130,7 @@
         "priority": 2,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": false
       }
     ],
     "metadata": {
@@ -2147,6 +2147,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-11-01T17:20:09.711Z"
+    "updatedAt": "2026-11-01T17:32:55.188Z"
   }
 ]
