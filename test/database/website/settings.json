@@ -748,7 +748,7 @@
       "charactersNavigation": true,
       "gamesNavigation": true,
       "toolsNavigation": true,
-      "islandNavigation": true,
+      "islandNavigation": false,
       "aboutNavigation": true,
       "worksMenu": true,
       "worksFirstPage": true,

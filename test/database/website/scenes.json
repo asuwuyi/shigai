@@ -1125,9 +1125,9 @@
       },
       {
         "id": "object-local-1792949868469",
-        "order": 2,
-        "type": "prop",
-        "name": "新道具",
+        "order": 5,
+        "type": "character",
+        "name": "ShiGai搖",
         "media": {
           "src": "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1792949868469-1792949898967.gif",
           "format": "gif",
@@ -1156,7 +1156,8 @@
         "locked": false,
         "text": "",
         "textBubble": {
-          "enabled": false,
+          "enabled": true,
+          "fontFamily": "helvetica",
           "color": "#34271f",
           "backgroundColor": "#fffdf5",
           "fontWeight": 600,
@@ -1166,10 +1167,10 @@
               "anchor": "above",
               "x": 0,
               "y": 0,
-              "scale": 1,
+              "scale": 0.698,
               "rotation": 0,
               "fontSize": 48,
-              "maxWidth": 480
+              "maxWidth": 200
             }
           }
         },
@@ -1207,7 +1208,7 @@
       },
       {
         "id": "object-local-1793469012869",
-        "order": 3,
+        "order": 6,
         "type": "character",
         "name": "我騎車",
         "media": {
@@ -1393,8 +1394,8 @@
       },
       {
         "id": "object-local-1793471906713",
-        "order": 4,
-        "type": "prop",
+        "order": 3,
+        "type": "character",
         "name": "企鵝",
         "media": {
           "src": "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1792592519571.gif",
@@ -1422,7 +1423,7 @@
         "layer": "mid",
         "visible": true,
         "locked": false,
-        "text": "Hello",
+        "text": "好熱喔",
         "textBubble": {
           "enabled": true,
           "color": "#34271f",
@@ -1432,8 +1433,8 @@
           "layouts": {
             "landscape": {
               "anchor": "above",
-              "x": -5.278,
-              "y": 59.086,
+              "x": 91.999,
+              "y": 59.693,
               "scale": 0.756,
               "rotation": 0,
               "fontSize": 45,
@@ -1521,7 +1522,7 @@
       },
       {
         "id": "object-local-1793471919509",
-        "order": 5,
+        "order": 4,
         "type": "character",
         "name": "雞",
         "media": {
@@ -1530,27 +1531,27 @@
           "alt": ""
         },
         "position": {
-          "x": 0.339,
-          "y": 0.672
+          "x": 0.309,
+          "y": 0.668
         },
-        "scale": 0.474,
+        "scale": 0.445,
         "rotation": 0,
         "flipX": false,
         "flipY": false,
         "layouts": {
           "landscape": {
             "position": {
-              "x": 0.339,
-              "y": 0.672
+              "x": 0.309,
+              "y": 0.668
             },
-            "scale": 0.474,
+            "scale": 0.445,
             "rotation": 0
           }
         },
         "layer": "mid",
         "visible": true,
         "locked": false,
-        "text": "今天喝什麼",
+        "text": "要喝一杯嗎？",
         "textBubble": {
           "enabled": true,
           "color": "#34271f",
@@ -1560,9 +1561,199 @@
           "layouts": {
             "landscape": {
               "anchor": "above",
-              "x": 4.75,
-              "y": 45.759,
-              "scale": 0.707,
+              "x": 11.855,
+              "y": 44.896,
+              "scale": 0.514,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1793528146823",
+        "order": 7,
+        "type": "text",
+        "name": "時間",
+        "media": {
+          "src": "",
+          "format": "",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.503,
+          "y": 0.238
+        },
+        "scale": 1,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.503,
+              "y": 0.238
+            },
+            "scale": 1,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "NEWS:",
+        "textDisplay": {
+          "version": 1,
+          "source": "time",
+          "timeZone": "scene",
+          "hour12": false,
+          "showSeconds": true,
+          "weekday": true,
+          "mode": "marquee",
+          "lines": 2,
+          "speed": 40,
+          "direction": "left",
+          "gap": 64
+        },
+        "textBubble": {
+          "enabled": false,
+          "color": "#ffffff",
+          "backgroundColor": "#424242",
+          "fontWeight": 900,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 4.436,
+              "y": 483.485,
+              "scale": 6.104,
+              "rotation": 0,
+              "fontSize": 50,
+              "maxWidth": 241
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1793542816103",
+        "order": 2,
+        "type": "character",
+        "name": "企鵝music",
+        "media": {
+          "src": "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1793542816103-1793543341073.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.421,
+          "y": 0.607
+        },
+        "scale": 0.364,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.421,
+              "y": 0.607
+            },
+            "scale": 0.364,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textDisplay": {
+          "version": 1,
+          "source": "manual",
+          "timeZone": "scene",
+          "hour12": false,
+          "showSeconds": false,
+          "weekday": true,
+          "mode": "wrap",
+          "lines": 2,
+          "speed": 40,
+          "direction": "left",
+          "gap": 64
+        },
+        "textBubble": {
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
               "rotation": 0,
               "fontSize": 48,
               "maxWidth": 480
@@ -1652,6 +1843,257 @@
         "objectId": "object-local-1792949868469",
         "mediaObjectId": "",
         "enabled": true
+      },
+      {
+        "id": "binding-f67bca21-8326-4241-a956-b90cf15c57e2",
+        "name": "01 午餐時間｜11:00–13:00",
+        "trigger": "both",
+        "start": "11:00",
+        "end": "13:00",
+        "lines": [
+          "中午要吃什麼？",
+          "我好餓，今天想吃點什麼？",
+          "先休息一下，想想午餐吧。"
+        ],
+        "replies": [
+          "今天吃咖哩飯！",
+          "水餃好像也不錯。",
+          "來碗麵怎麼樣？"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 1,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true
+      },
+      {
+        "id": "binding-b6de059b-1836-4971-8d5f-4b588f619a99",
+        "name": "02 晚餐時間｜17:00–19:00",
+        "trigger": "both",
+        "start": "17:00",
+        "end": "19:00",
+        "lines": [
+          "晚餐吃什麼？",
+          "忙了一天，該吃晚餐了。",
+          "今天想吃飯，還是吃麵？"
+        ],
+        "replies": [
+          "我投炒飯一票。",
+          "熱湯配飯怎麼樣？",
+          "來份你最想吃的吧。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 1,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true
+      },
+      {
+        "id": "binding-5bd0a87d-271d-4be4-857e-b8586b0144f4",
+        "name": "03 深夜提醒｜22:00–06:00",
+        "trigger": "both",
+        "start": "22:00",
+        "end": "06:00",
+        "lines": [
+          "還不睡？",
+          "夜深了，眼睛也需要休息。",
+          "今天辛苦了，要不要準備休息？"
+        ],
+        "replies": [
+          "把最後一件事收尾，就去睡吧。",
+          "先喝口水，讓眼睛休息一下。",
+          "明天再繼續也可以。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 1,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true
+      },
+      {
+        "displayMode": "continuous",
+        "interval": 10,
+        "id": "binding-b75c9f75-2d8d-402e-bdd1-a24aed8af5e4",
+        "name": "04 點我決定吃什麼｜全天點擊",
+        "trigger": "click",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "不知道吃什麼嗎？問我啊！",
+          "我幫你想一個選擇。"
+        ],
+        "replies": [
+          "咖哩飯！",
+          "牛肉麵！",
+          "水餃！",
+          "便當！",
+          "蛋餅也可以。"
+        ],
+        "duration": 5,
+        "cooldown": 0,
+        "dailyLimit": 20,
+        "priority": 1,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": false
+      },
+      {
+        "id": "binding-7e1ad9cf-cef8-4998-a2f3-31d1662f36b4",
+        "name": "05 帶傘提醒｜點擊示意・天氣條件待接",
+        "trigger": "click",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "【範例示意】等一下可能會下雨，記得帶傘。",
+          "【範例示意】出門前確認一下預報吧。"
+        ],
+        "replies": [
+          "這是台詞試看，尚未連接未來降雨機率。",
+          "拿雨傘的專用動畫尚未指定，可再替換素材。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 5,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true
+      },
+      {
+        "id": "binding-02aa7f90-1fa8-4118-a17c-00785c0bf0a8",
+        "name": "06 高溫反應｜點擊示意・氣溫條件待接",
+        "trigger": "click",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "【範例示意】好熱，我快融化了。",
+          "【範例示意】想找個涼快的地方休息。"
+        ],
+        "replies": [
+          "這是台詞試看，尚未依實際30°C門檻觸發。",
+          "流汗動畫尚未指定，可再替換素材。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 3,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true
+      },
+      {
+        "id": "binding-f0bff040-9127-4f79-85f8-0dc2f98db719",
+        "name": "09 日出提醒｜日出條件待接",
+        "trigger": "click",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "【範例示意】早安，天快亮了！",
+          "【範例示意】新的一天要開始了。"
+        ],
+        "replies": [
+          "日出提醒尚未綁定所在地日出時間；目前只供台詞試看。",
+          "之後可共用場景的城市與日出日落計算，不必重複設定固定時刻。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 2,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true
+      },
+      {
+        "id": "binding-ac6aeef0-3e59-4efd-bb12-4cd1d3026982",
+        "name": "10 日落提醒｜日落條件待接",
+        "trigger": "click",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "【範例示意】太陽快下山了。",
+          "【範例示意】準備迎接晚上的Shi-Gai吧。"
+        ],
+        "replies": [
+          "這是日落對話示意，目前沒有依實際日落時間自動出現。",
+          "將來可以跟天空共用同一個地區與日落時間。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 2,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true
+      },
+      {
+        "id": "binding-8579d1a6-2fd6-4ad8-86d7-583fab7fab09",
+        "name": "11 官方示警｜公告來源待接",
+        "trigger": "click",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "【範例示意，非官方警報】所在地若有官方示警，這裡會提示查看公告。"
+        ],
+        "replies": [
+          "目前未接官方示警來源，不提供即時災害通知。",
+          "正式接入時應顯示發布單位、影響地區、有效時間與原始公告連結。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 8,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true
+      },
+      {
+        "id": "binding-a4527d64-097f-488b-a80a-60d8f8727a76",
+        "name": "08 PM2.5 資訊｜資料條件待接",
+        "trigger": "click",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "【範例示意，非即時資料】一起看看附近測站的PM2.5。"
+        ],
+        "replies": [
+          "未來會顯示PM2.5濃度、單位與資料時間；目前未接來源。",
+          "AQI和PM2.5是不同欄位，不能直接當成相同數值。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 2,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true
+      },
+      {
+        "id": "binding-3dbd38ad-a6a2-4985-ad4a-9b12a4bb80f0",
+        "name": "07 空氣品質 AQI｜資料條件待接",
+        "trigger": "click",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "【範例示意，非即時資料】今天的空氣品質怎麼樣？",
+          "【範例示意】點我查看所在地空氣品質資訊。"
+        ],
+        "replies": [
+          "未來這裡會顯示所在地的AQI、測站、資料時間與來源。",
+          "這個範例尚未讀取真實AQI，不代表目前空氣品質狀況。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 2,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true
       }
     ],
     "metadata": {
@@ -1668,6 +2110,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-10-31T18:39:59.345Z"
+    "updatedAt": "2026-11-01T14:32:56.608Z"
   }
 ]
