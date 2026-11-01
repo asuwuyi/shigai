@@ -1034,7 +1034,7 @@
       ]
     },
     "condition": {
-      "mode": "fixed",
+      "mode": "environment",
       "timezone": "visitor",
       "start": "",
       "end": "",
@@ -1046,7 +1046,14 @@
       "weight": 1,
       "random": false,
       "event": "",
-      "fallback": false
+      "fallback": false,
+      "periods": [
+        "morning",
+        "noon",
+        "afternoon"
+      ],
+      "periodVersion": 2,
+      "weathers": []
     },
     "language": {
       "defaultLocale": "zh-Hant",
@@ -2196,6 +2203,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-11-01T20:37:56.859Z"
+    "updatedAt": "2026-11-01T22:06:43.660Z"
   }
 ]
