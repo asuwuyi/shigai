@@ -290,6 +290,11 @@
     }
     const speech = rules().normalizeTextBubble(object.textBubble);
     const eventPreview=editorSelectable&&scene?.livingEvents?.some(e=>e.objectId===object.id);if(eventPreview)speech.enabled=true;
+    // Manual information-text mounting must not erase the editor-only caption.
+    // Use a transient view object; never save placeholder text to the Scene.
+    const eventPlaceholder = eventPreview && !String(object.text || '').trim()
+      && (!object.textDisplay || rules().normalizeTextDisplay(object.textDisplay).source === 'manual');
+    const textObject = eventPlaceholder ? { ...object, text: '事件台詞預覽' } : object;
     const hasText = eventPreview || Boolean(object?.text) || Boolean(object?.textDisplay && rules().normalizeTextDisplay(object.textDisplay).source !== "manual");
     if ((!speech.enabled || !hasText) && (hasText || !media)) {
       const text = documentRef.createElement("span");
@@ -300,7 +305,7 @@
     if (speech.enabled && hasText) {
       const anchor = documentRef.createElement('div'); anchor.className = 'scene-speech-anchor';
       const counter = documentRef.createElement('div'); counter.className = 'scene-speech-counterflip';
-      const text = documentRef.createElement('span'); text.className = 'scene-speech-bubble'; text.textContent = object.text || (eventPreview?'事件台詞預覽':'');
+      const text = documentRef.createElement('span'); text.className = 'scene-speech-bubble'; text.textContent = textObject.text || '';
       counter.append(text); anchor.append(counter); visual.append(anchor);
     }
     const orientation = documentRef.createElement("div");
@@ -313,7 +318,7 @@
     applyObjectAnimation(node, object, metrics, playAnimation !== false, layout, editorSelectable);
     if(object.textDisplay){
       if(!global.ShiGaiSceneText)throw new Error('ShiGaiSceneText is required for information text.');
-      node.querySelectorAll('.scene-speech-bubble, .scene-render-object-text').forEach(text=>global.ShiGaiSceneText.mount({node:text,wrapper:node,object,scene,layout,editorSelectable:!!editorSelectable}));
+      node.querySelectorAll('.scene-speech-bubble, .scene-render-object-text').forEach(text=>global.ShiGaiSceneText.mount({node:text,wrapper:node,object:textObject,scene,layout,editorSelectable:!!editorSelectable}));
     }
     if (media && animationSettings(object).mode === "seamless") {
       const refreshSeamlessBounds = () => applyObjectAnimation(node, object, metrics, playAnimation !== false, layout);

@@ -1171,6 +1171,7 @@
         "locked": false,
         "text": "",
         "textBubble": {
+          "fixedWidth": true,
           "align": "auto",
           "lineHeight": 1.45,
           "letterSpacing": 0,
@@ -1183,12 +1184,12 @@
           "layouts": {
             "landscape": {
               "anchor": "above",
-              "x": 3.285,
-              "y": 38.263,
-              "scale": 0.702,
+              "x": 0.191,
+              "y": 55.371,
+              "scale": 0.361,
               "rotation": 0,
               "fontSize": 48,
-              "maxWidth": 200
+              "maxWidth": 430.242
             }
           }
         },
@@ -1281,7 +1282,7 @@
               "anchor": "above",
               "x": -1.768,
               "y": 72.327,
-              "scale": 0.726,
+              "scale": 0.571,
               "rotation": 0,
               "fontSize": 48,
               "maxWidth": 480
@@ -1775,6 +1776,7 @@
           "gap": 64
         },
         "textBubble": {
+          "fixedWidth": true,
           "align": "auto",
           "lineHeight": 1.45,
           "letterSpacing": 0,
@@ -1786,12 +1788,12 @@
           "layouts": {
             "landscape": {
               "anchor": "above",
-              "x": -1.944,
-              "y": -1.079,
-              "scale": 0.437,
+              "x": 1.443,
+              "y": 57.63,
+              "scale": 0.396,
               "rotation": 0,
               "fontSize": 48,
-              "maxWidth": 480
+              "maxWidth": 535.084
             }
           }
         },
@@ -2145,6 +2147,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-11-01T16:35:36.854Z"
+    "updatedAt": "2026-11-01T16:50:18.586Z"
   }
 ]
