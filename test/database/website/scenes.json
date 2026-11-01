@@ -1788,12 +1788,12 @@
           "layouts": {
             "landscape": {
               "anchor": "above",
-              "x": 1.443,
-              "y": 57.63,
+              "x": 3.727,
+              "y": 72.192,
               "scale": 0.396,
               "rotation": 0,
               "fontSize": 48,
-              "maxWidth": 535.084
+              "maxWidth": 575.079
             }
           }
         },
@@ -2147,6 +2147,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-11-01T16:50:18.586Z"
+    "updatedAt": "2026-11-01T17:20:09.711Z"
   }
 ]

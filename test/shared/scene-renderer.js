@@ -289,14 +289,15 @@
       visual.append(media);
     }
     const speech = rules().normalizeTextBubble(object.textBubble);
-    const eventPreview=editorSelectable&&scene?.livingEvents?.some(e=>e.objectId===object.id);if(eventPreview)speech.enabled=true;
+    const hasBoundEvents=scene?.livingEvents?.some(e=>e.objectId===object.id);
+    const eventPreview=editorSelectable&&hasBoundEvents;if(eventPreview)speech.enabled=true;
     // Manual information-text mounting must not erase the editor-only caption.
     // Use a transient view object; never save placeholder text to the Scene.
     const eventPlaceholder = eventPreview && !String(object.text || '').trim()
       && (!object.textDisplay || rules().normalizeTextDisplay(object.textDisplay).source === 'manual');
     const textObject = eventPlaceholder ? { ...object, text: '事件台詞預覽' } : object;
     const hasText = eventPreview || Boolean(object?.text) || Boolean(object?.textDisplay && rules().normalizeTextDisplay(object.textDisplay).source !== "manual");
-    if ((!speech.enabled || !hasText) && (hasText || !media)) {
+    if ((!speech.enabled || !hasText) && (hasText || (!media && !hasBoundEvents))) {
       const text = documentRef.createElement("span");
       text.className = "scene-render-object-text";
       text.textContent = object?.text || object?.name || "";

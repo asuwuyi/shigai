@@ -37,48 +37,96 @@
   const history=new Map(),controllers=new Set();let major=null;
   function mount({container,scene,replace,preview=false,suppressAuto=false,canStart=()=>true,random=Math.random,now=()=>new Date()}){
     const events=normalize(scene.livingEvents);let current=null,timer=null,ended=false,observer;const abort=new AbortController(),session=preview?new Map():history;
+    const standby=new Map();
+    const hasContent=actor=>Boolean(String(actor?.text||'').trim())||Boolean(actor?.textDisplay&&['time','date','datetime'].includes(actor.textDisplay.source));
+    const actorFor=e=>scene.objects.find(o=>o.id===e.objectId&&o.visible!==false);
     const paused=new Set();const key=e=>scene.id+':'+e.id;
     const sorted=events.slice().sort((a,b)=>b.priority-a.priority);
-    function finish(){if(!current)return;const focused=current.controls.contains(container.ownerDocument.activeElement),actorId=current.event.objectId;clearTimeout(current.timer);current.restore();current.controls.remove();current=null;if(focused)Array.from(container.querySelectorAll('[data-scene-object-id]')).find(n=>n.dataset.sceneObjectId===actorId)?.focus({preventScroll:true});if(major===controller)major=null;}
+    function standbyEligible(event) {
+      const actor=actorFor(event),time=localClock(scene,now());
+      return !!actor&&!hasContent(actor)&&event.enabled&&event.lines.length&&!paused.has(event.id)
+        &&inWindow(event,time.minute)&&session.get(key(event))?.dismissedDay!==time.day;
+    }
+    function clearStandby(id) {
+      const entry=standby.get(id);if(!entry)return;
+      clearTimeout(entry.timer);entry.restore();standby.delete(id);
+    }
+    function armStandby(entry) {
+      clearTimeout(entry.timer);if(entry.restore.hasNextPage?.())return;
+      const seconds=Math.max(entry.event.interval||entry.event.duration,entry.restore.readingSeconds?.()||0);
+      entry.timer=setTimeout(()=>refreshStandby(entry.event.objectId),seconds*1000);
+    }
+    function refreshStandby(rotateId) {
+      if(ended||global.document.hidden||suppressAuto||!canStart()) {for(const id of [...standby.keys()])clearStandby(id);return;}
+      const actors=new Set([...standby.keys(),...events.map(e=>e.objectId)]);
+      for(const id of actors) {
+        if(current?.event.objectId===id){clearStandby(id);continue;}
+        const candidates=sorted.filter(e=>e.objectId===id&&standbyEligible(e));
+        const top=candidates.filter(e=>e.priority===candidates[0]?.priority),previous=standby.get(id);
+        let event=top.find(e=>e.id===previous?.event.id)||top[0];
+        if(!event){clearStandby(id);continue;}
+        if(previous&&event.id===previous.event.id&&rotateId!==id)continue;
+        if(previous&&rotateId===id)event=top[(top.findIndex(e=>e.id===previous.event.id)+1)%top.length];
+        const picked=choose(event.lines,previous?.event.id===event.id?previous.index:undefined);
+        clearStandby(id);const restore=replace(actorFor(event),event,picked.text);if(!restore)continue;
+        const entry={event,restore,index:picked.index,timer:null};standby.set(id,entry);armStandby(entry);
+      }
+    }
+    function finish(){
+      if(!current)return;const focused=current.controls.contains(container.ownerDocument.activeElement),actorId=current.event.objectId;
+      clearTimeout(current.timer);current.restore();current.controls.remove();current=null;
+      if(focused)Array.from(container.querySelectorAll('[data-scene-object-id]')).find(n=>n.dataset.sceneObjectId===actorId)?.focus({preventScroll:true});
+      if(major===controller)major=null;refreshStandby();
+    }
     function scheduleDialogue(){
       if(!current)return;clearTimeout(current.timer);
       // A multi-page line waits for the visitor; never expire unread pages.
       if(current.restore.hasNextPage?.())return;
       const event=current.event,continuous=event.displayMode==='continuous';
       const seconds=Math.max(continuous&&!current.reply?event.interval:event.duration,current.restore.readingSeconds?.()||0);
-      current.timer=setTimeout(()=>{if(ended||!current)return;if(continuous&&eligible(event,scene,{now:now(),stats:session.get(key(event))}))show(event,false,false);else finish();},seconds*1000);
+      current.timer=setTimeout(()=>{if(ended||!current)return;if(!hasContent(actorFor(event)))finish();else if(continuous&&eligible(event,scene,{now:now(),stats:session.get(key(event))}))show(event,false,false);else finish();},seconds*1000);
     }
     function choose(lines,last){if(!lines.length)return '';let i=Math.floor(random()*lines.length)%lines.length;if(lines.length>1&&i===last)i=(i+1)%lines.length;return {text:lines[i],index:i};}
     function show(event,force=false,reply=false){
-      if(ended||(!force&&!eligible(event,scene,{now:now(),stats:session.get(key(event)),click:reply})))return false;
+      if(ended||(!force&&!(reply&&standbyEligible(event))&&!eligible(event,scene,{now:now(),stats:session.get(key(event)),click:reply})))return false;
       if(!preview&&major&&major!==controller)return false;
       const actor=scene.objects.find(o=>o.id===event.objectId&&o.visible!==false);if(!actor)return false;
       const last=session.get(key(event));const pick=choose(reply&&event.replies.length?event.replies:event.lines,last?.index);if(!pick)return false;
-      finish();const restore=replace(actor,event,pick.text);if(!restore)return false;
+      finish();clearStandby(actor.id);const restore=replace(actor,event,pick.text);if(!restore)return false;
       const controls=container.ownerDocument.createElement('div');controls.className='living-event-controls';controls.setAttribute('role','group');controls.setAttribute('aria-label',event.name);const more=container.ownerDocument.createElement('details'),summary=container.ownerDocument.createElement('summary');summary.textContent='⋯';summary.setAttribute('aria-label','生活事件選項');more.append(summary);controls.append(more);
-      for(const [label,action]of [['關閉',()=>{if(event.displayMode==='continuous')paused.add(event.id);finish();}],['今日不再提醒',()=>{const s=session.get(key(event))||{};session.set(key(event),{...s,dismissedDay:localClock(scene,now()).day});finish();}]]){const b=container.ownerDocument.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',e=>{e.stopPropagation();action();});more.append(b);}
+      for(const [label,action]of [['關閉',()=>{if(event.displayMode==='continuous'||!hasContent(actor))paused.add(event.id);finish();}],['今日不再提醒',()=>{const s=session.get(key(event))||{};session.set(key(event),{...s,dismissedDay:localClock(scene,now()).day});finish();}]]){const b=container.ownerDocument.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',e=>{e.stopPropagation();action();});more.append(b);}
       container.append(controls);current={event,restore,controls,index:pick.index,reply,timer:null};if(!preview)major=controller;
-      if(!force){const day=localClock(scene,now()).day;session.set(key(event),reply?{...last,last:now().getTime(),index:pick.index}:{day,count:(last?.day===day?last.count:0)+1,last:now().getTime(),index:pick.index,dismissedDay:last?.dismissedDay});if(session.size>500)session.delete(session.keys().next().value);}
+      if(!force&&hasContent(actor)){const day=localClock(scene,now()).day;session.set(key(event),reply?{...last,last:now().getTime(),index:pick.index}:{day,count:(last?.day===day?last.count:0)+1,last:now().getTime(),index:pick.index,dismissedDay:last?.dismissedDay});if(session.size>500)session.delete(session.keys().next().value);}
       scheduleDialogue();container.dispatchEvent(new CustomEvent('living-event-start',{detail:{id:event.id}}));return true;
     }
     function click(e){if(e.target.closest('.living-event-controls'))return;const node=e.target.closest('[data-scene-object-id]');if(!node||!container.contains(node))return;const id=node.dataset.sceneObjectId;
       if(current?.event.objectId===id&&current.event.clickPolicy!=='original-first'){e.preventDefault();e.stopImmediatePropagation();if(current.restore.nextPage?.()){scheduleDialogue();return;}const event=current.event,pick=choose(event.replies.length?event.replies:event.lines,current.index);if(pick){current.restore();current.restore=replace(scene.objects.find(o=>o.id===id),event,pick.text);current.index=pick.index;current.reply=true;scheduleDialogue();}return;}
+      const idle=standby.get(id);
+      if(idle&&idle.event.clickPolicy!=='original-first'){
+        e.preventDefault();e.stopImmediatePropagation();
+        if(idle.restore.nextPage?.()){armStandby(idle);return;}
+        show(idle.event,false,true);return;
+      }
       // Ownership is stable while the authored event applies. Frequency limits
       // suppress dialogue, not silently switch a dialogue target into a link.
-      const event=sorted.find(v=>v.objectId===id&&v.enabled&&v.lines.length&&(v.displayMode==='continuous'||v.trigger!=='time')&&((v.displayMode!=='continuous'&&v.trigger==='click')||inWindow(v,localClock(scene,now()).minute)));
+      const event=sorted.find(v=>v.objectId===id&&v.enabled&&v.lines.length&&(hasContent(actorFor(v))||inWindow(v,localClock(scene,now()).minute))&&(v.displayMode==='continuous'||v.trigger!=='time')&&((v.displayMode!=='continuous'&&v.trigger==='click')||inWindow(v,localClock(scene,now()).minute)));
       if(!event||event.clickPolicy==='original-first')return;
       e.preventDefault();e.stopImmediatePropagation();
       if(eligible(event,scene,{now:now(),stats:session.get(key(event)),click:true}))show(event,false,true);
     }
-    function tick(){clearTimeout(timer);if(ended)return;if(!container.isConnected){destroy();return;}if(current?.event.displayMode==='continuous'&&!inWindow(current.event,localClock(scene,now()).minute))finish();if(!global.document.hidden&&canStart()&&!suppressAuto&&!current){const e=sorted.find(v=>!paused.has(v.id)&&eligible(v,scene,{now:now(),stats:session.get(key(v))}));if(e)show(e);}
+    function tick(){
+      clearTimeout(timer);if(ended)return;if(!container.isConnected){destroy();return;}
+      if(current&&(current.event.displayMode==='continuous'||!hasContent(actorFor(current.event)))&&!inWindow(current.event,localClock(scene,now()).minute))finish();
+      refreshStandby();
+      if(!global.document.hidden&&canStart()&&!suppressAuto&&!current){const e=sorted.find(v=>hasContent(actorFor(v))&&!paused.has(v.id)&&eligible(v,scene,{now:now(),stats:session.get(key(v))}));if(e)show(e);}
       timer=setTimeout(tick,30000);
     }
-    function destroy(){if(ended)return;ended=true;clearTimeout(timer);finish();abort.abort();observer?.disconnect();controllers.delete(controller);}
+    function destroy(){if(ended)return;ended=true;clearTimeout(timer);finish();for(const id of [...standby.keys()])clearStandby(id);abort.abort();observer?.disconnect();controllers.delete(controller);}
     const controller={destroy,finish,preview:id=>{const event=events.find(e=>e.id===id);return event?show(event,true,false):false;},get activeId(){return current?.event.id||'';}};
     container.addEventListener('click',click,{capture:true,signal:abort.signal});container.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-living-event-target]')){e.preventDefault();e.target.click();}},{signal:abort.signal});
-    global.document.addEventListener('visibilitychange',()=>{if(global.document.hidden){clearTimeout(timer);finish();}else tick();},{signal:abort.signal});
+    global.document.addEventListener('visibilitychange',()=>{if(global.document.hidden){clearTimeout(timer);finish();for(const id of [...standby.keys()])clearStandby(id);}else tick();},{signal:abort.signal});
     if(global.MutationObserver){observer=new MutationObserver(()=>{if(!container.isConnected)destroy();});observer.observe(global.document.documentElement,{childList:true,subtree:true});}
-    for(const event of events.filter(e=>e.enabled&&(e.displayMode==='continuous'||e.trigger!=='time')&&e.clickPolicy!=='original-first')){const n=Array.from(container.querySelectorAll('[data-scene-object-id]')).find(n=>n.dataset.sceneObjectId===event.objectId);if(n){n.tabIndex=0;n.setAttribute('role','button');n.setAttribute('data-living-event-target','');n.setAttribute('aria-label',(n.getAttribute('aria-label')||event.name)+'：點擊對話');n.style.cursor='pointer';}}
+    for(const event of events.filter(e=>e.enabled&&(e.displayMode==='continuous'||e.trigger!=='time'||!hasContent(actorFor(e)))&&e.clickPolicy!=='original-first')){const n=Array.from(container.querySelectorAll('[data-scene-object-id]')).find(n=>n.dataset.sceneObjectId===event.objectId);if(n){n.tabIndex=0;n.setAttribute('role','button');n.setAttribute('data-living-event-target','');n.setAttribute('aria-label',(n.getAttribute('aria-label')||event.name)+'：點擊對話');n.style.cursor='pointer';}}
     controllers.add(controller);if(!suppressAuto)tick();return controller;
   }
   const api={normalize,normalizeLibrary,resolveScene,localClock,inWindow,eligible,mount};global.ShiGaiLivingEvents=api;if(typeof module==='object'&&module.exports)module.exports=api;
