@@ -100,7 +100,7 @@
     let returnFocus;
     const opener = button(copy.settingsLabel, () => {
       const toggle = document.querySelector('.site-menu-toggle, .works-exhibition-menu-button, .characters-menu-button');
-      returnFocus = toggle?.getClientRects().length ? toggle : fallbackMenu?.querySelector("summary") || opener;
+      returnFocus = opener;
       if (toggle?.getAttribute("aria-expanded") === "true") toggle.click();
       if (fallbackMenu) fallbackMenu.open = false;
       showPreferences(); title.focus();
@@ -108,16 +108,10 @@
     opener.className = "analytics-preferences-open"; opener.setAttribute("aria-expanded", "false"); opener.setAttribute("aria-controls", "analytics-preferences-panel"); panel.id = "analytics-preferences-panel"; title.tabIndex = -1;
     let fallbackMenu;
     const mountOpener = () => {
-      const navigation = document.querySelector('#sitePrimaryNav, .works-exhibition-nav');
-      if (navigation) { (navigation.querySelector(":scope > .scroll-menu-content") || navigation).append(opener); fallbackMenu?.remove(); fallbackMenu = null; return; }
-      // Standalone game pages have no shared navigation; keep a small collapsed
-      // menu instead of leaving a permanently visible privacy label over gameplay.
-      if (opener.isConnected) return;
-      fallbackMenu = document.createElement("details"); fallbackMenu.className = "analytics-preferences-menu";
-      const menuToggle = document.createElement("summary"); menuToggle.textContent = "☰";
-      menuToggle.setAttribute("aria-label", brand.system?.openMenuLabel || "開啟網站選單");
-      fallbackMenu.append(menuToggle, opener); document.body.append(fallbackMenu);
-      fallbackMenu.addEventListener("keydown", event => { if (event.key === "Escape") { fallbackMenu.open = false; menuToggle.focus(); } });
+      let footer=document.querySelector('[data-privacy-footer]');
+      if(!footer){footer=document.createElement('footer');footer.dataset.privacyFooter='';footer.className='site-privacy-footer';document.body.append(footer);}
+      footer.append(opener);fallbackMenu?.remove();fallbackMenu=null;
+
     };
     preferences = { open() { panel.hidden = false; opener.setAttribute("aria-expanded", "true"); }, close() { const restore = panel.contains(document.activeElement); panel.hidden = true; opener.setAttribute("aria-expanded", "false"); if (restore) (returnFocus?.isConnected ? returnFocus : document.querySelector('.site-menu-toggle, .works-exhibition-menu-button, .characters-menu-button') || fallbackMenu?.querySelector("summary"))?.focus(); } };
     panel.addEventListener("keydown", event => { if (event.key === "Escape") { event.preventDefault(); preferences.close(); } });

@@ -248,8 +248,8 @@
     const placement = settings.layouts[layout];
     if (!anchor) {
       const text=node.querySelector('.scene-render-object-text');
-      if(text)text.style.fontFamily=rules().fontFamily(settings.fontFamily);
-      if(text&&settings.animation){text.style.position='relative';text.style.left=placement.x+'px';text.style.top=placement.y+'px';text.style.transform=`rotate(${placement.rotation}deg) scale(${placement.scale})`;}
+      if(text){Object.assign(text.style,{fontFamily:rules().fontFamily(settings.fontFamily),fontSize:placement.fontSize+'px',fontWeight:String(settings.fontWeight),color:settings.color,maxWidth:placement.maxWidth+'px',lineHeight:String(settings.lineHeight),letterSpacing:settings.letterSpacing+'px'});text.dataset.textAlign=settings.align;if(settings.align!=='auto')text.style.textAlign=settings.align;}
+      if(text){text.style.position='relative';text.style.left=placement.x+'px';text.style.top=placement.y+'px';text.style.transform=`rotate(${placement.rotation}deg) scale(${placement.scale})`;}
       return;
     }
     const text = anchor.querySelector('.scene-speech-bubble');
@@ -264,6 +264,7 @@
     anchor.style.transform = 'scale(' + inverse * (object.flipX ? -1 : 1) + ',' + inverse * (object.flipY ? -1 : 1) + ')';
     text.style.left = placement.x + 'px'; text.style.top = placement.y + 'px';
     text.style.transform = (hasMedia ? 'translate(' + tx + ',' + ty + ') ' : '') + 'rotate(' + placement.rotation + 'deg) scale(' + placement.scale + ')';
+    text.style.lineHeight=String(settings.lineHeight);text.style.letterSpacing=settings.letterSpacing+'px';text.dataset.textAlign=settings.align;if(settings.align!=='auto')text.style.textAlign=settings.align;
     text.style.fontFamily = rules().fontFamily(settings.fontFamily);
     text.style.color = settings.color; text.style.backgroundColor = settings.backgroundColor;
     text.style.fontSize = placement.fontSize + 'px'; text.style.fontWeight = settings.fontWeight;
@@ -287,7 +288,8 @@
       visual.append(media);
     }
     const speech = rules().normalizeTextBubble(object.textBubble);
-    const hasText = Boolean(object?.text) || Boolean(object?.textDisplay && rules().normalizeTextDisplay(object.textDisplay).source !== "manual");
+    const eventPreview=editorSelectable&&scene?.livingEvents?.some(e=>e.objectId===object.id);if(eventPreview)speech.enabled=true;
+    const hasText = eventPreview || Boolean(object?.text) || Boolean(object?.textDisplay && rules().normalizeTextDisplay(object.textDisplay).source !== "manual");
     if ((!speech.enabled || !hasText) && (hasText || !media)) {
       const text = documentRef.createElement("span");
       text.className = "scene-render-object-text";
@@ -297,7 +299,7 @@
     if (speech.enabled && hasText) {
       const anchor = documentRef.createElement('div'); anchor.className = 'scene-speech-anchor';
       const counter = documentRef.createElement('div'); counter.className = 'scene-speech-counterflip';
-      const text = documentRef.createElement('span'); text.className = 'scene-speech-bubble'; text.textContent = object.text;
+      const text = documentRef.createElement('span'); text.className = 'scene-speech-bubble'; text.textContent = object.text || (eventPreview?'事件台詞預覽':'');
       counter.append(text); anchor.append(counter); visual.append(anchor);
     }
     const orientation = documentRef.createElement("div");
@@ -322,7 +324,7 @@
 
   function alignAuthoredSpeech(container) {
     for(const bubble of container.querySelectorAll('.scene-speech-bubble:not(.scene-info-text)')){
-      if(bubble.dataset.dialoguePage)continue;
+      if(bubble.dataset.dialoguePage||bubble.dataset.textAlign&&bubble.dataset.textAlign!=='auto')continue;
       const style=global.getComputedStyle?.(bubble);if(!style)continue;
       const line=parseFloat(style.lineHeight)||parseFloat(style.fontSize)*1.45;
       const height=bubble.clientHeight-(parseFloat(style.paddingTop)||0)-(parseFloat(style.paddingBottom)||0);
@@ -359,7 +361,7 @@
     if(!pages.length)pages.push('');if(pages.length>1)bubble.style.width=bubble.style.maxWidth;
     let index=0;const content=doc.createElement('span'),counter=doc.createElement('small');content.className='scene-dialogue-content';counter.className='scene-dialogue-page';bubble.replaceChildren(content);if(pages.length>1)bubble.append(counter);
     function draw(){content.textContent=pages[index];counter.textContent=(index+1)+' / '+pages.length+(index<pages.length-1?' · 點一下繼續':'');bubble.dataset.dialoguePage=String(index+1);bubble.dataset.dialoguePages=String(pages.length);bubble.setAttribute('aria-label',pages[index]+(pages.length>1?'，第'+(index+1)+'頁，共'+pages.length+'頁':''));
-      bubble.style.textAlign=content.offsetHeight>lineHeight*1.6?'start':'center';
+      if(!bubble.dataset.textAlign||bubble.dataset.textAlign==='auto')bubble.style.textAlign=content.offsetHeight>lineHeight*1.6?'start':'center';
     }
     draw();
     return {hasNextPage:()=>index<pages.length-1,nextPage:()=>{if(index>=pages.length-1)return false;index++;draw();return true;},readingSeconds:()=>event.readingTime===false?0:Math.min(120,Array.from(pages[index]).length/6+.5)};
@@ -380,11 +382,13 @@
     plane.dataset.sceneLayout = layout;
     plane.style.width = `${metrics.width}px`;
     plane.style.height = `${metrics.height}px`;
+    const fixedPlane=documentRef.createElement('div');fixedPlane.className='scene-render-fixed-plane';
+    fixedPlane.style.width=container.clientWidth+'px';fixedPlane.style.height=container.clientHeight+'px';
     const fragment = documentRef.createDocumentFragment();
     const objects = renderRules.sortVisibleObjects(scene);
-    objects.forEach((object) => fragment.append(createObjectNode({ ...options, documentRef, object, layout, surfaceScale, surfaceMetricsValue: metrics })));
+    objects.forEach((object) => (object.metadata?.viewportFixed?fixedPlane:fragment).append(createObjectNode({ ...options, documentRef, object, scene, layout, surfaceScale, surfaceMetricsValue:object.metadata?.viewportFixed?{...metrics,width:container.clientWidth,height:container.clientHeight}:metrics })));
     plane.append(fragment);
-    container.replaceChildren(plane);
+    container.replaceChildren(plane,fixedPlane);
     alignAuthoredSpeech(container);
     container.dataset.sceneRenderer = UNIFIED;
     container.dataset.sceneId = String(scene?.id || "");
@@ -403,14 +407,21 @@
         const bubble=rules().normalizeTextBubble(actor.textBubble);
         const eventBubble={...bubble,enabled:true,...(bubble.animation?{animation:{...bubble.animation,channels:Object.fromEntries(Object.entries(bubble.animation.channels||{}).map(([name,channels])=>[name,{...channels,...(channels.opacity?{opacity:{...channels.opacity,enabled:false}}:{})}]))}}:{})};
         const changed={...actor,text,textDisplay:undefined,textBubble:eventBubble,...(mediaObject?.media?.src?{media:mediaObject.media}:{})};
-        const animations=original.getAnimations?.({subtree:true}).filter(a=>a.playState==='running')||[];animations.forEach(a=>a.pause());
-        const videos=Array.from(original.querySelectorAll('video')).filter(v=>!v.paused);videos.forEach(v=>v.pause());
-        const replacement=createObjectNode({...options,resolveMediaSource:object=>typeof options.resolveMediaSource==='function'?options.resolveMediaSource(mediaObject?.media?.src?mediaObject:object):object.media?.src,documentRef,object:changed,scene,layout,surfaceScale,surfaceMetricsValue:metrics});replacement.dataset.livingEventId=event.id;if(event.clickPolicy!=='original-first'){replacement.tabIndex=0;replacement.setAttribute('role','button');replacement.setAttribute('data-living-event-target','');replacement.setAttribute('aria-label',text+'；點擊回應');}
-        const liveText=replacement.querySelector('.scene-speech-bubble, .scene-render-object-text');if(liveText){liveText.setAttribute('role','status');liveText.setAttribute('aria-live','polite');}
-        replacement.querySelector('.scene-render-object-media')?.addEventListener('error',()=>{if(replacement.isConnected)controller.finish();},{once:true});
-        original.replaceWith(replacement);
-        const dialogue=mountEventDialogue(replacement,event,String(text||''),layout,metrics.frame);
-        const restore=()=>{replacement.querySelectorAll('video').forEach(v=>v.pause());const focused=replacement.contains(documentRef.activeElement);replacement.replaceWith(original);animations.forEach(a=>a.play());videos.forEach(v=>v.play().catch(()=>{}));if(actor.textDisplay)original.querySelectorAll('.scene-speech-bubble, .scene-render-object-text').forEach(node=>global.ShiGaiSceneText?.mount({node,wrapper:original,object:actor,scene,layout}));if(focused)original.focus({preventScroll:true});};
+        // Retain the animated actor and its current clock; only its dialogue/media change.
+        const replacement=createObjectNode({...options,playAnimation:false,resolveMediaSource:object=>typeof options.resolveMediaSource==='function'?options.resolveMediaSource(mediaObject?.media?.src?mediaObject:object):object.media?.src,documentRef,object:changed,scene,layout,surfaceScale,surfaceMetricsValue:metrics});
+        const visual=original.querySelector('.scene-render-object-visual');
+        const oldText=visual.querySelector(':scope > .scene-speech-anchor, :scope > .scene-render-object-text');
+        const newText=replacement.querySelector('.scene-speech-anchor, .scene-render-object-text');
+        const textTimes=new Map((oldText?.getAnimations?.({subtree:true})||[]).map(a=>[a.id,{time:a.currentTime,state:a.playState}]));
+        if(oldText)oldText.replaceWith(newText);else visual.append(newText);
+        const liveText=original.querySelector('.scene-speech-bubble, .scene-render-object-text');
+        liveText.setAttribute('role','status');liveText.setAttribute('aria-live','polite');if(options.playAnimation!==false&&!prefersReducedMotion())applyChannelAnimation(liveText,eventBubble.animation,layout,metrics,true,false);for(const animation of liveText.getAnimations?.()||[]){const previous=textTimes.get(animation.id);if(previous?.time!=null){animation.currentTime=previous.time;if(previous.state==='paused')animation.pause();}}
+        const oldMedia=visual.querySelector(':scope > .scene-render-object-media');
+        const newMedia=mediaObject?.media?.src?replacement.querySelector('.scene-render-object-media'):null;
+        const resumeMedia=Boolean(newMedia&&oldMedia?.tagName==='VIDEO'&&!oldMedia.paused);if(newMedia&&oldMedia){if(resumeMedia)oldMedia.pause();oldMedia.replaceWith(newMedia);}newMedia?.addEventListener('error',()=>{if(newMedia.isConnected&&original.dataset.livingEventId===event.id)controller.finish();},{once:true});
+        original.dataset.livingEventId=event.id;
+        const dialogue=mountEventDialogue(original,event,String(text||''),layout,{...metrics.frame,width:Math.min(metrics.frame.width,container.clientWidth/surfaceScale)});
+        const restore=()=>{newMedia?.pause?.();if(newMedia&&oldMedia){newMedia.replaceWith(oldMedia);if(resumeMedia)oldMedia.play().catch(()=>{});}if(oldText)newText.replaceWith(oldText);else newText.remove();delete original.dataset.livingEventId;if(actor.textDisplay)original.querySelectorAll('.scene-speech-bubble, .scene-render-object-text').forEach(node=>global.ShiGaiSceneText?.mount({node,wrapper:original,object:actor,scene,layout}));};
         return Object.assign(restore,dialogue);
       }});
       eventControllers.set(container,controller);
@@ -427,6 +438,9 @@
     if (!node) return Object.freeze({ mode: UNIFIED, updated: false, reason: "object-not-found" });
     const normalizedLayout = container?.dataset?.sceneComposition === "shared-landscape-v1" ? "landscape" : rules().layoutName(layout);
     const metrics = surfaceMetrics(container, normalizedLayout, requestedFitMode || container?.dataset?.sceneFitMode, { widthMultiplier: container?.dataset?.sceneFrameWidthMultiplier });
+    const target=container.querySelector(object.metadata?.viewportFixed?'.scene-render-fixed-plane':'.scene-render-plane');
+    if(target&&node.parentElement!==target)target.append(node);
+    const fixed=container.querySelector('.scene-render-fixed-plane');if(fixed){fixed.style.width=container.clientWidth+'px';fixed.style.height=container.clientHeight+'px';}
     const plane = node.closest?.(".scene-render-plane");
     if (plane) { plane.style.width = `${metrics.width}px`; plane.style.height = `${metrics.height}px`; }
     applyObjectStyle(node, object, normalizedLayout, metrics.scale);

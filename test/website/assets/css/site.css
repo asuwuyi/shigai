@@ -193,3 +193,11 @@ body:is([data-standalone-game],[data-page="island"],[data-page="tools"]) > .site
 body:is([data-standalone-game],[data-page="island"],[data-page="tools"]) > .site-header .site-menu-toggle {display:grid;pointer-events:auto;}
 body:is([data-standalone-game],[data-page="island"],[data-page="tools"]) > .site-header .site-nav:not(.has-scroll-paper) {position:fixed;top:92px;right:var(--scroll-menu-right);display:none;flex-direction:column;width:min(240px,calc(100vw - 24px));max-height:calc(100svh - 110px);overflow:auto;padding:12px;background:#fff9ee;color:#493527;border:1px solid #c7ae83;border-radius:12px;pointer-events:auto;}
 body:is([data-standalone-game],[data-page="island"],[data-page="tools"]) > .site-header .site-nav:not(.has-scroll-paper).is-open {display:flex;}
+
+.site-privacy-footer{position:relative;z-index:5;text-align:center;padding:14px;background:#2b211b;color:#f4e8d8;font:13px/1.5 system-ui;}
+.site-privacy-footer .analytics-preferences-open{display:inline-block;position:static;min-height:44px;background:transparent;color:inherit;border:0;text-decoration:underline;font:inherit;}
+body[data-standalone-game] .site-privacy-footer{padding:2px;background:transparent;color:inherit;}
+body[data-standalone-game] .site-privacy-footer .analytics-preferences-open{min-height:24px;font-size:11px;}
+
+body[data-standalone-game]:not(.game-compact) .site-privacy-footer{position:fixed;bottom:0;left:0;width:100%;pointer-events:none;}
+body[data-standalone-game]:not(.game-compact) .site-privacy-footer button{pointer-events:auto;}
