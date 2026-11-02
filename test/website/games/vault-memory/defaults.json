@@ -1,0 +1,53 @@
+{
+  "gapMs": 350,
+  "levels": [
+    {
+      "count": 3,
+      "showMs": 2800,
+      "seconds": 24,
+      "symbols": "arrows"
+    },
+    {
+      "count": 4,
+      "showMs": 2650,
+      "seconds": 28,
+      "symbols": "arrows"
+    },
+    {
+      "count": 5,
+      "showMs": 2500,
+      "seconds": 32,
+      "symbols": "arrows"
+    },
+    {
+      "count": 6,
+      "showMs": 2350,
+      "seconds": 36,
+      "symbols": "basic"
+    },
+    {
+      "count": 7,
+      "showMs": 2200,
+      "seconds": 40,
+      "symbols": "basic"
+    },
+    {
+      "count": 8,
+      "showMs": 2050,
+      "seconds": 44,
+      "symbols": "all"
+    },
+    {
+      "count": 9,
+      "showMs": 1900,
+      "seconds": 48,
+      "symbols": "all"
+    },
+    {
+      "count": 10,
+      "showMs": 1750,
+      "seconds": 52,
+      "symbols": "all"
+    }
+  ]
+}

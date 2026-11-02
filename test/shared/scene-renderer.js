@@ -464,6 +464,7 @@
       if(!documentRef.hidden&&(!options.livingCanStart||options.livingCanStart())){
         const now=Date.now(),period=phase();
         for(const record of records){
+          if(record.switching)continue;
           const candidates=rules().behaviorCandidates(record.group,authoredScene,period);
           if(record.item&&candidates.some(v=>v.id===record.id)&&now<record.due)continue;
           // Reply/reading continues on the same animated node until it finishes.
@@ -471,9 +472,12 @@
           const item=candidates.length===1&&record.id===candidates[0].id?candidates[0]:rules().chooseBehavior(candidates,record.id),source=authoredScene.objects.find(o=>o.id===item?.sourceObjectId);
           if(item&&item.id===record.id){record.due=now+(item.minSeconds+Math.random()*(item.maxSeconds-item.minSeconds))*1000;continue;}
           if(!item&&!record.item)continue;
+          const apply=()=>{
+            if(ended||!container.isConnected)return;
           eventControllers.get(container)?.destroy();eventControllers.delete(container);
-          const actor=item?rules().behaviorActor(record.actor,source):{...record.actor,layouts:{landscape:rules().readLayout(record.actor)}};
+          const actor=item?rules().behaviorActor(record.actor,source,item):{...record.actor,layouts:{landscape:rules().readLayout(record.actor)}};
           const index=scene.objects.findIndex(o=>o.id===actor.id);scene.objects[index]=actor;
+          const previousOffset=rules().behaviorOffset(authoredScene.objects.find(o=>o.id===record.item?.sourceObjectId),record.item),nextOffset=rules().behaviorOffset(source,item);
           record.id=item?.id||'';record.item=item;record.due=now+(item?(item.minSeconds+Math.random()*(item.maxSeconds-item.minSeconds))*1000:1000);
           const active=new Map(records.filter(r=>r.item).map(r=>[r.actor.id,new Set(r.item.eventIds)]));
           scene.livingEvents=(authoredScene.livingEvents||[]).map(e=>({...e,enabled:e.enabled!==false&&(!active.has(e.objectId)||active.get(e.objectId).has(e.id))}));
@@ -481,14 +485,20 @@
           const node=createObjectNode({...options,documentRef,scene,object:actor,layout,surfaceScale,surfaceMetricsValue:actor.metadata?.viewportFixed?{...metrics,width:container.clientWidth,height:container.clientHeight}:metrics});
           if(original){global.ShiGaiSceneText?.unmount?.(original);original.querySelectorAll('video').forEach(v=>v.pause());original.replaceWith(node);
             const placed=node.getBoundingClientRect(),plane=node.parentElement.getBoundingClientRect();
-            if(point&&plane.width&&plane.height){const base=rules().readLayout(actor,layout);base.position.x+=(point.x-placed.x)/plane.width;base.position.y+=(point.y-placed.y)/plane.height;actor.layouts={...actor.layouts,[layout]:base};applyObjectStyle(node,actor,layout,surfaceScale);}
+            if(point&&plane.width&&plane.height&&item?.placementMode!=='scene'){const base=rules().readLayout(actor,layout);base.position.x+=(point.x-placed.x)/plane.width+nextOffset.x-previousOffset.x;base.position.y+=(point.y-placed.y)/plane.height+nextOffset.y-previousOffset.y;actor.layouts={...actor.layouts,[layout]:base};applyObjectStyle(node,actor,layout,surfaceScale);}
           }
-          node.dataset.sceneBehaviorId=record.id;alignAuthoredSpeech(node);mountSceneEvents();if(focused)node.focus({preventScroll:true});
+          node.dataset.sceneBehaviorId=record.id;if(item?.transition==='fade'&&!prefersReducedMotion())node.querySelector('.scene-render-object-visual')?.animate([{opacity:0},{opacity:1}],{duration:160,easing:'ease-out'});alignAuthoredSpeech(node);mountSceneEvents();if(focused)node.focus({preventScroll:true});
+          };
+          const previous=getObjectNode(container,record.actor.id)?.querySelector('.scene-render-object-visual');
+          if(item?.transition==='fade'&&previous&&!prefersReducedMotion()){
+            record.switching=true;const animation=previous.animate([{opacity:1},{opacity:0}],{duration:160,easing:'ease-in',fill:'forwards'});record.transitionAnimation=animation;
+            animation.finished.then(()=>{record.switching=false;if(ended)return;if(eventControllers.get(container)?.isReplying){animation.cancel();return;}apply();}).catch(()=>{record.switching=false;});
+          }else apply();
         }
       }
       timer=setTimeout(tick,1000);
     }
-    function destroy(){if(ended)return;ended=true;clearTimeout(timer);abort.abort();observer?.disconnect();}
+    function destroy(){if(ended)return;ended=true;clearTimeout(timer);for(const record of records)record.transitionAnimation?.cancel();abort.abort();observer?.disconnect();}
     documentRef.addEventListener('visibilitychange',()=>{if(documentRef.hidden){hiddenAt=Date.now();clearTimeout(timer);}else{if(hiddenAt)for(const record of records)record.due+=Date.now()-hiddenAt;hiddenAt=0;tick();}},{signal:abort.signal});
     if(global.MutationObserver){observer=new global.MutationObserver(()=>{if(!container.isConnected)destroy();});observer.observe(documentRef.documentElement,{childList:true,subtree:true});}
     tick();return {destroy,refresh:tick,actor:id=>scene.objects.find(o=>o.id===id)};

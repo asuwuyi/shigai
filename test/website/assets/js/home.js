@@ -91,6 +91,25 @@ function finishHomeLoading() {
     window.setTimeout(() => homeElements.loading?.remove(), 380);
   }, remaining);
 }
+function showNoMatchingHomeScene(settings) {
+  // No eligible Scene is a valid content state, not a failed media download.
+  const container=homeElements.worldSceneRender;
+  window.ShiGaiSceneRenderer?.stopLivingEvent?.(container);
+  container.replaceChildren();container.removeAttribute('data-scene-id');
+  activeWorldEntranceSceneId='';activeMobileViewport=null;activeMobileCoverage=Promise.resolve();
+  const panel=document.createElement('div');panel.className='home-scene-unavailable';panel.setAttribute('role','status');
+  const title=document.createElement('h1');title.textContent='這個時段，場景正在休息';
+  const text=document.createElement('p');text.textContent='目前沒有符合時段的場景，可以從右上角選單繼續逛逛。';panel.append(title,text);
+  if(['127.0.0.1','localhost','[::1]'].includes(location.hostname)){
+    const hint=document.createElement('p');hint.className='home-scene-unavailable-hint';hint.textContent='本機預覽：請在 Studio 啟用適用目前時段的首頁場景，或設定一個備用場景。';panel.append(hint);
+  }
+  const links=document.createElement('div');links.className='home-scene-unavailable-links';
+  for(const [id,label,path]of [['works','看看作品','works.html'],['games','玩個遊戲','games.html']]){
+    const brand=settings?.websiteBrand;if(brand?.pages?.[id]===false||brand?.controls?.[id+'Navigation']===false)continue;
+    const link=document.createElement('a');link.href=path;link.textContent=label;links.append(link);
+  }
+  const retry=document.createElement('a');retry.href=location.href;retry.textContent='重新查看';links.append(retry);panel.append(links);container.append(panel);
+}
 const failedHomeSceneMedia = new Set();
 function failHomeLoading() {
   if (homeElements.loadingStatus) homeElements.loadingStatus.textContent = "部分場景素材載入失敗，請重試";
@@ -745,9 +764,12 @@ async function loadHome() {
     setHomeLoadingProgress(38, "正在建立場景…");
     const scenesData = await scenesResponse.json();
     environmentWeather = await sceneEnvironment.prepareVisitEnvironment((Array.isArray(scenesData)?scenesData:[]).filter(scene=>scene.status==='published'));
-    renderWorldEntranceScene(scenesData, "");
-    setHomeLoadingProgress(55, "正在接收場景素材…");
-    await Promise.all([waitForCriticalSceneMedia(),waitForHomeBackground(),activeMobileCoverage]);
+    const rendered=renderWorldEntranceScene(scenesData, "");
+    if(rendered===false){showNoMatchingHomeScene(settings);}
+    else{
+      setHomeLoadingProgress(55, "正在接收場景素材…");
+      await Promise.all([waitForCriticalSceneMedia(),waitForHomeBackground(),activeMobileCoverage]);
+    }
     finishHomeLoading();
     renderWelcomeLogo(settings?.websiteBrand?.welcome);
     startHomeEnvironmentRefresh();

@@ -1623,5 +1623,112 @@
     "url": "tools/odor-radar/",
     "order": 18,
     "visible": true
+  },
+  {
+    "id": "vault-memory",
+    "kind": "game",
+    "name": "金庫密碼",
+    "description": "記住符號與數字，依序解鎖金庫，發現隨機珍藏作品。",
+    "mark": "◆",
+    "icon": "assets/games/icons/vault-memory.svg",
+    "status": "published",
+    "url": "games/vault-memory/",
+    "order": 19,
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "gapMs": 350,
+        "levels": [
+          {
+            "count": 3,
+            "showMs": 2800,
+            "seconds": 24,
+            "symbols": "arrows"
+          },
+          {
+            "count": 4,
+            "showMs": 2650,
+            "seconds": 28,
+            "symbols": "arrows"
+          },
+          {
+            "count": 5,
+            "showMs": 2500,
+            "seconds": 32,
+            "symbols": "arrows"
+          },
+          {
+            "count": 6,
+            "showMs": 2350,
+            "seconds": 36,
+            "symbols": "basic"
+          },
+          {
+            "count": 7,
+            "showMs": 2200,
+            "seconds": 40,
+            "symbols": "basic"
+          },
+          {
+            "count": 8,
+            "showMs": 2050,
+            "seconds": 44,
+            "symbols": "all"
+          },
+          {
+            "count": 9,
+            "showMs": 1900,
+            "seconds": 48,
+            "symbols": "all"
+          },
+          {
+            "count": 10,
+            "showMs": 1750,
+            "seconds": 52,
+            "symbols": "all"
+          }
+        ]
+      },
+      "ui": {
+        "theme": {
+          "background": "#111f25",
+          "paper": "#304449",
+          "ink": "#f1e5c8",
+          "accent": "#dfc18a",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 42,
+          "mobileTitleSize": 32,
+          "buttonRadius": 8,
+          "contentWidth": 800
+        },
+        "phrases": {
+          "開始記憶": "開始記憶",
+          "下一關 →": "下一關 →",
+          "重新挑戰": "重新挑戰",
+          "再試一次": "再試一次",
+          "暫停": "暫停",
+          "繼續": "繼續",
+          "重玩本關": "重玩本關",
+          "確認密碼 →": "確認密碼 →",
+          "清除": "清除",
+          "放大 2×": "放大 2×",
+          "符合視窗": "符合視窗",
+          "關閉": "關閉"
+        },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
+        "instructions": "符號＋兩位數字會逐組在中央放大、停留，再漸隱。全部播放完才開始倒數。選符號並按數字鍵還原密碼；答錯可在剩餘時間內修正。開門後點擊作品可放大欣賞。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
   }
 ]

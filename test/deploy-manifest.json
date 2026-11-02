@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-11-02T02:23:11.408Z",
+  "createdAt": "2026-11-02T17:23:18.447Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1082,
@@ -8,12 +8,12 @@
     "categories": 5,
     "tags": 0,
     "scenes": 3,
-    "games": 15,
+    "games": 16,
     "spotDifferenceLevels": 2,
-    "assets": 1224,
-    "files": 1439
+    "assets": 1226,
+    "files": 1447
   },
-  "bytes": 161240177,
+  "bytes": 161455569,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -37,6 +37,7 @@
     "assets/games/icons/puzzle-demo.svg",
     "assets/games/icons/rotation-demo.svg",
     "assets/games/icons/sokoban-demo.svg",
+    "assets/games/icons/vault-memory.svg",
     "assets/games/icons/wheel-demo.svg",
     "assets/games/spot-difference/level-001/modified.jpg",
     "assets/games/spot-difference/level-001/original.jpg",
@@ -1209,6 +1210,7 @@
     "assets/scenes/media/scene-1786549520650-object-local-1786549533424-1793034952010.gif",
     "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1792949868469-1792949898967.gif",
     "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1793542816103-1793543341073.gif",
+    "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1793638098192-1793638226782.gif",
     "assets/scenes/media/weather-20261022-01.webp",
     "assets/scenes/media/weather-20261022-02.webp",
     "assets/scenes/media/weather-20261022-03.webp",

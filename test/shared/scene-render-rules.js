@@ -119,7 +119,7 @@
     return {version:1,enabled:source.enabled===true,items:(Array.isArray(source.items)?source.items:[]).slice(0,40).filter(v=>v&&typeof v==='object').map((v,index)=>{
       let id=String(v.id||'behavior-'+(index+1)).slice(0,120);let suffix=0;const base=id;while(ids.has(id))id=base.slice(0,100)+'-'+index+'-'+(++suffix);ids.add(id);
       const minimum=rounded(v.minSeconds,2,600,10),maximum=rounded(v.maxSeconds,minimum,600,Math.max(minimum,20));
-      return {id,name:String(v.name||'未命名行為').slice(0,120),enabled:v.enabled!==false,sourceObjectId:String(v.sourceObjectId||'').slice(0,120),minSeconds:minimum,maxSeconds:maximum,weight:rounded(v.weight,1,100,1),periods:behaviorPeriods.filter(p=>Array.isArray(v.periods)&&v.periods.includes(p)),eventIds:[...new Set((Array.isArray(v.eventIds)?v.eventIds:[]).filter(id=>typeof id==='string').map(id=>id.slice(0,120)))].slice(0,100)};
+      return {...(v.placementMode==='scene'?{placementMode:'scene',transition:v.transition==='fade'?'fade':'cut'}:v.anchor&&typeof v.anchor==='object'?{anchor:cloneLayout(v.anchor)}:{}),id,name:String(v.name||'未命名行為').slice(0,120),enabled:v.enabled!==false,sourceObjectId:String(v.sourceObjectId||'').slice(0,120),minSeconds:minimum,maxSeconds:maximum,weight:rounded(v.weight,1,100,1),periods:behaviorPeriods.filter(p=>Array.isArray(v.periods)&&v.periods.includes(p)),eventIds:[...new Set((Array.isArray(v.eventIds)?v.eventIds:[]).filter(id=>typeof id==='string').map(id=>id.slice(0,120)))].slice(0,100)};
     })};
   }
   function behaviorCandidates(group,scene,phase) {
@@ -130,11 +130,13 @@
     let value=Math.max(0,Math.min(.999999,random()))*candidates.reduce((sum,v)=>sum+v.weight,0);
     return candidates.find(v=>(value-=v.weight)<0)||candidates.at(-1);
   }
-  function behaviorActor(actor,source) {
-    // Reuse action content, never the source placement, identity, link or layer.
-    return {...actor,behaviorSourceId:source.id,layouts:{...actor.layouts,landscape:{...readLayout(actor),scale:readLayout(source).scale,rotation:readLayout(source).rotation}},media:source.media,text:source.text,textDisplay:source.textDisplay,textBubble:source.textBubble,animation:source.animation,flipX:source.flipX,flipY:source.flipY};
+  function behaviorOffset(source,item){const anchor=item?.anchor;if(!anchor||!source)return {x:0,y:0};const value=readLayout(source);return {x:value.position.x-anchor.position.x,y:value.position.y-anchor.position.y};}
+  function behaviorActor(actor,source,item) {
+    const base=readLayout(actor),action=readLayout(source),offset=behaviorOffset(source,item);
+    const placement=item?.placementMode==='scene'?action:{...base,position:{x:base.position.x+offset.x,y:base.position.y+offset.y},scale:item?.anchor?clamp(base.scale*action.scale/item.anchor.scale,.05,5,base.scale):action.scale,rotation:item?.anchor?base.rotation+action.rotation-item.anchor.rotation:action.rotation};
+    return {...actor,behaviorSourceId:source.id,layouts:{...actor.layouts,landscape:placement},media:source.media,text:source.text,textDisplay:source.textDisplay,textBubble:source.textBubble,animation:source.animation,flipX:source.flipX,flipY:source.flipY};
   }
-  const api = Object.freeze({ normalizeBehaviorGroup, behaviorCandidates, chooseBehavior, behaviorActor, isSharedComposition, sharedComposition, normalizeLivingEvents, fontFamilies, fontFamily, normalizeTextDisplay, normalizeTextBubble, layers, layoutNames, layoutName, clamp, rounded, cloneLayout, readLayout, ensureWritableLayout, commitLayout, layout, position, scale, rotation, flipX, flipY, zIndex, transform, sortVisibleObjects });
+  const api = Object.freeze({ normalizeBehaviorGroup, behaviorCandidates, chooseBehavior, behaviorActor, behaviorOffset, isSharedComposition, sharedComposition, normalizeLivingEvents, fontFamilies, fontFamily, normalizeTextDisplay, normalizeTextBubble, layers, layoutNames, layoutName, clamp, rounded, cloneLayout, readLayout, ensureWritableLayout, commitLayout, layout, position, scale, rotation, flipX, flipY, zIndex, transform, sortVisibleObjects });
   if (global) global.ShiGaiSceneRender = api;
   if (typeof module === "object" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

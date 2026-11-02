@@ -266,3 +266,11 @@ button.home-welcome-control { cursor: pointer; }
   .home-world-scene-render .scene-render-object, .home-hero-background { translate: 0 0 !important; }
 }
 @media (max-width: 767px) { .home-hero-environment-orb { top: 20px; right: 22px; width: 72px; } .home-hero-environment-stars { background-size: 126px 126px, 156px 156px, 110px 110px; } [data-background-state="evening"] .home-hero-environment-orb, [data-background-state="night"] .home-hero-environment-orb { right: 26px; bottom: 22px; } .home-main > :not(.home-hero) { padding-right: var(--page-gutter); padding-left: var(--page-gutter); } .home-main > .home-section { margin-top: 52px; } .home-main > .home-about { margin-top: 52px; margin-bottom: 52px; } }
+
+/* A time-filtered empty Scene leaves navigation and the rest of Home available. */
+.home-scene-unavailable{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:100px 24px 48px;text-align:center;color:#392b23}
+.home-scene-unavailable h1{margin:0;padding:12px 20px;border-radius:18px;background:#fff9eeed;font-size:clamp(24px,5vw,36px);line-height:1.4}
+.home-scene-unavailable p{max-width:520px;margin:0;line-height:1.7;padding:12px 18px;border-radius:16px;background:#fff9eeed}
+.home-scene-unavailable .home-scene-unavailable-hint{font-size:14px}
+.home-scene-unavailable-links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.home-scene-unavailable-links a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 20px;border-radius:24px;background:#fff9ee;color:#392b23;text-decoration:none;box-shadow:0 3px 10px #392b231f}

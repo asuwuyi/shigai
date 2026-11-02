@@ -1047,11 +1047,7 @@
       "random": false,
       "event": "",
       "fallback": false,
-      "periods": [
-        "morning",
-        "noon",
-        "afternoon"
-      ],
+      "periods": [],
       "periodVersion": 2,
       "weathers": []
     },
@@ -1617,8 +1613,8 @@
           "alt": ""
         },
         "position": {
-          "x": 0.421,
-          "y": 0.639
+          "x": 0.397,
+          "y": 0.648
         },
         "scale": 0.327,
         "rotation": 0,
@@ -1627,8 +1623,8 @@
         "layouts": {
           "landscape": {
             "position": {
-              "x": 0.421,
-              "y": 0.639
+              "x": 0.397,
+              "y": 0.648
             },
             "scale": 0.327,
             "rotation": 0
@@ -1664,8 +1660,8 @@
           "layouts": {
             "landscape": {
               "anchor": "above",
-              "x": 3.727,
-              "y": 72.192,
+              "x": 3.904,
+              "y": 65.282,
               "scale": 0.319,
               "rotation": 0,
               "fontSize": 48,
@@ -1686,7 +1682,7 @@
           "items": [
             {
               "id": "behavior-791ee060-5ba6-47fe-98a1-0102c2c9d1f7",
-              "name": "企鵝music",
+              "name": "企鵝組",
               "enabled": true,
               "sourceObjectId": "object-local-1793586033078",
               "minSeconds": 10,
@@ -1717,6 +1713,37 @@
               "weight": 1,
               "periods": [],
               "eventIds": []
+            },
+            {
+              "anchor": {
+                "position": {
+                  "x": 0.421,
+                  "y": 0.639
+                },
+                "scale": 0.327,
+                "rotation": 0
+              },
+              "id": "behavior-3dc4df1d-b2c1-492a-8f7b-78e9002fc922",
+              "name": "Take Pictures Photo Sticker by ShiGai",
+              "enabled": true,
+              "sourceObjectId": "object-local-1793638098192",
+              "minSeconds": 10,
+              "maxSeconds": 20,
+              "weight": 1,
+              "periods": [],
+              "eventIds": [
+                "binding-f67bca21-8326-4241-a956-b90cf15c57e2",
+                "binding-b6de059b-1836-4971-8d5f-4b588f619a99",
+                "binding-5bd0a87d-271d-4be4-857e-b8586b0144f4",
+                "binding-b75c9f75-2d8d-402e-bdd1-a24aed8af5e4",
+                "binding-7e1ad9cf-cef8-4998-a2f3-31d1662f36b4",
+                "binding-02aa7f90-1fa8-4118-a17c-00785c0bf0a8",
+                "binding-f0bff040-9127-4f79-85f8-0dc2f98db719",
+                "binding-ac6aeef0-3e59-4efd-bb12-4cd1d3026982",
+                "binding-8579d1a6-2fd6-4ad8-86d7-583fab7fab09",
+                "binding-a4527d64-097f-488b-a80a-60d8f8727a76",
+                "binding-3dbd38ad-a6a2-4985-ad4a-9b12a4bb80f0"
+              ]
             }
           ]
         },
@@ -1963,6 +1990,94 @@
               }
             }
           }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {
+          "behaviorSource": true
+        }
+      },
+      {
+        "id": "object-local-1793638098192",
+        "order": 2,
+        "type": "character",
+        "name": "Take Pictures Photo Sticker by ShiGai · 動作來源",
+        "media": {
+          "src": "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1793638098192-1793638226782.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.421,
+          "y": 0.639
+        },
+        "scale": 0.392,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.421,
+              "y": 0.639
+            },
+            "scale": 0.392,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": false,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "fixedWidth": true,
+          "align": "center",
+          "lineHeight": 1.45,
+          "letterSpacing": 0,
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 3.904,
+              "y": 65.282,
+              "scale": 0.319,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 695.63
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
         },
         "scroll": {
           "speed": 1,
@@ -2346,6 +2461,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-11-02T02:22:56.922Z"
+    "updatedAt": "2026-11-02T16:50:26.778Z"
   }
 ]
