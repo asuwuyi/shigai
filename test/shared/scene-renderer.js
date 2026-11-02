@@ -1,6 +1,7 @@
 // Canonical Scene DOM and geometry shared by Studio and Website.
 (function exposeSceneRenderer(global) {
   const eventControllers = new WeakMap();
+  const behaviorControllers = new WeakMap();
   const UNIFIED = "unified";
   const mode = () => UNIFIED;
   const enabled = () => true;
@@ -280,7 +281,7 @@
     node.dataset.sceneLayer = String(object?.layer || "");
     setAttributes(node, typeof objectAttributes === "function" ? objectAttributes(object) : null);
 
-    const source = String(typeof resolveMediaSource === "function" ? resolveMediaSource(object) || "" : object?.media?.src || "").trim();
+    const source = String(typeof resolveMediaSource === "function" ? resolveMediaSource(object.behaviorSourceId?{...object,id:object.behaviorSourceId}:object) || "" : object?.media?.src || "").trim();
     const media = createMedia(documentRef, object, source);
     if (media) {
       media.addEventListener("error", (event) => {
@@ -381,7 +382,11 @@
   function renderScene(options = {}) {
     if(options.container){eventControllers.get(options.container)?.destroy();eventControllers.delete(options.container);}
     const renderRules = rules();
-    const { container, scene } = options;
+    const { container } = options;
+    behaviorControllers.get(container)?.destroy();behaviorControllers.delete(container);
+    const authoredScene=options.scene;
+    const scene={...authoredScene,objects:[...(authoredScene?.objects||[])],livingEvents:(authoredScene?.livingEvents||[]).map(e=>({...e}))};
+    options={...options,scene};
     if (!renderRules) throw new Error("ShiGaiSceneRender is required.");
     if (!container || typeof container.replaceChildren !== "function") throw new TypeError("A Scene container is required.");
     const documentRef = container.ownerDocument || global.document;
@@ -409,6 +414,7 @@
     container.dataset.sceneViewportScale = String(surfaceScale);
     container.dataset.sceneFrameWidthMultiplier = String(metrics.frame.width / referenceFrames[layout].width);
     if (options.applyBackground !== false && scene?.background?.color) container.style.background = scene.background.color;
+    function mountSceneEvents(){
     if (!options.editorSelectable && options.enableLivingEvents !== false && scene?.livingEvents?.length && global.ShiGaiLivingEvents) {
       const controller = global.ShiGaiLivingEvents.mount({container,scene,preview:options.livingPreview===true,suppressAuto:options.livingPreview===true&&options.livingSuppressAuto!==false,...(options.livingCanStart?{canStart:options.livingCanStart}:{}),...(options.livingNow?{now:options.livingNow}:{}),replace(actor,event,text){
         const original=getObjectNode(container,actor.id);if(!original)return null;
@@ -439,7 +445,53 @@
       }});
       eventControllers.set(container,controller);
     }
+    }
+    mountSceneEvents();
+    if(!options.editorSelectable&&options.enableLivingEvents!==false&&options.playAnimation!==false&&authoredScene?.objects?.some(o=>o.behaviorGroup?.enabled)){
+      const controller=mountBehaviorGroups({container,scene,authoredScene,options,layout,metrics,surfaceScale,documentRef,mountSceneEvents});
+      behaviorControllers.set(container,controller);
+    }
     return Object.freeze({ mode: UNIFIED, rendered: true, layout, fitMode: metrics.fitMode, objectCount: objects.length, viewportScale: surfaceScale, referenceFrame: metrics.frame, surfaceWidth: metrics.width, surfaceHeight: metrics.height });
+  }
+
+  function mountBehaviorGroups({container,scene,authoredScene,options,layout,metrics,surfaceScale,documentRef,mountSceneEvents}) {
+    const records=authoredScene.objects.filter(o=>o.visible!==false&&o.behaviorGroup?.enabled).map(actor=>({actor,group:rules().normalizeBehaviorGroup(actor.behaviorGroup),id:'',due:0,item:null}));
+    let ended=false,timer,observer,hiddenAt=documentRef.hidden?Date.now():0;const abort=new AbortController();
+    const clock=()=>options.livingNow?options.livingNow():new Date();
+    function phase(){const env=global.ShiGaiSceneEnvironment;return env?.environmentContext?env.environmentContext(scene.background,{now:clock()}).phase:undefined;}
+    function tick(){
+      clearTimeout(timer);if(ended||documentRef.hidden)return;if(!container.isConnected){destroy();return;}
+      if(!documentRef.hidden&&(!options.livingCanStart||options.livingCanStart())){
+        const now=Date.now(),period=phase();
+        for(const record of records){
+          const candidates=rules().behaviorCandidates(record.group,authoredScene,period);
+          if(record.item&&candidates.some(v=>v.id===record.id)&&now<record.due)continue;
+          // Reply/reading continues on the same animated node until it finishes.
+          if(eventControllers.get(container)?.isReplying)continue;
+          const item=candidates.length===1&&record.id===candidates[0].id?candidates[0]:rules().chooseBehavior(candidates,record.id),source=authoredScene.objects.find(o=>o.id===item?.sourceObjectId);
+          if(item&&item.id===record.id){record.due=now+(item.minSeconds+Math.random()*(item.maxSeconds-item.minSeconds))*1000;continue;}
+          if(!item&&!record.item)continue;
+          eventControllers.get(container)?.destroy();eventControllers.delete(container);
+          const actor=item?rules().behaviorActor(record.actor,source):{...record.actor,layouts:{landscape:rules().readLayout(record.actor)}};
+          const index=scene.objects.findIndex(o=>o.id===actor.id);scene.objects[index]=actor;
+          record.id=item?.id||'';record.item=item;record.due=now+(item?(item.minSeconds+Math.random()*(item.maxSeconds-item.minSeconds))*1000:1000);
+          const active=new Map(records.filter(r=>r.item).map(r=>[r.actor.id,new Set(r.item.eventIds)]));
+          scene.livingEvents=(authoredScene.livingEvents||[]).map(e=>({...e,enabled:e.enabled!==false&&(!active.has(e.objectId)||active.get(e.objectId).has(e.id))}));
+          const original=getObjectNode(container,actor.id),focused=original?.contains(documentRef.activeElement),point=original?.getBoundingClientRect();
+          const node=createObjectNode({...options,documentRef,scene,object:actor,layout,surfaceScale,surfaceMetricsValue:actor.metadata?.viewportFixed?{...metrics,width:container.clientWidth,height:container.clientHeight}:metrics});
+          if(original){global.ShiGaiSceneText?.unmount?.(original);original.querySelectorAll('video').forEach(v=>v.pause());original.replaceWith(node);
+            const placed=node.getBoundingClientRect(),plane=node.parentElement.getBoundingClientRect();
+            if(point&&plane.width&&plane.height){const base=rules().readLayout(actor,layout);base.position.x+=(point.x-placed.x)/plane.width;base.position.y+=(point.y-placed.y)/plane.height;actor.layouts={...actor.layouts,[layout]:base};applyObjectStyle(node,actor,layout,surfaceScale);}
+          }
+          node.dataset.sceneBehaviorId=record.id;alignAuthoredSpeech(node);mountSceneEvents();if(focused)node.focus({preventScroll:true});
+        }
+      }
+      timer=setTimeout(tick,1000);
+    }
+    function destroy(){if(ended)return;ended=true;clearTimeout(timer);abort.abort();observer?.disconnect();}
+    documentRef.addEventListener('visibilitychange',()=>{if(documentRef.hidden){hiddenAt=Date.now();clearTimeout(timer);}else{if(hiddenAt)for(const record of records)record.due+=Date.now()-hiddenAt;hiddenAt=0;tick();}},{signal:abort.signal});
+    if(global.MutationObserver){observer=new global.MutationObserver(()=>{if(!container.isConnected)destroy();});observer.observe(documentRef.documentElement,{childList:true,subtree:true});}
+    tick();return {destroy,refresh:tick,actor:id=>scene.objects.find(o=>o.id===id)};
   }
 
   function getObjectNode(container, objectId) {
@@ -449,6 +501,8 @@
   function updateObject({ container, object, layout = "landscape", fitMode: requestedFitMode, playAnimation = true } = {}) {
     const node = getObjectNode(container, object?.id);
     if (!node) return Object.freeze({ mode: UNIFIED, updated: false, reason: "object-not-found" });
+    const behaviorId=node.dataset.sceneBehaviorId;
+    if(behaviorId){const sceneSource=behaviorControllers.get(container)?.actor?.(object.id);if(sceneSource)object=sceneSource;}
     const normalizedLayout = container?.dataset?.sceneComposition === "shared-landscape-v1" ? "landscape" : rules().layoutName(layout);
     const metrics = surfaceMetrics(container, normalizedLayout, requestedFitMode || container?.dataset?.sceneFitMode, { widthMultiplier: container?.dataset?.sceneFrameWidthMultiplier });
     const target=container.querySelector(object.metadata?.viewportFixed?'.scene-render-fixed-plane':'.scene-render-plane');
@@ -479,8 +533,8 @@
   }
 
   const previewLivingEvent = (container,id) => eventControllers.get(container)?.preview(id) || false;
-  const refreshLivingEvents = container => eventControllers.get(container)?.refresh();
-  const stopLivingEvent = container => eventControllers.get(container)?.destroy();
+  const refreshLivingEvents = container => {behaviorControllers.get(container)?.refresh();eventControllers.get(container)?.refresh();};
+  const stopLivingEvent = container => {behaviorControllers.get(container)?.destroy();behaviorControllers.delete(container);eventControllers.get(container)?.destroy();};
   const api = Object.freeze({ previewLivingEvent, refreshLivingEvents, stopLivingEvent, UNIFIED, referenceFrames, mode, enabled, fitMode, surfaceMetrics, viewportScale, mappedTransform, animationSettings, keyframeAnimationSettings, applyObjectAnimation, renderScene, updateObject, resizeScene, getObjectNode });
   if (global) global.ShiGaiSceneRenderer = api;
   if (typeof module === "object" && module.exports) module.exports = api;

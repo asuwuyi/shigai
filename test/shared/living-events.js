@@ -135,7 +135,7 @@
       timer=setTimeout(tick,30000);
     }
     function destroy(){if(ended)return;ended=true;clearTimeout(timer);finish();for(const id of [...standby.keys()])clearStandby(id);abort.abort();observer?.disconnect();controllers.delete(controller);}
-    const controller={destroy,finish,refresh:tick,preview:id=>{const event=events.find(e=>e.id===id);return event?show(event,true,false):false;},get activeId(){return current?.event.id||'';}};
+    const controller={destroy,finish,refresh:tick,preview:id=>{const event=events.find(e=>e.id===id);return event?show(event,true,false):false;},get activeId(){return current?.event.id||'';},get isReplying(){return Boolean(current&&(current.reply||current.restore.hasNextPage?.()));}};
     container.addEventListener('click',click,{capture:true,signal:abort.signal});container.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-living-event-target]')){e.preventDefault();e.target.click();}},{signal:abort.signal});
     global.document.addEventListener('visibilitychange',()=>{if(global.document.hidden){clearTimeout(timer);finish();for(const id of [...standby.keys()])clearStandby(id);}else tick();},{signal:abort.signal});
     if(global.MutationObserver){observer=new MutationObserver(()=>{if(!container.isConnected)destroy();});observer.observe(global.document.documentElement,{childList:true,subtree:true});}
