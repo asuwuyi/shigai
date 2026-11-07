@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-11-02T17:23:18.447Z",
+  "createdAt": "2026-11-07T07:49:01.118Z",
   "entry": "website/index.html",
   "counts": {
-    "works": 1082,
+    "works": 1083,
     "characters": 11,
     "categories": 5,
     "tags": 0,
     "scenes": 3,
     "games": 16,
     "spotDifferenceLevels": 2,
-    "assets": 1226,
-    "files": 1447
+    "assets": 1227,
+    "files": 1445
   },
-  "bytes": 161455569,
+  "bytes": 160869105,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -1205,6 +1205,7 @@
     "assets/published/works/SG-001094/poster-v1.webp",
     "assets/published/works/SG-001094/primary-v1.webm",
     "assets/published/works/SG-001095/primary-v1.webp",
+    "assets/published/works/SG-001096/primary-v1.webp",
     "assets/scenes/media/pack-20261025-park-plaza.webp",
     "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1792592519571.gif",
     "assets/scenes/media/scene-1786549520650-object-local-1786549533424-1793034952010.gif",

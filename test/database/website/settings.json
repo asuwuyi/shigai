@@ -164,7 +164,6 @@
       "characters": "居民介紹 Character",
       "games": "活動空間 Games",
       "tools": "工具庫 Tools",
-      "island": "Shi-Gai 島 Island",
       "about": "櫃檯聯絡 About me"
     },
     "pages": {
@@ -173,7 +172,6 @@
       "characters": true,
       "games": true,
       "tools": true,
-      "island": true,
       "about": true
     },
     "analytics": {
@@ -748,7 +746,6 @@
       "charactersNavigation": true,
       "gamesNavigation": true,
       "toolsNavigation": true,
-      "islandNavigation": false,
       "aboutNavigation": true,
       "worksMenu": true,
       "worksFirstPage": true,

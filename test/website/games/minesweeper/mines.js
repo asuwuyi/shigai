@@ -37,7 +37,7 @@
   function finishIfNeeded() {
     if (ended || !['won', 'lost'].includes(board.status)) return;
     elapsed = startedAt ? performance.now() - startedAt : 0; ended = true; cancelPress();
-    const won = board.status === 'won';
+    const won = board.status === 'won'; if(won)window.ShiGaiMembers?.capture({gameId:'minesweeper',levelId:String(levelIndex+1),value:levelIndex+1});
     if (won) { completed.add(levelIndex); $('levelSelect').options[levelIndex].textContent = levelLabel(levelIndex); }
     $('gameStatus').textContent = won ? '所有安全格都找到了！' : '踩到地雷了。可以查看棋盤，再試一次。';
     $('resultTitle').textContent = won ? '第 ' + (levelIndex + 1) + ' 關完成！' : '差一點，再試一次';

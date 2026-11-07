@@ -26,3 +26,6 @@ html[data-game-layout="mobile"] .game-back { top: max(8px, env(safe-area-inset-t
 html[data-game-layout="mobile"] .game-back::before { content: "×"; font-size: 28px; font-weight: 500; line-height: 1; }
 html[data-game-embed="home"] .game-back { display: none; }
 @media (prefers-reduced-motion: reduce) { .game-preloader img { display: none; } }
+
+/* Goddess stage color is a stylesheet rule, compatible with strict CSP. */
+body[data-desktop-export="goddessD"] { --mobile-game-stage:#B0CD6C; }

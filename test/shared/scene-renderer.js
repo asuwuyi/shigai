@@ -264,6 +264,10 @@
     anchor.style.left = hasMedia ? left : '0'; anchor.style.top = hasMedia ? top : '0';
     const inverse = hasMedia ? 1 / rules().scale(object,layout) : 1;
     anchor.style.transform = 'scale(' + inverse * (object.flipX ? -1 : 1) + ',' + inverse * (object.flipY ? -1 : 1) + ')';
+    // Scale/rotation pivot follows the attached edge, so added lines never pull
+    // the bubble away from its actor. Text-only objects keep their center pivot.
+    const origins={above:'50% 100%',below:'50% 0%',left:'100% 50%',right:'0% 50%',center:'50% 50%'};
+    text.style.transformOrigin=hasMedia?origins[placement.anchor]:'50% 50%';
     text.style.left = placement.x + 'px'; text.style.top = placement.y + 'px';
     text.style.transform = (hasMedia ? 'translate(' + tx + ',' + ty + ') ' : '') + 'rotate(' + placement.rotation + 'deg) scale(' + placement.scale + ')';
     text.style.lineHeight=String(settings.lineHeight);text.style.letterSpacing=settings.letterSpacing+'px';text.dataset.textAlign=settings.align;if(settings.align!=='auto')text.style.textAlign=settings.align;

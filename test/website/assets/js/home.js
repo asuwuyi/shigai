@@ -87,6 +87,7 @@ function finishHomeLoading() {
   window.setTimeout(() => {
     homeElements.loading?.classList.add("is-leaving");
     document.body.classList.remove("is-home-loading");
+    window.dispatchEvent(new CustomEvent("shi-gai:home-scene-ready"));
     window.ShiGaiSceneRenderer?.refreshLivingEvents?.(homeElements.worldSceneRender);
     window.setTimeout(() => homeElements.loading?.remove(), 380);
   }, remaining);

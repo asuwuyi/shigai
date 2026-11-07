@@ -72,6 +72,7 @@ window.ShiGaiGameConfig=Object.freeze({load,entry:()=>entry?S.clone(entry):null,
     if (!controls.children.length) optionsButton.hidden = true;
     for (const node of room.querySelectorAll('.target,.board-hint,#puzzleSourceNote')) help.content.append(node);
   }
+  window.dispatchEvent(new Event('shigai:game-options-ready'));
   // Nodes are moved, not cloned: existing IDs, uploads, state and Studio copy continue to work.
   const area = room.querySelector('.play-area,.wheel-play');
   const stage = room.querySelector('.board-wrap,.board-viewport,.stage-wrap,#questionArea,.wheel-stage');

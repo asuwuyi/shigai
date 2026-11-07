@@ -526,7 +526,11 @@
     return section;
   });
 
-  Promise.all(composition.filter((section) => section.enabled).sort((a, b) => a.order - b.order).map(async (config) => {
+  let sectionsStarted = false;
+  function startSections() {
+    if (sectionsStarted) return;
+    sectionsStarted = true;
+    Promise.all(composition.filter((section) => section.enabled).sort((a, b) => a.order - b.order).map(async (config) => {
     const renderer = registry.get(config.type);
     return renderer ? renderer(config) : null;
   })).then((sections) => {
@@ -545,6 +549,11 @@
     window.dispatchEvent(new CustomEvent("shi-gai:home-sections-ready"));
     if (location.hash) scrollToHomeSectionFromHash();
   });
+  }
+  // Reserve initial bandwidth for the actual Scene; initialize during the welcome.
+  if (document.body.classList.contains("is-home-loading")) {
+    window.addEventListener("shi-gai:home-scene-ready", startSections, { once: true });
+  } else startSections();
   function scrollToHomeSectionFromHash() {
     let id;
     try { id = decodeURIComponent(location.hash.slice(1)); }

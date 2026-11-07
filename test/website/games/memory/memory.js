@@ -51,7 +51,7 @@
     $('gameStatus').textContent = '繼續找出相同的圖案。'; render();
   }
   function levelLabel(index) { const level = levels[index], score = best.get(index); return `${String(index + 1).padStart(2, '0')} · ${level.pairs * 2} 張${score ? ' · ' + '★'.repeat(score) : ''}`; }
-  function finish() {
+  function finish() { window.ShiGaiMembers?.capture({gameId:'memory',levelId:String(levelIndex+1),value:levelIndex+1});
     stopClock(); const rating = engine.stars(round.level, seconds(), round.moves);
     best.set(levelIndex, Math.max(best.get(levelIndex) || 0, rating)); $('levelSelect').options[levelIndex].textContent = levelLabel(levelIndex);
     $('gameStatus').textContent = '全部配對成功！可以進下一關，或重新挑戰星等。'; render();

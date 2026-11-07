@@ -5,7 +5,7 @@ const siteEmbedded = window.parent !== window && new URLSearchParams(location.se
 const siteHeader = siteEmbedded ? null : document.querySelector("[data-site-header]");
 const siteFooter = document.querySelector("[data-site-footer]");
 const siteReviewMode = new URLSearchParams(window.location.search).get("review") === "1";
-let siteBrand = { siteName: "Shi-Gai", icon: "", nav: { home: "Home", journal: "Journal", works: "Works", characters: "Characters", games: "Games", tools: "工具 Tools", island:"Shi-Gai 島 Island", about: "作者工作室" }, pages: { journal: true, works: true, characters: true, games: true, tools: true, island:true, about: false }, controls: { globalBrand: true, homeNavigation: true, journalNavigation: true, worksNavigation: true, charactersNavigation: true, gamesNavigation: true, toolsNavigation: true, islandNavigation:true, aboutNavigation: true }, analytics: { enabled: false, provider: "gtm", containerId: "" }, system: { homeSuffix: "首頁", openMenuLabel: "開啟網站選單", closeMenuLabel: "關閉網站選單", primaryNavigationLabel: "主要導覽", footerNavigationLabel: "頁尾導覽" }, footerName: "Shi-Gai", copyright: "Shi-Gai" };
+let siteBrand = { siteName: "Shi-Gai", icon: "", nav: { home: "Home", journal: "Journal", works: "Works", characters: "Characters", games: "Games", tools: "工具 Tools", about: "作者工作室" }, pages: { journal: true, works: true, characters: true, games: true, tools: true, about: false }, controls: { globalBrand: true, homeNavigation: true, journalNavigation: true, worksNavigation: true, charactersNavigation: true, gamesNavigation: true, toolsNavigation: true, aboutNavigation: true }, analytics: { enabled: false, provider: "gtm", containerId: "" }, system: { homeSuffix: "首頁", openMenuLabel: "開啟網站選單", closeMenuLabel: "關閉網站選單", primaryNavigationLabel: "主要導覽", footerNavigationLabel: "頁尾導覽" }, footerName: "Shi-Gai", copyright: "Shi-Gai" };
 const siteLinks = [
   { id: "home", label: "Home", href: "index.html" },
   { id: "journal", label: "Journal", href: "journal.html" },
@@ -13,7 +13,6 @@ const siteLinks = [
   { id: "characters", label: "Characters", href: "characters.html" },
   { id: "games", label: "Games", href: "games.html" },
   { id: "tools", label: "工具 Tools", href: "tools.html" },
-  { id: "island", label: "Shi-Gai 島 Island", href: "island/" },
   { id: "about", label: "作者工作室", href: "about.html" }
 ];
 

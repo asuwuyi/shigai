@@ -52022,5 +52022,55 @@
         "error": ""
       }
     }
+  },
+  {
+    "id": "SG-001096",
+    "title": "綠色的極光",
+    "publishDate": "2026-11-07",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "20261107.JPG",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "懂的都懂\n（股市）",
+    "journal": {
+      "enabled": true,
+      "text": "就不多說了\n\n祝大家平安喜樂"
+    },
+    "file": "assets/published/works/SG-001096/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-07T06:01:22.484Z",
+    "updatedAt": "2026-11-07T06:01:22.484Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "898b03fa490687e7e5d42535841b4e03337af6b83ca350ce5a17628ef4c88983",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001096/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
   }
 ]

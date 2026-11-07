@@ -1660,8 +1660,8 @@
           "layouts": {
             "landscape": {
               "anchor": "above",
-              "x": 3.904,
-              "y": 65.282,
+              "x": 6.929,
+              "y": 35.998,
               "scale": 0.319,
               "rotation": 0,
               "fontSize": 48,
@@ -1681,6 +1681,8 @@
           "enabled": true,
           "items": [
             {
+              "placementMode": "scene",
+              "transition": "cut",
               "id": "behavior-791ee060-5ba6-47fe-98a1-0102c2c9d1f7",
               "name": "企鵝組",
               "enabled": true,
@@ -1704,6 +1706,8 @@
               ]
             },
             {
+              "placementMode": "scene",
+              "transition": "cut",
               "id": "behavior-adf39744-e36c-4901-811f-3ae422b42c8c",
               "name": "企鵝",
               "enabled": true,
@@ -1717,8 +1721,8 @@
             {
               "anchor": {
                 "position": {
-                  "x": 0.421,
-                  "y": 0.639
+                  "x": 0.397,
+                  "y": 0.648
                 },
                 "scale": 0.327,
                 "rotation": 0
@@ -1783,8 +1787,8 @@
           "alt": ""
         },
         "position": {
-          "x": 0.421,
-          "y": 0.607
+          "x": 0.393,
+          "y": 0.654
         },
         "scale": 0.364,
         "rotation": 0,
@@ -1793,8 +1797,8 @@
         "layouts": {
           "landscape": {
             "position": {
-              "x": 0.421,
-              "y": 0.607
+              "x": 0.393,
+              "y": 0.654
             },
             "scale": 0.364,
             "rotation": 0
@@ -1884,8 +1888,8 @@
           "alt": ""
         },
         "position": {
-          "x": 0.777,
-          "y": 0.787
+          "x": 0.394,
+          "y": 0.655
         },
         "scale": 0.474,
         "rotation": 0,
@@ -1894,8 +1898,8 @@
         "layouts": {
           "landscape": {
             "position": {
-              "x": 0.777,
-              "y": 0.787
+              "x": 0.394,
+              "y": 0.655
             },
             "scale": 0.474,
             "rotation": 0
@@ -2017,20 +2021,20 @@
           "alt": ""
         },
         "position": {
-          "x": 0.421,
-          "y": 0.639
+          "x": 0.397,
+          "y": 0.648
         },
-        "scale": 0.392,
+        "scale": 0.503,
         "rotation": 0,
         "flipX": false,
         "flipY": false,
         "layouts": {
           "landscape": {
             "position": {
-              "x": 0.421,
-              "y": 0.639
+              "x": 0.397,
+              "y": 0.648
             },
-            "scale": 0.392,
+            "scale": 0.503,
             "rotation": 0
           }
         },
@@ -2263,7 +2267,7 @@
           "等一下可能會下雨，出門前看看預報吧。"
         ],
         "replies": [
-          "預報時段：{{forecastStart}}～{{forecastEnd}}。這是降雨機率，不代表現在已經下雨。",
+          "{{forecastStart}}～{{forecastEnd}}。這是降雨機率，不代表現在已經下雨。",
           "雨傘帶著比較安心；{{city}}未來{{forecastHours}}小時最高降雨機率為{{rainProbability}}%。"
         ],
         "duration": 10,
@@ -2321,7 +2325,7 @@
           "新的一天要開始了，日出約{{sunrise}}。"
         ],
         "replies": [
-          "{{city}}今天日出約{{sunrise}}；依設定地點計算，實際可見時間仍受地形和雲層影響。",
+          "{{city}}今天日出約{{sunrise}}",
           "慢慢醒來，準備開始今天吧。"
         ],
         "duration": 10,
@@ -2350,7 +2354,7 @@
           "太陽快下山了，今天的日落約在{{sunset}}。"
         ],
         "replies": [
-          "{{city}}今天日落約{{sunset}}，是依設定地點計算的約略時間。",
+          "今天日落約{{sunset}}",
           "辛苦一天了，要不要休息一下？"
         ],
         "duration": 10,
@@ -2375,11 +2379,10 @@
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "{{alertArea}}目前有「{{alertTitle}}」，有效至{{alertUntil}}。"
+          "「{{alertTitle}}」"
         ],
         "replies": [
-          "{{alertText}}",
-          "中央氣象署發布時間：{{alertIssued}}；適用地區：{{alertArea}}；有效至{{alertUntil}}。請查看原始官方公告。"
+          "{{alertText}}"
         ],
         "duration": 10,
         "cooldown": 60,
@@ -2406,7 +2409,7 @@
           "{{station}}測站 PM2.5 為 {{pm25}} µg/m³。"
         ],
         "replies": [
-          "資料時間：{{dataTime}}，{{station}}測站 PM2.5 為 {{pm25}} µg/m³。",
+          "PM2.5 為 {{pm25}} µg/m³",
           "PM2.5 是濃度，AQI 是空氣品質指標，兩者不是同一個數值。"
         ],
         "duration": 10,
@@ -2431,11 +2434,11 @@
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "附近{{station}}測站 AQI {{aqi}}，目前為「{{aqiStatus}}」。",
-          "一起看看附近測站的空氣品質：AQI {{aqi}}（{{aqiStatus}}）。"
+          "AQI {{aqi}}，目前為「{{aqiStatus}}」。",
+          "AQI {{aqi}}（{{aqiStatus}}）。"
         ],
         "replies": [
-          "{{station}}測站 AQI {{aqi}}（{{aqiStatus}}），資料時間：{{dataTime}}。",
+          "AQI {{aqi}}（{{aqiStatus}}）",
           "這是測站周邊的參考資料，不是你所在位置的精確測量。"
         ],
         "duration": 10,
@@ -2461,6 +2464,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-11-02T16:50:26.778Z"
+    "updatedAt": "2026-11-07T07:48:40.395Z"
   }
 ]
