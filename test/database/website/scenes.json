@@ -2748,7 +2748,7 @@
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "「{{alertTitle}}」"
+          "氣象特報：{{alertTitle}}。"
         ],
         "replies": [
           "你有感覺到有風嗎？"
