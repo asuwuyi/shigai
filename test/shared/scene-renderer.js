@@ -425,7 +425,8 @@
         const mediaObject=scene.objects.find(o=>o.id===event.mediaObjectId);
         // The event owns its dialogue lifetime. Preserve the authored text transform
         // tracks, but do not let the original text's fade/hit track hide this reply.
-        const bubble=rules().normalizeTextBubble(actor.textBubble);
+        const originalBubble=rules().normalizeTextBubble(actor.textBubble);
+        const bubble=event.dialogueStyle?rules().normalizeTextBubble({...originalBubble,...event.dialogueStyle,layouts:{...originalBubble.layouts,[layout]:{...originalBubble.layouts[layout],...event.dialogueStyle}},animation:{enabled:false}}):originalBubble;
         const eventBubble={...bubble,enabled:true,...(bubble.animation?{animation:{...bubble.animation,channels:Object.fromEntries(Object.entries(bubble.animation.channels||{}).map(([name,channels])=>[name,{...channels,...(channels.opacity?{opacity:{...channels.opacity,enabled:false}}:{})}]))}}:{})};
         const changed={...actor,text,textDisplay:undefined,textBubble:eventBubble,...(mediaObject?.media?.src?{media:mediaObject.media}:{})};
         // Retain the animated actor and its current clock; only its dialogue/media change.
@@ -443,7 +444,8 @@
         original.dataset.livingEventId=event.id;
         const counter=original.querySelector('.scene-speech-counterflip'),orientation=original.querySelector('.scene-render-object-orientation'),anchor=original.querySelector('.scene-speech-anchor');
         if(counter&&options.playAnimation!==false&&!prefersReducedMotion())for(const motion of orientation?.getAnimations?.()||[]){const frames=motion.effect?.getKeyframes?.();if(!frames?.length||!frames.every(f=>String(f.transform||'').startsWith('scaleX(')))continue;const copyClock=(target,keyframes)=>{const animation=target.animate(keyframes,motion.effect.getTiming());animation.playbackRate=motion.playbackRate;if(motion.playState==='running'&&motion.startTime!==null)animation.startTime=motion.startTime;else{animation.currentTime=motion.currentTime;if(motion.playState==='paused')animation.pause();}return animation;};copyClock(counter,frames);const left=parseFloat(anchor?.style.left);if(anchor&&!anchor.classList.contains('is-text-only')&&(left===0||left===100))copyClock(anchor,frames.map(f=>({offset:f.offset,left:(String(f.transform).includes('-1')?100-left:left)+'%',easing:f.easing})));}
-        const dialogue=mountEventDialogue(original,event,String(text||''),layout,{...metrics.frame,width:Math.min(metrics.frame.width,container.clientWidth/surfaceScale)});
+        if(event.dialogueStyle?.minHeight!==undefined)liveText.style.minHeight=event.dialogueStyle.minHeight+'px';
+        const dialogue=mountEventDialogue(original,{...event,pageLines:event.dialogueStyle?.pageLines??event.pageLines},String(text||''),layout,{...metrics.frame,width:Math.min(metrics.frame.width,container.clientWidth/surfaceScale)});
         const restore=()=>{newMedia?.pause?.();if(newMedia&&oldMedia){newMedia.replaceWith(oldMedia);if(resumeMedia)oldMedia.play().catch(()=>{});}if(oldText)newText.replaceWith(oldText);else newText.remove();delete original.dataset.livingEventId;if(actor.textDisplay)original.querySelectorAll('.scene-speech-bubble, .scene-render-object-text').forEach(node=>global.ShiGaiSceneText?.mount({node,wrapper:original,object:actor,scene,layout}));};
         return Object.assign(restore,dialogue);
       }});
@@ -459,20 +461,25 @@
   }
 
   function mountBehaviorGroups({container,scene,authoredScene,options,layout,metrics,surfaceScale,documentRef,mountSceneEvents}) {
-    const records=authoredScene.objects.filter(o=>o.visible!==false&&o.behaviorGroup?.enabled).map(actor=>({actor,group:rules().normalizeBehaviorGroup(actor.behaviorGroup),id:'',due:0,item:null}));
+    const records=authoredScene.objects.filter(o=>o.visible!==false&&o.behaviorGroup?.enabled).map(actor=>({actor,group:rules().normalizeBehaviorGroup(actor.behaviorGroup),id:'',due:0,item:null,initialized:false,started:false,duration:0}));
     let ended=false,timer,observer,hiddenAt=documentRef.hidden?Date.now():0;const abort=new AbortController();
     const clock=()=>options.livingNow?options.livingNow():new Date();
     function phase(){const env=global.ShiGaiSceneEnvironment;return env?.environmentContext?env.environmentContext(scene.background,{now:clock()}).phase:undefined;}
+    function mediaReady(record){const media=getObjectNode(container,record.actor.id)?.querySelector('.scene-render-object-media');return !media||(media.tagName==='IMG'?media.complete:media.tagName==='VIDEO'?media.readyState>=2||!!media.error:true);}
     function tick(){
       clearTimeout(timer);if(ended||documentRef.hidden)return;if(!container.isConnected){destroy();return;}
-      if(!documentRef.hidden&&(!options.livingCanStart||options.livingCanStart())){
-        const now=Date.now(),period=phase();
+      {
+        const canStart=!options.livingCanStart||options.livingCanStart(),now=Date.now(),period=phase();
         for(const record of records){
           if(record.switching)continue;
           const candidates=rules().behaviorCandidates(record.group,authoredScene,period);
-          if(record.item&&candidates.some(v=>v.id===record.id)&&now<record.due)continue;
+          if(record.item&&candidates.some(v=>v.id===record.id)){
+            if(!record.started){if(canStart&&mediaReady(record)){record.started=true;record.due=now+record.duration;}continue;}
+            if(!canStart||now<record.due)continue;
+          }
+          if(!canStart&&record.initialized)continue;
           // Reply/reading continues on the same animated node until it finishes.
-          if(eventControllers.get(container)?.isReplying)continue;
+          if(record.initialized&&eventControllers.get(container)?.isReplying)continue;
           const item=candidates.length===1&&record.id===candidates[0].id?candidates[0]:rules().chooseBehavior(candidates,record.id),source=authoredScene.objects.find(o=>o.id===item?.sourceObjectId);
           if(item&&item.id===record.id){record.due=now+(item.minSeconds+Math.random()*(item.maxSeconds-item.minSeconds))*1000;continue;}
           if(!item&&!record.item)continue;
@@ -482,7 +489,7 @@
           const actor=item?rules().behaviorActor(record.actor,source,item):{...record.actor,layouts:{landscape:rules().readLayout(record.actor)}};
           const index=scene.objects.findIndex(o=>o.id===actor.id);scene.objects[index]=actor;
           const previousOffset=rules().behaviorOffset(authoredScene.objects.find(o=>o.id===record.item?.sourceObjectId),record.item),nextOffset=rules().behaviorOffset(source,item);
-          record.id=item?.id||'';record.item=item;record.due=now+(item?(item.minSeconds+Math.random()*(item.maxSeconds-item.minSeconds))*1000:1000);
+          record.id=item?.id||'';record.item=item;record.initialized=true;record.started=false;record.duration=item?(item.minSeconds+Math.random()*(item.maxSeconds-item.minSeconds))*1000:1000;record.due=0;
           const active=new Map(records.filter(r=>r.item).map(r=>[r.actor.id,new Set(r.item.eventIds)]));
           scene.livingEvents=(authoredScene.livingEvents||[]).map(e=>({...e,enabled:e.enabled!==false&&(!active.has(e.objectId)||active.get(e.objectId).has(e.id))}));
           const original=getObjectNode(container,actor.id),focused=original?.contains(documentRef.activeElement),point=original?.getBoundingClientRect();
@@ -491,10 +498,11 @@
             const placed=node.getBoundingClientRect(),plane=node.parentElement.getBoundingClientRect();
             if(point&&plane.width&&plane.height&&item?.placementMode!=='scene'){const base=rules().readLayout(actor,layout);base.position.x+=(point.x-placed.x)/plane.width+nextOffset.x-previousOffset.x;base.position.y+=(point.y-placed.y)/plane.height+nextOffset.y-previousOffset.y;actor.layouts={...actor.layouts,[layout]:base};applyObjectStyle(node,actor,layout,surfaceScale);}
           }
-          node.dataset.sceneBehaviorId=record.id;if(item?.transition==='fade'&&!prefersReducedMotion())node.querySelector('.scene-render-object-visual')?.animate([{opacity:0},{opacity:1}],{duration:160,easing:'ease-out'});alignAuthoredSpeech(node);mountSceneEvents();if(focused)node.focus({preventScroll:true});
+          if(canStart&&mediaReady(record)){record.started=true;record.due=Date.now()+record.duration;}
+          node.dataset.sceneBehaviorId=record.id;if(record.hasPresented&&item?.transition==='fade'&&!prefersReducedMotion())node.querySelector('.scene-render-object-visual')?.animate([{opacity:0},{opacity:1}],{duration:160,easing:'ease-out'});record.hasPresented=true;alignAuthoredSpeech(node);mountSceneEvents();if(focused)node.focus({preventScroll:true});
           };
           const previous=getObjectNode(container,record.actor.id)?.querySelector('.scene-render-object-visual');
-          if(item?.transition==='fade'&&previous&&!prefersReducedMotion()){
+          if(record.initialized&&item?.transition==='fade'&&previous&&!prefersReducedMotion()){
             record.switching=true;const animation=previous.animate([{opacity:1},{opacity:0}],{duration:160,easing:'ease-in',fill:'forwards'});record.transitionAnimation=animation;
             animation.finished.then(()=>{record.switching=false;if(ended)return;if(eventControllers.get(container)?.isReplying){animation.cancel();return;}apply();}).catch(()=>{record.switching=false;});
           }else apply();
@@ -505,6 +513,7 @@
     function destroy(){if(ended)return;ended=true;clearTimeout(timer);for(const record of records)record.transitionAnimation?.cancel();abort.abort();observer?.disconnect();}
     documentRef.addEventListener('visibilitychange',()=>{if(documentRef.hidden){hiddenAt=Date.now();clearTimeout(timer);}else{if(hiddenAt)for(const record of records)record.due+=Date.now()-hiddenAt;hiddenAt=0;tick();}},{signal:abort.signal});
     if(global.MutationObserver){observer=new global.MutationObserver(()=>{if(!container.isConnected)destroy();});observer.observe(documentRef.documentElement,{childList:true,subtree:true});}
+    container.addEventListener('load',tick,{signal:abort.signal,capture:true});container.addEventListener('loadeddata',tick,{signal:abort.signal,capture:true});
     tick();return {destroy,refresh:tick,actor:id=>scene.objects.find(o=>o.id===id)};
   }
 
@@ -546,7 +555,7 @@
     return Object.freeze({ mode: UNIFIED, resized: true, layout: normalizedLayout, fitMode: metrics.fitMode, viewportScale: metrics.scale });
   }
 
-  const previewLivingEvent = (container,id) => eventControllers.get(container)?.preview(id) || false;
+  const previewLivingEvent = (container,id,selection) => eventControllers.get(container)?.preview(id,selection) || false;
   const refreshLivingEvents = container => {behaviorControllers.get(container)?.refresh();eventControllers.get(container)?.refresh();};
   const stopLivingEvent = container => {behaviorControllers.get(container)?.destroy();behaviorControllers.delete(container);eventControllers.get(container)?.destroy();};
   const api = Object.freeze({ previewLivingEvent, refreshLivingEvents, stopLivingEvent, UNIFIED, referenceFrames, mode, enabled, fitMode, surfaceMetrics, viewportScale, mappedTransform, animationSettings, keyframeAnimationSettings, applyObjectAnimation, renderScene, updateObject, resizeScene, getObjectNode });

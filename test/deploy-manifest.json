@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-11-07T07:49:01.118Z",
+  "createdAt": "2026-11-08T17:07:40.471Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1083,
@@ -8,12 +8,12 @@
     "categories": 5,
     "tags": 0,
     "scenes": 3,
-    "games": 16,
+    "games": 18,
     "spotDifferenceLevels": 2,
-    "assets": 1227,
-    "files": 1445
+    "assets": 1229,
+    "files": 1455
   },
-  "bytes": 160869105,
+  "bytes": 161078976,
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -28,6 +28,8 @@
     "assets/characters/images/shi-gai-1787911101272.jpg",
     "assets/games/icons/breakout-demo.svg",
     "assets/games/icons/catch-demo.svg",
+    "assets/games/icons/fate-book.svg",
+    "assets/games/icons/fate-draw.svg",
     "assets/games/icons/magnifier-demo.svg",
     "assets/games/icons/memory-demo.svg",
     "assets/games/icons/minesweeper-demo.svg",

@@ -5,13 +5,29 @@
   const clean=(v,n=120)=>String(v??'').trim().slice(0,n);
   const num=(v,min,max,f)=>Number.isFinite(Number(v))?Math.max(min,Math.min(max,Number(v))):f;
   const clock=v=>/^([01]\d|2[0-3]):[0-5]\d$/.test(String(v))?String(v):'00:00';
+  function lineId(event,kind,index){
+    const saved=event?.dialogueIds?.[kind]?.[index];if(typeof saved==='string'&&!['__proto__','constructor','prototype'].includes(saved)&&/^[a-zA-Z0-9_-]{1,100}$/.test(saved))return saved;
+    const text=String(event?.[kind]?.[index]??'');let hash=2166136261;for(let i=0;i<text.length;i++)hash=Math.imul(hash^text.charCodeAt(i),16777619);
+    const duplicate=(event?.[kind]||[]).slice(0,index).filter(v=>String(v)===text).length;return 'line-'+kind+'-'+(hash>>>0).toString(36)+'-'+duplicate;
+  }
+  function ensureDialogueIds(event){event.dialogueIds=Object.fromEntries(['lines','replies'].map(kind=>[kind,(event[kind]||[]).map((_,index)=>lineId(event,kind,index))]));return event.dialogueIds;}
+  function normalizeDialogueStyles(value){
+    const result={};for(const [id,raw] of Object.entries(value&&typeof value==='object'?value:{}).slice(0,100)){
+      if(['__proto__','constructor','prototype'].includes(id)||!/^[a-zA-Z0-9_-]{1,100}$/.test(id)||!raw||typeof raw!=='object')continue;const style={};
+      for(const [key,min,max] of [['x',-9600,9600],['y',-9600,9600],['scale',.1,10],['fontSize',12,160],['maxWidth',120,960],['rotation',-720,720],['lineHeight',.8,3],['minHeight',0,1600],['pageLines',1,6]])if(raw[key]!==undefined&&Number.isFinite(Number(raw[key])))style[key]=num(raw[key],min,max,0);
+      if(['auto','left','center','right'].includes(raw.align))style.align=raw.align;if(raw.fixedWidth!==undefined)style.fixedWidth=raw.fixedWidth===true;if(style.pageLines!==undefined)style.pageLines=Math.round(style.pageLines);
+      if(['above','below','left','right','center'].includes(raw.anchor))style.anchor=raw.anchor;if(Object.keys(style).length)result[id]=style;
+    }return result;
+  }
   function normalize(items){
     const ids=new Set();return (Array.isArray(items)?items:[]).slice(0,100).map((v,i)=>{
       v=v&&typeof v==='object'?v:{};let id=clean(v.id)||'event-'+(i+1),suffix=0;while(ids.has(id))id='event-'+(i+1)+'-'+(++suffix);ids.add(id);
-      if(clean(v.templateId))return {id,templateId:clean(v.templateId),objectId:clean(v.objectId),mediaObjectId:clean(v.mediaObjectId),enabled:v.enabled===true,...(v.clickPolicy==='original-first'?{clickPolicy:'original-first'}:{})};
+      const styles=normalizeDialogueStyles(v.dialogueStyles),extras=Object.keys(styles).length?{dialogueStyles:styles}:{};
+      if(clean(v.templateId))return {id,templateId:clean(v.templateId),objectId:clean(v.objectId),mediaObjectId:clean(v.mediaObjectId),enabled:v.enabled===true,...extras,...(v.clickPolicy==='original-first'?{clickPolicy:'original-first'}:{})};
       const condition=dataApi()?.normalize(v.dataCondition)||(dataApi()?.hasTokens([...(Array.isArray(v.lines)?v.lines:[]),...(Array.isArray(v.replies)?v.replies:[])])?{type:'unavailable'}:null);
-      const lines=a=>(Array.isArray(a)?a:[]).slice(0,50).map(x=>clean(x,500)).filter(Boolean);
-      return {...(condition?{dataCondition:condition}:{}),...(v.pageLines!==undefined?{pageLines:Math.round(num(v.pageLines,1,6,3))}:{}),...(v.readingTime!==undefined?{readingTime:v.readingTime!==false}:{}),...(v.displayMode==='continuous'?{displayMode:'continuous',interval:num(v.interval,5,300,10)}:{}),...(v.clickPolicy==='original-first'?{clickPolicy:'original-first'}:{}),id,name:clean(v.name)||'新生活事件',enabled:v.enabled===true,objectId:clean(v.objectId),mediaObjectId:clean(v.mediaObjectId),trigger:['time','click','both'].includes(v.trigger)?v.trigger:'click',start:clock(v.start),end:clock(v.end),lines:lines(v.lines),replies:lines(v.replies),duration:num(v.duration,2,120,8),cooldown:num(v.cooldown,0,1440,60),dailyLimit:Math.round(num(v.dailyLimit,1,20,2)),priority:Math.round(num(v.priority,0,10,0))};
+      const values={},dialogueIds={};for(const kind of ['lines','replies']){values[kind]=[];dialogueIds[kind]=[];for(const [index,value]of (Array.isArray(v[kind])?v[kind]:[]).slice(0,50).entries()){const text=clean(value,500);if(text){values[kind].push(text);if(v.dialogueIds)dialogueIds[kind].push(lineId(v,kind,index));}}}
+      if(v.dialogueIds)extras.dialogueIds=dialogueIds;
+      return {...extras,...(condition?{dataCondition:condition}:{}),...(v.pageLines!==undefined?{pageLines:Math.round(num(v.pageLines,1,6,3))}:{}),...(v.readingTime!==undefined?{readingTime:v.readingTime!==false}:{}),...(v.displayMode==='continuous'?{displayMode:'continuous',interval:num(v.interval,5,300,10)}:{}),...(v.clickPolicy==='original-first'?{clickPolicy:'original-first'}:{}),id,name:clean(v.name)||'新生活事件',enabled:v.enabled===true,objectId:clean(v.objectId),mediaObjectId:clean(v.mediaObjectId),trigger:['time','click','both'].includes(v.trigger)?v.trigger:'click',start:clock(v.start),end:clock(v.end),...values,duration:num(v.duration,2,120,8),cooldown:num(v.cooldown,0,1440,60),dailyLimit:Math.round(num(v.dailyLimit,1,20,2)),priority:Math.round(num(v.priority,0,10,0))};
     });
   }
   function normalizeLibrary(items){
@@ -19,7 +35,7 @@
   }
   function resolveScene(scene,library=[]){
     const templates=new Map(normalizeLibrary(library).map(e=>[e.id,e]));
-    const events=normalize(scene?.livingEvents).flatMap(binding=>{if(!binding.templateId)return [binding];const source=templates.get(binding.templateId);if(!source)return [];const {templateId,...local}=binding;return [{...source,...local}];});
+    const events=normalize(scene?.livingEvents).flatMap(binding=>{if(!binding.templateId)return [binding];const source=templates.get(binding.templateId);if(!source)return [];const {templateId,...local}=binding;return [{...source,...local,...((source.dialogueStyles||local.dialogueStyles)?{dialogueStyles:{...source.dialogueStyles,...local.dialogueStyles}}:{})}];});
     return {...scene,...(Array.isArray(scene?.livingEvents)?{livingEvents:events}:{})};
   }
   function localClock(scene,date=new Date()){
@@ -44,7 +60,7 @@
     const conditioned=events.filter(e=>e.enabled&&e.dataCondition);
     const dataResult=event=>dataApi()?.evaluate(event.dataCondition,scene,liveData,now())||{matches:!event.dataCondition,variables:{}};
     const canCondition=event=>!event.dataCondition||dataResult(event).matches;
-    function renderDialogue(actor,event,line){const result=dataResult(event);return replace(actor,event.dataCondition?{...event,dataSource:result.source}:event,event.dataCondition?dataApi().format(line,result,scene):line);}
+    function renderDialogue(actor,event,line,kind,index){const result=dataResult(event),styled={...event,dialogueStyle:event.dialogueStyles?.[lineId(event,kind,index)],dialogueKind:kind,dialogueIndex:index};return replace(actor,event.dataCondition?{...styled,dataSource:result.source}:styled,event.dataCondition?dataApi().format(line,result,scene):line);}
     function refreshData(){
       if(!conditioned.length||dataRequest||Date.now()<nextDataAt||ended||global.document.hidden||!dataApi())return;
       dataRequest=dataApi().read(scene,conditioned.map(e=>e.dataCondition.type)).then(value=>{if(ended)return;liveData=value;nextDataAt=Date.now()+900000;container.dispatchEvent(new CustomEvent('living-data-status',{detail:conditioned.map(e=>({id:e.id,...dataResult(e)}))}));tick();}).catch(()=>{liveData=null;nextDataAt=Date.now()+300000;}).finally(()=>{dataRequest=null;});
@@ -80,7 +96,7 @@
         if(previous&&event.id===previous.event.id&&rotateId!==id&&previous.signature===signature)continue;
         if(previous&&rotateId===id)event=top[(top.findIndex(e=>e.id===previous.event.id)+1)%top.length];
         const picked=choose(event.lines,previous?.event.id===event.id?previous.index:undefined);
-        clearStandby(id);const restore=renderDialogue(actorFor(event),event,picked.text);if(!restore)continue;
+        clearStandby(id);const restore=renderDialogue(actorFor(event),event,picked.text,'lines',picked.index);if(!restore)continue;
         const entry={event,restore,index:picked.index,timer:null,signature:JSON.stringify(dataResult(event).variables)};standby.set(id,entry);armStandby(entry);
       }
     }
@@ -91,7 +107,7 @@
       if(major===controller)major=null;refreshStandby();
     }
     function scheduleDialogue(){
-      if(!current)return;clearTimeout(current.timer);
+      if(!current||current.layoutPreview)return;clearTimeout(current.timer);
       // A multi-page line waits for the visitor; never expire unread pages.
       if(current.restore.hasNextPage?.())return;
       const event=current.event,continuous=event.displayMode==='continuous';
@@ -99,21 +115,21 @@
       current.timer=setTimeout(()=>{if(ended||!current)return;if(!hasContent(actorFor(event)))finish();else if(continuous&&eligible(event,scene,{now:now(),stats:session.get(key(event)),data:liveData}))show(event,false,false);else finish();},seconds*1000);
     }
     function choose(lines,last){if(!lines.length)return '';let i=Math.floor(random()*lines.length)%lines.length;if(lines.length>1&&i===last)i=(i+1)%lines.length;return {text:lines[i],index:i};}
-    function show(event,force=false,reply=false){
+    function show(event,force=false,reply=false,selection){
       if(!canCondition(event))return false;
       if(ended||(!force&&!(reply&&standbyEligible(event))&&!eligible(event,scene,{now:now(),stats:session.get(key(event)),click:reply,data:liveData})))return false;
       if(!preview&&major&&major!==controller)return false;
       const actor=scene.objects.find(o=>o.id===event.objectId&&o.visible!==false);if(!actor)return false;
-      const last=session.get(key(event));const pick=choose(reply&&event.replies.length?event.replies:event.lines,last?.index);if(!pick)return false;
-      finish();clearStandby(actor.id);const restore=renderDialogue(actor,event,pick.text);if(!restore)return false;
+      const last=session.get(key(event));const kind=selection?.kind==='replies'&&event.replies.length?'replies':selection?'lines':reply&&event.replies.length?'replies':'lines';const pick=selection&&event[kind][selection.index]!==undefined?{text:event[kind][selection.index],index:selection.index}:choose(event[kind],last?.index);if(!pick)return false;
+      finish();clearStandby(actor.id);const restore=renderDialogue(actor,event,pick.text,kind,pick.index);if(!restore)return false;
       const controls=container.ownerDocument.createElement('div');controls.className='living-event-controls';controls.setAttribute('role','group');controls.setAttribute('aria-label',event.name);const more=container.ownerDocument.createElement('details'),summary=container.ownerDocument.createElement('summary');summary.textContent='⋯';summary.setAttribute('aria-label','生活事件選項');more.append(summary);controls.append(more);
       for(const [label,action]of [['關閉',()=>{if(event.displayMode==='continuous'||!hasContent(actor))paused.add(event.id);finish();}],['今日不再提醒',()=>{const s=session.get(key(event))||{};session.set(key(event),{...s,dismissedDay:localClock(scene,now()).day});finish();}]]){const b=container.ownerDocument.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',e=>{e.stopPropagation();action();});more.append(b);}
-      container.append(controls);current={event,restore,controls,index:pick.index,reply,timer:null};if(!preview)major=controller;
+      container.append(controls);current={event,restore,controls,index:pick.index,reply,timer:null,layoutPreview:selection?.static===true};if(!preview)major=controller;
       if(!force&&hasContent(actor)){const day=localClock(scene,now()).day;session.set(key(event),reply?{...last,last:now().getTime(),index:pick.index}:{day,count:(last?.day===day?last.count:0)+1,last:now().getTime(),index:pick.index,dismissedDay:last?.dismissedDay});if(session.size>500)session.delete(session.keys().next().value);}
       scheduleDialogue();container.dispatchEvent(new CustomEvent('living-event-start',{detail:{id:event.id}}));return true;
     }
     function click(e){if(e.target.closest('.living-event-controls, .scene-event-data-source'))return;const node=e.target.closest('[data-scene-object-id]');if(!node||!container.contains(node))return;const id=node.dataset.sceneObjectId;
-      if(current?.event.objectId===id&&current.event.clickPolicy!=='original-first'){e.preventDefault();e.stopImmediatePropagation();if(current.restore.nextPage?.()){scheduleDialogue();return;}const event=current.event,pick=choose(event.replies.length?event.replies:event.lines,current.index);if(pick){current.restore();current.restore=renderDialogue(scene.objects.find(o=>o.id===id),event,pick.text);current.index=pick.index;current.reply=true;scheduleDialogue();}return;}
+      if(current?.event.objectId===id&&current.event.clickPolicy!=='original-first'){e.preventDefault();e.stopImmediatePropagation();if(current.restore.nextPage?.()){scheduleDialogue();return;}const event=current.event,pick=choose(event.replies.length?event.replies:event.lines,current.index);if(pick){current.restore();current.restore=renderDialogue(scene.objects.find(o=>o.id===id),event,pick.text,event.replies.length?'replies':'lines',pick.index);current.index=pick.index;current.reply=true;scheduleDialogue();}return;}
       const idle=standby.get(id);
       if(idle&&idle.event.clickPolicy!=='original-first'){
         e.preventDefault();e.stopImmediatePropagation();
@@ -135,12 +151,12 @@
       timer=setTimeout(tick,30000);
     }
     function destroy(){if(ended)return;ended=true;clearTimeout(timer);finish();for(const id of [...standby.keys()])clearStandby(id);abort.abort();observer?.disconnect();controllers.delete(controller);}
-    const controller={destroy,finish,refresh:tick,preview:id=>{const event=events.find(e=>e.id===id);return event?show(event,true,false):false;},get activeId(){return current?.event.id||'';},get isReplying(){return Boolean(current&&(current.reply||current.restore.hasNextPage?.()));}};
+    const controller={destroy,finish,refresh:tick,preview:(id,selection)=>{const event=events.find(e=>e.id===id);return event?show(event,true,false,selection):false;},get activeId(){return current?.event.id||'';},get isReplying(){return Boolean(current&&(current.reply||current.restore.hasNextPage?.()));}};
     container.addEventListener('click',click,{capture:true,signal:abort.signal});container.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-living-event-target]')){e.preventDefault();e.target.click();}},{signal:abort.signal});
     global.document.addEventListener('visibilitychange',()=>{if(global.document.hidden){clearTimeout(timer);finish();for(const id of [...standby.keys()])clearStandby(id);}else tick();},{signal:abort.signal});
     if(global.MutationObserver){observer=new MutationObserver(()=>{if(!container.isConnected)destroy();});observer.observe(global.document.documentElement,{childList:true,subtree:true});}
     for(const event of events.filter(e=>e.enabled&&(e.displayMode==='continuous'||e.trigger!=='time'||!hasContent(actorFor(e)))&&e.clickPolicy!=='original-first')){const n=Array.from(container.querySelectorAll('[data-scene-object-id]')).find(n=>n.dataset.sceneObjectId===event.objectId);if(n){n.tabIndex=0;n.setAttribute('role','button');n.setAttribute('data-living-event-target','');n.setAttribute('aria-label',(n.getAttribute('aria-label')||event.name)+'：點擊對話');n.style.cursor='pointer';}}
     controllers.add(controller);if(!suppressAuto)tick();return controller;
   }
-  const api={normalize,normalizeLibrary,resolveScene,localClock,inWindow,eligible,mount};global.ShiGaiLivingEvents=api;if(typeof module==='object'&&module.exports)module.exports=api;
+  const api={normalize,lineId,ensureDialogueIds,normalizeDialogueStyles,normalizeLibrary,resolveScene,localClock,inWindow,eligible,mount};global.ShiGaiLivingEvents=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

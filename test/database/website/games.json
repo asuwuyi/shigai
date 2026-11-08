@@ -1730,5 +1730,479 @@
         "buttonImage": ""
       }
     }
+  },
+  {
+    "id": "fate-book",
+    "name": "命運之書",
+    "description": "答案、否定、勸退，三本書陪你換個角度想。",
+    "mark": "✦",
+    "icon": "assets/games/icons/fate-book.svg",
+    "status": "published",
+    "url": "games/fate-book/",
+    "order": 20,
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "modes": [
+          {
+            "id": "answer",
+            "name": "答案之書",
+            "label": "給猶豫一點空間",
+            "action": "翻開答案之書",
+            "tone": "blue",
+            "type": "book",
+            "lines": [
+              {
+                "id": "answer-1",
+                "title": "答案正在靠近",
+                "text": "先走一小步，下一個線索才會出現。",
+                "enabled": true
+              },
+              {
+                "id": "answer-2",
+                "title": "給它一點時間",
+                "text": "今天不用急著得到完整的答案。",
+                "enabled": true
+              },
+              {
+                "id": "answer-3",
+                "title": "你其實已有方向",
+                "text": "留意那個反覆回到心裡的念頭。",
+                "enabled": true
+              },
+              {
+                "id": "answer-4",
+                "title": "換個角度看看",
+                "text": "也許問題需要換一種問法。",
+                "enabled": true
+              },
+              {
+                "id": "answer-5",
+                "title": "找一位旅伴",
+                "text": "把想法說給願意聽的人聽。",
+                "enabled": true
+              },
+              {
+                "id": "answer-6",
+                "title": "先做最小的版本",
+                "text": "一個小小的嘗試，勝過無限的想像。",
+                "enabled": true
+              },
+              {
+                "id": "answer-7",
+                "title": "留一點空白",
+                "text": "把行程放鬆，讓意外有位置。",
+                "enabled": true
+              },
+              {
+                "id": "answer-8",
+                "title": "向好奇走去",
+                "text": "先選你最想了解的那一條路。",
+                "enabled": true
+              },
+              {
+                "id": "answer-9",
+                "title": "整理眼前的線索",
+                "text": "把知道與不知道的事分開寫下來。",
+                "enabled": true
+              },
+              {
+                "id": "answer-10",
+                "title": "休息也是前進",
+                "text": "睡一覺，再看看這個問題。",
+                "enabled": true
+              },
+              {
+                "id": "answer-11",
+                "title": "先聽自己的聲音",
+                "text": "不必每個人的建議都照單全收。",
+                "enabled": true
+              },
+              {
+                "id": "answer-12",
+                "title": "門沒有上鎖",
+                "text": "你可以試試，也可以回頭。",
+                "enabled": true
+              }
+            ]
+          },
+          {
+            "id": "no",
+            "name": "否定之書",
+            "label": "讓「不」成為另一種可能",
+            "action": "翻開否定之書",
+            "tone": "purple",
+            "type": "book",
+            "lines": [
+              {
+                "id": "no-1",
+                "title": "不必現在就答應",
+                "text": "先確認你有沒有餘裕。",
+                "enabled": true
+              },
+              {
+                "id": "no-2",
+                "title": "不要急著下結論",
+                "text": "還有一塊拼圖沒有找到。",
+                "enabled": true
+              },
+              {
+                "id": "no-3",
+                "title": "不是每件事都要參加",
+                "text": "錯過一場，也可能換來自己的時間。",
+                "enabled": true
+              },
+              {
+                "id": "no-4",
+                "title": "不需要做到完美",
+                "text": "先完成一個能用的版本。",
+                "enabled": true
+              },
+              {
+                "id": "no-5",
+                "title": "別替別人猜答案",
+                "text": "有些事直接問會比較清楚。",
+                "enabled": true
+              },
+              {
+                "id": "no-6",
+                "title": "不要再多開一個分頁了",
+                "text": "把眼前這一件小事做完。",
+                "enabled": true
+              },
+              {
+                "id": "no-7",
+                "title": "不必證明給所有人看",
+                "text": "你知道自己為什麼做就好。",
+                "enabled": true
+              },
+              {
+                "id": "no-8",
+                "title": "今天先不要硬撐",
+                "text": "允許自己換一個節奏。",
+                "enabled": true
+              },
+              {
+                "id": "no-9",
+                "title": "不要把猜測當事實",
+                "text": "查一查，再決定。",
+                "enabled": true
+              },
+              {
+                "id": "no-10",
+                "title": "不一定只有兩個選項",
+                "text": "也許可以協商出第三條路。",
+                "enabled": true
+              },
+              {
+                "id": "no-11",
+                "title": "別再等完美時機",
+                "text": "挑一個很小、可以撤回的行動。",
+                "enabled": true
+              },
+              {
+                "id": "no-12",
+                "title": "不喜歡也沒關係",
+                "text": "誠實的界線，比勉強的答應舒服。",
+                "enabled": true
+              }
+            ]
+          },
+          {
+            "id": "retreat",
+            "name": "勸退之書",
+            "label": "認真潑一點溫柔冷水",
+            "action": "翻開勸退之書",
+            "tone": "orange",
+            "type": "book",
+            "lines": [
+              {
+                "id": "retreat-1",
+                "title": "先關掉購物車",
+                "text": "明天還想要，再來談判。",
+                "enabled": true
+              },
+              {
+                "id": "retreat-2",
+                "title": "熱血不能替你睡覺",
+                "text": "先睡飽，企劃書不會逃跑。",
+                "enabled": true
+              },
+              {
+                "id": "retreat-3",
+                "title": "這坑看起來有點深",
+                "text": "先查成本，再決定要不要跳。",
+                "enabled": true
+              },
+              {
+                "id": "retreat-4",
+                "title": "你的待辦清單在看你",
+                "text": "它說：先把我處理一下。",
+                "enabled": true
+              },
+              {
+                "id": "retreat-5",
+                "title": "先別宣布偉大計畫",
+                "text": "偷偷做出第一步，再大聲也不遲。",
+                "enabled": true
+              },
+              {
+                "id": "retreat-6",
+                "title": "買工具不等於有進度",
+                "text": "用手邊的先做一次看看。",
+                "enabled": true
+              },
+              {
+                "id": "retreat-7",
+                "title": "可能只是肚子餓了",
+                "text": "吃點東西，再決定人生大事。",
+                "enabled": true
+              },
+              {
+                "id": "retreat-8",
+                "title": "這個靈感先寄放",
+                "text": "寫下來就好，不必今天開工。",
+                "enabled": true
+              },
+              {
+                "id": "retreat-9",
+                "title": "不要同時開五個坑",
+                "text": "選一個真的願意收尾的。",
+                "enabled": true
+              },
+              {
+                "id": "retreat-10",
+                "title": "先算算明天的自己",
+                "text": "他可能沒有今天這麼熱血。",
+                "enabled": true
+              },
+              {
+                "id": "retreat-11",
+                "title": "先試用再加碼",
+                "text": "給自己一個可以停下來的期限。",
+                "enabled": true
+              },
+              {
+                "id": "retreat-12",
+                "title": "冷靜，還沒到大結局",
+                "text": "先把這一章寫完。",
+                "enabled": true
+              }
+            ]
+          }
+        ]
+      },
+      "ui": {
+        "theme": {
+          "background": "#f7f9fc",
+          "paper": "#ffffff",
+          "ink": "#333333",
+          "accent": "#79b8e8",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 58,
+          "mobileTitleSize": 36,
+          "buttonRadius": 14,
+          "contentWidth": 1120
+        },
+        "phrases": {
+          "再翻一頁": "再翻一頁",
+          "再抽一支": "再抽一支",
+          "複製這次結果": "複製這次結果",
+          "清空": "清空",
+          "本次翻閱與抽籤": "本次翻閱與抽籤"
+        },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
+        "instructions": "選擇玩法，想好問題，再按按鈕。每次隨機抽取，多個結果時避開連續重複。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
+  },
+  {
+    "id": "fate-draw",
+    "name": "命運抽籤",
+    "description": "是否籤與運氣籤，抽一份輕鬆的小靈感。",
+    "mark": "☷",
+    "icon": "assets/games/icons/fate-draw.svg",
+    "status": "published",
+    "url": "games/fate-draw/",
+    "order": 21,
+    "visible": true,
+    "play": {
+      "version": 1,
+      "config": {
+        "modes": [
+          {
+            "id": "yesno",
+            "name": "是否的抽籤",
+            "label": "把猶豫輕輕放進籤筒",
+            "action": "搖一支是否籤",
+            "tone": "blue",
+            "type": "draw",
+            "lines": [
+              {
+                "id": "yesno-1",
+                "title": "可以試試",
+                "text": "從一個風險小、能回頭的做法開始。",
+                "enabled": true
+              },
+              {
+                "id": "yesno-2",
+                "title": "先不要",
+                "text": "把理由寫下來，看看是擔心還是不適合。",
+                "enabled": true
+              },
+              {
+                "id": "yesno-3",
+                "title": "再等等",
+                "text": "多收集一個關鍵資訊，再做決定。",
+                "enabled": true
+              },
+              {
+                "id": "yesno-4",
+                "title": "換一個方法",
+                "text": "方向也許沒錯，走法可以不同。",
+                "enabled": true
+              },
+              {
+                "id": "yesno-5",
+                "title": "問問自己",
+                "text": "如果沒有這支籤，你原本想怎麼選？",
+                "enabled": true
+              },
+              {
+                "id": "yesno-6",
+                "title": "先做小測試",
+                "text": "不用一次決定全部。",
+                "enabled": true
+              }
+            ]
+          },
+          {
+            "id": "luck",
+            "name": "運氣抽籤",
+            "label": "抽一份今天的小小靈感",
+            "action": "搖一支運氣籤",
+            "tone": "orange",
+            "type": "draw",
+            "lines": [
+              {
+                "id": "luck-1",
+                "title": "靈感大吉",
+                "text": "幸運提案：把突然想到的點子畫下來。",
+                "enabled": true
+              },
+              {
+                "id": "luck-2",
+                "title": "散步吉",
+                "text": "幸運提案：換一條熟悉又安全的路。",
+                "enabled": true
+              },
+              {
+                "id": "luck-3",
+                "title": "整理小吉",
+                "text": "幸運提案：讓桌面多出一小塊空間。",
+                "enabled": true
+              },
+              {
+                "id": "luck-4",
+                "title": "慢慢來吉",
+                "text": "幸運提案：留十分鐘給自己放空。",
+                "enabled": true
+              },
+              {
+                "id": "luck-5",
+                "title": "相遇吉",
+                "text": "幸運提案：向一位朋友說聲嗨。",
+                "enabled": true
+              },
+              {
+                "id": "luck-6",
+                "title": "補眠吉",
+                "text": "幸運提案：今晚早一點放下螢幕。",
+                "enabled": true
+              },
+              {
+                "id": "luck-7",
+                "title": "好奇吉",
+                "text": "幸運提案：認識一個平常不會看的主題。",
+                "enabled": true
+              },
+              {
+                "id": "luck-8",
+                "title": "小小勇氣吉",
+                "text": "幸運提案：完成那件一直拖延的小事。",
+                "enabled": true
+              },
+              {
+                "id": "luck-9",
+                "title": "留白籤",
+                "text": "幸運提案：今天的好事，由你自己命名。",
+                "enabled": true
+              },
+              {
+                "id": "luck-10",
+                "title": "分享吉",
+                "text": "幸運提案：把一件開心的小事說出來。",
+                "enabled": true
+              },
+              {
+                "id": "luck-11",
+                "title": "專心吉",
+                "text": "幸運提案：為一件喜歡的事留一段時間。",
+                "enabled": true
+              },
+              {
+                "id": "luck-12",
+                "title": "感謝吉",
+                "text": "幸運提案：記下一件值得感謝的小事。",
+                "enabled": true
+              }
+            ]
+          }
+        ]
+      },
+      "ui": {
+        "theme": {
+          "background": "#f7f9fc",
+          "paper": "#ffffff",
+          "ink": "#333333",
+          "accent": "#79b8e8",
+          "fontFamily": "sans",
+          "fontSize": 16,
+          "titleSize": 58,
+          "mobileTitleSize": 36,
+          "buttonRadius": 14,
+          "contentWidth": 1120
+        },
+        "phrases": {
+          "再翻一頁": "再翻一頁",
+          "再抽一支": "再抽一支",
+          "複製這次結果": "複製這次結果",
+          "清空": "清空",
+          "本次翻閱與抽籤": "本次翻閱與抽籤"
+        },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
+        "instructions": "選擇玩法，想好問題，再按按鈕。每次隨機抽取，多個結果時避開連續重複。",
+        "backgroundImage": "",
+        "panelImage": "",
+        "buttonImage": ""
+      }
+    }
   }
 ]

@@ -1,7 +1,12 @@
-// Shared decorative Canvas renderer. No network, author writes, audio or dependencies.
+// Shared decorative Canvas renderer. Local cloud artwork only; no external network, author writes, audio or dependencies.
 (function(global){
   'use strict';
   const mounted=new Set();let frame=0;
+  const cloudUrl=global.document?.currentScript?.src?new URL('./assets/clouds/painted-atlas-v1.webp',global.document.currentScript.src).href:null;
+  let cloudImage,cloudRequested=false;const cloudTints=new Map();
+  function requestClouds(){if(cloudRequested||!cloudUrl||!global.Image)return;cloudRequested=true;const image=new global.Image();image.decoding='async';image.onload=()=>{cloudImage=image;for(const item of mounted)if(item.clouds&&runnable(item))item.draw(0);wake();};image.src=cloudUrl;}
+  function cloudArtwork(tone){if(!cloudImage)return null;if(cloudTints.has(tone))return cloudTints.get(tone);const c=global.document.createElement('canvas');c.width=cloudImage.naturalWidth;c.height=cloudImage.naturalHeight;const g=c.getContext('2d');if(!g)return cloudImage;g.drawImage(cloudImage,0,0);if(tone!=='day'){g.globalCompositeOperation='source-atop';g.fillStyle=tone==='night'?'rgba(58,73,108,.68)':tone==='twilight'?'rgba(238,173,155,.32)':'rgba(120,137,158,.35)';g.fillRect(0,0,c.width,c.height);}cloudTints.set(tone,c);return c;}
+
   const reduced=()=>global.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   function random(seed=37){return()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};}
   // aria-hidden is also used on visible decorative Website layers; only Studio
@@ -26,19 +31,14 @@
     function makeBolt(){const points=[{x:w*(.22+rand()*.56),y:-10}];const length=h*(.38+rand()*.33);for(let y=0;y<length;y+=h*.035)points.push({x:points.at(-1).x+(rand()-.5)*w*.07,y});return points;}
     function drawRain(dt){for(const drop of drops){drop.y+=dt*(.32+drop.depth*.65)*config.speed;drop.x+=dt*config.wind*.16*(.3+drop.depth);if(drop.y>1.12){drop.y=-.12;drop.x=rand();}drop.x=(drop.x+1.3)%1.3;const x=drop.x*w,y=drop.y*h,length=(8+drop.depth*21)*h/600,slant=config.wind*length*.65,gradient=ctx.createLinearGradient(x-slant,y-length,x,y);gradient.addColorStop(0,'rgba(191,217,236,0)');gradient.addColorStop(.75,'rgba(200,224,244,'+(.09+drop.depth*.28)+')');gradient.addColorStop(1,'rgba(239,248,255,'+(.13+drop.depth*.35)+')');ctx.strokeStyle=gradient;ctx.lineWidth=.45+drop.depth*1.05;ctx.beginPath();ctx.moveTo(x-slant,y-length);ctx.lineTo(x,y);ctx.stroke();if(drop.depth>.7&&drop.y>.93&&drop.y<1){ctx.strokeStyle='rgba(215,237,247,.12)';ctx.lineWidth=.7;ctx.beginPath();ctx.ellipse(x,h*(.94+drop.phase*.05),3+drop.phase*5,1.1,0,0,Math.PI);ctx.stroke();}}}
     function drawFog(){const img=texture();for(let layer=0;layer<3;layer++){const width=w*(1.45+layer*.25),height=h*(.68+layer*.16),drift=(time*config.speed*(7+layer*5)*(config.wind<0?-1:1))%width,baseX=-width*.35+drift,baseY=h*(.22-layer*.17)+Math.sin(time*.13+layer)*h*.025;ctx.globalAlpha=config.intensity*(layer===1?.8:1.05);for(const x of [baseX-width,baseX,baseX+width])ctx.drawImage(img,x,baseY,width,height);}ctx.globalAlpha=1;}
-    // Soft outlined illustration clouds, transparent around every silhouette.
+    // Three painted transparent silhouettes; tint cached once, no per-frame image processing.
     function drawClouds(){
-      const night=sky.phase==='night',twilight=['dawn','dusk'].includes(sky.phase),density=sky.density??.6;
-      const count=Math.max(1,Math.round(clouds.length*density));
-      for(const cloud of clouds.slice(0,count)){
-        const unit=Math.min(w*.16,h*.25)*config.size*cloud.scale;
-        const travel=(time*config.speed*(config.wind)*.012*cloud.depth);
-        const x=((cloud.x+travel)%1.5+1.5)%1.5*w-w*.25,y=h*(config.altitude+(cloud.y-.5)*.18);
-        ctx.save();ctx.translate(x,y);ctx.scale(unit,unit);ctx.globalAlpha=config.intensity*(.65+cloud.depth*.25);
-        ctx.fillStyle=night?'#8B98B6':twilight?'#F1C5B1':density>.8?'#B8C4D1':'#FFF5E3';
-        ctx.strokeStyle=night?'#64718C':'#A9A8AC';ctx.lineWidth=.012;
-        ctx.beginPath();ctx.moveTo(-1,.22);ctx.bezierCurveTo(-1.35,.17,-1.25,-.24,-.88,-.22);ctx.bezierCurveTo(-.95,-.69,-.34,-.8,-.12,-.45);ctx.bezierCurveTo(.09,-.92,.82,-.64,.74,-.2);ctx.bezierCurveTo(1.22,-.24,1.37,.22,.96,.32);ctx.bezierCurveTo(.36,.45,-.47,.41,-1,.22);ctx.closePath();ctx.fill();ctx.stroke();
-        ctx.globalAlpha*=.2;ctx.strokeStyle=night?'#D0D6EA':'#FFFFFF';ctx.lineWidth=.045;ctx.beginPath();ctx.moveTo(-.72,-.2);ctx.bezierCurveTo(-.72,-.52,-.38,-.58,-.2,-.4);ctx.stroke();ctx.restore();
+      const density=sky.density??.6,tone=sky.phase==='night'?'night':['dawn','dusk'].includes(sky.phase)?'twilight':density>.8?'overcast':'day',art=cloudArtwork(tone);if(!art)return;
+      const count=Math.max(1,Math.round(clouds.length*density)),rowHeight=art.height/3;canvas.dataset.cloudArtwork='painted-v1';
+      for(const [index,cloud]of clouds.slice(0,count).entries()){
+        const width=Math.min(w*.54,h*.8)*config.size*cloud.scale,height=width*rowHeight/art.width;
+        const travel=time*config.speed*config.wind*.012*cloud.depth,x=(((cloud.x+travel+1)%3+3)%3-1)*w,y=h*(config.altitude+(cloud.y-.5)*.18);
+        ctx.save();ctx.globalAlpha=config.intensity*(.65+cloud.depth*.25);ctx.drawImage(art,0,(index%3)*rowHeight,art.width,rowHeight,x-width/2,y-height/2,width,height);ctx.restore();
       }
     }
     function drawSun(){
@@ -50,10 +50,10 @@
       canvas.dataset.sunProgress=String(p);
     }
     function drawLightning(){if(time>=nextBolt){bolt=makeBolt();flashTime=time;nextBolt=time+8+rand()*16/config.speed;}const age=time-flashTime;if(!bolt||age<0||age>.7)return;const alpha=Math.sin(age/.7*Math.PI)**1.6*config.intensity*(.75+config.intensity*.25);ctx.fillStyle='rgba(185,204,239,'+(alpha*.035)+')';ctx.fillRect(0,0,w,h);ctx.lineJoin='round';ctx.lineCap='round';for(const [width,opacity]of [[10,.10],[4,.30],[1.8,1]]){ctx.strokeStyle='rgba(221,232,255,'+(alpha*opacity)+')';ctx.lineWidth=width;ctx.beginPath();bolt.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();}ctx.strokeStyle='rgba(199,218,255,'+(alpha*.38)+')';ctx.lineWidth=.75;for(let i=3;i<bolt.length;i+=5){const p=bolt[i];ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+w*.035,p.y+h*.035);ctx.lineTo(p.x+w*.02,p.y+h*.08);ctx.stroke();}}
-    const item={host,visible:!observer,enabled:config.intensity>0,last:0,interval:small?50:1000/30,draw(dt){if(canvas.width<2||canvas.height<2)return;time+=dt;ctx.clearRect(0,0,w,h);if(config.type==='clouds')drawClouds();if(config.type==='sun')drawSun();if(config.type==='rain')drawRain(dt);if(config.type==='fog')drawFog();if(config.type==='lightning')drawLightning();canvas.dataset.weatherFrame=String(Math.round(time*1000));},stop(){if(dead)return;dead=true;observer?.disconnect();resizeObserver?.disconnect();mounted.delete(item);canvas.remove();wake();}};
+    const item={host,clouds:config.type==='clouds',visible:!observer,enabled:config.intensity>0,last:0,interval:small?50:1000/30,draw(dt){if(canvas.width<2||canvas.height<2)return;time+=dt;ctx.clearRect(0,0,w,h);if(config.type==='clouds')drawClouds();if(config.type==='sun')drawSun();if(config.type==='rain')drawRain(dt);if(config.type==='fog')drawFog();if(config.type==='lightning')drawLightning();canvas.dataset.weatherFrame=String(Math.round(time*1000));},stop(){if(dead)return;dead=true;observer?.disconnect();resizeObserver?.disconnect();mounted.delete(item);canvas.remove();wake();}};
     item.flash=()=>{if(config.type!=='lightning'||config.intensity<=0||reduced()||flashTime>=0&&time-flashTime<8)return false;nextBolt=time;return true;};
     item.stop.updateSky=value=>{sky=value;if(item.enabled&&runnable(item)&&!global.document.hidden&&!reduced())item.draw(0);};
-    resize();mounted.add(item);observer?.observe(host);resizeObserver?.observe(host);if(!observer&&item.enabled&&!reduced())item.draw(.033);schedule();return item.stop;
+    resize();mounted.add(item);if(config.type==='clouds')requestClouds();observer?.observe(host);resizeObserver?.observe(host);if(!observer&&item.enabled&&!reduced())item.draw(.033);schedule();return item.stop;
   }
   if(global.document){global.document.addEventListener('visibilitychange',wake);global.addEventListener?.('pagehide',()=>{if(frame){global.cancelAnimationFrame(frame);frame=0;}});global.addEventListener?.('pageshow',wake);const media=global.matchMedia?.('(prefers-reduced-motion: reduce)');media?.addEventListener?.('change',()=>{if(reduced())for(const v of mounted){const canvas=v.host.querySelector('canvas');canvas?.getContext('2d')?.clearRect(0,0,canvas.width,canvas.height);}wake();});const visibilityObserver=global.MutationObserver&&new global.MutationObserver(()=>{if(mounted.size)wake();});visibilityObserver?.observe(global.document.documentElement,{subtree:true,attributes:true,attributeFilter:['aria-hidden','hidden']});}
   global.ShiGaiWeatherEffects={mount,activeCount:()=>mounted.size,previewLightning:root=>{let triggered=false;for(const item of mounted)if(item.visible&&(!root||root.contains(item.host)))triggered=item.flash()||triggered;schedule();return triggered;}};

@@ -830,7 +830,7 @@
         {
           "id": "sky-10",
           "name": "10 暮色・藍調",
-          "enabled": true,
+          "enabled": false,
           "color": "#B7D4E5",
           "asset": "assets/scenes/media/weather-20261022-10.webp",
           "assetId": "weather-20261022-10",
@@ -849,8 +849,7 @@
             "event": "",
             "fallback": false,
             "periods": [
-              "dusk",
-              "night"
+              "dusk"
             ],
             "periodVersion": 2,
             "weathers": [
@@ -1030,6 +1029,79 @@
             ],
             "followWeather": true
           }
+        },
+        {
+          "id": "weather-clouds-1794156079585-ey1g",
+          "name": "流動雲層",
+          "enabled": true,
+          "asset": "",
+          "procedural": {
+            "type": "clouds",
+            "intensity": 0.55,
+            "speed": 1,
+            "wind": 0.2,
+            "size": 1,
+            "count": 5,
+            "altitude": 0.22
+          },
+          "layer": "back",
+          "group": "weather-clouds",
+          "opacity": 1,
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": []
+          }
+        },
+        {
+          "id": "weather-sun-1794156101741-itl0",
+          "name": "太陽",
+          "enabled": true,
+          "asset": "",
+          "procedural": {
+            "type": "sun",
+            "intensity": 0.55,
+            "speed": 1,
+            "wind": 0.2,
+            "size": 1
+          },
+          "layer": "back",
+          "group": "weather-sun",
+          "opacity": 1,
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": [
+              "clear",
+              "cloudy"
+            ]
+          }
         }
       ]
     },
@@ -1188,7 +1260,7 @@
             "landscape": {
               "anchor": "above",
               "x": 0.191,
-              "y": 55.371,
+              "y": 20.126,
               "scale": 0.361,
               "rotation": 0,
               "fontSize": 48,
@@ -1284,7 +1356,7 @@
             "landscape": {
               "anchor": "above",
               "x": -1.768,
-              "y": 72.327,
+              "y": 45.013,
               "scale": 0.571,
               "rotation": 0,
               "fontSize": 48,
@@ -1461,8 +1533,8 @@
           "layouts": {
             "landscape": {
               "anchor": "above",
-              "x": 11.855,
-              "y": 44.896,
+              "x": 8.949,
+              "y": 21.448,
               "scale": 0.514,
               "rotation": 0,
               "fontSize": 48,
@@ -1660,8 +1732,8 @@
           "layouts": {
             "landscape": {
               "anchor": "above",
-              "x": 6.929,
-              "y": 35.998,
+              "x": 1.075,
+              "y": 29.386,
               "scale": 0.319,
               "rotation": 0,
               "fontSize": 48,
@@ -1682,13 +1754,13 @@
           "items": [
             {
               "placementMode": "scene",
-              "transition": "cut",
+              "transition": "fade",
               "id": "behavior-791ee060-5ba6-47fe-98a1-0102c2c9d1f7",
               "name": "企鵝組",
               "enabled": true,
               "sourceObjectId": "object-local-1793586033078",
-              "minSeconds": 10,
-              "maxSeconds": 20,
+              "minSeconds": 60,
+              "maxSeconds": 60,
               "weight": 1,
               "periods": [],
               "eventIds": [
@@ -1707,13 +1779,13 @@
             },
             {
               "placementMode": "scene",
-              "transition": "cut",
+              "transition": "fade",
               "id": "behavior-adf39744-e36c-4901-811f-3ae422b42c8c",
               "name": "企鵝",
               "enabled": true,
               "sourceObjectId": "object-local-1793586039278",
-              "minSeconds": 30,
-              "maxSeconds": 90,
+              "minSeconds": 60,
+              "maxSeconds": 60,
               "weight": 1,
               "periods": [],
               "eventIds": []
@@ -1731,8 +1803,8 @@
               "name": "Take Pictures Photo Sticker by ShiGai",
               "enabled": true,
               "sourceObjectId": "object-local-1793638098192",
-              "minSeconds": 10,
-              "maxSeconds": 20,
+              "minSeconds": 60,
+              "maxSeconds": 60,
               "weight": 1,
               "periods": [],
               "eventIds": [
@@ -2172,7 +2244,74 @@
         "priority": 1,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-t9jcxd-0": {
+            "x": 4.475,
+            "y": 23.508,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 427.044,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-lines-1l8ao94-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 680.011,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-lines-e2dftp-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 670.417,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-1a32ucc-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 450.636,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-d9t2xh-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 494.008,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
       },
       {
         "id": "binding-b6de059b-1836-4971-8d5f-4b588f619a99",
@@ -2196,7 +2335,48 @@
         "priority": 1,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-1066qc5-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 446.189,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-m4rj5x-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 489.031,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-1g52nan-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 528.781,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
       },
       {
         "id": "binding-5bd0a87d-271d-4be4-857e-b8586b0144f4",
@@ -2220,7 +2400,22 @@
         "priority": 1,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-1ymw1fe-0": {
+            "x": 6.929,
+            "y": 23.104,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 306.372,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
       },
       {
         "displayMode": "continuous",
@@ -2250,6 +2445,16 @@
         "enabled": false
       },
       {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-ourxgx-0",
+            "line-lines-70hqhg-0"
+          ],
+          "replies": [
+            "line-replies-xeu3aj-0",
+            "line-replies-1sf4mdf-0"
+          ]
+        },
         "dataCondition": {
           "type": "rain-probability",
           "threshold": 50,
@@ -2263,12 +2468,12 @@
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "{{city}}未來{{forecastHours}}小時最高降雨機率{{rainProbability}}%，出門記得帶傘。",
-          "等一下可能會下雨，出門前看看預報吧。"
+          "{{city}}未來{{forecastHours}}小時\n最高降雨機率{{rainProbability}}%，\n出門記得帶傘。",
+          "等一下可能會下雨，\n出門前看看預報吧。"
         ],
         "replies": [
-          "{{forecastStart}}～{{forecastEnd}}。這是降雨機率，不代表現在已經下雨。",
-          "雨傘帶著比較安心；{{city}}未來{{forecastHours}}小時最高降雨機率為{{rainProbability}}%。"
+          "這是降雨機率，\n不代表現在已經下雨。",
+          "雨傘帶著比較安心；\n{{city}}未來{{forecastHours}}小時\n最高降雨機率為{{rainProbability}}%。"
         ],
         "duration": 10,
         "cooldown": 60,
@@ -2276,9 +2481,61 @@
         "priority": 5,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-ourxgx-0": {
+            "x": 6.281,
+            "y": 26.179,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 526.551,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 175.564,
+            "pageLines": 2,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-lines-70hqhg-0": {
+            "x": 6.647,
+            "y": 24.955,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 520.75,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-1sf4mdf-0": {
+            "x": 6.722,
+            "y": 26.004,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 593.718,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
       },
       {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-co450w-0",
+            "line-lines-u88afw-0"
+          ],
+          "replies": [
+            "line-replies-1d0ptnt-0",
+            "line-replies-1nj9257-0"
+          ]
+        },
         "dataCondition": {
           "type": "temperature",
           "threshold": 30,
@@ -2292,11 +2549,11 @@
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "{{city}}目前模式氣溫約{{temperature}}°C，好熱啊。",
-          "現在約{{temperature}}°C，想找個涼快的地方休息。"
+          "{{city}}目前模式氣溫約{{temperature}}°C",
+          "現在約{{temperature}}°C，\n想找個涼快的地方休息。"
         ],
         "replies": [
-          "先找個涼快的地方吧。目前氣溫約{{temperature}}°C。",
+          "先找個涼快的地方吧。\n目前氣溫約{{temperature}}°C。",
           "記得適時休息、補充水分。"
         ],
         "duration": 10,
@@ -2305,9 +2562,47 @@
         "priority": 3,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-u88afw-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 599.136,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-1d0ptnt-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 601.103,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
       },
       {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-2cn83b-0",
+            "line-lines-166ieq5-0"
+          ],
+          "replies": [
+            "line-replies-4ayjrv-0",
+            "line-replies-1k9ag4o-0"
+          ]
+        },
         "dataCondition": {
           "type": "sunrise",
           "threshold": 0,
@@ -2321,11 +2616,11 @@
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "早安，{{city}}今天日出約在{{sunrise}}。",
-          "新的一天要開始了，日出約{{sunrise}}。"
+          "早安，{{city}}今天日出約在\n{{sunrise}}。",
+          "新的一天要開始了，\n日出約{{sunrise}}。"
         ],
         "replies": [
-          "{{city}}今天日出約{{sunrise}}",
+          "{{city}}今天日出約\n{{sunrise}}",
           "慢慢醒來，準備開始今天吧。"
         ],
         "duration": 10,
@@ -2334,9 +2629,34 @@
         "priority": 2,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-2cn83b-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 662.984,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
       },
       {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-o9gnzu-0",
+            "line-lines-11jfxog-0"
+          ],
+          "replies": [
+            "line-replies-1f0y1ic-0",
+            "line-replies-16ngsus-0"
+          ]
+        },
         "dataCondition": {
           "type": "sunset",
           "threshold": 0,
@@ -2350,12 +2670,12 @@
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "{{city}}今天日落約{{sunset}}，準備迎接晚上吧。",
-          "太陽快下山了，今天的日落約在{{sunset}}。"
+          "{{city}}今天日落約\n{{sunset}}\n準備迎接晚上吧。",
+          "太陽快下山了\n今天的日落約在\n{{sunset}}。"
         ],
         "replies": [
-          "今天日落約{{sunset}}",
-          "辛苦一天了，要不要休息一下？"
+          "今天日落約\n{{sunset}}",
+          "辛苦一天了\n要不要休息一下？"
         ],
         "duration": 10,
         "cooldown": 60,
@@ -2363,9 +2683,58 @@
         "priority": 2,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-o9gnzu-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 547.735,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-lines-11jfxog-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 573.36,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-16ngsus-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 494.029,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
       },
       {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-1ag0bu2-0"
+          ],
+          "replies": [
+            "line-replies-91jofy-0"
+          ]
+        },
         "dataCondition": {
           "type": "official-alert",
           "threshold": 0,
@@ -2382,7 +2751,7 @@
           "「{{alertTitle}}」"
         ],
         "replies": [
-          "{{alertText}}"
+          "你有感覺到有風嗎？"
         ],
         "duration": 10,
         "cooldown": 60,
@@ -2390,9 +2759,47 @@
         "priority": 8,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-1ag0bu2-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 555.211,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-91jofy-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 590.979,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 119.914,
+            "pageLines": 1,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
       },
       {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-omh9c3-0"
+          ],
+          "replies": [
+            "line-replies-1c7zrvm-0",
+            "line-replies-s0v1x4-0"
+          ]
+        },
         "dataCondition": {
           "type": "pm25",
           "threshold": 0,
@@ -2406,11 +2813,11 @@
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "{{station}}測站 PM2.5 為 {{pm25}} µg/m³。"
+          "{{station}}測站 PM2.5 \n為 {{pm25}} µg/m³。"
         ],
         "replies": [
           "PM2.5 為 {{pm25}} µg/m³",
-          "PM2.5 是濃度，AQI 是空氣品質指標，兩者不是同一個數值。"
+          "PM2.5 是濃度\nAQI 是空氣品質指標\n兩者不是同一個數值。"
         ],
         "duration": 10,
         "cooldown": 60,
@@ -2418,9 +2825,60 @@
         "priority": 0,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-omh9c3-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 464.91,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-1c7zrvm-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 565.122,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-s0v1x4-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 602.909,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
       },
       {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-1jsuwq-0",
+            "line-lines-ihwfcb-0"
+          ],
+          "replies": [
+            "line-replies-1uxfqmj-0",
+            "line-replies-ze9co8-0"
+          ]
+        },
         "dataCondition": {
           "type": "aqi",
           "threshold": 0,
@@ -2439,7 +2897,7 @@
         ],
         "replies": [
           "AQI {{aqi}}（{{aqiStatus}}）",
-          "這是測站周邊的參考資料，不是你所在位置的精確測量。"
+          "這是測站周邊的參考資料\n不是你所在位置的精確測量。"
         ],
         "duration": 10,
         "cooldown": 60,
@@ -2447,7 +2905,18 @@
         "priority": 0,
         "objectId": "object-local-1793542816103",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": true,
+        "dialogueStyles": {
+          "line-replies-ze9co8-0": {
+            "x": 6.583,
+            "y": 26.981,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 695.63,
+            "rotation": 0,
+            "anchor": "above"
+          }
+        }
       }
     ],
     "metadata": {
@@ -2464,6 +2933,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-11-07T07:48:40.395Z"
+    "updatedAt": "2026-11-08T17:07:36.582Z"
   }
 ]
