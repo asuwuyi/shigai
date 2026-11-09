@@ -38,6 +38,6 @@ function evaluate(condition,scene,data,now=new Date()){
  const area=areaName(c.area||s.city);if(!area)return no('請指定可辨識的縣市行政區');const alert=(data.alerts||[]).filter(a=>a.start<=ms&&a.end>ms&&a.issued<=ms+300000&&a.areas.includes(area)).sort((a,b)=>b.issued-a.issued)[0];if(!alert)return no(data.errors?.alerts||'目前無符合設定縣市且有效的官方氣象特報');Object.assign(v,{alertTitle:alert.title,alertArea:area,alertIssued:timeLabel(alert.issued,scene),alertUntil:timeLabel(alert.end,scene),alertText:alert.text.slice(0,180),dataTime:timeLabel(alert.issued,scene)});source={label:'中央氣象署｜'+area+'（縣市範圍參考）',url:'https://www.cwa.gov.tw/V8/C/P/Warning/Warning.html',at:alert.issued};return {matches:true,variables:v,source,reason:'有效至 '+v.alertUntil};
 }
 function hasTokens(values){return (Array.isArray(values)?values:[values]).some(v=>/\{\{[A-Za-z][A-Za-z0-9]*\}\}/.test(String(v||'')));}
-function format(line,result,scene){let text=String(line||'').replace(/\{\{([A-Za-z][A-Za-z0-9]*)\}\}/g,(_,key)=>result.variables[key]??'');if(result.source)text+='\n（'+result.source.label+'｜'+timeLabel(result.source.at,scene)+'）';return text;}
+function format(line,result,scene){return String(line||'').replace(/\{\{([A-Za-z][A-Za-z0-9]*)\}\}/g,(_,key)=>result.variables[key]??'');}
 const api=Object.freeze({types:TYPES,hasTokens,normalize,read,evaluate,format,airRecords,alertRecords,areaName,stamp,fresh,sourceUrls:Object.freeze(sources)});global.ShiGaiLivingEventData=api;if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

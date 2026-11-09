@@ -1732,8 +1732,8 @@
           "layouts": {
             "landscape": {
               "anchor": "above",
-              "x": 1.075,
-              "y": 29.386,
+              "x": 0.353,
+              "y": 10.777,
               "scale": 0.319,
               "rotation": 0,
               "fontSize": 48,
@@ -1759,50 +1759,6 @@
               "name": "企鵝組",
               "enabled": true,
               "sourceObjectId": "object-local-1793586033078",
-              "minSeconds": 60,
-              "maxSeconds": 60,
-              "weight": 1,
-              "periods": [],
-              "eventIds": [
-                "binding-f67bca21-8326-4241-a956-b90cf15c57e2",
-                "binding-b6de059b-1836-4971-8d5f-4b588f619a99",
-                "binding-5bd0a87d-271d-4be4-857e-b8586b0144f4",
-                "binding-b75c9f75-2d8d-402e-bdd1-a24aed8af5e4",
-                "binding-7e1ad9cf-cef8-4998-a2f3-31d1662f36b4",
-                "binding-02aa7f90-1fa8-4118-a17c-00785c0bf0a8",
-                "binding-f0bff040-9127-4f79-85f8-0dc2f98db719",
-                "binding-ac6aeef0-3e59-4efd-bb12-4cd1d3026982",
-                "binding-8579d1a6-2fd6-4ad8-86d7-583fab7fab09",
-                "binding-a4527d64-097f-488b-a80a-60d8f8727a76",
-                "binding-3dbd38ad-a6a2-4985-ad4a-9b12a4bb80f0"
-              ]
-            },
-            {
-              "placementMode": "scene",
-              "transition": "fade",
-              "id": "behavior-adf39744-e36c-4901-811f-3ae422b42c8c",
-              "name": "企鵝",
-              "enabled": true,
-              "sourceObjectId": "object-local-1793586039278",
-              "minSeconds": 60,
-              "maxSeconds": 60,
-              "weight": 1,
-              "periods": [],
-              "eventIds": []
-            },
-            {
-              "anchor": {
-                "position": {
-                  "x": 0.397,
-                  "y": 0.648
-                },
-                "scale": 0.327,
-                "rotation": 0
-              },
-              "id": "behavior-3dc4df1d-b2c1-492a-8f7b-78e9002fc922",
-              "name": "Take Pictures Photo Sticker by ShiGai",
-              "enabled": true,
-              "sourceObjectId": "object-local-1793638098192",
               "minSeconds": 60,
               "maxSeconds": 60,
               "weight": 1,
@@ -1948,227 +1904,6 @@
         "metadata": {
           "behaviorSource": true
         }
-      },
-      {
-        "id": "object-local-1793586039278",
-        "order": 3,
-        "type": "prop",
-        "name": "企鵝 · 動作來源",
-        "media": {
-          "src": "assets/scenes/media/scene-1786444494332-object-local-1788711281803-1792592519571.gif",
-          "format": "gif",
-          "alt": ""
-        },
-        "position": {
-          "x": 0.394,
-          "y": 0.655
-        },
-        "scale": 0.474,
-        "rotation": 0,
-        "flipX": false,
-        "flipY": false,
-        "layouts": {
-          "landscape": {
-            "position": {
-              "x": 0.394,
-              "y": 0.655
-            },
-            "scale": 0.474,
-            "rotation": 0
-          }
-        },
-        "layer": "mid",
-        "visible": false,
-        "locked": false,
-        "text": "Hello",
-        "textBubble": {
-          "align": "auto",
-          "lineHeight": 1.45,
-          "letterSpacing": 0,
-          "enabled": true,
-          "color": "#34271f",
-          "backgroundColor": "#fffdf5",
-          "fontWeight": 600,
-          "radius": 24,
-          "layouts": {
-            "landscape": {
-              "anchor": "above",
-              "x": -5.278,
-              "y": 56.044,
-              "scale": 1.005,
-              "rotation": 0,
-              "fontSize": 45,
-              "maxWidth": 480
-            }
-          },
-          "animation": {
-            "type": "keyframes",
-            "enabled": true,
-            "duration": 20,
-            "loop": true,
-            "easing": "linear",
-            "keyframes": {
-              "landscape": []
-            },
-            "channels": {
-              "landscape": {
-                "opacity": {
-                  "enabled": true,
-                  "keyframes": [
-                    {
-                      "offset": 0,
-                      "value": 1
-                    },
-                    {
-                      "offset": 0.15,
-                      "value": 0
-                    },
-                    {
-                      "offset": 0.397,
-                      "value": 0
-                    },
-                    {
-                      "offset": 0.52,
-                      "value": 1
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "interaction": {
-          "enabled": false,
-          "cursor": "default",
-          "action": "none",
-          "target": "",
-          "openMode": "same-tab"
-        },
-        "animation": {
-          "type": "keyframes",
-          "enabled": true,
-          "duration": 20,
-          "loop": true,
-          "easing": "linear",
-          "keyframes": {
-            "landscape": []
-          },
-          "channels": {
-            "landscape": {
-              "scale": {
-                "enabled": true,
-                "keyframes": [
-                  {
-                    "offset": 0,
-                    "value": 0.865
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "scroll": {
-          "speed": 1,
-          "parallax": 0,
-          "fade": false,
-          "scale": false,
-          "trigger": ""
-        },
-        "language": {
-          "defaultLocale": "zh-Hant",
-          "translations": {}
-        },
-        "metadata": {
-          "behaviorSource": true
-        }
-      },
-      {
-        "id": "object-local-1793638098192",
-        "order": 2,
-        "type": "character",
-        "name": "Take Pictures Photo Sticker by ShiGai · 動作來源",
-        "media": {
-          "src": "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1793638098192-1793638226782.gif",
-          "format": "gif",
-          "alt": ""
-        },
-        "position": {
-          "x": 0.397,
-          "y": 0.648
-        },
-        "scale": 0.503,
-        "rotation": 0,
-        "flipX": false,
-        "flipY": false,
-        "layouts": {
-          "landscape": {
-            "position": {
-              "x": 0.397,
-              "y": 0.648
-            },
-            "scale": 0.503,
-            "rotation": 0
-          }
-        },
-        "layer": "mid",
-        "visible": false,
-        "locked": false,
-        "text": "",
-        "textBubble": {
-          "fixedWidth": true,
-          "align": "center",
-          "lineHeight": 1.45,
-          "letterSpacing": 0,
-          "enabled": false,
-          "color": "#34271f",
-          "backgroundColor": "#fffdf5",
-          "fontWeight": 600,
-          "radius": 24,
-          "layouts": {
-            "landscape": {
-              "anchor": "above",
-              "x": 3.904,
-              "y": 65.282,
-              "scale": 0.319,
-              "rotation": 0,
-              "fontSize": 48,
-              "maxWidth": 695.63
-            }
-          }
-        },
-        "interaction": {
-          "enabled": false,
-          "cursor": "default",
-          "action": "none",
-          "target": "",
-          "openMode": "same-tab"
-        },
-        "animation": {
-          "type": "",
-          "enabled": false,
-          "position": {
-            "x": 0,
-            "y": 0
-          },
-          "rotation": 0,
-          "duration": 3,
-          "mode": "yoyo",
-          "easing": "ease-in-out"
-        },
-        "scroll": {
-          "speed": 1,
-          "parallax": 0,
-          "fade": false,
-          "scale": false,
-          "trigger": ""
-        },
-        "language": {
-          "defaultLocale": "zh-Hant",
-          "translations": {}
-        },
-        "metadata": {
-          "behaviorSource": true
-        }
       }
     ],
     "livingEvents": [
@@ -2220,7 +1955,48 @@
         "priority": 0,
         "objectId": "object-local-1792949868469",
         "mediaObjectId": "",
-        "enabled": true
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-1w2u0qz-0": {
+            "x": 0.191,
+            "y": 20.126,
+            "scale": 0.361,
+            "fontSize": 48,
+            "maxWidth": 217.93,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "auto",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-lines-86kxv3-0": {
+            "x": 0.191,
+            "y": 20.126,
+            "scale": 0.509,
+            "fontSize": 48,
+            "maxWidth": 180.182,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "auto",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-1g4ca2n-0": {
+            "x": 0.191,
+            "y": 20.126,
+            "scale": 0.381,
+            "fontSize": 48,
+            "maxWidth": 279.118,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "auto",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
       },
       {
         "id": "binding-f67bca21-8326-4241-a956-b90cf15c57e2",
@@ -2748,7 +2524,7 @@
         "start": "00:00",
         "end": "00:00",
         "lines": [
-          "氣象特報：{{alertTitle}}。"
+          "{{alertArea}}：{{alertTitle}}。"
         ],
         "replies": [
           "你有感覺到有風嗎？"
@@ -2763,10 +2539,10 @@
         "dialogueStyles": {
           "line-lines-1ag0bu2-0": {
             "x": 6.929,
-            "y": 35.998,
+            "y": 28.789,
             "scale": 0.319,
             "fontSize": 48,
-            "maxWidth": 555.211,
+            "maxWidth": 624.386,
             "rotation": 0,
             "lineHeight": 1.45,
             "minHeight": 0,
@@ -2933,6 +2709,6 @@
       "composition": "shared-landscape-v1"
     },
     "createdAt": "2026-10-25T00:00:00.000Z",
-    "updatedAt": "2026-11-08T17:07:36.582Z"
+    "updatedAt": "2026-11-08T17:34:31.632Z"
   }
 ]

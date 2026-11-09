@@ -52072,5 +52072,389 @@
         "error": ""
       }
     }
+  },
+  {
+    "id": "SG-001099",
+    "title": "嗨",
+    "publishDate": "2019-02-13",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1550059025_1978350788036016430_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001099/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001099/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=hDACJ-IylHY",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-09T16:22:47.567Z",
+    "updatedAt": "2026-11-09T16:23:10.180Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "20e2a4d17a3194e1bf8a1c8af6650d8fe105a6e0fd52b6f4a1baa65a984bf608",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001099/primary-v1.webm",
+          "poster": "assets/published/works/SG-001099/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001100",
+    "title": "來一杯",
+    "publishDate": "2019-02-14",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1550143906_1979070818977833378_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001100/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001100/poster-v1.webp",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-09T16:31:37.675Z",
+    "updatedAt": "2026-11-09T16:31:37.676Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "5508a7ad9bced4275734d925fffe93e4990d856a90250090ad71e16710b2817a",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001100/primary-v1.webm",
+          "poster": "assets/published/works/SG-001100/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001101",
+    "title": "Dance",
+    "publishDate": "2019-02-15",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1550231421_1979806105508786247_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001101/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001101/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=UPeaoJDEFss",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-09T16:33:08.601Z",
+    "updatedAt": "2026-11-09T16:33:08.601Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "735a62598ce1e8747c5909632848d779ce38558ca325a54ea39ab8cb357962c1",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001101/primary-v1.webm",
+          "poster": "assets/published/works/SG-001101/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001102",
+    "title": "UM....",
+    "publishDate": "2019-02-18",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1550491875_1981990895100133628_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001102/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001102/poster-v1.webp",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-09T16:34:53.147Z",
+    "updatedAt": "2026-11-09T16:34:53.147Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "efd89734e36c071cb26b59324967183dd1a65613cf0102fd968c94765eed1718",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001102/primary-v1.webm",
+          "poster": "assets/published/works/SG-001102/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001103",
+    "title": "元宵節快樂",
+    "publishDate": "2019-02-19",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1550571437_1982658257352871542_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝",
+      "豬",
+      "雞",
+      "Shi-Gai"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001103/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001103/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=ngtHcqTVO0s",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-09T16:36:49.933Z",
+    "updatedAt": "2026-11-09T16:36:49.933Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "90f0f30a665aacea023e96a6463efae9b355d7347b9377ced055e05c1992297a",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001103/primary-v1.webm",
+          "poster": "assets/published/works/SG-001103/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001104",
+    "title": "電療",
+    "publishDate": "2019-02-20",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1550672493_1983505411088594572_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001104/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001104/poster-v1.webp",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-09T16:37:59.633Z",
+    "updatedAt": "2026-11-09T16:37:59.633Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "8fecd3235bbc1afb55117805cbbae1901f13db4a6c37d90f714b350181f8fb47",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001104/primary-v1.webm",
+          "poster": "assets/published/works/SG-001104/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001105",
+    "title": "落雨",
+    "publishDate": "2019-02-21",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1550749696_1984150835227094927_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001105/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001105/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=oV49z_zdXzE",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-09T16:39:16.764Z",
+    "updatedAt": "2026-11-09T16:39:16.764Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "c42c2794e1501c6b3c1c44d5a7a7e2bee36127c438c15025ad5a66c195621bd9",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001105/primary-v1.webm",
+          "poster": "assets/published/works/SG-001105/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   }
 ]
