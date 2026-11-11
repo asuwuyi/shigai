@@ -423,45 +423,9 @@
       if (!game) throw new Error("Habit interaction unavailable");
       section.dataset.contentId = game.id;
       const panel = document.createElement("div"); panel.className = "home-game-embed"; panel.dataset.gameId = game.id;
-      const intro = document.createElement("p"); intro.className = "home-game-embed-intro"; intro.textContent = game.description || copy.intro;
-      const frameStage = document.createElement("div"); frameStage.className = "home-game-frame-stage";
-      const frame = document.createElement("iframe"); frame.className = "home-game-frame"; const gameSource = `${game.url}${game.url.includes("?") ? "&" : "?"}embed=home`;
-      const loadGame = () => { if (!frame.hasAttribute('src')) frame.src = gameSource; };
-      if ('IntersectionObserver' in window) {
-        const gameLoader = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) { loadGame(); gameLoader.disconnect(); } }, { rootMargin: '400px' });
-        gameLoader.observe(frame);
-      } else loadGame(); frame.title = `${game.name || game.id} 完整遊戲`; frame.loading = "lazy"; frame.allow = "fullscreen";
-      let gameStarted = false;
-      window.addEventListener("message", event => {
-        if (event.origin !== location.origin || event.source !== frame.contentWindow || event.data?.type !== "shi-gai:game-analytics") return;
-        if (window.ShiGaiAnalytics?.isEnabled?.() === false) return;
-        const name = event.data.event;
-        if (!["game_start", "game_draw", "game_interaction", "game_complete"].includes(name)) return;
-        if (name === "game_start") { if (gameStarted) return; gameStarted = true; }
-        const supplied = event.data.parameters || {};
-        const safe = Object.fromEntries(["action", "draw_count", "duration_ms", "level_id"].filter(key => ["string", "number"].includes(typeof supplied[key])).map(key => [key, supplied[key]]));
-        track(name, { ...safe, game_id: game.id, section_id: config.id, source: "home_inline" });
-      });
-      if (game.id === "spot-difference") {
-        frameStage.classList.add("is-awaiting-activation");
-        const activate = document.createElement("button"); activate.className = "home-game-activate"; activate.type = "button";
-        const activateLabel = document.createElement("span"); activateLabel.textContent = "開始遊玩找找不同 →"; activate.append(activateLabel);
-        activate.addEventListener("click", () => {
-          frameStage.classList.remove("is-awaiting-activation");
-          activate.remove();
-          loadGame();
-          const startGame = () => frame.contentWindow?.postMessage({ type: "shi-gai:start-embedded-game" }, location.origin);
-          if (frame.dataset.gameLoaded === 'true') startGame(); else frame.addEventListener('load', startGame, { once: true });
-          track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: game.id, action: "activate_inline_game" });
-        });
-        frameStage.append(frame, activate);
-      } else frameStage.append(frame);
-      const controls = document.createElement("div"); controls.className = "home-game-embed-controls";
-      const full = document.createElement("a"); full.className = "home-game-full"; full.href = game.url; full.textContent = copy.actionLabel;
-      window.ShiGaiVisualText?.apply(full, copy.actionLabel, copy.visuals?.actionLabel);
-      frame.addEventListener("load", () => { if (!frame.hasAttribute('src')) return; frame.dataset.gameLoaded = 'true'; track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: game.id, action: "load_original_game_inline" }); });
-      full.addEventListener("click", () => track(analyticsEvents.sectionInteraction, { section_id: config.id, content_id: game.id, action: "open_full_game" }));
-      controls.append(full); panel.append(intro, frameStage, controls); grid.append(panel);
+      grid.append(panel);
+      const player=window.ShiGaiHomeGamePlayer.mount({games,index:games.indexOf(game),panel,actionLabel:copy.actionLabel&&copy.actionLabel!=="放大遊玩 →"?copy.actionLabel:"開始玩",onSelect:selected=>{section.dataset.contentId=selected.id;},track:(action,selected,parameters={})=>{const event=["game_start","game_draw","game_interaction","game_complete"].includes(action)?action:analyticsEvents.sectionInteraction;track(event,{...parameters,game_id:selected.id,section_id:config.id,content_id:selected.id,action,source:"home_overlay"});}});
+      window.ShiGaiVisualText?.apply(player.start,player.start.textContent,copy.visuals?.actionLabel);
     } catch {
       const empty = document.createElement("p"); empty.className = "home-living-empty"; empty.textContent = "今天的互動正在準備，仍可前往遊戲室看看。"; grid.append(empty);
     }

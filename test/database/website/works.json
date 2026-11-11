@@ -52456,53 +52456,5 @@
         "error": ""
       }
     }
-  },
-  {
-    "id": "SG-001109",
-    "title": "我的測試",
-    "publishDate": "2026-11-09",
-    "createDate": "2026-11-09",
-    "source": "original",
-    "originalFilename": "SG-001109.png",
-    "type": "image",
-    "favorite": false,
-    "status": "published",
-    "characters": [],
-    "category": "",
-    "tags": [],
-    "description": "",
-    "journal": {
-      "enabled": true,
-      "text": "我測試用手機發文"
-    },
-    "file": "assets/published/works/SG-001109/primary-v1.webp",
-    "thumbnail": "",
-    "externalMedia": [],
-    "publishingStatus": {
-      "website": "published",
-      "youtube": "pending",
-      "instagram": "pending",
-      "threads": "pending"
-    },
-    "frame": {
-      "id": "auto",
-      "fit": "contain",
-      "scale": 1,
-      "positionX": 50,
-      "positionY": 50
-    },
-    "createdAt": "2026-11-10T11:48:17.310Z",
-    "updatedAt": "2026-11-10T11:48:17.310Z",
-    "media": {
-      "optimized": {
-        "status": "ready",
-        "sourceHash": "39bf2ad760a2a9cbf6b7d4d2e1b2d8f1f83e561b5325cdac304984fb21fda2e7",
-        "presetVersion": 1,
-        "outputs": {
-          "primary": "assets/published/works/SG-001109/primary-v1.webp"
-        },
-        "error": ""
-      }
-    }
   }
 ]

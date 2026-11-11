@@ -28,7 +28,7 @@
 
   const nativeOpen = window.open.bind(window);
   window.open = (url, target, features = "") => {
-    if (/^\.\.\/\.\.\/index\.html(?:[?#].*)?$/.test(String(url || ""))) { location.assign("../../games.html"); return window; }
+    if (/^\.\.\/\.\.\/index\.html(?:[?#].*)?$/.test(String(url || ""))) { if(embeddedMode==="home"){parent.postMessage({type:"shi-gai:close-embedded-game"},location.origin);return window;} location.assign("../../games.html"); return window; }
     if (target === "_blank") { const opened = nativeOpen(url, target, [features, "noopener", "noreferrer"].filter(Boolean).join(",")); if (opened) opened.opener = null; return opened; }
     return nativeOpen(url, target, features);
   };

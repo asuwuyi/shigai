@@ -2,6 +2,7 @@
 const sitePage = document.body.dataset.page || "home";
 const siteWebsiteRoot = new URL("../../", document.currentScript.src);
 const siteEmbedded = window.parent !== window && new URLSearchParams(location.search).get("embed") === "home";
+if(siteEmbedded){document.documentElement.dataset.gameEmbed='home';const sheet=document.createElement('link');sheet.rel='stylesheet';sheet.href=new URL('assets/css/home-game-embedded.css?v=home-player-20261111',siteWebsiteRoot).href;document.head.append(sheet);}
 const siteHeader = siteEmbedded ? null : document.querySelector("[data-site-header]");
 const siteFooter = document.querySelector("[data-site-footer]");
 const siteReviewMode = new URLSearchParams(window.location.search).get("review") === "1";

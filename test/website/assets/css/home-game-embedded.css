@@ -1,0 +1,7 @@
+/* Only loaded in the homepage player. Standalone game pages retain their navigation. */
+html[data-game-embed="home"] :is(.back-link,.game-back,.lottery-back,.game-navigation .back,a[href$="games.html"],a[href$="index.html"],[data-site-header],[data-site-footer]){display:none!important}
+html[data-game-embed="home"] body[data-standalone-game] :is(.arcade-room,.wheel-room,.memory-room,.mines-room)>header{padding-right:0;min-height:0}
+html[data-game-embed="home"] body.game-compact main>header{display:flex;justify-content:flex-end;gap:8px;min-height:44px;padding:0;margin:0 0 8px}
+html[data-game-embed="home"] body.game-compact main>header h1{flex:1;min-width:0}
+html[data-game-embed="home"] #gameHelpButton{display:none!important}
+html[data-game-embed="home"] #gameOptionsButton{flex:none;min-width:48px}
