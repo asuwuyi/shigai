@@ -410,6 +410,8 @@
   });
 
   registry.set("habit-recommendation", async (config) => {
+    const settings=await window.ShiGaiWebsiteSettings;
+    if(settings?.websiteBrand?.pages?.games===false)return null;
     const copy = await homeCopy(config.id);
     const section = sectionShell(config, copy, "games.html");
     const grid = document.createElement("div"); grid.className = "home-habit-grid"; section.append(grid);
@@ -424,7 +426,7 @@
       section.dataset.contentId = game.id;
       const panel = document.createElement("div"); panel.className = "home-game-embed"; panel.dataset.gameId = game.id;
       grid.append(panel);
-      const player=window.ShiGaiHomeGamePlayer.mount({games,index:games.indexOf(game),panel,actionLabel:copy.actionLabel&&copy.actionLabel!=="放大遊玩 →"?copy.actionLabel:"開始玩",onSelect:selected=>{section.dataset.contentId=selected.id;},track:(action,selected,parameters={})=>{const event=["game_start","game_draw","game_interaction","game_complete"].includes(action)?action:analyticsEvents.sectionInteraction;track(event,{...parameters,game_id:selected.id,section_id:config.id,content_id:selected.id,action,source:"home_overlay"});}});
+      const player=window.ShiGaiHomeGamePlayer.mount({games,index:games.indexOf(game),panel,actionLabel:copy.actionLabel&&copy.actionLabel!=="放大遊玩 →"?copy.actionLabel:"開始玩",onSelect:selected=>{section.dataset.contentId=selected.id;},track:(action,selected,parameters={})=>{const event=["game_start","game_draw","game_interaction","game_complete"].includes(action)?action:analyticsEvents.sectionInteraction;track(event,{...parameters,game_id:selected.id,section_id:config.id,content_id:selected.id,action:parameters.action||action,source:"home_overlay"});}});
       window.ShiGaiVisualText?.apply(player.start,player.start.textContent,copy.visuals?.actionLabel);
     } catch {
       const empty = document.createElement("p"); empty.className = "home-living-empty"; empty.textContent = "今天的互動正在準備，仍可前往遊戲室看看。"; grid.append(empty);

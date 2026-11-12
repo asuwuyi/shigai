@@ -52456,5 +52456,583 @@
         "error": ""
       }
     }
+  },
+  {
+    "id": "SG-001110",
+    "title": "明天要上班上課！",
+    "publishDate": "2019-02-22",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1550841163_1984921111481103741_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/works/videos/SG-001110-1794412431709.mp4",
+    "thumbnail": "",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=C47YRxpr6ug",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-11T15:51:25.690Z",
+    "updatedAt": "2026-11-11T15:53:51.710Z"
+  },
+  {
+    "id": "SG-001111",
+    "title": "雞排",
+    "publishDate": "2019-02-24",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1551001239_1986264819078191814_16821.jpg",
+    "type": "image",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "插畫",
+    "tags": [],
+    "description": "要剪嗎？要辣嗎？\n裝一起嗎？\n\n賣身了？）",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001111/primary-v1.webp",
+    "thumbnail": "",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-11T15:53:29.236Z",
+    "updatedAt": "2026-11-11T15:53:29.237Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "a2e688ab35189c37376a507370379e85043c4c0cc4136c1dfc070e8fb500ad14",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001111/primary-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001112",
+    "title": "倒數兩天！ 你懂的XDD",
+    "publishDate": "2019-02-25",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "",
+    "type": "youtube",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "豬"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "",
+    "thumbnail": "",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=E2hzXifSzto",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-11T15:58:39.890Z",
+    "updatedAt": "2026-11-11T15:58:39.890Z"
+  },
+  {
+    "id": "SG-001113",
+    "title": "[奇怪王國的奇怪生物]",
+    "publishDate": "2019-02-26",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1551119176_1987254087527263244_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "它們總是在深夜的時候出現..\n只要你還沒睡..\n你就會看到它們..",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001113/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001113/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=Vyy85F8Ryw4",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-11T16:00:31.150Z",
+    "updatedAt": "2026-11-11T16:00:31.150Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "dd6a7f570b9546d8429e3f1db7e0153a617172fc69d0d7bc79e9cad036e57297",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001113/primary-v1.webm",
+          "poster": "assets/published/works/SG-001113/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001114",
+    "title": "沒回應就是最好的回應嗎？ 你覺得呢？",
+    "publishDate": "2019-02-26",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1551183183_1987789551065724359_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "企鵝"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001114/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001114/poster-v1.webp",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-11T16:02:29.082Z",
+    "updatedAt": "2026-11-11T16:02:29.082Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "61d92a581e459592d3d69613736ee47c5c32008a4094f1c5681ff70dd3322c24",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001114/primary-v1.webm",
+          "poster": "assets/published/works/SG-001114/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001115",
+    "title": "[奇怪王國的奇怪生物]",
+    "publishDate": "2019-02-27",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1551208070_1987992923052140394_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "這也許是王國裡的坐騎吧！？",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001115/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001115/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=lbClaMShDSg",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-11T16:03:45.109Z",
+    "updatedAt": "2026-11-11T16:03:45.109Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "8068d91c6a757bc4197ba978ce750c23f8af883511ad6003669adc118ec2b180",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001115/primary-v1.webm",
+          "poster": "assets/published/works/SG-001115/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001116",
+    "title": "你覺得你手機打字快嗎？",
+    "publishDate": "2019-02-27",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1551273333_1988529304178274907_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "雞"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "你覺得哪種方式最快？ 用中指x1 姆指x1 姆指x2 還有其他的方式嗎？",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001116/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001116/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=_1L3itYP2G8",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-11T16:05:21.553Z",
+    "updatedAt": "2026-11-11T16:05:21.553Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "602de037989700044c76433ac7aedc782775f6aafde45ff39fff616559edd8a3",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001116/primary-v1.webm",
+          "poster": "assets/published/works/SG-001116/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001117",
+    "title": "[奇怪王國的奇怪生物]",
+    "publishDate": "2019-02-28",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1551299115_1988762175921775035_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "他們總是做些奇怪的動作\n你遇見過他們其中ㄧ位嗎？",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001117/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001117/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=tfhAaSckG0Q",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-11T16:07:27.532Z",
+    "updatedAt": "2026-11-11T16:07:27.532Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "44c0ff6d3059a7e3c1accf4e0eb90c1a70f2ddfa9ef564d906a167fc086a2d6e",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001117/primary-v1.webm",
+          "poster": "assets/published/works/SG-001117/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001118",
+    "title": "[奇怪王國的奇怪生物]",
+    "publishDate": "2019-03-01",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1551382291_1989454592169149723_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "好像有點太頻繁出現了！\n這王國好像出了什麼事？",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001118/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001118/poster-v1.webp",
+    "externalMedia": [
+      {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/watch?v=CnyabzCQiJc",
+        "label": "YouTube"
+      }
+    ],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-11T16:08:51.362Z",
+    "updatedAt": "2026-11-11T16:08:51.362Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "724a1bf9be143524f6f865f55db846231017c9286ae8f4bde2d19275b5086c9f",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001118/primary-v1.webm",
+          "poster": "assets/published/works/SG-001118/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001119",
+    "title": "[奇怪王國的奇怪生物]",
+    "publishDate": "2019-03-02",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1551475989_1990243505636858181_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "nobody"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001119/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001119/poster-v1.webp",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-11T16:10:19.679Z",
+    "updatedAt": "2026-11-11T16:10:19.679Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "68e63eae2fd653f5c91722dd470bb2e7872271aa6687fd469ed4116c760d899d",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001119/primary-v1.webm",
+          "poster": "assets/published/works/SG-001119/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
+  },
+  {
+    "id": "SG-001120",
+    "title": "還有一天好天氣！",
+    "publishDate": "2019-03-04",
+    "createDate": "",
+    "source": "original",
+    "originalFilename": "shigaishigai_1551709790_1992204917888121097_16821.mp4",
+    "type": "video",
+    "favorite": false,
+    "status": "published",
+    "characters": [
+      "Shi-Gai"
+    ],
+    "category": "動畫",
+    "tags": [],
+    "description": "",
+    "journal": {
+      "enabled": false,
+      "text": ""
+    },
+    "file": "assets/published/works/SG-001120/primary-v1.webm",
+    "thumbnail": "assets/published/works/SG-001120/poster-v1.webp",
+    "externalMedia": [],
+    "publishingStatus": {
+      "website": "published",
+      "youtube": "pending",
+      "instagram": "pending",
+      "threads": "pending"
+    },
+    "frame": {
+      "id": "auto",
+      "fit": "contain",
+      "scale": 1,
+      "positionX": 50,
+      "positionY": 50
+    },
+    "createdAt": "2026-11-11T16:11:12.604Z",
+    "updatedAt": "2026-11-11T16:11:12.604Z",
+    "media": {
+      "optimized": {
+        "status": "ready",
+        "sourceHash": "6f7b17d42a48df757adb48ec4b95d74a31e8562c8c1e7e32a92f06c36f0d710f",
+        "presetVersion": 1,
+        "outputs": {
+          "primary": "assets/published/works/SG-001120/primary-v1.webm",
+          "poster": "assets/published/works/SG-001120/poster-v1.webp"
+        },
+        "error": ""
+      }
+    }
   }
 ]

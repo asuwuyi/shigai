@@ -1,6 +1,8 @@
 [
   {
     "id": "lottery",
+    "kind": "tool",
+    "releaseScope": "production",
     "name": "企鵝樂透號碼產生器",
     "description": "想買樂透，卻不知道要選哪幾個號碼嗎?\n就由企鵝來幫你選吧",
     "mark": "✦",
@@ -8,11 +10,12 @@
     "status": "published",
     "url": "games/lottery/",
     "order": 1,
-    "visible": true,
-    "kind": "tool"
+    "visible": true
   },
   {
     "id": "goddess",
+    "kind": "game",
+    "releaseScope": "production",
     "name": "企鵝女神的告誡",
     "description": "注意你的選項，不用在意他的告誡XDDD",
     "mark": "♓",
@@ -24,6 +27,8 @@
   },
   {
     "id": "spot-difference",
+    "kind": "game",
+    "releaseScope": "test",
     "name": "找找不同",
     "description": "在兩張圖之間，找出藏起來的小小變化。",
     "mark": "◎",
@@ -34,21 +39,12 @@
     "visible": true
   },
   {
-    "id": "wheel",
-    "name": "選擇轉盤",
-    "description": "輸入你的選項，按住加速或用手撥動，讓轉盤慢慢停下。",
-    "mark": "◉",
-    "icon": "assets/games/icons/wheel-demo.svg",
-    "status": "published",
-    "url": "games/wheel/",
-    "order": 7,
-    "visible": true,
-    "kind": "tool",
     "play": {
       "version": 1,
       "config": {
         "pointer": "top",
         "centerImage": "",
+        "pointerImage": "",
         "options": [
           "咖哩飯",
           "牛肉麵",
@@ -87,23 +83,32 @@
           "恢復中心圖案": "恢復中心圖案",
           "好，再轉一次": "好，再轉一次"
         },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
         "instructions": "輸入選項後套用，按住按鈕加速，或直接用手撥動轉盤；放開後會慢慢停下。箭頭可沿外圈拖動，轉動中鎖定。",
         "backgroundImage": "",
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "wheel",
+    "kind": "tool",
+    "releaseScope": "test",
+    "name": "選擇轉盤",
+    "description": "輸入你的選項，按住加速或用手撥動，讓轉盤慢慢停下。",
+    "mark": "◉",
+    "icon": "assets/games/icons/wheel-demo.svg",
+    "status": "published",
+    "url": "games/wheel/",
+    "order": 7,
+    "visible": true
   },
   {
-    "id": "minesweeper",
-    "name": "踩地雷",
-    "description": "用數字找出周圍地雷，從小棋盤一路挑戰 60 關。",
-    "mark": "✳",
-    "icon": "assets/games/icons/minesweeper-demo.svg",
-    "status": "published",
-    "url": "games/minesweeper/",
-    "order": 8,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -495,23 +500,32 @@
           "再試一次": "再試一次",
           "查看棋盤": "查看棋盤"
         },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
         "instructions": "翻開安全格，數字代表周圍八格的地雷數。手機可切換翻格／插旗，或長按插旗；第一格及附近不會有地雷。",
         "backgroundImage": "",
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "minesweeper",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "踩地雷",
+    "description": "用數字找出周圍地雷，從小棋盤一路挑戰 60 關。",
+    "mark": "✳",
+    "icon": "assets/games/icons/minesweeper-demo.svg",
+    "status": "published",
+    "url": "games/minesweeper/",
+    "order": 8,
+    "visible": true
   },
   {
-    "id": "memory",
-    "name": "記憶翻牌",
-    "description": "翻開兩張牌，找出相同圖案。24關，用時間與次數挑戰自己的紀錄。",
-    "mark": "▧",
-    "icon": "assets/games/icons/memory-demo.svg",
-    "status": "published",
-    "url": "games/memory/",
-    "order": 9,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -750,24 +764,32 @@
           "查看卡牌": "查看卡牌",
           "繼續": "繼續"
         },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
         "instructions": "翻開兩張牌，找出相同作品。全部配對即可過關，時間及翻牌次數決定星等；超時仍可完成。",
         "backgroundImage": "",
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "memory",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "記憶翻牌",
+    "description": "翻開兩張牌，找出相同圖案。24關，用時間與次數挑戰自己的紀錄。",
+    "mark": "▧",
+    "icon": "assets/games/icons/memory-demo.svg",
+    "status": "published",
+    "url": "games/memory/",
+    "order": 9,
+    "visible": true
   },
   {
-    "id": "catch",
-    "kind": "game",
-    "name": "企鵝接東西",
-    "description": "左右移動，接住食物、避開石頭。",
-    "mark": "♧",
-    "icon": "assets/games/icons/catch-demo.svg",
-    "status": "published",
-    "url": "games/catch/",
-    "order": 10,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -883,24 +905,32 @@
           "查看畫面": "查看畫面",
           "繼續": "繼續"
         },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
         "instructions": "拖動角色左右移動，或按左右按鈕／方向鍵。接到食物得分；碰到障礙或漏接食物扣一顆心，集滿目標即可過關。",
         "backgroundImage": "",
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "catch",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "企鵝接東西",
+    "description": "左右移動，接住食物、避開石頭。",
+    "mark": "♧",
+    "icon": "assets/games/icons/catch-demo.svg",
+    "status": "published",
+    "url": "games/catch/",
+    "order": 10,
+    "visible": true
   },
   {
-    "id": "puzzle",
-    "kind": "game",
-    "name": "作品拼圖",
-    "description": "拖動或點選兩塊交換，把作品拼回原樣。",
-    "mark": "▦",
-    "icon": "assets/games/icons/puzzle-demo.svg",
-    "status": "published",
-    "url": "games/puzzle/",
-    "order": 11,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -1029,24 +1059,32 @@
           "查看畫面": "查看畫面",
           "繼續": "繼續"
         },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
         "instructions": "拖動或依序點選兩塊交換，依線條與色塊拼回原圖。相同純色留白可互換，原圖參考可展開。",
         "backgroundImage": "",
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "puzzle",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "作品拼圖",
+    "description": "拖動或點選兩塊交換，把作品拼回原樣。",
+    "mark": "▦",
+    "icon": "assets/games/icons/puzzle-demo.svg",
+    "status": "published",
+    "url": "games/puzzle/",
+    "order": 11,
+    "visible": true
   },
   {
-    "id": "sokoban",
-    "kind": "game",
-    "name": "角色推箱子",
-    "description": "把所有箱子推到圓點上；走錯可退一步。",
-    "mark": "▣",
-    "icon": "assets/games/icons/sokoban-demo.svg",
-    "status": "published",
-    "url": "games/sokoban/",
-    "order": 12,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -1224,24 +1262,32 @@
           "查看畫面": "查看畫面",
           "繼續": "繼續"
         },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
         "instructions": "用方向鍵、滑動或下方按鈕移動角色。箱子只能推不能拉；全部推到目標即可過關，走錯可退一步。",
         "backgroundImage": "",
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "sokoban",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "角色推箱子",
+    "description": "把所有箱子推到圓點上；走錯可退一步。",
+    "mark": "▣",
+    "icon": "assets/games/icons/sokoban-demo.svg",
+    "status": "published",
+    "url": "games/sokoban/",
+    "order": 12,
+    "visible": true
   },
   {
-    "id": "breakout",
-    "kind": "game",
-    "name": "打磚塊",
-    "description": "移動底板反彈球，清除所有磚塊。",
-    "mark": "◒",
-    "icon": "assets/games/icons/breakout-demo.svg",
-    "status": "published",
-    "url": "games/breakout/",
-    "order": 13,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -1381,24 +1427,32 @@
           "查看畫面": "查看畫面",
           "繼續": "繼續"
         },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
         "instructions": "拖動底板左右移動，或按左右按鈕／方向鍵。反彈球清除磚塊，球掉落扣一顆心；擊中底板不同位置會改變反彈方向。",
         "backgroundImage": "",
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "breakout",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "打磚塊",
+    "description": "移動底板反彈球，清除所有磚塊。",
+    "mark": "◒",
+    "icon": "assets/games/icons/breakout-demo.svg",
+    "status": "published",
+    "url": "games/breakout/",
+    "order": 13,
+    "visible": true
   },
   {
-    "id": "magnifier",
-    "kind": "game",
-    "name": "作品放大鏡",
-    "description": "看作品局部，從四張作品找出答案；提示逐步揭露，每輪20題。",
-    "mark": "⌕",
-    "icon": "assets/games/icons/magnifier-demo.svg",
-    "status": "published",
-    "url": "games/magnifier/",
-    "order": 14,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -1438,24 +1492,32 @@
           "下一題 →": "下一題 →",
           "查看答案": "查看答案"
         },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
         "instructions": "看局部線索，從四件作品選出答案。答錯可繼續，提示逐步擴大畫面，直到整張作品。",
         "backgroundImage": "",
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "magnifier",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "作品放大鏡",
+    "description": "看作品局部，從四張作品找出答案；提示逐步揭露，每輪20題。",
+    "mark": "⌕",
+    "icon": "assets/games/icons/magnifier-demo.svg",
+    "status": "published",
+    "url": "games/magnifier/",
+    "order": 14,
+    "visible": true
   },
   {
-    "id": "palette",
-    "kind": "game",
-    "name": "作品配色挑戰",
-    "description": "看作品，找出它的五種代表色。",
-    "mark": "◕",
-    "icon": "assets/games/icons/palette-demo.svg",
-    "status": "published",
-    "url": "games/palette/",
-    "order": 15,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -1493,24 +1555,32 @@
           "下一關 →": "下一關 →",
           "查看畫面": "查看畫面"
         },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
         "instructions": "觀察作品，從四組色票選出它的代表配色。答錯可繼續，提示會顯示一種代表色。",
         "backgroundImage": "",
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "palette",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "作品配色挑戰",
+    "description": "看作品，找出它的五種代表色。",
+    "mark": "◕",
+    "icon": "assets/games/icons/palette-demo.svg",
+    "status": "published",
+    "url": "games/palette/",
+    "order": 15,
+    "visible": true
   },
   {
-    "id": "missing",
-    "kind": "game",
-    "name": "哪張不見了？",
-    "description": "記住作品，再找出偷偷消失的那一張。",
-    "mark": "◌",
-    "icon": "assets/games/icons/missing-demo.svg",
-    "status": "published",
-    "url": "games/missing/",
-    "order": 16,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -1548,24 +1618,32 @@
           "下一關 →": "下一關 →",
           "查看畫面": "查看畫面"
         },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
         "instructions": "先記住畫面中的作品，等倒數結束或按「我記好了」。有一件作品會消失，從四個選項找回它；提示可再看一次。",
         "backgroundImage": "",
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "missing",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "哪張不見了？",
+    "description": "記住作品，再找出偷偷消失的那一張。",
+    "mark": "◌",
+    "icon": "assets/games/icons/missing-demo.svg",
+    "status": "published",
+    "url": "games/missing/",
+    "order": 16,
+    "visible": true
   },
   {
-    "id": "rotation",
-    "kind": "game",
-    "name": "旋轉復原",
-    "description": "點擊旋轉圖塊，讓作品回到原來的樣子。",
-    "mark": "↻",
-    "icon": "assets/games/icons/rotation-demo.svg",
-    "status": "published",
-    "url": "games/rotation/",
-    "order": 17,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -1605,16 +1683,35 @@
           "查看原圖": "查看原圖",
           "收起原圖": "收起原圖"
         },
+        "messages": {
+          "ready": "",
+          "paused": "",
+          "winTitle": "",
+          "lossTitle": "",
+          "resultText": ""
+        },
         "instructions": "每點一下圖塊就順時針轉90度，將所有有方向差異的圖塊轉正。可以查看原圖，純色及對稱區塊不要求猜不可辨識的方向。",
         "backgroundImage": "",
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "rotation",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "旋轉復原",
+    "description": "點擊旋轉圖塊，讓作品回到原來的樣子。",
+    "mark": "↻",
+    "icon": "assets/games/icons/rotation-demo.svg",
+    "status": "published",
+    "url": "games/rotation/",
+    "order": 17,
+    "visible": true
   },
   {
     "id": "odor-radar",
     "kind": "tool",
+    "releaseScope": "test",
     "name": "異味雷達",
     "description": "真實地圖、氣象署風況、環境部空品與區域預報；記錄有無異味並匯出 JSON。",
     "mark": "◎",
@@ -1625,16 +1722,6 @@
     "visible": true
   },
   {
-    "id": "vault-memory",
-    "kind": "game",
-    "name": "金庫密碼",
-    "description": "記住符號與數字，依序解鎖金庫，發現隨機珍藏作品。",
-    "mark": "◆",
-    "icon": "assets/games/icons/vault-memory.svg",
-    "status": "published",
-    "url": "games/vault-memory/",
-    "order": 19,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -1729,18 +1816,20 @@
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "vault-memory",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "金庫密碼",
+    "description": "記住符號與數字，依序解鎖金庫，發現隨機珍藏作品。",
+    "mark": "◆",
+    "icon": "assets/games/icons/vault-memory.svg",
+    "status": "published",
+    "url": "games/vault-memory/",
+    "order": 19,
+    "visible": true
   },
   {
-    "id": "fate-book",
-    "name": "命運之書",
-    "description": "答案、否定、勸退，三本書陪你換個角度想。",
-    "mark": "✦",
-    "icon": "assets/games/icons/fate-book.svg",
-    "status": "published",
-    "url": "games/fate-book/",
-    "order": 20,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -2025,18 +2114,20 @@
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "fate-book",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "命運之書",
+    "description": "答案、否定、勸退，三本書陪你換個角度想。",
+    "mark": "✦",
+    "icon": "assets/games/icons/fate-book.svg",
+    "status": "published",
+    "url": "games/fate-book/",
+    "order": 20,
+    "visible": true
   },
   {
-    "id": "fate-draw",
-    "name": "命運抽籤",
-    "description": "是否籤與運氣籤，抽一份輕鬆的小靈感。",
-    "mark": "☷",
-    "icon": "assets/games/icons/fate-draw.svg",
-    "status": "published",
-    "url": "games/fate-draw/",
-    "order": 21,
-    "visible": true,
     "play": {
       "version": 1,
       "config": {
@@ -2203,6 +2294,17 @@
         "panelImage": "",
         "buttonImage": ""
       }
-    }
+    },
+    "id": "fate-draw",
+    "kind": "game",
+    "releaseScope": "test",
+    "name": "命運抽籤",
+    "description": "是否籤與運氣籤，抽一份輕鬆的小靈感。",
+    "mark": "☷",
+    "icon": "assets/games/icons/fate-draw.svg",
+    "status": "published",
+    "url": "games/fate-draw/",
+    "order": 21,
+    "visible": true
   }
 ]

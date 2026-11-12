@@ -1,13 +1,36 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-11-11T08:25:59.501Z",
+  "releaseTarget": "test",
+  "createdAt": "2026-11-12T09:03:31.006Z",
   "entry": "website/index.html",
   "counts": {
-    "works": 1090,
-    "assets": 1241,
-    "files": 1470
+    "works": 1101,
+    "games": 18,
+    "spotDifferenceLevels": 2,
+    "assets": 1259,
+    "files": 1489
   },
-  "bytes": 166209855,
+  "bytes": 170907721,
+  "imageDelivery": [
+    {
+      "preset": "lossless-animation-v1",
+      "sourceHash": "86dcff95b380cc14d3747f2d5524882646fdd6da75f54809095e0ed6d2ae01ae",
+      "outputHash": "10185ebbcea33b722044e013ae2d5a3b87d91668f978c47f998e4fe492e297f3",
+      "sourceBytes": 316274,
+      "bytes": 91880,
+      "width": 853,
+      "height": 480,
+      "pages": 3,
+      "delay": [
+        170,
+        170,
+        170
+      ],
+      "loop": 0,
+      "source": "assets/site/brand/welcome-logo-1792404325378.gif",
+      "target": "assets/published/delivery/3a9c4ec1076ab265c6ce6a6e76251f7cee585276b8116ff6d5f715f7e64f5a51.webp"
+    }
+  ],
   "assets": [
     "assets/characters/images/character-1784239323099-1787844432065.jpg",
     "assets/characters/images/character-1784239332295-1787844438228.jpg",
@@ -41,6 +64,7 @@
     "assets/games/spot-difference/level-002/original-1788461712389-8324886c.jpg",
     "assets/games/spot-difference/ui/mascot-1788507876341-6e6b001f.png",
     "assets/published/characters/penguin/primary-v1.webp",
+    "assets/published/delivery/3a9c4ec1076ab265c6ce6a6e76251f7cee585276b8116ff6d5f715f7e64f5a51.webp",
     "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp",
     "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
     "assets/published/works/SG-000001/primary-v1.webp",
@@ -1216,6 +1240,23 @@
     "assets/published/works/SG-001104/primary-v1.webm",
     "assets/published/works/SG-001105/poster-v1.webp",
     "assets/published/works/SG-001105/primary-v1.webm",
+    "assets/published/works/SG-001111/primary-v1.webp",
+    "assets/published/works/SG-001113/poster-v1.webp",
+    "assets/published/works/SG-001113/primary-v1.webm",
+    "assets/published/works/SG-001114/poster-v1.webp",
+    "assets/published/works/SG-001114/primary-v1.webm",
+    "assets/published/works/SG-001115/poster-v1.webp",
+    "assets/published/works/SG-001115/primary-v1.webm",
+    "assets/published/works/SG-001116/poster-v1.webp",
+    "assets/published/works/SG-001116/primary-v1.webm",
+    "assets/published/works/SG-001117/poster-v1.webp",
+    "assets/published/works/SG-001117/primary-v1.webm",
+    "assets/published/works/SG-001118/poster-v1.webp",
+    "assets/published/works/SG-001118/primary-v1.webm",
+    "assets/published/works/SG-001119/poster-v1.webp",
+    "assets/published/works/SG-001119/primary-v1.webm",
+    "assets/published/works/SG-001120/poster-v1.webp",
+    "assets/published/works/SG-001120/primary-v1.webm",
     "assets/scenes/media/pack-20261025-park-plaza.webp",
     "assets/scenes/media/scene-1786549520650-object-local-1786549533424-1793034952010.gif",
     "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1792949868469-1792949898967.gif",
@@ -1241,7 +1282,6 @@
     "assets/site/brand/social-legacy/line-store.svg",
     "assets/site/brand/social-legacy/twitter.svg",
     "assets/site/brand/social-legacy/youtube.svg",
-    "assets/site/brand/welcome-logo-1792404325378.gif",
     "assets/site/brand/welcome-logo-1792404325378.webm",
     "assets/site/frames/frame-mtspj2a0-a17dbba3.png",
     "assets/site/frames/frame-mu18q41p-2d5703ae.png",
@@ -1249,6 +1289,7 @@
     "assets/site/frames/frame-mu18q43b-f9fb5e65.png",
     "assets/website/transitions/home-transition-game-17984510183c.webp",
     "assets/website/transitions/home-transition-journal-993e0884741e.webp",
-    "assets/website/transitions/home-transition-works-e8258fd1069b.webp"
+    "assets/website/transitions/home-transition-works-e8258fd1069b.webp",
+    "assets/works/videos/SG-001110-1794412431709.mp4"
   ]
 }

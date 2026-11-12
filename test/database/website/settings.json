@@ -790,7 +790,7 @@
     "welcome": {
       "enabled": true,
       "asset": "assets/site/brand/welcome-logo-1792404325378.webm",
-      "fallbackAsset": "assets/site/brand/welcome-logo-1792404325378.gif",
+      "fallbackAsset": "assets/published/delivery/3a9c4ec1076ab265c6ce6a6e76251f7cee585276b8116ff6d5f715f7e64f5a51.webp",
       "duration": 3,
       "interaction": {
         "enabled": false,
@@ -810,5 +810,9 @@
         "easing": "ease-in-out"
       }
     }
+  },
+  "release": {
+    "version": 1,
+    "target": "test"
   }
 }

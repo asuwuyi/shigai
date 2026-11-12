@@ -141,13 +141,14 @@ function applyScrollMenus() {
     const art = document.createElement("img"); art.className = "scroll-menu-art"; art.alt = ""; art.setAttribute("aria-hidden", "true");
     art.addEventListener("load", () => panel.classList.add("has-scroll-paper"));
     art.addEventListener("error", () => panel.classList.remove("has-scroll-paper"));
-    art.src = openSource;
+    // Closed navigation must not download the expanded paper during Scene loading.
     const paper = document.createElement("span"); paper.className = "scroll-menu-paper"; paper.setAttribute("aria-hidden", "true");
-    const sheet = document.createElement("img"); sheet.className = "scroll-menu-paper-art"; sheet.alt = ""; sheet.src = openSource;
+    const sheet = document.createElement("img"); sheet.className = "scroll-menu-paper-art"; sheet.alt = "";
     paper.append(sheet); panel.prepend(art, paper);
     panel.classList.add("scroll-menu-panel");
     const sync = () => {
       const open = panel.classList.contains("is-open");
+      if (open && !art.hasAttribute("src")) { art.src = openSource; sheet.src = openSource; }
       [...content.children].filter(node => node.matches("a, button")).forEach(formatBilingualMenuLabel);
       if (panel.id === "sitePrimaryNav") panel.style.setProperty("--scroll-menu-rows", String([...content.children].filter(node => node.matches("a, button") && !node.hidden).length || 6));
       button.classList.toggle("is-scroll-menu-open", open && panel.classList.contains("has-scroll-paper"));

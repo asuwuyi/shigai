@@ -425,7 +425,11 @@
         const mediaObject=scene.objects.find(o=>o.id===event.mediaObjectId);
         // The event owns its dialogue lifetime. Preserve the authored text transform
         // tracks, but do not let the original text's fade/hit track hide this reply.
-        const originalBubble=rules().normalizeTextBubble(actor.textBubble);
+        // Events are bound to the scene actor. Action sources may have their own
+        // native captions, but must not replace the event editor's default layout.
+        // Keep the active actor's media/placement/animation for its attachment point.
+        const dialogueOwner=authoredScene.objects.find(object=>object.id===actor.id)||actor;
+        const originalBubble=rules().normalizeTextBubble(dialogueOwner.textBubble);
         const bubble=event.dialogueStyle?rules().normalizeTextBubble({...originalBubble,...event.dialogueStyle,layouts:{...originalBubble.layouts,[layout]:{...originalBubble.layouts[layout],...event.dialogueStyle}},animation:{enabled:false}}):originalBubble;
         const eventBubble={...bubble,enabled:true,...(bubble.animation?{animation:{...bubble.animation,channels:Object.fromEntries(Object.entries(bubble.animation.channels||{}).map(([name,channels])=>[name,{...channels,...(channels.opacity?{opacity:{...channels.opacity,enabled:false}}:{})}]))}}:{})};
         const changed={...actor,text,textDisplay:undefined,textBubble:eventBubble,...(mediaObject?.media?.src?{media:mediaObject.media}:{})};
