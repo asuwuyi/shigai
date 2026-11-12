@@ -1,0 +1,101 @@
+[
+  {
+    "id": "character-1787842790707",
+    "name": "方塊叔",
+    "shortDescription": "",
+    "description": "",
+    "image": "assets/characters/images/character-1787842790707-1787844280998.jpg",
+    "createdAt": "2026-08-27T14:59:50.707Z",
+    "updatedAt": "2026-08-27T15:24:41.000Z"
+  },
+  {
+    "id": "penguin",
+    "name": "企鵝",
+    "createdAt": "2026-07-16T00:00:00.000Z",
+    "updatedAt": "2026-08-27T16:52:02.976Z",
+    "shortDescription": "",
+    "description": "",
+    "image": "assets/characters/images/penguin-1787844397632.jpg"
+  },
+  {
+    "id": "creator",
+    "name": "作者本人",
+    "createdAt": "2026-07-16T00:00:00.000Z",
+    "updatedAt": "2026-08-27T17:02:21.454Z",
+    "shortDescription": "",
+    "description": "",
+    "image": "assets/characters/images/creator-1787844412045.jpg"
+  },
+  {
+    "id": "fish",
+    "name": "魚",
+    "createdAt": "2026-07-16T00:00:00.000Z",
+    "updatedAt": "2026-08-28T10:01:09.318Z",
+    "shortDescription": "",
+    "description": "",
+    "image": "assets/characters/images/fish-1787911269317.jpg"
+  },
+  {
+    "id": "character-1784239338780",
+    "name": "鳥",
+    "createdAt": "2026-07-16T22:02:18.780Z",
+    "updatedAt": "2026-08-27T16:20:45.216Z",
+    "shortDescription": "",
+    "description": "",
+    "image": "assets/characters/images/character-1784239338780-1787844421540.jpg"
+  },
+  {
+    "id": "character-1784239323099",
+    "name": "熊",
+    "createdAt": "2026-07-16T22:02:03.099Z",
+    "updatedAt": "2026-08-27T16:20:47.770Z",
+    "shortDescription": "",
+    "description": "",
+    "image": "assets/characters/images/character-1784239323099-1787844432065.jpg"
+  },
+  {
+    "id": "character-1784239332295",
+    "name": "豬",
+    "createdAt": "2026-07-16T22:02:12.295Z",
+    "updatedAt": "2026-08-27T16:20:49.899Z",
+    "shortDescription": "",
+    "description": "",
+    "image": "assets/characters/images/character-1784239332295-1787844438228.jpg"
+  },
+  {
+    "id": "chicken",
+    "name": "雞",
+    "createdAt": "2026-07-16T00:00:00.000Z",
+    "updatedAt": "2026-08-27T16:20:51.902Z",
+    "shortDescription": "",
+    "description": "",
+    "image": "assets/characters/images/chicken-1787844445027.jpg"
+  },
+  {
+    "id": "character-1787833910842",
+    "name": "cat",
+    "shortDescription": "",
+    "description": "",
+    "image": "assets/characters/images/character-1787833910842-1787844454552.jpg",
+    "createdAt": "2026-08-27T12:31:50.842Z",
+    "updatedAt": "2026-08-27T16:20:53.699Z"
+  },
+  {
+    "id": "character-1787832728993",
+    "name": "nobody",
+    "shortDescription": "",
+    "description": "",
+    "image": "assets/characters/images/character-1787832728993-1787911161344.jpg",
+    "createdAt": "2026-08-27T12:12:08.993Z",
+    "updatedAt": "2026-08-28T09:59:21.358Z"
+  },
+  {
+    "id": "shi-gai",
+    "name": "Shi-Gai",
+    "createdAt": "2026-07-16T00:00:00.000Z",
+    "updatedAt": "2026-08-28T09:58:21.274Z",
+    "shortDescription": "",
+    "description": "",
+    "image": "assets/characters/images/shi-gai-1787911101272.jpg"
+  }
+]

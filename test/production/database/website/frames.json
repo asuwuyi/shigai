@@ -1,0 +1,42 @@
+[
+  {
+    "id": "frame-mtspj2a0-a17dbba3",
+    "name": "Codex 圖像 2026年9月8日 下午09_29_48",
+    "shape": "oval",
+    "asset": "assets/site/frames/frame-mtspj2a0-a17dbba3.png",
+    "ratio": 0.6666666666666666,
+    "openingInset": 0.18,
+    "createdAt": "2026-09-08T13:30:30.603Z",
+    "updatedAt": "2026-09-08T13:39:21.978Z"
+  },
+  {
+    "id": "frame-mu18q41p-2d5703ae",
+    "name": "象牙金色古典矩形框",
+    "shape": "rectangle",
+    "asset": "assets/site/frames/frame-mu18q41p-2d5703ae.png",
+    "ratio": 1.3333333333333333,
+    "openingInset": 0.13,
+    "createdAt": "2026-09-14T12:50:01.600Z",
+    "updatedAt": "2026-09-14T12:50:01.600Z"
+  },
+  {
+    "id": "frame-mu18q42o-401bde07",
+    "name": "胡桃木黃銅圓形框",
+    "shape": "circle",
+    "asset": "assets/site/frames/frame-mu18q42o-401bde07.png",
+    "ratio": 1,
+    "openingInset": 0.18,
+    "createdAt": "2026-09-14T12:50:01.634Z",
+    "updatedAt": "2026-09-14T12:50:01.634Z"
+  },
+  {
+    "id": "frame-mu18q43b-f9fb5e65",
+    "name": "象牙金色洛可可橢圓框",
+    "shape": "oval",
+    "asset": "assets/site/frames/frame-mu18q43b-f9fb5e65.png",
+    "ratio": 0.6666666666666666,
+    "openingInset": 0.18,
+    "createdAt": "2026-09-14T12:50:01.658Z",
+    "updatedAt": "2026-09-14T12:50:01.658Z"
+  }
+]

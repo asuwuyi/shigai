@@ -1,0 +1,2405 @@
+[
+  {
+    "id": "scene-1787847732039",
+    "name": "作品廊道",
+    "type": "work",
+    "status": "published",
+    "order": 5,
+    "background": {
+      "color": "#392B22",
+      "asset": "",
+      "automatic": false,
+      "intervalMinutes": 30,
+      "weather": {
+        "provider": "none",
+        "city": "",
+        "latitude": null,
+        "longitude": null,
+        "url": "",
+        "attribution": "Weather data by Open-Meteo"
+      },
+      "variants": []
+    },
+    "condition": {
+      "mode": "fixed",
+      "timezone": "visitor",
+      "start": "",
+      "end": "",
+      "time": "",
+      "dates": [],
+      "holidays": [],
+      "weekdays": [],
+      "weather": "any",
+      "weight": 1,
+      "random": false,
+      "event": "",
+      "fallback": false
+    },
+    "language": {
+      "defaultLocale": "zh-Hant",
+      "translations": {}
+    },
+    "objects": [
+      {
+        "id": "object-local-1787870141396",
+        "order": 2,
+        "type": "prop",
+        "name": "地毯",
+        "media": {
+          "src": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "0ac2d27d800b76c5bf1695c70850341c176c932b466fc15f11effda58960c34e",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.495,
+          "y": 0.387
+        },
+        "scale": 0.909,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.495,
+              "y": 0.387
+            },
+            "scale": 0.909,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "align": "auto",
+          "lineHeight": 1.45,
+          "letterSpacing": 0,
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": false,
+          "duration": 4,
+          "loop": false,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": []
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1787871545771",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "16bd73612327b1b09b965f85c063e456f1e88b1d764aabe5752618d5e1091147",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.894,
+          "y": 0.448
+        },
+        "scale": 0.333,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.894,
+              "y": 0.448
+            },
+            "scale": 0.333,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "align": "auto",
+          "lineHeight": 1.45,
+          "letterSpacing": 0,
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": true,
+          "duration": 20,
+          "loop": true,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": [
+              {
+                "offset": 0,
+                "position": {
+                  "x": 0.173,
+                  "y": 0.017
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              },
+              {
+                "offset": 0.5,
+                "position": {
+                  "x": -0.982,
+                  "y": 0.028
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": true
+              },
+              {
+                "offset": 1,
+                "position": {
+                  "x": 0.163,
+                  "y": 0.003
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              }
+            ]
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      }
+    ],
+    "metadata": {
+      "composition": "shared-landscape-v1"
+    },
+    "createdAt": "2026-08-27T16:22:12.039Z",
+    "updatedAt": "2026-09-03T07:21:27.420Z"
+  },
+  {
+    "id": "scene-1788159835341",
+    "name": "遊戲室前方",
+    "type": "game",
+    "status": "published",
+    "order": 7,
+    "background": {
+      "color": "#F7F9FC",
+      "asset": "",
+      "automatic": false,
+      "intervalMinutes": 30,
+      "weather": {
+        "provider": "none",
+        "city": "",
+        "latitude": null,
+        "longitude": null,
+        "url": "",
+        "attribution": "Weather data by Open-Meteo"
+      },
+      "variants": []
+    },
+    "condition": {
+      "mode": "fixed",
+      "timezone": "visitor",
+      "start": "",
+      "end": "",
+      "time": "",
+      "dates": [],
+      "holidays": [],
+      "weekdays": [],
+      "weather": "any",
+      "weight": 1,
+      "random": false,
+      "event": "",
+      "fallback": false
+    },
+    "language": {
+      "defaultLocale": "zh-Hant",
+      "translations": {}
+    },
+    "objects": [
+      {
+        "id": "object-local-1788193069792",
+        "order": 1,
+        "type": "background",
+        "name": "地毯",
+        "media": {
+          "src": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "0ac2d27d800b76c5bf1695c70850341c176c932b466fc15f11effda58960c34e",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-0ac2d27d800b76c5bf1695c7/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.489,
+          "y": 0.513
+        },
+        "scale": 1.484,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.489,
+              "y": 0.513
+            },
+            "scale": 1.484,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "align": "auto",
+          "lineHeight": 1.45,
+          "letterSpacing": 0,
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1788193133638",
+        "order": 2,
+        "type": "prop",
+        "name": "新道具",
+        "media": {
+          "src": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "16bd73612327b1b09b965f85c063e456f1e88b1d764aabe5752618d5e1091147",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.996,
+          "y": 0.704
+        },
+        "scale": 0.436,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.996,
+              "y": 0.704
+            },
+            "scale": 0.436,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "align": "auto",
+          "lineHeight": 1.45,
+          "letterSpacing": 0,
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": true,
+          "duration": 4,
+          "loop": true,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": [
+              {
+                "offset": 0,
+                "position": {
+                  "x": 0,
+                  "y": 0
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              },
+              {
+                "offset": 0.5,
+                "position": {
+                  "x": -0.981,
+                  "y": -0.009
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": true
+              },
+              {
+                "offset": 1,
+                "position": {
+                  "x": 0,
+                  "y": 0
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              }
+            ]
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      }
+    ],
+    "metadata": {
+      "composition": "shared-landscape-v1"
+    },
+    "createdAt": "2026-08-31T07:03:55.341Z",
+    "updatedAt": "2026-09-04T15:58:26.663Z"
+  },
+  {
+    "id": "scene-pack-20261025-park-plaza",
+    "name": "公園廣場",
+    "type": "world-entrance",
+    "status": "published",
+    "order": 16,
+    "background": {
+      "color": "#B7D4E5",
+      "asset": "",
+      "automatic": true,
+      "intervalMinutes": 30,
+      "weather": {
+        "provider": "open-meteo",
+        "city": "台中",
+        "latitude": 24.1477,
+        "longitude": 120.6736,
+        "timeZone": "Asia/Taipei",
+        "url": "",
+        "attribution": "Weather data by Open-Meteo"
+      },
+      "variants": [
+        {
+          "id": "sky-01",
+          "name": "01 黎明前・少雲",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-01.webp",
+          "assetId": "weather-20261022-01",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "dawn"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear"
+            ]
+          }
+        },
+        {
+          "id": "sky-02",
+          "name": "02 日出・少雲",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-02.webp",
+          "assetId": "weather-20261022-02",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "dawn",
+              "morning"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear"
+            ]
+          }
+        },
+        {
+          "id": "sky-03",
+          "name": "03 早晨・少雲",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-03.webp",
+          "assetId": "weather-20261022-03",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "morning"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear"
+            ]
+          }
+        },
+        {
+          "id": "sky-04",
+          "name": "04 正午・少雲",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-04.webp",
+          "assetId": "weather-20261022-04",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "noon"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear"
+            ]
+          }
+        },
+        {
+          "id": "sky-05",
+          "name": "05 正午・多雲",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-05.webp",
+          "assetId": "weather-20261022-05",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "noon",
+              "afternoon"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "cloudy"
+            ]
+          }
+        },
+        {
+          "id": "sky-06",
+          "name": "06 午後・金光",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-06.webp",
+          "assetId": "weather-20261022-06",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "afternoon"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear"
+            ]
+          }
+        },
+        {
+          "id": "sky-07",
+          "name": "07 陰天",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-07.webp",
+          "assetId": "weather-20261022-07",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": true,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": [
+              "overcast",
+              "fog"
+            ]
+          }
+        },
+        {
+          "id": "sky-08",
+          "name": "08 雨天",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-08.webp",
+          "assetId": "weather-20261022-08",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": [
+              "rain",
+              "storm"
+            ]
+          }
+        },
+        {
+          "id": "sky-09",
+          "name": "09 黃昏・暖霞",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-09.webp",
+          "assetId": "weather-20261022-09",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "dusk"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear",
+              "cloudy"
+            ]
+          }
+        },
+        {
+          "id": "sky-10",
+          "name": "10 暮色・藍調",
+          "enabled": false,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-10.webp",
+          "assetId": "weather-20261022-10",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "dusk"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear",
+              "cloudy"
+            ]
+          }
+        },
+        {
+          "id": "sky-11",
+          "name": "11 晴朗夜空",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-11.webp",
+          "assetId": "weather-20261022-11",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "night"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "clear"
+            ]
+          }
+        },
+        {
+          "id": "sky-12",
+          "name": "12 多雲夜空",
+          "enabled": true,
+          "color": "#B7D4E5",
+          "asset": "assets/scenes/media/weather-20261022-12.webp",
+          "assetId": "weather-20261022-12",
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [
+              "night"
+            ],
+            "periodVersion": 2,
+            "weathers": [
+              "cloudy",
+              "overcast"
+            ]
+          }
+        }
+      ],
+      "effects": [
+        {
+          "id": "weather-rain-1792941746442-ll3t",
+          "name": "即時雨",
+          "enabled": true,
+          "asset": "",
+          "procedural": {
+            "type": "rain",
+            "intensity": 0.55,
+            "speed": 1,
+            "wind": 0.2
+          },
+          "layer": "front",
+          "group": "weather-rain",
+          "opacity": 1,
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": [
+              "rain",
+              "storm"
+            ],
+            "followWeather": true
+          }
+        },
+        {
+          "id": "weather-fog-1792941747091-waz9",
+          "name": "即時霧",
+          "enabled": true,
+          "asset": "",
+          "procedural": {
+            "type": "fog",
+            "intensity": 0.55,
+            "speed": 1,
+            "wind": 0.2
+          },
+          "layer": "back",
+          "group": "weather-fog",
+          "opacity": 1,
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": [
+              "fog"
+            ],
+            "followWeather": true
+          }
+        },
+        {
+          "id": "weather-lightning-1792941747750-sxk9",
+          "name": "即時雷電",
+          "enabled": true,
+          "asset": "",
+          "procedural": {
+            "type": "lightning",
+            "intensity": 0.55,
+            "speed": 1,
+            "wind": 0.2
+          },
+          "layer": "back",
+          "group": "weather-lightning",
+          "opacity": 1,
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": [
+              "storm"
+            ],
+            "followWeather": true
+          }
+        },
+        {
+          "id": "weather-clouds-1794156079585-ey1g",
+          "name": "流動雲層",
+          "enabled": true,
+          "asset": "",
+          "procedural": {
+            "type": "clouds",
+            "intensity": 0.55,
+            "speed": 1,
+            "wind": 0.2,
+            "size": 1,
+            "count": 5,
+            "altitude": 0.22
+          },
+          "layer": "back",
+          "group": "weather-clouds",
+          "opacity": 1,
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": []
+          }
+        },
+        {
+          "id": "weather-sun-1794156101741-itl0",
+          "name": "太陽",
+          "enabled": true,
+          "asset": "",
+          "procedural": {
+            "type": "sun",
+            "intensity": 0.55,
+            "speed": 1,
+            "wind": 0.2,
+            "size": 1
+          },
+          "layer": "back",
+          "group": "weather-sun",
+          "opacity": 1,
+          "condition": {
+            "mode": "environment",
+            "timezone": "visitor",
+            "start": "",
+            "end": "",
+            "time": "",
+            "dates": [],
+            "holidays": [],
+            "weekdays": [],
+            "weather": "any",
+            "weight": 1,
+            "random": false,
+            "event": "",
+            "fallback": false,
+            "periods": [],
+            "periodVersion": 2,
+            "weathers": [
+              "clear",
+              "cloudy"
+            ]
+          }
+        }
+      ]
+    },
+    "condition": {
+      "mode": "environment",
+      "timezone": "visitor",
+      "start": "",
+      "end": "",
+      "time": "",
+      "dates": [],
+      "holidays": [],
+      "weekdays": [],
+      "weather": "any",
+      "weight": 1,
+      "random": false,
+      "event": "",
+      "fallback": false,
+      "periods": [],
+      "periodVersion": 2,
+      "weathers": []
+    },
+    "language": {
+      "defaultLocale": "zh-Hant",
+      "translations": {}
+    },
+    "objects": [
+      {
+        "id": "environment-frame-park-plaza",
+        "order": 1,
+        "type": "background",
+        "name": "公園廣場（透明環境層）",
+        "media": {
+          "src": "assets/scenes/media/pack-20261025-park-plaza.webp",
+          "format": "webp",
+          "alt": "公園廣場"
+        },
+        "position": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "scale": 1.149,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.5,
+              "y": 0.5
+            },
+            "scale": 1.149,
+            "rotation": 0
+          }
+        },
+        "layer": "background",
+        "visible": true,
+        "locked": true,
+        "text": "",
+        "textBubble": {
+          "align": "auto",
+          "lineHeight": 1.45,
+          "letterSpacing": 0,
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1792949868469",
+        "order": 5,
+        "type": "character",
+        "name": "ShiGai搖",
+        "media": {
+          "src": "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1792949868469-1792949898967.gif",
+          "format": "gif",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.5,
+          "y": 0.713
+        },
+        "scale": 0.251,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.5,
+              "y": 0.713
+            },
+            "scale": 0.251,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "fixedWidth": true,
+          "align": "auto",
+          "lineHeight": 1.45,
+          "letterSpacing": 0,
+          "enabled": true,
+          "fontFamily": "helvetica",
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 0.191,
+              "y": 20.126,
+              "scale": 0.361,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 430.242
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1793469012869",
+        "order": 6,
+        "type": "character",
+        "name": "我騎車",
+        "media": {
+          "src": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp",
+          "format": "webp",
+          "alt": "",
+          "pipeline": {
+            "optimized": {
+              "status": "ready",
+              "sourceHash": "16bd73612327b1b09b965f85c063e456f1e88b1d764aabe5752618d5e1091147",
+              "presetVersion": 1,
+              "outputs": {
+                "primary": "assets/published/scenes/asset-16bd73612327b1b09b965f85/primary-v1.webp"
+              },
+              "error": ""
+            }
+          }
+        },
+        "position": {
+          "x": 0.855,
+          "y": 0.798
+        },
+        "scale": 0.259,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.855,
+              "y": 0.798
+            },
+            "scale": 0.259,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "",
+        "textBubble": {
+          "align": "auto",
+          "lineHeight": 1.45,
+          "letterSpacing": 0,
+          "enabled": false,
+          "color": "#34271f",
+          "backgroundColor": "#fffdf5",
+          "fontWeight": 600,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": -1.768,
+              "y": 45.013,
+              "scale": 0.571,
+              "rotation": 0,
+              "fontSize": 48,
+              "maxWidth": 480
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "about",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "keyframes",
+          "enabled": true,
+          "duration": 20,
+          "loop": true,
+          "easing": "linear",
+          "keyframes": {
+            "landscape": [
+              {
+                "offset": 0,
+                "position": {
+                  "x": 0.214,
+                  "y": 0.006
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              },
+              {
+                "offset": 0.5,
+                "position": {
+                  "x": -0.925,
+                  "y": -0.002
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": true
+              },
+              {
+                "offset": 1,
+                "position": {
+                  "x": 0.214,
+                  "y": 0.001
+                },
+                "rotation": 0,
+                "scale": 1,
+                "flipX": false
+              }
+            ]
+          },
+          "channels": {
+            "landscape": {
+              "position": {
+                "enabled": true,
+                "keyframes": [
+                  {
+                    "offset": 0,
+                    "value": {
+                      "x": 0.214,
+                      "y": 0.006
+                    }
+                  },
+                  {
+                    "offset": 0.5,
+                    "value": {
+                      "x": -0.925,
+                      "y": -0.002
+                    }
+                  },
+                  {
+                    "offset": 1,
+                    "value": {
+                      "x": 0.214,
+                      "y": 0.001
+                    }
+                  }
+                ]
+              },
+              "scale": {
+                "enabled": true,
+                "keyframes": [
+                  {
+                    "offset": 0,
+                    "value": 1
+                  },
+                  {
+                    "offset": 0.5,
+                    "value": 1
+                  },
+                  {
+                    "offset": 1,
+                    "value": 1
+                  }
+                ]
+              },
+              "rotation": {
+                "enabled": true,
+                "keyframes": [
+                  {
+                    "offset": 0,
+                    "value": 0
+                  },
+                  {
+                    "offset": 0.5,
+                    "value": 0
+                  },
+                  {
+                    "offset": 1,
+                    "value": 0
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {}
+      },
+      {
+        "id": "object-local-1793528146823",
+        "order": 7,
+        "type": "text",
+        "name": "時間",
+        "media": {
+          "src": "",
+          "format": "",
+          "alt": ""
+        },
+        "position": {
+          "x": 0.5,
+          "y": 0.238
+        },
+        "scale": 0.197,
+        "rotation": 0,
+        "flipX": false,
+        "flipY": false,
+        "layouts": {
+          "landscape": {
+            "position": {
+              "x": 0.5,
+              "y": 0.238
+            },
+            "scale": 0.197,
+            "rotation": 0
+          }
+        },
+        "layer": "mid",
+        "visible": true,
+        "locked": false,
+        "text": "NEWS:",
+        "textDisplay": {
+          "version": 1,
+          "source": "time",
+          "timeZone": "scene",
+          "hour12": false,
+          "showSeconds": true,
+          "weekday": true,
+          "mode": "marquee",
+          "lines": 2,
+          "speed": 40,
+          "direction": "left",
+          "gap": 64
+        },
+        "textBubble": {
+          "align": "auto",
+          "lineHeight": 1.45,
+          "letterSpacing": 0,
+          "enabled": false,
+          "color": "#ffffff",
+          "backgroundColor": "#424242",
+          "fontWeight": 900,
+          "radius": 24,
+          "layouts": {
+            "landscape": {
+              "anchor": "above",
+              "x": 4.436,
+              "y": 483.485,
+              "scale": 6.104,
+              "rotation": 0,
+              "fontSize": 50,
+              "maxWidth": 241
+            }
+          }
+        },
+        "interaction": {
+          "enabled": false,
+          "cursor": "default",
+          "action": "none",
+          "target": "",
+          "openMode": "same-tab"
+        },
+        "animation": {
+          "type": "",
+          "enabled": false,
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "rotation": 0,
+          "duration": 3,
+          "mode": "yoyo",
+          "easing": "ease-in-out"
+        },
+        "scroll": {
+          "speed": 1,
+          "parallax": 0,
+          "fade": false,
+          "scale": false,
+          "trigger": ""
+        },
+        "language": {
+          "defaultLocale": "zh-Hant",
+          "translations": {}
+        },
+        "metadata": {
+          "viewportFixed": true
+        }
+      }
+    ],
+    "livingEvents": [
+      {
+        "displayMode": "continuous",
+        "interval": 5,
+        "id": "binding-f47fe4a6-4574-4a0f-9f7e-f10257ce1cdf",
+        "name": "我打招呼",
+        "trigger": "both",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "Hello",
+          "按我"
+        ],
+        "replies": [
+          "好久不見",
+          "右上角有導覽喔",
+          "今天過得好嗎"
+        ],
+        "duration": 8,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 0,
+        "objectId": "object-local-1792949868469",
+        "mediaObjectId": "",
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-1w2u0qz-0": {
+            "x": 0.191,
+            "y": 20.126,
+            "scale": 0.361,
+            "fontSize": 48,
+            "maxWidth": 217.93,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "auto",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-lines-86kxv3-0": {
+            "x": 0.191,
+            "y": 20.126,
+            "scale": 0.509,
+            "fontSize": 48,
+            "maxWidth": 180.182,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "auto",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-1g4ca2n-0": {
+            "x": 0.191,
+            "y": 20.126,
+            "scale": 0.381,
+            "fontSize": 48,
+            "maxWidth": 279.118,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "auto",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
+      },
+      {
+        "id": "binding-f67bca21-8326-4241-a956-b90cf15c57e2",
+        "name": "午餐時間｜11:00–13:00",
+        "trigger": "both",
+        "start": "11:00",
+        "end": "13:00",
+        "lines": [
+          "中午要吃什麼？",
+          "我好餓，今天想吃點什麼？",
+          "先休息一下，想想午餐吧。"
+        ],
+        "replies": [
+          "今天吃咖哩飯！",
+          "水餃好像也不錯。",
+          "來碗麵怎麼樣？"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 1,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-t9jcxd-0": {
+            "x": 4.475,
+            "y": 23.508,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 427.044,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-lines-1l8ao94-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 680.011,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-lines-e2dftp-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 670.417,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-1a32ucc-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 450.636,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-d9t2xh-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 494.008,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
+      },
+      {
+        "id": "binding-b6de059b-1836-4971-8d5f-4b588f619a99",
+        "name": "晚餐時間｜17:00–19:00",
+        "trigger": "both",
+        "start": "17:00",
+        "end": "19:00",
+        "lines": [
+          "晚餐吃什麼？",
+          "忙了一天，該吃晚餐了。",
+          "今天想吃飯，還是吃麵？"
+        ],
+        "replies": [
+          "我投炒飯一票。",
+          "熱湯配飯怎麼樣？",
+          "來份你最想吃的吧。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 1,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-1066qc5-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 446.189,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-m4rj5x-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 489.031,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-1g52nan-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 528.781,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
+      },
+      {
+        "id": "binding-5bd0a87d-271d-4be4-857e-b8586b0144f4",
+        "name": "深夜提醒｜22:00–06:00",
+        "trigger": "both",
+        "start": "22:00",
+        "end": "06:00",
+        "lines": [
+          "還不睡？",
+          "夜深了，眼睛也需要休息。",
+          "今天辛苦了，要不要準備休息？"
+        ],
+        "replies": [
+          "把最後一件事收尾，就去睡吧。",
+          "先喝口水，讓眼睛休息一下。",
+          "明天再繼續也可以。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 1,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-1ymw1fe-0": {
+            "x": 6.929,
+            "y": 23.104,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 306.372,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
+      },
+      {
+        "displayMode": "continuous",
+        "interval": 10,
+        "id": "binding-b75c9f75-2d8d-402e-bdd1-a24aed8af5e4",
+        "name": "吃什麼靈感",
+        "trigger": "click",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "不知道吃什麼嗎？問我啊！",
+          "我幫你想一個選擇。"
+        ],
+        "replies": [
+          "咖哩飯！",
+          "牛肉麵！",
+          "水餃！",
+          "便當！",
+          "蛋餅也可以。"
+        ],
+        "duration": 5,
+        "cooldown": 0,
+        "dailyLimit": 20,
+        "priority": 1,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": false
+      },
+      {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-ourxgx-0",
+            "line-lines-70hqhg-0"
+          ],
+          "replies": [
+            "line-replies-xeu3aj-0",
+            "line-replies-1sf4mdf-0"
+          ]
+        },
+        "dataCondition": {
+          "type": "rain-probability",
+          "threshold": 50,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
+        "id": "binding-7e1ad9cf-cef8-4998-a2f3-31d1662f36b4",
+        "name": "帶傘提醒｜未來降雨機率",
+        "trigger": "both",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "{{city}}未來{{forecastHours}}小時\n最高降雨機率{{rainProbability}}%，\n出門記得帶傘。",
+          "等一下可能會下雨，\n出門前看看預報吧。"
+        ],
+        "replies": [
+          "這是降雨機率，\n不代表現在已經下雨。",
+          "雨傘帶著比較安心；\n{{city}}未來{{forecastHours}}小時\n最高降雨機率為{{rainProbability}}%。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 5,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-ourxgx-0": {
+            "x": 6.281,
+            "y": 26.179,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 526.551,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 175.564,
+            "pageLines": 2,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-lines-70hqhg-0": {
+            "x": 6.647,
+            "y": 24.955,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 520.75,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-1sf4mdf-0": {
+            "x": 6.722,
+            "y": 26.004,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 593.718,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
+      },
+      {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-co450w-0",
+            "line-lines-u88afw-0"
+          ],
+          "replies": [
+            "line-replies-1d0ptnt-0",
+            "line-replies-1nj9257-0"
+          ]
+        },
+        "dataCondition": {
+          "type": "temperature",
+          "threshold": 30,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
+        "id": "binding-02aa7f90-1fa8-4118-a17c-00785c0bf0a8",
+        "name": "高溫反應｜氣溫達30°C",
+        "trigger": "both",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "{{city}}目前模式氣溫約{{temperature}}°C",
+          "現在約{{temperature}}°C，\n想找個涼快的地方休息。"
+        ],
+        "replies": [
+          "先找個涼快的地方吧。\n目前氣溫約{{temperature}}°C。",
+          "記得適時休息、補充水分。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 3,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-u88afw-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 599.136,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-1d0ptnt-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 601.103,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
+      },
+      {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-2cn83b-0",
+            "line-lines-166ieq5-0"
+          ],
+          "replies": [
+            "line-replies-4ayjrv-0",
+            "line-replies-1k9ag4o-0"
+          ]
+        },
+        "dataCondition": {
+          "type": "sunrise",
+          "threshold": 0,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
+        "id": "binding-f0bff040-9127-4f79-85f8-0dc2f98db719",
+        "name": "日出提醒｜所在地日出前後",
+        "trigger": "both",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "早安，{{city}}今天日出約在\n{{sunrise}}。",
+          "新的一天要開始了，\n日出約{{sunrise}}。"
+        ],
+        "replies": [
+          "{{city}}今天日出約\n{{sunrise}}",
+          "慢慢醒來，準備開始今天吧。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 2,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-2cn83b-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 662.984,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
+      },
+      {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-o9gnzu-0",
+            "line-lines-11jfxog-0"
+          ],
+          "replies": [
+            "line-replies-1f0y1ic-0",
+            "line-replies-16ngsus-0"
+          ]
+        },
+        "dataCondition": {
+          "type": "sunset",
+          "threshold": 0,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
+        "id": "binding-ac6aeef0-3e59-4efd-bb12-4cd1d3026982",
+        "name": "日落提醒｜所在地日落前後",
+        "trigger": "both",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "{{city}}今天日落約\n{{sunset}}\n準備迎接晚上吧。",
+          "太陽快下山了\n今天的日落約在\n{{sunset}}。"
+        ],
+        "replies": [
+          "今天日落約\n{{sunset}}",
+          "辛苦一天了\n要不要休息一下？"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 2,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-o9gnzu-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 547.735,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-lines-11jfxog-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 573.36,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-16ngsus-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 494.029,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
+      },
+      {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-1ag0bu2-0"
+          ],
+          "replies": [
+            "line-replies-91jofy-0"
+          ]
+        },
+        "dataCondition": {
+          "type": "official-alert",
+          "threshold": 0,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
+        "id": "binding-8579d1a6-2fd6-4ad8-86d7-583fab7fab09",
+        "name": "所在地官方氣象特報",
+        "trigger": "both",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "{{alertArea}}：{{alertTitle}}。"
+        ],
+        "replies": [
+          "你有感覺到有風嗎？"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 8,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-1ag0bu2-0": {
+            "x": 6.929,
+            "y": 28.789,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 624.386,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-91jofy-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 590.979,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 119.914,
+            "pageLines": 1,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
+      },
+      {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-omh9c3-0"
+          ],
+          "replies": [
+            "line-replies-1c7zrvm-0",
+            "line-replies-s0v1x4-0"
+          ]
+        },
+        "dataCondition": {
+          "type": "pm25",
+          "threshold": 0,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
+        "id": "binding-a4527d64-097f-488b-a80a-60d8f8727a76",
+        "name": "附近測站 PM2.5",
+        "trigger": "both",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "{{station}}測站 PM2.5 \n為 {{pm25}} µg/m³。"
+        ],
+        "replies": [
+          "PM2.5 為 {{pm25}} µg/m³",
+          "PM2.5 是濃度\nAQI 是空氣品質指標\n兩者不是同一個數值。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 0,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true,
+        "dialogueStyles": {
+          "line-lines-omh9c3-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 464.91,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-1c7zrvm-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 565.122,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          },
+          "line-replies-s0v1x4-0": {
+            "x": 6.929,
+            "y": 35.998,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 602.909,
+            "rotation": 0,
+            "lineHeight": 1.45,
+            "minHeight": 0,
+            "align": "center",
+            "fixedWidth": true,
+            "anchor": "above"
+          }
+        }
+      },
+      {
+        "dialogueIds": {
+          "lines": [
+            "line-lines-1jsuwq-0",
+            "line-lines-ihwfcb-0"
+          ],
+          "replies": [
+            "line-replies-1uxfqmj-0",
+            "line-replies-ze9co8-0"
+          ]
+        },
+        "dataCondition": {
+          "type": "aqi",
+          "threshold": 0,
+          "hours": 3,
+          "windowMinutes": 30,
+          "area": ""
+        },
+        "id": "binding-3dbd38ad-a6a2-4985-ad4a-9b12a4bb80f0",
+        "name": "附近測站空氣品質 AQI",
+        "trigger": "both",
+        "start": "00:00",
+        "end": "00:00",
+        "lines": [
+          "AQI {{aqi}}，目前為「{{aqiStatus}}」。",
+          "AQI {{aqi}}（{{aqiStatus}}）。"
+        ],
+        "replies": [
+          "AQI {{aqi}}（{{aqiStatus}}）",
+          "這是測站周邊的參考資料\n不是你所在位置的精確測量。"
+        ],
+        "duration": 10,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 0,
+        "objectId": "object-local-1793542816103",
+        "mediaObjectId": "",
+        "enabled": true,
+        "dialogueStyles": {
+          "line-replies-ze9co8-0": {
+            "x": 6.583,
+            "y": 26.981,
+            "scale": 0.319,
+            "fontSize": 48,
+            "maxWidth": 695.63,
+            "rotation": 0,
+            "anchor": "above"
+          }
+        }
+      },
+      {
+        "dialogueIds": {
+          "lines": [
+            "line-eae57762-4e69-4861-9545-0f443b6898bf",
+            "line-cb33a11e-eb48-4e60-87cb-ce1e0856b9ee"
+          ],
+          "replies": [
+            "line-9c2021ba-0619-4190-a227-53947b77e933"
+          ]
+        },
+        "displayMode": "continuous",
+        "interval": 10,
+        "id": "binding-9c35aaa6-c0c1-4416-9b4e-fd32938acb8f",
+        "name": "作者本人的碎念",
+        "trigger": "click",
+        "start": "11:00",
+        "end": "11:00",
+        "lines": [
+          "YO!",
+          "歡迎參觀\nwelcome"
+        ],
+        "replies": [
+          "往下滑還有喔"
+        ],
+        "duration": 8,
+        "cooldown": 60,
+        "dailyLimit": 2,
+        "priority": 0,
+        "objectId": "object-local-1793469012869",
+        "mediaObjectId": "",
+        "enabled": true
+      }
+    ],
+    "metadata": {
+      "source": "generated-scene-pack-20261025",
+      "environmentKind": "outdoor",
+      "mobileViewport": {
+        "enabled": true,
+        "width": 1.8,
+        "initialX": 0.504,
+        "autoPan": true,
+        "speed": 9,
+        "weatherParallax": true
+      },
+      "composition": "shared-landscape-v1"
+    },
+    "createdAt": "2026-10-25T00:00:00.000Z",
+    "updatedAt": "2026-11-12T11:48:12.805Z"
+  }
+]

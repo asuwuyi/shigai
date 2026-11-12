@@ -1,0 +1,86 @@
+/* A shared, editable paper-and-gallery presentation. Gameplay geometry is owned by each game. */
+:root {--game-paper:#fff9ed;--game-ink:#493527;--game-accent:#806044;--game-accentInk:#fff9ed;--game-font:"PingFang TC","Microsoft JhengHei",system-ui,sans-serif;--game-fontSize:16px;--game-buttonRadius:10px;--game-line:color-mix(in srgb,var(--game-ink) 25%,var(--game-paper));}
+body.game-managed {--paper:var(--game-paper);--ink:var(--game-ink);--accent:var(--game-accent);color:var(--game-ink)!important;background-color:var(--game-background)!important;background-image:var(--game-backgroundImage),repeating-linear-gradient(0deg,transparent 0 5px,#5b402006 5px 6px)!important;background-size:cover,12px 12px;background-attachment:scroll;font-family:var(--game-font)!important;font-size:var(--game-fontSize)!important;}
+.game-managed :is(.arcade-room,.wheel-room,.memory-room,.mines-room) {max-width:var(--game-contentWidth);}
+body[data-standalone-game] :is(.arcade-room,.wheel-room,.memory-room,.mines-room)>header {padding-right:calc(var(--scroll-menu-icon-size,80px) + 12px);min-height:88px;}
+.game-managed h1 {font-size:var(--game-titleSize)!important;font-family:var(--game-font)!important;color:var(--game-ink);line-height:1.3;overflow-wrap:anywhere;}
+.game-managed :is(main,dialog) :is(button,select,input,textarea) {font-family:var(--game-font)!important;color:var(--game-ink);}
+.game-managed :is(main,dialog) :is(select,input,textarea),.game-managed :is(main,dialog) button:not(.puzzle-tile):not(.rotation-cell):not(.card):not(.cell) {border-radius:var(--game-buttonRadius)!important;}
+.game-managed :is(main,dialog) button:not(.puzzle-tile):not(.rotation-cell):not(.card):not(.cell) {display:inline-flex;align-items:center;justify-content:center;gap:.4em;min-height:44px;line-height:1.35;background-image:var(--game-buttonImage);background-size:100% 100%;}
+.game-managed :is(main,dialog) :is(button,select,input,textarea) {border-color:var(--game-line);}
+.game-managed :is(.settings,.wheel-settings,dialog) {background-color:var(--game-paper)!important;background-image:var(--game-panelImage),repeating-linear-gradient(90deg,transparent 0 9px,#73532905 9px 10px);background-size:cover,10px 10px;color:var(--game-ink)!important;border:1px solid var(--game-line);border-radius:16px;box-shadow:0 6px 18px #3f2a1610;}
+.game-managed dialog {max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:auto;padding:24px;line-height:1.8;}
+.game-managed dialog::backdrop {background:#34271f80;}
+.game-managed :is(#startButton,#nextButton,#resumeButton,#resultNext,#driveButton,#nextLevel,#continueGame,#resume):enabled {background-color:var(--game-accent)!important;color:var(--game-accentInk)!important;border-color:var(--game-accent);box-shadow:0 3px 10px #34271f16;}
+.game-managed :is(.settings,.status,.game-status) {font-size:var(--game-fontSize)!important;}
+.game-managed .eyebrow {color:var(--game-accent);letter-spacing:.16em;font-size:12px;}
+.game-managed #stats {scroll-margin-top:96px;}
+.game-managed .game-ui-instructions {white-space:pre-line;line-height:1.8;}
+.game-managed .session-note {font-size:14px;}
+.game-managed :is(.toolbar,.stats) {gap:10px;}
+.game-managed .stats {font-variant-numeric:tabular-nums;line-height:1.6;}
+.game-managed .stats>span {padding:6px 10px;border:1px solid var(--game-line);border-radius:10px;background:var(--game-paper);}
+.game-managed .back-link {color:var(--game-ink);border-bottom:1px solid var(--game-line);}
+.game-managed .card-side {box-shadow:0 3px 9px #34271f20;}
+.game-managed :is(main,dialog) :is(button,select,input,textarea,a):focus-visible {outline:3px solid var(--game-accent);outline-offset:3px;}
+/* Keep the original spotting controls and exported canvases intact, soften their surrounding surfaces. */
+body[data-spot-game] .game-bar {padding-right:calc(var(--scroll-menu-icon-size,80px) + 20px);border-width:1px;border-color:#b6a387;box-shadow:0 6px 18px #34271f16;}
+body[data-spot-game] :is(.stat-pill,.levels-dialog,.complete>.card) {border-width:1px;border-color:#b6a387;box-shadow:0 6px 18px #34271f16;}
+body[data-spot-game] :is(.back,.levels-button) {box-shadow:none;border-width:1px;}
+@media(max-width:800px){.game-managed h1{font-size:var(--game-mobileTitleSize)!important}.game-managed .toolbar :is(button,select){font-size:14px;min-height:44px}.game-managed .stats{gap:7px}.game-managed .settings{line-height:1.85}}
+@media(prefers-reduced-motion:reduce){.game-managed *{scroll-behavior:auto!important}}
+
+/* Exported legacy games share the same paper navigation without changing their canvas artwork. */
+body[data-standalone-game] .game-back {color:#493527;background:#fff9ed;border:1px solid #b6a387;border-radius:12px;box-shadow:0 3px 10px #34271f20;}
+html[data-game-layout="mobile"] body[data-standalone-game] .game-back {color:#493527;background:#fff9ed;border-color:#b6a387;min-width:44px;min-height:44px;}
+
+/* Focused play screen: secondary content stays in native dialogs. */
+body.game-compact main {width:100%;max-width:1120px;margin:auto;padding:8px 12px max(10px,env(safe-area-inset-bottom));--play-height:440px;}
+body.game-compact main > header {display:grid;grid-template-columns:44px minmax(0,1fr) 44px 48px;align-items:center;gap:8px;padding:0 calc(var(--scroll-menu-icon-size,80px) + 12px) 0 0;min-height:76px;margin:0 0 8px;}
+body.game-compact main > header h1 {font-size:min(var(--game-mobileTitleSize,28px),28px)!important;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.4;}
+body.game-compact .back-link {display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--game-line);border-radius:12px;font-size:24px;}
+body.game-compact main > header button {padding:4px;font-size:14px;min-height:44px;}
+body.game-compact #gameHelpButton {font-size:22px;border-radius:50%!important;}
+body.game-compact :is(.game-layout,.wheel-layout) {display:block;}
+body.game-compact .toolbar {gap:6px;min-height:0;}
+body.game-compact .toolbar:empty {display:none;}
+body.game-compact .toolbar button {padding:7px 12px;font-size:14px;}
+body.game-compact .stats {margin:6px 0;padding:4px 0;gap:6px;min-height:0;font-size:13px;line-height:1.6;}
+body.game-compact .stats>span {padding:3px 8px;}
+body.game-compact .stats strong {font-size:18px;}
+body.game-compact :is(.status,.game-status) {font-size:14px!important;min-height:0;margin:6px 0;line-height:1.5;}
+body.game-compact :is(#questionArea,#playContent,#pauseCover,.board-wrap) {min-height:0;}
+body.game-compact .board-wrap {padding:4px;max-height:var(--play-height);overflow:auto;}
+body.game-compact .board-wrap .board {gap:6px;}
+body.game-compact .board-viewport {max-height:var(--play-height);overscroll-behavior:contain;}
+body.game-compact .mode-bar {padding:3px 0;position:static;}
+body.game-compact .stage-wrap {width:min(100%,var(--play-height));}
+body.game-compact .stage-wrap:has(canvas) {width:min(100%,calc(var(--play-height) * .75));max-width:480px;}
+body.game-compact .game-controls {margin-top:8px;gap:6px;}
+body.game-compact .wheel-stage {width:min(100%,var(--play-height));max-width:560px;margin:0 auto 10px;}
+body.game-compact .play-controls {gap:8px;}
+body.game-compact .drive-button {min-height:60px;padding:8px 16px;}
+body.game-compact #questionArea {max-height:var(--play-height);overflow:auto;}
+body.game-compact .clue-frame {width:min(100%,calc(var(--play-height) * .45));}
+body.game-compact .choices {gap:6px;margin-top:8px;}
+body.game-compact .choice {padding:6px;gap:4px;}
+body.game-compact .choice img {height:clamp(44px,calc(var(--play-height) * .16),120px);}
+body.game-compact .choice span {font-size:13px;}
+body.game-compact .main-art {height:calc(var(--play-height) * .46);min-height:100px;}
+body.game-compact .swatches {height:clamp(28px,calc(var(--play-height) * .09),48px);}
+body.game-compact .memory-grid {width:min(100%,calc(var(--play-height) * .68));margin:auto;gap:6px;}
+body.game-compact .rotation-board {width:min(100%,var(--play-height));max-width:520px;}
+body.game-compact #hintArea {margin-top:6px;padding:6px;}
+body.game-compact #hintArea img {max-height:calc(var(--play-height) * .6);}
+body.game-compact .game-info-dialog {width:min(600px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);padding:0;overscroll-behavior:contain;}
+body.game-compact .game-info-heading {display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;padding:12px 16px;background:var(--game-paper);z-index:2;border-bottom:1px solid var(--game-line);}
+body.game-compact .game-info-heading h2 {margin:0;font-size:20px;}
+body.game-compact .game-info-close {display:grid!important;place-items:center;width:44px;height:44px;flex-shrink:0;padding:0;font:28px/1 system-ui!important;}
+body.game-compact .game-info-content {padding:16px;line-height:1.8;}
+body.game-compact .game-info-content :is(.settings,.wheel-settings) {padding:0;border:0;box-shadow:none;}
+body.game-compact .game-info-content .eyebrow {display:none;}
+body.game-compact .game-option-controls {display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+body.game-compact .game-option-controls label {display:flex;gap:8px;align-items:center;}
+body.game-compact .game-info-content #reference img {max-height:55dvh;object-fit:contain;}
+@media(min-width:850px){body.game-compact main {max-width:1000px;}body.game-compact .choices{grid-template-columns:repeat(4,minmax(0,1fr));}body.game-compact .clue-frame{width:min(100%,calc(var(--play-height) * .65));}body.game-compact .main-art{height:calc(var(--play-height) * .65);}}
+@media(max-width:420px){body.game-compact main{padding-inline:8px;}body.game-compact main > header {gap:4px;grid-template-columns:40px minmax(0,1fr) 40px 44px;}body.game-compact main > header h1{font-size:18px!important;}body.game-compact main > header .back-link{width:40px;}}

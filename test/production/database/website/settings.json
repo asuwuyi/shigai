@@ -1,0 +1,818 @@
+{
+  "websiteBrand": {
+    "siteName": "Shi-Gai.Com",
+    "visualTitles": {
+      "journal": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "works": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "characters": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "games": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "about": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "asset",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-latestJournal-eyebrow": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "text",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-latestJournal-title": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "text",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-latestJournal-moreLabel": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "text",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-latestJournal-actionLabel": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "text",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-dailyGame-eyebrow": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "text",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-dailyGame-title": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "text",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-dailyGame-moreLabel": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "text",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-dailyGame-actionLabel": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "text",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-archiveDiscovery-eyebrow": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "text",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-archiveDiscovery-title": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "text",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-archiveDiscovery-moreLabel": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "text",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      },
+      "home-archiveDiscovery-actionLabel": {
+        "asset": "",
+        "fallbackAsset": "",
+        "mobileAsset": "",
+        "mobileFallbackAsset": "",
+        "mode": "text",
+        "mobileWidth": 280,
+        "desktopWidth": 480
+      }
+    },
+    "icon": "",
+    "nav": {
+      "home": "宇宙的中心 Home",
+      "journal": "事件記錄簿 Journal",
+      "works": "收藏庫 Works",
+      "characters": "居民介紹 Character",
+      "games": "活動空間 Games",
+      "tools": "工具庫 Tools",
+      "about": "櫃檯聯絡 About me"
+    },
+    "pages": {
+      "journal": true,
+      "works": true,
+      "characters": true,
+      "games": true,
+      "tools": true,
+      "about": true
+    },
+    "analytics": {
+      "enabled": false,
+      "provider": "gtm",
+      "containerId": "GTM-TVSK97C"
+    },
+    "journal": {
+      "eyebrow": "SHI-GAI JOURNAL",
+      "title": "最近發生的事",
+      "intro": "創作、角色與日常留下來的片段。",
+      "readLabel": "閱讀這篇 →",
+      "workLabel": "查看作品 →",
+      "previousLabel": "← 上一篇",
+      "nextLabel": "下一篇 →",
+      "undatedLabel": "日期未定",
+      "emptyTitle": "日誌正在整理中。",
+      "emptyBody": "下一篇故事很快就會來到這裡。",
+      "errorTitle": "暫時無法載入日誌。",
+      "errorBody": "請稍後再試一次。"
+    },
+    "works": {
+      "archiveLabel": "SHI-GAI ARCHIVE",
+      "menuTitle": "作品瀏覽",
+      "navigationLabel": "前往",
+      "searchLabel": "尋找作品",
+      "searchPlaceholder": "搜尋作品、角色或標籤",
+      "allCharacters": "全部角色",
+      "allCategories": "全部分類",
+      "allYears": "全部年份",
+      "clearFilters": "清除篩選",
+      "quickPageLabel": "快速換頁",
+      "firstPage": "第一頁",
+      "previousPage": "← 上一頁",
+      "nextPage": "下一頁 →",
+      "lastPage": "最後一頁",
+      "emptyTitle": "作品正在創作中。",
+      "emptyBody": "很快就會有新的故事來這裡報到。",
+      "noResultsTitle": "沒有符合條件的作品。",
+      "noResultsBody": "試試看不同的搜尋或篩選條件。",
+      "errorTitle": "作品資料暫時無法載入。",
+      "errorBody": "請確認網站是透過本機或網站伺服器開啟。"
+    },
+    "characters": {
+      "pageTitle": "角色 Characters",
+      "menuLabel": "開啟角色導覽與搜尋",
+      "searchPlaceholder": "搜尋角色名稱",
+      "summaryLabel": "顯示 {count} 位角色",
+      "unnamedLabel": "未命名角色",
+      "workCountLabel": "{count} 件作品",
+      "viewLabel": "查看 {name} 的角色詳細頁",
+      "emptyTitle": "No Characters",
+      "emptyBody": "角色很快就會來這裡報到。",
+      "noResultsTitle": "找不到符合的角色。",
+      "noResultsBody": "試試看其他角色名稱。",
+      "errorTitle": "角色資料暫時無法載入。",
+      "errorBody": "請確認網站是透過本機或網站伺服器開啟。"
+    },
+    "games": {
+      "eyebrow": "SHI-GAI PLAYROOM",
+      "title": "遊戲室",
+      "homeLabel": "← Home",
+      "homeAriaLabel": "返回首頁",
+      "previousLabel": "上一款遊戲",
+      "nextLabel": "下一款遊戲",
+      "selectLabel": "選擇遊戲",
+      "unnamedLabel": "未命名遊戲",
+      "startLabel": "開始遊戲",
+      "comingSoonLabel": "Coming Soon",
+      "loadingLabel": "正在載入遊戲資料。",
+      "emptyLabel": "目前還沒有遊戲。",
+      "errorLabel": "遊戲資料暫時無法載入。",
+      "lotteryBackLabel": "← 遊戲室",
+      "lotteryHint": "讓六隻企鵝，幫你選六個號碼。",
+      "lotteryDrawLabel": "幫我選號碼",
+      "lotteryAgainLabel": "再選一次",
+      "lotteryBusyLabel": "企鵝正在選號…",
+      "lotteryResultLabel": "第 {count} 次：{numbers}",
+      "lotteryLoadingLabel": "正在載入企鵝…"
+    },
+    "system": {
+      "homeSuffix": "首頁",
+      "openMenuLabel": "開啟網站選單",
+      "closeMenuLabel": "關閉網站選單",
+      "primaryNavigationLabel": "主要導覽",
+      "footerNavigationLabel": "頁尾導覽"
+    },
+    "privacy": {
+      "title": "讓我們知道這個世界有人來過",
+      "description": "是否允許使用 Google Analytics 統計瀏覽與互動？拒絕也能正常看作品、探索與玩遊戲。",
+      "acceptLabel": "同意",
+      "rejectLabel": "拒絕",
+      "settingsLabel": "隱私與統計",
+      "policyLabel": "統計與隱私說明",
+      "closeLabel": "關閉",
+      "disabledDescription": "這個網站目前未啟用統計。你的選擇不會讓停用的追蹤自行開啟。",
+      "policyBody": "同意後，Google Analytics 會接收瀏覽頁面、裝置與瀏覽器資訊，以及作品入口、首頁區塊與遊戲互動等資料，協助我們了解網站的使用狀況；Google 可能設定分析 Cookie。\n未選擇或拒絕時，本版網站不載入 Google 統計，也不補傳同意前的操作。廣告用途的同意維持關閉。\n我們僅用必要的偏好 Cookie 記住你的選擇 180 天，不用它建立訪客身分。你可以隨時在「隱私與統計」更改選擇；撤回時會清除本網站可存取的 Google 分析 Cookie 並重新載入，停止後續追蹤，已送出的資料不會因此自動刪除。\n這個選擇針對 Google 統計，不代表第三方影片或外部網站也已被停用；那些服務可能有自己的資料處理方式。"
+    },
+    "home": {
+      "latestJournal": {
+        "eyebrow": "TODAY IN SHI-GAI",
+        "title": "今日地球日誌",
+        "moreLabel": "走進 Journal →",
+        "intro": "",
+        "actionLabel": "前往完整 Journal →",
+        "titleAsset": ""
+      },
+      "dailyGame": {
+        "eyebrow": "TODAY'S GAME",
+        "title": "今天一起玩什麼？",
+        "moreLabel": "所有遊戲 →",
+        "intro": "直接在這裡玩今天推薦的遊戲。",
+        "actionLabel": "放大遊玩 →",
+        "titleAsset": ""
+      },
+      "archiveDiscovery": {
+        "eyebrow": "ARCHIVE DISCOVERY",
+        "title": "今天重新遇見的作品",
+        "moreLabel": "探索所有 Works →",
+        "intro": "",
+        "actionLabel": "走進這件作品 →",
+        "refreshLabel": "再遇見一件",
+        "loadingLabel": "正在尋找…",
+        "retryLabel": "再試一次",
+        "titleAsset": ""
+      }
+    },
+    "homeTransitions": {
+      "latestJournal": {
+        "enabled": true,
+        "asset": "assets/website/transitions/home-transition-journal-993e0884741e.webp",
+        "mobile": {
+          "x": 16,
+          "y": 6,
+          "scale": 0.62,
+          "rotation": -4,
+          "parallax": 32
+        },
+        "desktop": {
+          "x": 16,
+          "y": 0,
+          "scale": 0.72,
+          "rotation": -4,
+          "parallax": 48
+        }
+      },
+      "dailyGame": {
+        "enabled": true,
+        "asset": "assets/website/transitions/home-transition-game-17984510183c.webp",
+        "mobile": {
+          "x": 82,
+          "y": 0,
+          "scale": 0.58,
+          "rotation": 3,
+          "parallax": 32
+        },
+        "desktop": {
+          "x": 84,
+          "y": 0,
+          "scale": 0.68,
+          "rotation": 3,
+          "parallax": 48
+        }
+      },
+      "archiveDiscovery": {
+        "enabled": true,
+        "asset": "assets/website/transitions/home-transition-works-e8258fd1069b.webp",
+        "mobile": {
+          "x": 84,
+          "y": 0,
+          "scale": 0.58,
+          "rotation": 2,
+          "parallax": 32
+        },
+        "desktop": {
+          "x": 86,
+          "y": 0,
+          "scale": 0.68,
+          "rotation": 2,
+          "parallax": 48
+        }
+      }
+    },
+    "homeCompanion": {
+      "enabled": false,
+      "motion": "straight",
+      "items": [
+        {
+          "id": "companion-1",
+          "name": "跨區物件 1",
+          "enabled": true,
+          "attachment": "viewport",
+          "section": "latestJournal",
+          "playback": "loop",
+          "states": {
+            "todayScene": {
+              "asset": "assets/published/characters/penguin/primary-v1.webp",
+              "mobile": {
+                "x": 17.9,
+                "y": 8.4,
+                "scale": 1.1,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 94,
+                "y": 70,
+                "scale": 0.7,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              }
+            },
+            "latestJournal": {
+              "asset": "assets/published/characters/penguin/primary-v1.webp",
+              "mobile": {
+                "x": 73.1,
+                "y": 14.9,
+                "scale": 0.6,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 94,
+                "y": 70,
+                "scale": 0.7,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              }
+            },
+            "dailyGame": {
+              "asset": "assets/published/characters/penguin/primary-v1.webp",
+              "mobile": {
+                "x": 47.8,
+                "y": 67.4,
+                "scale": 0.6,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 6,
+                "y": 62,
+                "scale": 0.7,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              }
+            },
+            "archiveDiscovery": {
+              "asset": "assets/published/characters/penguin/primary-v1.webp",
+              "mobile": {
+                "x": 93.6,
+                "y": 52.3,
+                "scale": 0.6,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 94,
+                "y": 64,
+                "scale": 0.7,
+                "opacity": 1,
+                "rotation": 0,
+                "flipX": false,
+                "path": []
+              }
+            }
+          }
+        },
+        {
+          "id": "ground-fossil-penguin-1",
+          "name": "魚化石（可替換）",
+          "enabled": true,
+          "attachment": "section",
+          "section": "latestJournal",
+          "playback": "loop",
+          "states": {
+            "todayScene": {
+              "asset": "assets/site/brand/home-fish-fossil-20261015-v1.webp",
+              "mobile": {
+                "x": 76,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.9,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 80,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.9,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              }
+            },
+            "latestJournal": {
+              "asset": "assets/site/brand/home-fish-fossil-20261015-v1.webp",
+              "mobile": {
+                "x": 76,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.9,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 80,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.9,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              }
+            },
+            "dailyGame": {
+              "asset": "assets/site/brand/home-fish-fossil-20261015-v1.webp",
+              "mobile": {
+                "x": 76,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.9,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 80,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.9,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              }
+            },
+            "archiveDiscovery": {
+              "asset": "assets/site/brand/home-fish-fossil-20261015-v1.webp",
+              "mobile": {
+                "x": 76,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.9,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              },
+              "desktop": {
+                "x": 80,
+                "y": 50,
+                "scale": 1,
+                "opacity": 0.9,
+                "rotation": -12,
+                "flipX": false,
+                "path": []
+              }
+            }
+          }
+        }
+      ],
+      "states": {
+        "todayScene": {
+          "asset": "assets/published/characters/penguin/primary-v1.webp",
+          "mobile": {
+            "x": 17.9,
+            "y": 8.4,
+            "scale": 1.1,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
+          },
+          "desktop": {
+            "x": 94,
+            "y": 70,
+            "scale": 0.7,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
+          }
+        },
+        "latestJournal": {
+          "asset": "assets/published/characters/penguin/primary-v1.webp",
+          "mobile": {
+            "x": 73.1,
+            "y": 14.9,
+            "scale": 0.6,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
+          },
+          "desktop": {
+            "x": 94,
+            "y": 70,
+            "scale": 0.7,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
+          }
+        },
+        "dailyGame": {
+          "asset": "assets/published/characters/penguin/primary-v1.webp",
+          "mobile": {
+            "x": 47.8,
+            "y": 67.4,
+            "scale": 0.6,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
+          },
+          "desktop": {
+            "x": 6,
+            "y": 62,
+            "scale": 0.7,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
+          }
+        },
+        "archiveDiscovery": {
+          "asset": "assets/published/characters/penguin/primary-v1.webp",
+          "mobile": {
+            "x": 93.6,
+            "y": 52.3,
+            "scale": 0.6,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
+          },
+          "desktop": {
+            "x": 94,
+            "y": 64,
+            "scale": 0.7,
+            "opacity": 1,
+            "rotation": 0,
+            "flipX": false,
+            "path": []
+          }
+        }
+      }
+    },
+    "about": {
+      "eyebrow": "SHI-GAI CREATOR",
+      "title": "R451's Studio",
+      "intro": "Shi-Gai 是我的個人創作世界。我從事動畫、動態設計與影像製作，也持續創作角色、短動畫與互動作品。",
+      "servicesTitle": "Services",
+      "services": [
+        "2D Animation",
+        "Motion Design",
+        "Illustration Animation",
+        "Video Editing",
+        "Character / IP Content"
+      ],
+      "email": "notartist@gmail.com",
+      "instagram": "https://www.instagram.com/shigaishigai/",
+      "youtube": "https://www.youtube.com/@shigaishigai",
+      "introLabel": "關於作者",
+      "contactKicker": "LET'S MAKE SOMETHING",
+      "contactTitle": "合作／工作邀約",
+      "socialLinks": {
+        "enabled": true,
+        "position": "after-contact",
+        "desktop": {
+          "align": "center",
+          "size": 56,
+          "gap": 12,
+          "offsetY": 0
+        },
+        "mobile": {
+          "align": "center",
+          "size": 48,
+          "gap": 12,
+          "offsetY": 0
+        },
+        "items": [
+          {
+            "id": "email",
+            "label": "Email",
+            "description": "",
+            "url": "mailto:notartist@gmail.com",
+            "icon": "assets/site/brand/social-legacy/email.svg",
+            "enabled": true
+          },
+          {
+            "id": "facebook",
+            "label": "Facebook",
+            "description": "",
+            "url": "https://www.facebook.com/shigaihome/",
+            "icon": "assets/site/brand/social-legacy/facebook.svg",
+            "enabled": true
+          },
+          {
+            "id": "instagram",
+            "label": "Instagram",
+            "description": "",
+            "url": "https://www.instagram.com/shigaishigai/",
+            "icon": "assets/site/brand/social-legacy/instagram.svg",
+            "enabled": true
+          },
+          {
+            "id": "twitter",
+            "label": "Twitter",
+            "description": "",
+            "url": "https://twitter.com/shigai",
+            "icon": "assets/site/brand/social-legacy/twitter.svg",
+            "enabled": true
+          },
+          {
+            "id": "youtube",
+            "label": "YouTube",
+            "description": "",
+            "url": "https://www.youtube.com/@shigaishigai",
+            "icon": "assets/site/brand/social-legacy/youtube.svg",
+            "enabled": true
+          },
+          {
+            "id": "giphy",
+            "label": "GIPHY",
+            "description": "",
+            "url": "https://giphy.com/shigai",
+            "icon": "assets/site/brand/social-legacy/giphy.svg",
+            "enabled": true
+          },
+          {
+            "id": "line-store",
+            "label": "LINE STORE",
+            "description": "",
+            "url": "https://store.line.me/stickershop/author/4968/zh-Hant",
+            "icon": "assets/site/brand/social-legacy/line-store.svg",
+            "enabled": true
+          },
+          {
+            "id": "behance",
+            "label": "Behance",
+            "description": "",
+            "url": "https://www.behance.net/r451",
+            "icon": "assets/site/brand/social-legacy/behance.svg",
+            "enabled": true
+          }
+        ]
+      },
+      "socialsLabel": "社群連結"
+    },
+    "controls": {
+      "globalMenu": true,
+      "globalBrand": false,
+      "homeNavigation": true,
+      "journalNavigation": true,
+      "worksNavigation": true,
+      "charactersNavigation": true,
+      "gamesNavigation": true,
+      "toolsNavigation": true,
+      "aboutNavigation": true,
+      "worksMenu": true,
+      "worksFirstPage": true,
+      "worksPreviousPage": true,
+      "worksPagePicker": true,
+      "worksNextPage": true,
+      "worksLastPage": true,
+      "workDetailBack": true,
+      "workDetailPrevious": true,
+      "workDetailNext": true,
+      "workDetailPlayPause": true,
+      "workDetailSound": true,
+      "charactersMenu": true,
+      "characterDetailBack": true,
+      "characterDetailPrevious": true,
+      "characterDetailNext": true
+    },
+    "buttonAssets": {
+      "menu": {
+        "asset": "",
+        "fallbackAsset": ""
+      },
+      "menuOpen": {
+        "asset": "",
+        "fallbackAsset": ""
+      },
+      "back": {
+        "asset": "",
+        "fallbackAsset": ""
+      },
+      "previous": {
+        "asset": "",
+        "fallbackAsset": ""
+      },
+      "next": {
+        "asset": "",
+        "fallbackAsset": ""
+      }
+    },
+    "footerName": "Shi-Gai",
+    "copyright": "Shi-Gai",
+    "welcome": {
+      "enabled": true,
+      "asset": "assets/site/brand/welcome-logo-1792404325378.webm",
+      "fallbackAsset": "assets/published/delivery/3a9c4ec1076ab265c6ce6a6e76251f7cee585276b8116ff6d5f715f7e64f5a51.webp",
+      "duration": 3,
+      "interaction": {
+        "enabled": false,
+        "cursor": "pointer",
+        "action": "scene",
+        "target": "scene-1786548379879",
+        "openMode": "same-tab"
+      },
+      "animation": {
+        "enabled": true,
+        "x": 0,
+        "y": 0,
+        "scale": 3,
+        "flipX": false,
+        "duration": 3,
+        "mode": "yoyo",
+        "easing": "ease-in-out"
+      }
+    }
+  },
+  "release": {
+    "version": 1,
+    "target": "production"
+  }
+}
