@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
   "releaseTarget": "test",
-  "createdAt": "2026-11-12T09:03:31.006Z",
+  "createdAt": "2026-11-12T11:48:42.561Z",
   "entry": "website/index.html",
   "counts": {
     "works": 1101,
+    "characters": 11,
+    "categories": 5,
+    "tags": 0,
+    "scenes": 3,
     "games": 18,
     "spotDifferenceLevels": 2,
-    "assets": 1259,
-    "files": 1489
+    "assets": 1257,
+    "files": 1487
   },
-  "bytes": 170907721,
+  "bytes": 169999523,
   "imageDelivery": [
     {
       "preset": "lossless-animation-v1",
@@ -1258,9 +1262,7 @@
     "assets/published/works/SG-001120/poster-v1.webp",
     "assets/published/works/SG-001120/primary-v1.webm",
     "assets/scenes/media/pack-20261025-park-plaza.webp",
-    "assets/scenes/media/scene-1786549520650-object-local-1786549533424-1793034952010.gif",
     "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1792949868469-1792949898967.gif",
-    "assets/scenes/media/scene-pack-20261025-park-plaza-object-local-1793542816103-1793543341073.gif",
     "assets/scenes/media/weather-20261022-01.webp",
     "assets/scenes/media/weather-20261022-02.webp",
     "assets/scenes/media/weather-20261022-03.webp",
